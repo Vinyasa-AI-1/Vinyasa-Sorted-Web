@@ -3,6 +3,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Bot, Minus, Send } from "lucide-react";
+import type { translations } from "@/lib/translations";
+
+interface ChatInterfaceProps {
+  t: (key: keyof typeof translations.en) => string;
+}
 
 const initialMessages = [
   {
@@ -22,7 +27,7 @@ const initialMessages = [
   },
 ];
 
-export default function ChatInterface() {
+export default function ChatInterface({ t }: ChatInterfaceProps) {
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState(initialMessages);
   const [inputValue, setInputValue] = useState("");
@@ -75,7 +80,7 @@ export default function ChatInterface() {
       <div className="bg-forest text-white p-4 rounded-t-xl flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <Bot className="text-sage" />
-          <span className="font-semibold" data-testid="text-chat-title">Assistant</span>
+          <span className="font-semibold" data-testid="text-chat-title">{t('assistant')}</span>
         </div>
         <Button
           variant="ghost"
@@ -117,7 +122,7 @@ export default function ChatInterface() {
           <div className="flex space-x-2">
             <Input
               type="text"
-              placeholder="Ask about your produce..."
+              placeholder={t('askAboutProduce')}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}

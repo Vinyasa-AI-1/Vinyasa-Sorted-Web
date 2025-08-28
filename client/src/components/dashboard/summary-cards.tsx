@@ -1,19 +1,21 @@
 import { Box, Weight, Star, IndianRupee } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import type { Summary } from "@shared/schema";
+import type { translations } from "@/lib/translations";
 
 interface SummaryCardsProps {
   summary: Summary;
+  t: (key: keyof typeof translations.en) => string;
 }
 
-export default function SummaryCards({ summary }: SummaryCardsProps) {
+export default function SummaryCards({ summary, t }: SummaryCardsProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       <Card className="border-l-4 border-forest">
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-gray-600 text-sm font-medium">Total Sorted</p>
+              <p className="text-gray-600 text-sm font-medium">{t('totalSorted')}</p>
               <p className="text-3xl font-bold text-forest" data-testid="text-total-sorted">
                 {summary.totalSorted}
               </p>
@@ -27,7 +29,7 @@ export default function SummaryCards({ summary }: SummaryCardsProps) {
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-gray-600 text-sm font-medium">Total Weight</p>
+              <p className="text-gray-600 text-sm font-medium">{t('totalWeight')}</p>
               <p className="text-3xl font-bold text-forest" data-testid="text-total-weight">
                 {summary.totalWeight.toLocaleString()} kg
               </p>
@@ -41,7 +43,7 @@ export default function SummaryCards({ summary }: SummaryCardsProps) {
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-gray-600 text-sm font-medium">Avg Quality</p>
+              <p className="text-gray-600 text-sm font-medium">{t('avgQuality')}</p>
               <p className="text-3xl font-bold text-forest" data-testid="text-avg-quality">
                 {summary.avgQuality}%
               </p>
@@ -55,7 +57,7 @@ export default function SummaryCards({ summary }: SummaryCardsProps) {
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-gray-600 text-sm font-medium">Revenue</p>
+              <p className="text-gray-600 text-sm font-medium">{t('revenue')}</p>
               <p className="text-3xl font-bold text-forest" data-testid="text-revenue">
                 ₹{summary.revenue.toLocaleString()}
               </p>

@@ -8,9 +8,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import type { ProduceVariety } from "@shared/schema";
+import type { translations } from "@/lib/translations";
 
 interface OptimalRevenueTableProps {
   variety: ProduceVariety;
+  t: (key: keyof typeof translations.en) => string;
 }
 
 const getSaleCategoryColor = (category: string) => {
@@ -31,7 +33,7 @@ const getSaleCategoryColor = (category: string) => {
   }
 };
 
-export default function OptimalRevenueTable({ variety }: OptimalRevenueTableProps) {
+export default function OptimalRevenueTable({ variety, t }: OptimalRevenueTableProps) {
   return (
     <Card className="bg-white rounded-xl shadow-lg">
       <CardContent className="p-6">
@@ -48,7 +50,7 @@ export default function OptimalRevenueTable({ variety }: OptimalRevenueTableProp
             <p className="text-2xl font-bold text-fresh" data-testid={`text-variety-revenue-${variety.id}`}>
               ₹{variety.totalOptimalRevenue.toLocaleString()}
             </p>
-            <p className="text-gray-600">Total Optimal Revenue</p>
+            <p className="text-gray-600">{t('totalOptimalRevenue')}</p>
           </div>
         </div>
 
@@ -56,15 +58,15 @@ export default function OptimalRevenueTable({ variety }: OptimalRevenueTableProp
           <table className="w-full text-sm">
             <thead className="bg-gray-50">
               <tr>
-                <th className="text-left p-3 font-semibold text-forest">Quality Category</th>
-                <th className="text-left p-3 font-semibold text-forest">Items</th>
-                <th className="text-left p-3 font-semibold text-forest">Weight (kg)</th>
-                <th className="text-left p-3 font-semibold text-forest">Recommended Sale For</th>
-                <th className="text-left p-3 font-semibold text-forest">Recommended Sale To</th>
-                <th className="text-left p-3 font-semibold text-forest">Price/kg</th>
-                <th className="text-left p-3 font-semibold text-forest">Total</th>
-                <th className="text-left p-3 font-semibold text-forest">Change Buyer</th>
-                <th className="text-left p-3 font-semibold text-forest">Action</th>
+                <th className="text-left p-3 font-semibold text-forest">{t('qualityCategory')}</th>
+                <th className="text-left p-3 font-semibold text-forest">{t('items')}</th>
+                <th className="text-left p-3 font-semibold text-forest">{t('weight')}</th>
+                <th className="text-left p-3 font-semibold text-forest">{t('recommendedSaleFor')}</th>
+                <th className="text-left p-3 font-semibold text-forest">{t('recommendedSaleTo')}</th>
+                <th className="text-left p-3 font-semibold text-forest">{t('pricePerKg')}</th>
+                <th className="text-left p-3 font-semibold text-forest">{t('total')}</th>
+                <th className="text-left p-3 font-semibold text-forest">{t('changeBuyer')}</th>
+                <th className="text-left p-3 font-semibold text-forest">{t('action')}</th>
               </tr>
             </thead>
             <tbody>
@@ -121,7 +123,7 @@ export default function OptimalRevenueTable({ variety }: OptimalRevenueTableProp
                       className="bg-sage text-white hover:bg-green-600 transition-colors"
                       data-testid={`button-sell-${variety.id}-${index}`}
                     >
-                      Sell Now
+                      {t('sellNow')}
                     </Button>
                   </td>
                 </tr>

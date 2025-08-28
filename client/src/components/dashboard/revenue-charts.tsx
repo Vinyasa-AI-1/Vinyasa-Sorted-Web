@@ -1,8 +1,13 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
+import type { translations } from "@/lib/translations";
 
-export default function RevenueCharts() {
+interface RevenueChartsProps {
+  t: (key: keyof typeof translations.en) => string;
+}
+
+export default function RevenueCharts({ t }: RevenueChartsProps) {
   const { data: revenueComparison } = useQuery({
     queryKey: ["/api/revenue-comparison"],
   });
@@ -33,7 +38,7 @@ export default function RevenueCharts() {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <Card className="bg-white rounded-xl shadow-lg">
         <CardContent className="p-6">
-          <h3 className="text-xl font-bold text-forest mb-4">Revenue Comparison by Variety</h3>
+          <h3 className="text-xl font-bold text-forest mb-4">{t('revenueComparison')}</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={revenueData}>
@@ -41,9 +46,9 @@ export default function RevenueCharts() {
                 <XAxis dataKey="variety" />
                 <YAxis />
                 <Tooltip formatter={(value) => [`₹${Number(value).toLocaleString()}`, ""]} />
-                <Bar dataKey="today" fill="#22543D" name="Today" />
-                <Bar dataKey="seasonAvg" fill="#68D391" name="Season Avg" />
-                <Bar dataKey="lastYear" fill="#F6E05E" name="Last Year" />
+                <Bar dataKey="today" fill="#22543D" name={t('today')} />
+                <Bar dataKey="seasonAvg" fill="#68D391" name={t('seasonAvg')} />
+                <Bar dataKey="lastYear" fill="#F6E05E" name={t('lastYear')} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -52,7 +57,7 @@ export default function RevenueCharts() {
 
       <Card className="bg-white rounded-xl shadow-lg">
         <CardContent className="p-6">
-          <h3 className="text-xl font-bold text-forest mb-4">Volume Trends by Variety</h3>
+          <h3 className="text-xl font-bold text-forest mb-4">{t('volumeTrends')}</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={volumeData}>

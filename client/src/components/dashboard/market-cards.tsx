@@ -2,9 +2,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Ship, Factory } from "lucide-react";
 import type { Market } from "@shared/schema";
+import type { translations } from "@/lib/translations";
 
 interface MarketCardsProps {
   markets: Market[];
+  t: (key: keyof typeof translations.en) => string;
 }
 
 const getCategoryIcon = (category: string) => {
@@ -29,24 +31,24 @@ const getCategoryColor = (category: string) => {
   }
 };
 
-const getCategoryTitle = (category: string) => {
+const getCategoryTitle = (category: string, t: (key: keyof typeof translations.en) => string) => {
   switch (category) {
     case "local":
-      return "Local Markets";
+      return t("localMarkets");
     case "distant":
-      return "Distant Markets";
+      return t("distantMarkets");
     case "export":
-      return "Export Markets";
+      return t("exportMarkets");
     case "processing":
-      return "Processing Units";
+      return t("processingUnits");
     case "decompost":
-      return "Decompost Markets";
+      return t("decompostMarkets");
     default:
-      return "Markets";
+      return t("marketInformation");
   }
 };
 
-export default function MarketCards({ markets }: MarketCardsProps) {
+export default function MarketCards({ markets, t }: MarketCardsProps) {
   const marketsByCategory = markets.reduce((acc, market) => {
     if (!acc[market.category]) {
       acc[market.category] = [];
@@ -57,7 +59,7 @@ export default function MarketCards({ markets }: MarketCardsProps) {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-forest">Market Information</h2>
+      <h2 className="text-2xl font-bold text-forest">{t('marketInformation')}</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {Object.entries(marketsByCategory).slice(0, 3).map(([category, categoryMarkets]) => (
@@ -65,7 +67,7 @@ export default function MarketCards({ markets }: MarketCardsProps) {
             <CardContent className="p-6">
               <h3 className="text-lg font-bold text-forest mb-4 flex items-center" data-testid={`text-category-${category}`}>
                 {getCategoryIcon(category)}
-                {getCategoryTitle(category)}
+                {getCategoryTitle(category, t)}
               </h3>
               <div className="space-y-4">
                 {categoryMarkets.slice(0, 2).map((market) => (
@@ -77,7 +79,7 @@ export default function MarketCards({ markets }: MarketCardsProps) {
                       {market.location}
                     </p>
                     <p className="text-sm" data-testid={`text-market-details-${market.id}`}>
-                      Distance: {market.distance} • Capacity: {market.capacity}
+                      {t('distance')}: {market.distance} • {t('capacity')}: {market.capacity}
                     </p>
                     <Button 
                       className={`mt-2 text-white px-3 py-1 rounded text-sm ${
@@ -87,7 +89,7 @@ export default function MarketCards({ markets }: MarketCardsProps) {
                       }`}
                       data-testid={`button-sell-${market.id}`}
                     >
-                      Sell
+                      {t('sell')}
                     </Button>
                   </div>
                 ))}

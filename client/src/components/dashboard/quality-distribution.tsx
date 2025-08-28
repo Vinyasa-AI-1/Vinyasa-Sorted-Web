@@ -1,9 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import type { ProduceVariety } from "@shared/schema";
+import type { translations } from "@/lib/translations";
 
 interface QualityDistributionProps {
   varieties: ProduceVariety[];
+  t: (key: keyof typeof translations.en) => string;
 }
 
 const COLORS = {
@@ -14,7 +16,7 @@ const COLORS = {
   Rotten: "#DC2626", // Red
 };
 
-export default function QualityDistribution({ varieties }: QualityDistributionProps) {
+export default function QualityDistribution({ varieties, t }: QualityDistributionProps) {
   const createChartData = (distribution: Record<string, number>) => {
     return Object.entries(distribution).map(([name, value]) => ({
       name,
@@ -26,7 +28,7 @@ export default function QualityDistribution({ varieties }: QualityDistributionPr
   return (
     <Card className="bg-white rounded-xl shadow-lg">
       <CardContent className="p-6">
-        <h2 className="text-2xl font-bold text-forest mb-6">Quality Distribution by Variety</h2>
+        <h2 className="text-2xl font-bold text-forest mb-6">{t('qualityDistribution')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           {varieties.map((variety) => (
             <div key={variety.id} className="text-center">
@@ -53,7 +55,7 @@ export default function QualityDistribution({ varieties }: QualityDistributionPr
                 </ResponsiveContainer>
               </div>
               <p className="text-sm text-gray-600" data-testid={`text-total-items-${variety.id}`}>
-                {variety.totalItems} items total
+                {variety.totalItems} {t('itemsTotal')}
               </p>
               <div className="mt-4 space-y-2">
                 <div className="grid grid-cols-2 gap-2 text-xs">

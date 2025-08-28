@@ -5,12 +5,24 @@ import OptimalRevenueTable from "@/components/dashboard/optimal-revenue-table";
 import MarketCards from "@/components/dashboard/market-cards";
 import RevenueCharts from "@/components/dashboard/revenue-charts";
 import ChatInterface from "@/components/dashboard/chat-interface";
-import { UserCircle } from "lucide-react";
+import { UserCircle, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import logoUrl from "@assets/logo_1756410067559.png";
+import { useLanguage, type Language } from "@/hooks/use-language";
+import { useTranslation } from "@/lib/translations";
 
 export default function Dashboard() {
+  const { currentLanguage, changeLanguage, languages } = useLanguage();
+  const { t } = useTranslation(currentLanguage);
+  
   const { data: summary } = useQuery({
     queryKey: ["/api/summary"],
   });
@@ -31,41 +43,92 @@ export default function Dashboard() {
     <div className="min-h-screen bg-cream">
       {/* Header */}
       <header className="bg-forest text-white p-4 shadow-lg">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-3">
-            <img src={logoUrl} alt="Sorted Logo" className="h-8 w-8" />
-            <h1 className="text-2xl font-bold" data-testid="header-title">
-              Sorted! Producer Dashboard
-            </h1>
+        <div className="container mx-auto">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-4">
+              <img src={logoUrl} alt="Sorted Logo" className="h-12 w-12" />
+              <h1 className="text-2xl font-bold" data-testid="header-title">
+                {t('title')}
+              </h1>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <Globe className="h-4 w-4 text-sage" />
+                <Select value={currentLanguage} onValueChange={(value) => changeLanguage(value as Language)}>
+                  <SelectTrigger className="bg-transparent border-sage text-white w-32">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.entries(languages).map(([code, name]) => (
+                      <SelectItem key={code} value={code}>
+                        {name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <span className="text-sage" data-testid="farm-name">
+                {t('farmName')}
+              </span>
+              <UserCircle className="text-2xl" />
+            </div>
           </div>
-          <div className="flex items-center space-x-4">
-            <span className="text-sage" data-testid="farm-name">
-              Svavlamban Farms
-            </span>
-            <UserCircle className="text-2xl" />
-          </div>
+          
+          {/* Navigation Menu */}
+          <nav className="mt-3">
+            <div className="flex space-x-6">
+              <Button 
+                variant="ghost" 
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-sm"
+                data-testid="nav-live-sorting"
+              >
+                {t('liveSorting')}
+              </Button>
+              <Button 
+                variant="ghost" 
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-sm"
+                data-testid="nav-harvest-insights"
+              >
+                {t('harvestInsights')}
+              </Button>
+              <Button 
+                variant="ghost" 
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-sm"
+                data-testid="nav-crop-recommendations"
+              >
+                {t('cropRecommendations')}
+              </Button>
+              <Button 
+                variant="ghost" 
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-sm"
+                data-testid="nav-yield-optimization"
+              >
+                {t('yieldOptimization')}
+              </Button>
+            </div>
+          </nav>
         </div>
       </header>
 
       <main className="container mx-auto p-6 space-y-8">
         {/* Summary Cards */}
-        {summary && <SummaryCards summary={summary} />}
+        {summary && <SummaryCards summary={summary} t={t} />}
 
         {/* Quality Distribution */}
-        {varieties && <QualityDistribution varieties={varieties} />}
+        {varieties && <QualityDistribution varieties={varieties} t={t} />}
 
         {/* Quick Actions */}
         <div className="bg-white rounded-xl shadow-lg p-6">
-          <h2 className="text-xl font-bold text-forest mb-4">Quick Actions</h2>
+          <h2 className="text-xl font-bold text-forest mb-4">{t('quickActions')}</h2>
           <div className="flex flex-wrap gap-4">
             <Button className="bg-sage text-white hover:bg-green-600" data-testid="button-view-produce">
-              View All Produce
+              {t('viewAllProduce')}
             </Button>
             <Button className="bg-harvest text-forest hover:bg-yellow-400" data-testid="button-price-analysis">
-              Price Analysis
+              {t('priceAnalysis')}
             </Button>
             <Button className="bg-fresh text-white hover:bg-green-600" data-testid="button-market-trends">
-              Market Trends
+              {t('marketTrends')}
             </Button>
           </div>
         </div>
@@ -73,30 +136,30 @@ export default function Dashboard() {
         {/* Optimal Revenue Plan Tables */}
         {varieties && Array.isArray(varieties) && (
           <div className="space-y-8">
-            <h2 className="text-2xl font-bold text-forest">Optimal Revenue Plan by Variety</h2>
+            <h2 className="text-2xl font-bold text-forest">{t('optimalRevenuePlan')}</h2>
             {varieties.map((variety) => (
-              <OptimalRevenueTable key={variety.id} variety={variety} />
+              <OptimalRevenueTable key={variety.id} variety={variety} t={t} />
             ))}
           </div>
         )}
 
         {/* Market Information Cards */}
-        {markets && Array.isArray(markets) && <MarketCards markets={markets} />}
+        {markets && Array.isArray(markets) && <MarketCards markets={markets} t={t} />}
 
         {/* Revenue and Volume Charts */}
-        <RevenueCharts />
+        <RevenueCharts t={t} />
 
         {/* Overall Revenue Summary */}
         {overallSummary && 'totalOptimalRevenue' in overallSummary && (
           <Card className="bg-white rounded-xl shadow-lg">
             <CardContent className="p-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-forest">Overall Optimal Revenue Summary</h2>
+                <h2 className="text-2xl font-bold text-forest">{t('overallSummary')}</h2>
                 <div className="text-right">
                   <p className="text-3xl font-bold text-fresh" data-testid="text-total-revenue">
                     ₹{overallSummary.totalOptimalRevenue.toLocaleString()}
                   </p>
-                  <p className="text-gray-600">Total Optimal Revenue</p>
+                  <p className="text-gray-600">{t('totalOptimalRevenue')}</p>
                 </div>
               </div>
               
@@ -122,14 +185,14 @@ export default function Dashboard() {
                     <p className="text-sm text-gray-600">
                       {item.category} ({item.percentage}%)
                     </p>
-                    <p className="text-xs text-gray-500">{item.items} items</p>
+                    <p className="text-xs text-gray-500">{item.items} {t('items')}</p>
                   </div>
                 ))}
               </div>
               
               <div className="text-center">
                 <p className="text-lg font-semibold text-forest" data-testid="text-summary-stats">
-                  {overallSummary.totalItems} Total Items • ₹{overallSummary.avgRevenuePerItem} Avg Revenue per Item
+                  {overallSummary.totalItems} {t('totalItems')} • ₹{overallSummary.avgRevenuePerItem} {t('avgRevenuePerItem')}
                 </p>
               </div>
             </CardContent>
@@ -138,7 +201,7 @@ export default function Dashboard() {
       </main>
 
       {/* Chat Interface */}
-      <ChatInterface />
+      <ChatInterface t={t} />
     </div>
   );
 }

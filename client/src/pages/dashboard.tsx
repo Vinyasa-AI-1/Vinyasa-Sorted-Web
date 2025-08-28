@@ -45,9 +45,9 @@ export default function Dashboard() {
       <header className="bg-forest text-white py-0 px-2 shadow-lg">
         <div className="container mx-auto">
           {/* Top row with logo, title, and user info */}
-          <div className="flex justify-between items-center mb-0">
+          <div className="flex justify-between items-center -mb-2">
             <div className="flex items-center space-x-2">
-              <img src={logoUrl} alt="Sorted Logo" className="h-24 w-24" />
+              <img src={logoUrl} alt="Sorted Logo" className="h-28 w-28" />
               <h1 className="text-base font-bold" data-testid="header-title">
                 {t('title')}
               </h1>
@@ -76,49 +76,49 @@ export default function Dashboard() {
           </div>
           
           {/* Bottom row with navigation menu spread across full width */}
-          <nav className="w-full pb-1">
+          <nav className="w-full -mt-1 pb-0">
             <div className="flex flex-wrap justify-center gap-x-8 gap-y-1">
               <Button 
                 variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-xs font-medium text-center leading-tight min-w-0 w-20"
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
                 data-testid="nav-live-sorting"
               >
                 <div className="flex flex-col">
                   {t('liveSorting').split(' ').map((word, index) => (
-                    <span key={index} className="block text-xs leading-tight">{word}</span>
+                    <span key={index} className="block text-sm leading-tight">{word}</span>
                   ))}
                 </div>
               </Button>
               <Button 
                 variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-xs font-medium text-center leading-tight min-w-0 w-20"
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
                 data-testid="nav-harvest-insights"
               >
                 <div className="flex flex-col">
                   {t('harvestInsights').split(' ').map((word, index) => (
-                    <span key={index} className="block text-xs leading-tight">{word}</span>
+                    <span key={index} className="block text-sm leading-tight">{word}</span>
                   ))}
                 </div>
               </Button>
               <Button 
                 variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-xs font-medium text-center leading-tight min-w-0 w-20"
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
                 data-testid="nav-crop-recommendations"
               >
                 <div className="flex flex-col">
                   {t('cropRecommendations').split(' ').map((word, index) => (
-                    <span key={index} className="block text-xs leading-tight">{word}</span>
+                    <span key={index} className="block text-sm leading-tight">{word}</span>
                   ))}
                 </div>
               </Button>
               <Button 
                 variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-xs font-medium text-center leading-tight min-w-0 w-20"
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
                 data-testid="nav-yield-optimization"
               >
                 <div className="flex flex-col">
                   {t('yieldOptimization').split(' ').map((word, index) => (
-                    <span key={index} className="block text-xs leading-tight">{word}</span>
+                    <span key={index} className="block text-sm leading-tight">{word}</span>
                   ))}
                 </div>
               </Button>

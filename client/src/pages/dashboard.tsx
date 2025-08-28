@@ -5,9 +5,10 @@ import OptimalRevenueTable from "@/components/dashboard/optimal-revenue-table";
 import MarketCards from "@/components/dashboard/market-cards";
 import RevenueCharts from "@/components/dashboard/revenue-charts";
 import ChatInterface from "@/components/dashboard/chat-interface";
-import { Sprout, UserCircle } from "lucide-react";
+import { UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import logoUrl from "@assets/logo_1756410067559.png";
 
 export default function Dashboard() {
   const { data: summary } = useQuery({
@@ -32,9 +33,9 @@ export default function Dashboard() {
       <header className="bg-forest text-white p-4 shadow-lg">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-3">
-            <Sprout className="text-sage text-2xl" />
+            <img src={logoUrl} alt="Sorted Logo" className="h-8 w-8" />
             <h1 className="text-2xl font-bold" data-testid="header-title">
-              Sorted Dashboard
+              Sorted! Producer Dashboard
             </h1>
           </div>
           <div className="flex items-center space-x-4">

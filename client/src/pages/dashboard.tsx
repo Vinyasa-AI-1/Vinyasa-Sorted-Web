@@ -42,21 +42,21 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-cream">
       {/* Header */}
-      <header className="bg-forest text-white p-1 shadow-lg">
+      <header className="bg-forest text-white py-0.5 px-2 shadow-lg">
         <div className="container mx-auto">
           {/* Top row with logo, title, and user info */}
-          <div className="flex justify-between items-center mb-1">
-            <div className="flex items-center space-x-3">
-              <img src={logoUrl} alt="Sorted Logo" className="h-16 w-16" />
-              <h1 className="text-lg font-bold" data-testid="header-title">
+          <div className="flex justify-between items-center mb-0.5">
+            <div className="flex items-center space-x-2">
+              <img src={logoUrl} alt="Sorted Logo" className="h-20 w-20" />
+              <h1 className="text-base font-bold" data-testid="header-title">
                 {t('title')}
               </h1>
             </div>
-            <div className="flex items-center space-x-3">
-              <div className="flex items-center space-x-2">
-                <Globe className="h-4 w-4 text-sage" />
+            <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1">
+                <Globe className="h-3 w-3 text-sage" />
                 <Select value={currentLanguage} onValueChange={(value) => changeLanguage(value as Language)}>
-                  <SelectTrigger className="bg-transparent border-sage text-white w-28">
+                  <SelectTrigger className="bg-transparent border-sage text-white w-24 h-7 text-xs">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -68,47 +68,59 @@ export default function Dashboard() {
                   </SelectContent>
                 </Select>
               </div>
-              <span className="text-sage text-sm" data-testid="farm-name">
+              <span className="text-sage text-xs" data-testid="farm-name">
                 {t('farmName')}
               </span>
-              <UserCircle className="text-xl" />
+              <UserCircle className="text-lg" />
             </div>
           </div>
           
           {/* Bottom row with navigation menu spread across full width */}
           <nav className="w-full">
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-1">
+            <div className="flex flex-wrap justify-center gap-x-3 gap-y-0.5">
               <Button 
                 variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-sm font-medium text-center leading-tight"
+                className="text-sage hover:text-white hover:bg-sage/20 px-2 py-0.5 text-xs font-medium text-center leading-tight min-w-0 w-16"
                 data-testid="nav-live-sorting"
               >
-                <span className="block">Live</span>
-                <span className="block">Sorting</span>
+                <div className="flex flex-col">
+                  {t('liveSorting').split(' ').map((word, index) => (
+                    <span key={index} className="block text-xs leading-tight">{word}</span>
+                  ))}
+                </div>
               </Button>
               <Button 
                 variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-sm font-medium text-center leading-tight"
+                className="text-sage hover:text-white hover:bg-sage/20 px-2 py-0.5 text-xs font-medium text-center leading-tight min-w-0 w-16"
                 data-testid="nav-harvest-insights"
               >
-                <span className="block">Harvest</span>
-                <span className="block">Insights</span>
+                <div className="flex flex-col">
+                  {t('harvestInsights').split(' ').map((word, index) => (
+                    <span key={index} className="block text-xs leading-tight">{word}</span>
+                  ))}
+                </div>
               </Button>
               <Button 
                 variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-sm font-medium text-center leading-tight"
+                className="text-sage hover:text-white hover:bg-sage/20 px-2 py-0.5 text-xs font-medium text-center leading-tight min-w-0 w-16"
                 data-testid="nav-crop-recommendations"
               >
-                <span className="block">Crop</span>
-                <span className="block">Recommendations</span>
+                <div className="flex flex-col">
+                  {t('cropRecommendations').split(' ').map((word, index) => (
+                    <span key={index} className="block text-xs leading-tight">{word}</span>
+                  ))}
+                </div>
               </Button>
               <Button 
                 variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-sm font-medium text-center leading-tight"
+                className="text-sage hover:text-white hover:bg-sage/20 px-2 py-0.5 text-xs font-medium text-center leading-tight min-w-0 w-16"
                 data-testid="nav-yield-optimization"
               >
-                <span className="block">Yield</span>
-                <span className="block">Optimization</span>
+                <div className="flex flex-col">
+                  {t('yieldOptimization').split(' ').map((word, index) => (
+                    <span key={index} className="block text-xs leading-tight">{word}</span>
+                  ))}
+                </div>
               </Button>
             </div>
           </nav>

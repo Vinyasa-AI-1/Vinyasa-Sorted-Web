@@ -747,10 +747,32 @@ export const translations = {
   }
 };
 
+// Number formatting for different languages
+const formatNumber = (num: number, language: Language): string => {
+  switch (language) {
+    case 'hi':
+      // Hindi numbers (Devanagari numerals)
+      return num.toString().replace(/\d/g, (d) => "०१२३४५६७८९"[parseInt(d)]);
+    case 'bn':
+      // Bengali numbers
+      return num.toString().replace(/\d/g, (d) => "০১২৩৪৫৬৭৮৯"[parseInt(d)]);
+    case 'te':
+      // Telugu numbers
+      return num.toString().replace(/\d/g, (d) => "౦౧౨౩౪౫౬౭౮౯"[parseInt(d)]);
+    case 'mr':
+      // Marathi numbers (Devanagari numerals)
+      return num.toString().replace(/\d/g, (d) => "०१२३४५६७८९"[parseInt(d)]);
+    default:
+      // English/Arabic numerals
+      return num.toLocaleString();
+  }
+};
+
 export const useTranslation = (language: Language) => {
   return {
     t: (key: keyof typeof translations.en): string => {
       return translations[language][key] || translations.en[key] || key;
-    }
+    },
+    formatNumber: (num: number) => formatNumber(num, language)
   };
 };

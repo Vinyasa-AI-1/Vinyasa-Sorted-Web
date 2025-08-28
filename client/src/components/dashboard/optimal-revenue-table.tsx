@@ -13,6 +13,7 @@ import type { translations } from "@/lib/translations";
 interface OptimalRevenueTableProps {
   variety: ProduceVariety;
   t: (key: keyof typeof translations.en) => string;
+  formatNumber: (num: number) => string;
 }
 
 const getSaleCategoryColor = (category: string) => {
@@ -33,7 +34,7 @@ const getSaleCategoryColor = (category: string) => {
   }
 };
 
-export default function OptimalRevenueTable({ variety, t }: OptimalRevenueTableProps) {
+export default function OptimalRevenueTable({ variety, t, formatNumber }: OptimalRevenueTableProps) {
   return (
     <Card className="bg-white rounded-xl shadow-lg">
       <CardContent className="p-6">
@@ -43,12 +44,12 @@ export default function OptimalRevenueTable({ variety, t }: OptimalRevenueTableP
               {t(variety.id as keyof typeof translations.en) || variety.name}
             </h3>
             <p className="text-gray-600" data-testid={`text-variety-details-${variety.id}`}>
-              {variety.variety} • {variety.totalItems} items total
+              {variety.variety} • {formatNumber(variety.totalItems)} items total
             </p>
           </div>
           <div className="text-right">
             <p className="text-2xl font-bold text-fresh" data-testid={`text-variety-revenue-${variety.id}`}>
-              ₹{variety.totalOptimalRevenue.toLocaleString()}
+              ₹{formatNumber(variety.totalOptimalRevenue)}
             </p>
             <p className="text-gray-600">{t('totalOptimalRevenue')}</p>
           </div>
@@ -76,10 +77,10 @@ export default function OptimalRevenueTable({ variety, t }: OptimalRevenueTableP
                     {t(plan.qualityCategory as keyof typeof translations.en) || plan.qualityCategory}
                   </td>
                   <td className="p-3" data-testid={`text-items-${variety.id}-${index}`}>
-                    {plan.items}
+                    {formatNumber(plan.items)}
                   </td>
                   <td className="p-3" data-testid={`text-weight-${variety.id}-${index}`}>
-                    {plan.weight}
+                    {formatNumber(plan.weight)}
                   </td>
                   <td className="p-3">
                     <span 
@@ -98,10 +99,10 @@ export default function OptimalRevenueTable({ variety, t }: OptimalRevenueTableP
                     </div>
                   </td>
                   <td className="p-3 font-medium" data-testid={`text-price-${variety.id}-${index}`}>
-                    ₹{plan.pricePerKg}
+                    ₹{formatNumber(plan.pricePerKg)}
                   </td>
                   <td className="p-3 font-bold text-fresh" data-testid={`text-total-${variety.id}-${index}`}>
-                    ₹{plan.total.toLocaleString()}
+                    ₹{formatNumber(plan.total)}
                   </td>
                   <td className="p-3">
                     <Select data-testid={`select-buyer-${variety.id}-${index}`}>

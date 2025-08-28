@@ -6,6 +6,7 @@ import type { translations } from "@/lib/translations";
 interface QualityDistributionProps {
   varieties: ProduceVariety[];
   t: (key: keyof typeof translations.en) => string;
+  formatNumber: (num: number) => string;
 }
 
 const COLORS = {
@@ -16,7 +17,7 @@ const COLORS = {
   Rotten: "#DC2626", // Red
 };
 
-export default function QualityDistribution({ varieties, t }: QualityDistributionProps) {
+export default function QualityDistribution({ varieties, t, formatNumber }: QualityDistributionProps) {
   const createChartData = (distribution: Record<string, number>) => {
     return Object.entries(distribution).map(([name, value]) => ({
       name,
@@ -55,7 +56,7 @@ export default function QualityDistribution({ varieties, t }: QualityDistributio
                 </ResponsiveContainer>
               </div>
               <p className="text-sm text-gray-600" data-testid={`text-total-items-${variety.id}`}>
-                {variety.totalItems} {t('itemsTotal')}
+                {formatNumber(variety.totalItems)} {t('itemsTotal')}
               </p>
               <div className="mt-4 space-y-2">
                 <div className="grid grid-cols-2 gap-2 text-xs">
@@ -68,7 +69,7 @@ export default function QualityDistribution({ varieties, t }: QualityDistributio
                         />
                         <span>{t(quality as keyof typeof translations.en) || quality}</span>
                       </div>
-                      <span className="font-medium">{count}</span>
+                      <span className="font-medium">{formatNumber(count)}</span>
                     </div>
                   ))}
                 </div>

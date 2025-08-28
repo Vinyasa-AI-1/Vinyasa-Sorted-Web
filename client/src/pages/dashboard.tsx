@@ -21,7 +21,7 @@ import { useTranslation } from "@/lib/translations";
 
 export default function Dashboard() {
   const { currentLanguage, changeLanguage, languages } = useLanguage();
-  const { t } = useTranslation(currentLanguage);
+  const { t, formatNumber } = useTranslation(currentLanguage);
   
   const { data: summary } = useQuery({
     queryKey: ["/api/summary"],
@@ -42,21 +42,21 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-cream">
       {/* Header */}
-      <header className="bg-forest text-white p-2 shadow-lg">
+      <header className="bg-forest text-white p-1 shadow-lg">
         <div className="container mx-auto">
           {/* Top row with logo, title, and user info */}
-          <div className="flex justify-between items-center mb-2">
-            <div className="flex items-center space-x-4">
-              <img src={logoUrl} alt="Sorted Logo" className="h-24 w-24" />
-              <h1 className="text-xl font-bold" data-testid="header-title">
+          <div className="flex justify-between items-center mb-1">
+            <div className="flex items-center space-x-3">
+              <img src={logoUrl} alt="Sorted Logo" className="h-16 w-16" />
+              <h1 className="text-lg font-bold" data-testid="header-title">
                 {t('title')}
               </h1>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
               <div className="flex items-center space-x-2">
                 <Globe className="h-4 w-4 text-sage" />
                 <Select value={currentLanguage} onValueChange={(value) => changeLanguage(value as Language)}>
-                  <SelectTrigger className="bg-transparent border-sage text-white w-32">
+                  <SelectTrigger className="bg-transparent border-sage text-white w-28">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -68,43 +68,47 @@ export default function Dashboard() {
                   </SelectContent>
                 </Select>
               </div>
-              <span className="text-sage" data-testid="farm-name">
+              <span className="text-sage text-sm" data-testid="farm-name">
                 {t('farmName')}
               </span>
-              <UserCircle className="text-2xl" />
+              <UserCircle className="text-xl" />
             </div>
           </div>
           
           {/* Bottom row with navigation menu spread across full width */}
           <nav className="w-full">
-            <div className="flex flex-wrap justify-center gap-x-8 gap-y-2">
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-1">
               <Button 
                 variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-6 py-2 text-lg font-medium whitespace-nowrap"
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-sm font-medium text-center leading-tight"
                 data-testid="nav-live-sorting"
               >
-                {t('liveSorting')}
+                <span className="block">Live</span>
+                <span className="block">Sorting</span>
               </Button>
               <Button 
                 variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-6 py-2 text-lg font-medium whitespace-nowrap"
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-sm font-medium text-center leading-tight"
                 data-testid="nav-harvest-insights"
               >
-                {t('harvestInsights')}
+                <span className="block">Harvest</span>
+                <span className="block">Insights</span>
               </Button>
               <Button 
                 variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-6 py-2 text-lg font-medium whitespace-nowrap"
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-sm font-medium text-center leading-tight"
                 data-testid="nav-crop-recommendations"
               >
-                {t('cropRecommendations')}
+                <span className="block">Crop</span>
+                <span className="block">Recommendations</span>
               </Button>
               <Button 
                 variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-6 py-2 text-lg font-medium whitespace-nowrap"
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-sm font-medium text-center leading-tight"
                 data-testid="nav-yield-optimization"
               >
-                {t('yieldOptimization')}
+                <span className="block">Yield</span>
+                <span className="block">Optimization</span>
               </Button>
             </div>
           </nav>
@@ -113,10 +117,10 @@ export default function Dashboard() {
 
       <main className="container mx-auto p-6 space-y-8">
         {/* Summary Cards */}
-        {summary && <SummaryCards summary={summary} t={t} />}
+        {summary && <SummaryCards summary={summary} t={t} formatNumber={formatNumber} />}
 
         {/* Quality Distribution */}
-        {varieties && <QualityDistribution varieties={varieties} t={t} />}
+        {varieties && <QualityDistribution varieties={varieties} t={t} formatNumber={formatNumber} />}
 
         {/* Quick Actions */}
         <div className="bg-white rounded-xl shadow-lg p-6">
@@ -139,7 +143,7 @@ export default function Dashboard() {
           <div className="space-y-8">
             <h2 className="text-2xl font-bold text-forest">{t('optimalRevenuePlan')}</h2>
             {varieties.map((variety) => (
-              <OptimalRevenueTable key={variety.id} variety={variety} t={t} />
+              <OptimalRevenueTable key={variety.id} variety={variety} t={t} formatNumber={formatNumber} />
             ))}
           </div>
         )}
@@ -158,7 +162,7 @@ export default function Dashboard() {
                 <h2 className="text-2xl font-bold text-forest">{t('overallSummary')}</h2>
                 <div className="text-right">
                   <p className="text-3xl font-bold text-fresh" data-testid="text-total-revenue">
-                    ₹{overallSummary.totalOptimalRevenue.toLocaleString()}
+                    ₹{formatNumber(overallSummary.totalOptimalRevenue)}
                   </p>
                   <p className="text-gray-600">{t('totalOptimalRevenue')}</p>
                 </div>
@@ -181,7 +185,7 @@ export default function Dashboard() {
                       item.category === 'Processing' ? 'text-purple-600' :
                       item.category === 'Local' ? 'text-green-600' : 'text-red-600'
                     }`} data-testid={`text-revenue-${item.category.toLowerCase()}`}>
-                      ₹{item.revenue.toLocaleString()}
+                      ₹{formatNumber(item.revenue)}
                     </p>
                     <p className="text-sm text-gray-600">
                       {item.category} ({item.percentage}%)
@@ -193,7 +197,7 @@ export default function Dashboard() {
               
               <div className="text-center">
                 <p className="text-lg font-semibold text-forest" data-testid="text-summary-stats">
-                  {overallSummary.totalItems} {t('totalItems')} • ₹{overallSummary.avgRevenuePerItem} {t('avgRevenuePerItem')}
+                  {formatNumber(overallSummary.totalItems)} {t('totalItems')} • ₹{formatNumber(overallSummary.avgRevenuePerItem)} {t('avgRevenuePerItem')}
                 </p>
               </div>
             </CardContent>

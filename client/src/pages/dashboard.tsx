@@ -42,12 +42,12 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-cream">
       {/* Header */}
-      <header className="bg-forest text-white py-0.5 px-2 shadow-lg">
+      <header className="bg-forest text-white py-0 px-2 shadow-lg">
         <div className="container mx-auto">
           {/* Top row with logo, title, and user info */}
-          <div className="flex justify-between items-center mb-0.5">
+          <div className="flex justify-between items-center mb-0">
             <div className="flex items-center space-x-2">
-              <img src={logoUrl} alt="Sorted Logo" className="h-20 w-20" />
+              <img src={logoUrl} alt="Sorted Logo" className="h-24 w-24" />
               <h1 className="text-base font-bold" data-testid="header-title">
                 {t('title')}
               </h1>
@@ -76,11 +76,11 @@ export default function Dashboard() {
           </div>
           
           {/* Bottom row with navigation menu spread across full width */}
-          <nav className="w-full">
-            <div className="flex flex-wrap justify-center gap-x-3 gap-y-0.5">
+          <nav className="w-full pb-1">
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-1">
               <Button 
                 variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-2 py-0.5 text-xs font-medium text-center leading-tight min-w-0 w-16"
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-xs font-medium text-center leading-tight min-w-0 w-20"
                 data-testid="nav-live-sorting"
               >
                 <div className="flex flex-col">
@@ -91,7 +91,7 @@ export default function Dashboard() {
               </Button>
               <Button 
                 variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-2 py-0.5 text-xs font-medium text-center leading-tight min-w-0 w-16"
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-xs font-medium text-center leading-tight min-w-0 w-20"
                 data-testid="nav-harvest-insights"
               >
                 <div className="flex flex-col">
@@ -102,7 +102,7 @@ export default function Dashboard() {
               </Button>
               <Button 
                 variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-2 py-0.5 text-xs font-medium text-center leading-tight min-w-0 w-16"
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-xs font-medium text-center leading-tight min-w-0 w-20"
                 data-testid="nav-crop-recommendations"
               >
                 <div className="flex flex-col">
@@ -113,7 +113,7 @@ export default function Dashboard() {
               </Button>
               <Button 
                 variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-2 py-0.5 text-xs font-medium text-center leading-tight min-w-0 w-16"
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-1 text-xs font-medium text-center leading-tight min-w-0 w-20"
                 data-testid="nav-yield-optimization"
               >
                 <div className="flex flex-col">

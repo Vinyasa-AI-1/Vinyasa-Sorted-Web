@@ -125,7 +125,29 @@ export const translations = {
     "Aurangabad APMC": "Aurangabad APMC",
     "Reliance Fresh": "Reliance Fresh",
     "Mother Dairy": "Mother Dairy",
-    "Godrej Agrovet": "Godrej Agrovet"
+    "Godrej Agrovet": "Godrej Agrovet",
+    
+    // Additional buyer names
+    "Dubai Fruit Market": "Dubai Fruit Market",
+    "Azadpur Mandi": "Azadpur Mandi",
+    "ITC Foods Ltd": "ITC Foods Ltd",
+    "Biogas Plant": "Biogas Plant",
+    "Local (₹180/kg)": "Local (₹180/kg)",
+    "Distant (₹190/kg)": "Distant (₹190/kg)",
+    "Local (₹160/kg)": "Local (₹160/kg)",
+    "Distant (₹170/kg)": "Distant (₹170/kg)",
+    "Processing (₹140/kg)": "Processing (₹140/kg)",
+    "Local (₹120/kg)": "Local (₹120/kg)",
+    "Processing (₹110/kg)": "Processing (₹110/kg)",
+    "Britannia (₹55/kg)": "Britannia (₹55/kg)",
+    "Haldiram's (₹50/kg)": "Haldiram's (₹50/kg)",
+    "Local Compost (₹2/kg)": "Local Compost (₹2/kg)",
+    "Local (₹70/kg)": "Local (₹70/kg)",
+    "Local (₹140/kg)": "Local (₹140/kg)",
+    "Distant (₹150/kg)": "Distant (₹150/kg)",
+    "Processing (₹120/kg)": "Processing (₹120/kg)",
+    "Local (₹100/kg)": "Local (₹100/kg)",
+    "Processing (₹90/kg)": "Processing (₹90/kg)"
   },
   
   hi: {
@@ -252,7 +274,29 @@ export const translations = {
     "Aurangabad APMC": "औरंगाबाद एपीएमसी",
     "Reliance Fresh": "रिलायंस फ्रेश",
     "Mother Dairy": "मदर डेयरी",
-    "Godrej Agrovet": "गोदरेज एग्रोवेट"
+    "Godrej Agrovet": "गोदरेज एग्रोवेट",
+    
+    // Additional buyer names
+    "Dubai Fruit Market": "दुबई फल बाजार",
+    "Azadpur Mandi": "आजादपुर मंडी",
+    "ITC Foods Ltd": "आईटीसी फूड्स लिमिटेड",
+    "Biogas Plant": "बायोगैस प्लांट",
+    "Local (₹180/kg)": "स्थानीय (₹180/किग्रा)",
+    "Distant (₹190/kg)": "दूर (₹190/किग्रा)",
+    "Local (₹160/kg)": "स्थानीय (₹160/किग्रा)",
+    "Distant (₹170/kg)": "दूर (₹170/किग्रा)",
+    "Processing (₹140/kg)": "प्रसंस्करण (₹140/किग्रा)",
+    "Local (₹120/kg)": "स्थानीय (₹120/किग्रा)",
+    "Processing (₹110/kg)": "प्रसंस्करण (₹110/किग्रा)",
+    "Britannia (₹55/kg)": "ब्रिटानिया (₹55/किग्रा)",
+    "Haldiram's (₹50/kg)": "हलदीराम (₹50/किग्रा)",
+    "Local Compost (₹2/kg)": "स्थानीय खाद (₹2/किग्रा)",
+    "Local (₹70/kg)": "स्थानीय (₹70/किग्रा)",
+    "Local (₹140/kg)": "स्थानीय (₹140/किग्रा)",
+    "Distant (₹150/kg)": "दूर (₹150/किग्रा)",
+    "Processing (₹120/kg)": "प्रसंस्करण (₹120/किग्रा)",
+    "Local (₹100/kg)": "स्थानीय (₹100/किग्रा)",
+    "Processing (₹90/kg)": "प्रसंस्करण (₹90/किग्रा)"
   },
   
   bn: {
@@ -379,7 +423,29 @@ export const translations = {
     "Aurangabad APMC": "আউরঙ্গাবাদ APMC",
     "Reliance Fresh": "রিলায়েন্স ফ্রেশ",
     "Mother Dairy": "মাদার ডেয়ারি",
-    "Godrej Agrovet": "গোদরেজ অ্যাগ্রোভেট"
+    "Godrej Agrovet": "গোদরেজ অ্যাগ্রোভেট",
+    
+    // Additional buyer names
+    "Dubai Fruit Market": "দুবাই ফল বাজার",
+    "Azadpur Mandi": "আজাদপুর মন্ডি",
+    "ITC Foods Ltd": "আইটিসি ফুডস লিমিটেড",
+    "Biogas Plant": "বায়োগ্যাস প্ল্যান্ট",
+    "Local (₹180/kg)": "স্থানীয় (₹১৮০/কেজি)",
+    "Distant (₹190/kg)": "দূরের (₹১৯০/কেজি)",
+    "Local (₹160/kg)": "স্থানীয় (₹১৬০/কেজি)",
+    "Distant (₹170/kg)": "দূরের (₹১৭০/কেজি)",
+    "Processing (₹140/kg)": "প্রক্রিয়াকরণ (₹১৪০/কেজি)",
+    "Local (₹120/kg)": "স্থানীয় (₹১২০/কেজি)",
+    "Processing (₹110/kg)": "প্রক্রিয়াকরণ (₹১১০/কেজি)",
+    "Britannia (₹55/kg)": "ব্রিটানিয়া (₹৫৫/কেজি)",
+    "Haldiram's (₹50/kg)": "হলদিরাম (₹৫০/কেজি)",
+    "Local Compost (₹2/kg)": "স্থানীয় সার (₹২/কেজি)",
+    "Local (₹70/kg)": "স্থানীয় (₹৭০/কেজি)",
+    "Local (₹140/kg)": "স্থানীয় (₹১৪০/কেজি)",
+    "Distant (₹150/kg)": "দূরের (₹১৫০/কেজি)",
+    "Processing (₹120/kg)": "প্রক্রিয়াকরণ (₹১২০/কেজি)",
+    "Local (₹100/kg)": "স্থানীয় (₹১০০/কেজি)",
+    "Processing (₹90/kg)": "প্রক্রিয়াকরণ (₹৯০/কেজি)"
   },
   
   te: {
@@ -506,7 +572,29 @@ export const translations = {
     "Aurangabad APMC": "ఔరంగాబాద్ APMC",
     "Reliance Fresh": "రిలయన్స్ ఫ్రెష్",
     "Mother Dairy": "మదర్ డైరీ",
-    "Godrej Agrovet": "గొద్రేజ్ అగ్రోవేట్"
+    "Godrej Agrovet": "గొద్రేజ్ అగ్రోవేట్",
+    
+    // Additional buyer names
+    "Dubai Fruit Market": "దుబాయ్ పండ్ల మార్కెట్",
+    "Azadpur Mandi": "ఆజాద్‌పుర్ మండి",
+    "ITC Foods Ltd": "ఐటీసీ ఫుడ్స్ లిమిటెడ్",
+    "Biogas Plant": "బయోగ్యాస్ ప్లాంట్",
+    "Local (₹180/kg)": "స్థానిక (₹180/కిలో)",
+    "Distant (₹190/kg)": "దూర (₹190/కిలో)",
+    "Local (₹160/kg)": "స్థానిక (₹160/కిలో)",
+    "Distant (₹170/kg)": "దూర (₹170/కిలో)",
+    "Processing (₹140/kg)": "ప్రాసెసింగ్ (₹140/కిలో)",
+    "Local (₹120/kg)": "స్థానిక (₹120/కిలో)",
+    "Processing (₹110/kg)": "ప్రాసెసింగ్ (₹110/కిలో)",
+    "Britannia (₹55/kg)": "బ్రిటానియా (₹55/కిలో)",
+    "Haldiram's (₹50/kg)": "హల్దిరాం (₹50/కిలో)",
+    "Local Compost (₹2/kg)": "స్థానిక కంపోస్ట్ (₹2/కిలో)",
+    "Local (₹70/kg)": "స్థానిక (₹70/కిలో)",
+    "Local (₹140/kg)": "స్థానిక (₹140/కిలో)",
+    "Distant (₹150/kg)": "దూర (₹150/కిలో)",
+    "Processing (₹120/kg)": "ప్రాసెసింగ్ (₹120/కిలో)",
+    "Local (₹100/kg)": "స్థానిక (₹100/కిలో)",
+    "Processing (₹90/kg)": "ప్రాసెసింగ్ (₹90/కిలో)"
   },
   
   mr: {
@@ -633,7 +721,29 @@ export const translations = {
     "Aurangabad APMC": "औरंगाबाद APMC",
     "Reliance Fresh": "रिलायन्स फ्रेश",
     "Mother Dairy": "मदर डेअरी",
-    "Godrej Agrovet": "गोदरेज अॅग्रोव्हेट"
+    "Godrej Agrovet": "गोदरेज अॅग्रोव्हेट",
+    
+    // Additional buyer names
+    "Dubai Fruit Market": "दुबई फळ मार्केट",
+    "Azadpur Mandi": "आजादपूर मंडी",
+    "ITC Foods Ltd": "आयटीसी फूड्स लिमिटेड",
+    "Biogas Plant": "बायोगॅस प्लांट",
+    "Local (₹180/kg)": "स्थानिक (₹180/किलो)",
+    "Distant (₹190/kg)": "दूर (₹190/किलो)",
+    "Local (₹160/kg)": "स्थानिक (₹160/किलो)",
+    "Distant (₹170/kg)": "दूर (₹170/किलो)",
+    "Processing (₹140/kg)": "प्रक्रिया (₹140/किलो)",
+    "Local (₹120/kg)": "स्थानिक (₹120/किलो)",
+    "Processing (₹110/kg)": "प्रक्रिया (₹110/किलो)",
+    "Britannia (₹55/kg)": "ब्रिटानिया (₹55/किलो)",
+    "Haldiram's (₹50/kg)": "हलदीराम (₹50/किलो)",
+    "Local Compost (₹2/kg)": "स्थानिक कंपोस्ट (₹2/किलो)",
+    "Local (₹70/kg)": "स्थानिक (₹70/किलो)",
+    "Local (₹140/kg)": "स्थानिक (₹140/किलो)",
+    "Distant (₹150/kg)": "दूर (₹150/किलो)",
+    "Processing (₹120/kg)": "प्रक्रिया (₹120/किलो)",
+    "Local (₹100/kg)": "स्थानिक (₹100/किलो)",
+    "Processing (₹90/kg)": "प्रक्रिया (₹90/किलो)"
   }
 };
 

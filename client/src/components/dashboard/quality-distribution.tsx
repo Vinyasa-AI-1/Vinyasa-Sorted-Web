@@ -33,7 +33,7 @@ export default function QualityDistribution({ varieties, t }: QualityDistributio
           {varieties.map((variety) => (
             <div key={variety.id} className="text-center">
               <h3 className="font-semibold text-lg text-forest mb-4" data-testid={`text-variety-${variety.id}`}>
-                {variety.name}
+                {t(variety.id as keyof typeof translations.en) || variety.name}
               </h3>
               <div className="relative w-32 h-32 mx-auto mb-4">
                 <ResponsiveContainer width="100%" height="100%">
@@ -66,7 +66,7 @@ export default function QualityDistribution({ varieties, t }: QualityDistributio
                           className="w-3 h-3 rounded-full mr-1"
                           style={{ backgroundColor: COLORS[quality as keyof typeof COLORS] }}
                         />
-                        <span>{quality}</span>
+                        <span>{t(quality as keyof typeof translations.en) || quality}</span>
                       </div>
                       <span className="font-medium">{count}</span>
                     </div>

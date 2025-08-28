@@ -42,49 +42,49 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-cream">
       {/* Header */}
-      <header className="bg-forest text-white p-4 shadow-lg">
+      <header className="bg-forest text-white p-2 shadow-lg">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-4">
-            <img src={logoUrl} alt="Sorted Logo" className="h-24 w-24" />
-            <div className="flex flex-col">
-              <h1 className="text-2xl font-bold" data-testid="header-title">
-                {t('title')}
-              </h1>
-              {/* Navigation Menu */}
-              <nav className="mt-1">
-                <div className="flex space-x-4">
-                  <Button 
-                    variant="ghost" 
-                    className="text-sage hover:text-white hover:bg-sage/20 px-2 py-1 text-xs"
-                    data-testid="nav-live-sorting"
-                  >
-                    {t('liveSorting')}
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    className="text-sage hover:text-white hover:bg-sage/20 px-2 py-1 text-xs"
-                    data-testid="nav-harvest-insights"
-                  >
-                    {t('harvestInsights')}
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    className="text-sage hover:text-white hover:bg-sage/20 px-2 py-1 text-xs"
-                    data-testid="nav-crop-recommendations"
-                  >
-                    {t('cropRecommendations')}
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    className="text-sage hover:text-white hover:bg-sage/20 px-2 py-1 text-xs"
-                    data-testid="nav-yield-optimization"
-                  >
-                    {t('yieldOptimization')}
-                  </Button>
-                </div>
-              </nav>
-            </div>
+          <div className="flex items-center space-x-6">
+            <img src={logoUrl} alt="Sorted Logo" className="h-32 w-32" />
+            <h1 className="text-2xl font-bold" data-testid="header-title">
+              {t('title')}
+            </h1>
           </div>
+          
+          {/* Navigation Menu - Spread across center */}
+          <nav className="flex-1 flex justify-center">
+            <div className="flex space-x-8">
+              <Button 
+                variant="ghost" 
+                className="text-sage hover:text-white hover:bg-sage/20 px-4 py-2 text-base font-medium"
+                data-testid="nav-live-sorting"
+              >
+                {t('liveSorting')}
+              </Button>
+              <Button 
+                variant="ghost" 
+                className="text-sage hover:text-white hover:bg-sage/20 px-4 py-2 text-base font-medium"
+                data-testid="nav-harvest-insights"
+              >
+                {t('harvestInsights')}
+              </Button>
+              <Button 
+                variant="ghost" 
+                className="text-sage hover:text-white hover:bg-sage/20 px-4 py-2 text-base font-medium"
+                data-testid="nav-crop-recommendations"
+              >
+                {t('cropRecommendations')}
+              </Button>
+              <Button 
+                variant="ghost" 
+                className="text-sage hover:text-white hover:bg-sage/20 px-4 py-2 text-base font-medium"
+                data-testid="nav-yield-optimization"
+              >
+                {t('yieldOptimization')}
+              </Button>
+            </div>
+          </nav>
+          
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <Globe className="h-4 w-4 text-sage" />

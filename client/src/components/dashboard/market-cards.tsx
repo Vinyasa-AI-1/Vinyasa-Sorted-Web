@@ -73,7 +73,7 @@ export default function MarketCards({ markets, t }: MarketCardsProps) {
                 {categoryMarkets.slice(0, 2).map((market) => (
                   <div key={market.id} className={`border-l-4 ${getCategoryColor(category)} pl-4`}>
                     <h4 className="font-semibold" data-testid={`text-market-name-${market.id}`}>
-                      {market.name}
+                      {t(market.name as keyof typeof translations.en) || market.name}
                     </h4>
                     <p className="text-sm text-gray-600" data-testid={`text-market-location-${market.id}`}>
                       {market.location}

@@ -85,9 +85,12 @@ export default function ChatInterface({ t, currentLanguage = 'en' }: ChatInterfa
     const question = userQuestion.toLowerCase();
     
     // Analyze question and provide contextual response based on dashboard data
-    if (question.includes('revenue') || question.includes('income') || question.includes('earning') || 
-        question.includes('आय') || question.includes('मुनाफा') || question.includes('আয়') || 
-        question.includes('ఆదాయం') || question.includes('महसूल')) {
+    // Revenue keywords in all languages
+    if (question.includes('revenue') || question.includes('income') || question.includes('earning') || question.includes('profit') || question.includes('money') ||
+        question.includes('आय') || question.includes('मुनाफा') || question.includes('पैसा') || question.includes('लाभ') || question.includes('कमाई') ||
+        question.includes('আয়') || question.includes('মুনাফা') || question.includes('টাকা') || question.includes('লাভ') || question.includes('উপার্জন') ||
+        question.includes('ఆదాయం') || question.includes('లాభం') || question.includes('డబ్బు') || question.includes('వేలడ') ||
+        question.includes('महसूल') || question.includes('नफा') || question.includes('पैसे') || question.includes('कमावणी')) {
       
       const responses = {
         en: `Based on your current data: Total revenue is ₹${summary?.revenue?.toLocaleString() || '0'}. Your optimal revenue potential is ₹${overallSummary?.totalOptimalRevenue?.toLocaleString() || '0'}. Focus on premium quality produce for maximum returns.`,
@@ -99,10 +102,12 @@ export default function ChatInterface({ t, currentLanguage = 'en' }: ChatInterfa
       return responses[currentLang] || responses.en;
     }
     
-    if (question.includes('market') || question.includes('sell') || question.includes('buyer') ||
-        question.includes('बाजार') || question.includes('बेचना') || question.includes('বাজার') ||
-        question.includes('মার্কেট') || question.includes('বিক্রি') || question.includes('मार्केट') ||
-        question.includes('మార్కెట్') || question.includes('అమ్మకం')) {
+    // Market keywords in all languages  
+    if (question.includes('market') || question.includes('sell') || question.includes('buyer') || question.includes('sale') || question.includes('export') || question.includes('where') ||
+        question.includes('बाजार') || question.includes('बेचना') || question.includes('खरीदार') || question.includes('निर्यात') || question.includes('कहाँ') || question.includes('विक्री') ||
+        question.includes('বাজার') || question.includes('মার্কেট') || question.includes('বিক্রি') || question.includes('ক্রেতা') || question.includes('রপ্তানি') || question.includes('কোথায়') ||
+        question.includes('మార్కెట్') || question.includes('అమ్మకం') || question.includes('కొనుగోలుదారు') || question.includes('ఎగుమతి') || question.includes('ఎక్కడ') ||
+        question.includes('मार्केट') || question.includes('विक्री') || question.includes('खरेदी') || question.includes('निर्यात') || question.includes('कुठे')) {
       
       const exportMarkets = markets?.filter(m => m.category === 'export') || [];
       const localMarkets = markets?.filter(m => m.category === 'local') || [];

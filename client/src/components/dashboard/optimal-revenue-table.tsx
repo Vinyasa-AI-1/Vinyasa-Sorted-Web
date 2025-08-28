@@ -40,7 +40,7 @@ export default function OptimalRevenueTable({ variety, t }: OptimalRevenueTableP
         <div className="flex justify-between items-center mb-6">
           <div>
             <h3 className="text-xl font-bold text-forest" data-testid={`text-variety-name-${variety.id}`}>
-              {variety.name}
+              {t(variety.id as keyof typeof translations.en) || variety.name}
             </h3>
             <p className="text-gray-600" data-testid={`text-variety-details-${variety.id}`}>
               {variety.variety} • {variety.totalItems} items total
@@ -73,7 +73,7 @@ export default function OptimalRevenueTable({ variety, t }: OptimalRevenueTableP
               {variety.optimalRevenuePlan.map((plan, index) => (
                 <tr key={index} className="border-b">
                   <td className="p-3 font-medium" data-testid={`text-quality-${variety.id}-${index}`}>
-                    {plan.qualityCategory}
+                    {t(plan.qualityCategory as keyof typeof translations.en) || plan.qualityCategory}
                   </td>
                   <td className="p-3" data-testid={`text-items-${variety.id}-${index}`}>
                     {plan.items}
@@ -86,12 +86,12 @@ export default function OptimalRevenueTable({ variety, t }: OptimalRevenueTableP
                       className={`px-2 py-1 rounded text-xs ${getSaleCategoryColor(plan.recommendedSaleFor)}`}
                       data-testid={`text-sale-category-${variety.id}-${index}`}
                     >
-                      {plan.recommendedSaleFor}
+                      {t(plan.recommendedSaleFor as keyof typeof translations.en) || plan.recommendedSaleFor}
                     </span>
                   </td>
                   <td className="p-3">
                     <div className="text-sm" data-testid={`text-buyer-${variety.id}-${index}`}>
-                      <p className="font-medium">{plan.recommendedBuyer.name}</p>
+                      <p className="font-medium">{t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name}</p>
                       <p className="text-gray-600">
                         {plan.recommendedBuyer.location} • {plan.recommendedBuyer.distance}
                       </p>
@@ -106,13 +106,13 @@ export default function OptimalRevenueTable({ variety, t }: OptimalRevenueTableP
                   <td className="p-3">
                     <Select data-testid={`select-buyer-${variety.id}-${index}`}>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder={plan.recommendedBuyer.name} />
+                        <SelectValue placeholder={t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="current">{plan.recommendedBuyer.name}</SelectItem>
+                        <SelectItem value="current">{t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name}</SelectItem>
                         {plan.alternativeBuyers.map((buyer, buyerIndex) => (
                           <SelectItem key={buyerIndex} value={`alt-${buyerIndex}`}>
-                            {buyer.name}
+                            {t(buyer.name as keyof typeof translations.en) || buyer.name}
                           </SelectItem>
                         ))}
                       </SelectContent>

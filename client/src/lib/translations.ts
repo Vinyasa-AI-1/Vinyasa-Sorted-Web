@@ -82,7 +82,50 @@ export const translations = {
     distantMarket: "Distant Market",
     processingUnit: "Processing Unit",
     biogas: "Biogas",
-    decompost: "Decompost"
+    decompost: "Decompost",
+    
+    // Fruits and vegetables
+    "alphonso-mango": "Alphonso Mango",
+    "kesar-mango": "Kesar Mango", 
+    "robust-mango": "Robust Mango",
+    "valencia-orange": "Valencia Orange",
+    "nagpur-orange": "Nagpur Orange",
+    "pomegranate": "Pomegranate",
+    "grapes": "Grapes",
+    "apple": "Apple",
+    "banana": "Banana",
+    "onion": "Onion",
+    "potato": "Potato",
+    "tomato": "Tomato",
+    
+    // Quality categories data
+    "Premium": "Premium",
+    "Ripe": "Ripe", 
+    "YetToRipe": "Yet To Ripe",
+    "Overripe": "Overripe",
+    "Rotten": "Rotten",
+    
+    // Sale categories data
+    "Export": "Export",
+    "Local Market": "Local Market",
+    "Distant Market": "Distant Market", 
+    "Processing Unit": "Processing Unit",
+    "Biogas": "Biogas",
+    "Decompost": "Decompost",
+    
+    // Buyer names
+    "JNPT Export Terminal": "JNPT Export Terminal",
+    "Dubai International": "Dubai International",
+    "Singapore Port": "Singapore Port",
+    "Vashi APMC Market": "Vashi APMC Market",
+    "Crawford Market": "Crawford Market",
+    "Dadar Market": "Dadar Market",
+    "Pune APMC": "Pune APMC",
+    "Nashik Market": "Nashik Market",
+    "Aurangabad APMC": "Aurangabad APMC",
+    "Reliance Fresh": "Reliance Fresh",
+    "Mother Dairy": "Mother Dairy",
+    "Godrej Agrovet": "Godrej Agrovet"
   },
   
   hi: {
@@ -166,7 +209,50 @@ export const translations = {
     distantMarket: "दूर का बाजार", 
     processingUnit: "प्रसंस्करण इकाई",
     biogas: "बायोगैस",
-    decompost: "कंपोस्ट"
+    decompost: "कंपोस्ट",
+    
+    // Fruits and vegetables
+    "alphonso-mango": "अल्फांसो आम",
+    "kesar-mango": "केसर आम", 
+    "robust-mango": "रोबस्ट आम",
+    "valencia-orange": "वेलेंसिया संतरा",
+    "nagpur-orange": "नागपुर संतरा",
+    "pomegranate": "अनार",
+    "grapes": "अंगूर",
+    "apple": "सेब",
+    "banana": "केला",
+    "onion": "प्याज",
+    "potato": "आलू",
+    "tomato": "टमाटर",
+    
+    // Quality categories data
+    "Premium": "प्रीमियम",
+    "Ripe": "पका हुआ", 
+    "YetToRipe": "अभी पकना है",
+    "Overripe": "अधिक पका हुआ",
+    "Rotten": "सड़ा हुआ",
+    
+    // Sale categories data
+    "Export": "निर्यात",
+    "Local Market": "स्थानीय बाजार",
+    "Distant Market": "दूर का बाजार", 
+    "Processing Unit": "प्रसंस्करण इकाई",
+    "Biogas": "बायोगैस",
+    "Decompost": "कंपोस्ट",
+    
+    // Buyer names
+    "JNPT Export Terminal": "जेएनपीटी एक्सपोर्ट टर्मिनल",
+    "Dubai International": "दुबई इंटरनेशनल",
+    "Singapore Port": "सिंगापुर पोर्ट",
+    "Vashi APMC Market": "वाशी एपीएमसी बाजार",
+    "Crawford Market": "क्रॉफर्ड बाजार",
+    "Dadar Market": "दादर बाजार",
+    "Pune APMC": "पुणे एपीएमसी",
+    "Nashik Market": "नाशिक बाजार",
+    "Aurangabad APMC": "औरंगाबाद एपीएमसी",
+    "Reliance Fresh": "रिलायंस फ्रेश",
+    "Mother Dairy": "मदर डेयरी",
+    "Godrej Agrovet": "गोदरेज एग्रोवेट"
   },
   
   bn: {
@@ -250,7 +336,50 @@ export const translations = {
     distantMarket: "দূরের বাজার",
     processingUnit: "প্রক্রিয়াকরণ ইউনিট",
     biogas: "বায়োগ্যাস",
-    decompost: "কম্পোস্ট"
+    decompost: "কম্পোস্ট",
+    
+    // Fruits and vegetables
+    "alphonso-mango": "আলফান্সো আম",
+    "kesar-mango": "কেসর আম", 
+    "robust-mango": "রবাস্ট আম",
+    "valencia-orange": "ভ্যালেন্সিয়া কমলা",
+    "nagpur-orange": "নাগপুর কমলা",
+    "pomegranate": "ডালিম",
+    "grapes": "আঙুর",
+    "apple": "আপেল",
+    "banana": "কলা",
+    "onion": "পেঁয়াজ",
+    "potato": "আলু",
+    "tomato": "টমেটো",
+    
+    // Quality categories data
+    "Premium": "প্রিমিয়াম",
+    "Ripe": "পাকা", 
+    "YetToRipe": "এখনো পাকেনি",
+    "Overripe": "বেশি পাকা",
+    "Rotten": "পচা",
+    
+    // Sale categories data
+    "Export": "রপ্তানি",
+    "Local Market": "স্থানীয় বাজার",
+    "Distant Market": "দূরের বাজার", 
+    "Processing Unit": "প্রক্রিয়াকরণ ইউনিট",
+    "Biogas": "বায়োগ্যাস",
+    "Decompost": "কম্পোস্ট",
+    
+    // Buyer names
+    "JNPT Export Terminal": "JNPT এক্সপোর্ট টার্মিনাল",
+    "Dubai International": "দুবাই ইন্টারন্যাশনাল",
+    "Singapore Port": "সিঙ্গাপুর পোর্ট",
+    "Vashi APMC Market": "ভাশি APMC বাজার",
+    "Crawford Market": "ক্রফোর্ড বাজার",
+    "Dadar Market": "দাদার বাজার",
+    "Pune APMC": "পুনে APMC",
+    "Nashik Market": "নাশিক বাজার",
+    "Aurangabad APMC": "আউরঙ্গাবাদ APMC",
+    "Reliance Fresh": "রিলায়েন্স ফ্রেশ",
+    "Mother Dairy": "মাদার ডেয়ারি",
+    "Godrej Agrovet": "গোদরেজ অ্যাগ্রোভেট"
   },
   
   te: {
@@ -334,7 +463,50 @@ export const translations = {
     distantMarket: "దూర మార్కెట్",
     processingUnit: "ప్రాసెసింగ్ యూనిట్",
     biogas: "బయోగ్యాస్",
-    decompost: "కంపోస్ట్"
+    decompost: "కంపోస్ట్",
+    
+    // Fruits and vegetables
+    "alphonso-mango": "అల్ఫాన్సో మామిడి",
+    "kesar-mango": "కేసర్ మామిడి", 
+    "robust-mango": "రోబస్ట్ మామిడి",
+    "valencia-orange": "వ్యాలెన్సియా నారింజ",
+    "nagpur-orange": "నాగ్‌పూర్ నారింజ",
+    "pomegranate": "దానిమ్మ",
+    "grapes": "ద్రాక్ష",
+    "apple": "యాపిల్",
+    "banana": "అరటి",
+    "onion": "ఉల్లిపాయ",
+    "potato": "బంగాళదుంప",
+    "tomato": "టమాటో",
+    
+    // Quality categories data
+    "Premium": "ప్రీమియం",
+    "Ripe": "పండిన", 
+    "YetToRipe": "ఇంకా పండలేదు",
+    "Overripe": "అధికంగా పండిన",
+    "Rotten": "కుళ్ళిన",
+    
+    // Sale categories data
+    "Export": "ఎగుమతి",
+    "Local Market": "స్థానిక మార్కెట్",
+    "Distant Market": "దూర మార్కెట్", 
+    "Processing Unit": "ప్రాసెసింగ్ యూనిట్",
+    "Biogas": "బయోగ్యాస్",
+    "Decompost": "కంపోస్ట్",
+    
+    // Buyer names
+    "JNPT Export Terminal": "JNPT ఎగుమతి టెర్మినల్",
+    "Dubai International": "దుబాయ్ ఇంటర్నేషనల్",
+    "Singapore Port": "సింగపూర్ పోర్ట్",
+    "Vashi APMC Market": "వాశి APMC మార్కెట్",
+    "Crawford Market": "క్రాఫర్డ్ మార్కెట్",
+    "Dadar Market": "దాదర్ మార్కెట్",
+    "Pune APMC": "పుణే APMC",
+    "Nashik Market": "నాసిక్ మార్కెట్",
+    "Aurangabad APMC": "ఔరంగాబాద్ APMC",
+    "Reliance Fresh": "రిలయన్స్ ఫ్రెష్",
+    "Mother Dairy": "మదర్ డైరీ",
+    "Godrej Agrovet": "గొద్రేజ్ అగ్రోవేట్"
   },
   
   mr: {
@@ -418,7 +590,50 @@ export const translations = {
     distantMarket: "दूरचे बाजार",
     processingUnit: "प्रक्रिया युनिट",
     biogas: "बायोगॅस",
-    decompost: "कंपोस्ट"
+    decompost: "कंपोस्ट",
+    
+    // Fruits and vegetables
+    "alphonso-mango": "अल्फान्सो आंबा",
+    "kesar-mango": "केसर आंबा", 
+    "robust-mango": "रोबस्ट आंबा",
+    "valencia-orange": "व्हॅलेन्सिया संत्रे",
+    "nagpur-orange": "नागपूर संत्रे",
+    "pomegranate": "डाळिंब",
+    "grapes": "द्राक्षे",
+    "apple": "सफरचंद",
+    "banana": "केळे",
+    "onion": "कांदा",
+    "potato": "बटाटा",
+    "tomato": "टोमॅटो",
+    
+    // Quality categories data
+    "Premium": "प्रीमियम",
+    "Ripe": "पिकलेले", 
+    "YetToRipe": "अजून पिकायचे",
+    "Overripe": "जास्त पिकलेले",
+    "Rotten": "कुजलेले",
+    
+    // Sale categories data
+    "Export": "निर्यात",
+    "Local Market": "स्थानिक बाजार",
+    "Distant Market": "दूरचे बाजार", 
+    "Processing Unit": "प्रक्रिया युनिट",
+    "Biogas": "बायोगॅस",
+    "Decompost": "कंपोस्ट",
+    
+    // Buyer names
+    "JNPT Export Terminal": "JNPT निर्यात टर्मिनल",
+    "Dubai International": "दुबई इंटरनॅशनल",
+    "Singapore Port": "सिंगापूर पोर्ट",
+    "Vashi APMC Market": "वाशी APMC मार्केट",
+    "Crawford Market": "क्रॉफर्ड मार्केट",
+    "Dadar Market": "दादर मार्केट",
+    "Pune APMC": "पुणे APMC",
+    "Nashik Market": "नाशिक मार्केट",
+    "Aurangabad APMC": "औरंगाबाद APMC",
+    "Reliance Fresh": "रिलायन्स फ्रेश",
+    "Mother Dairy": "मदर डेअरी",
+    "Godrej Agrovet": "गोदरेज अॅग्रोव्हेट"
   }
 };
 

@@ -1235,7 +1235,6 @@ export const translations = {
     "startSorting": "সাজানো শুরু করুন",
     "pauseSorting": "সাজানো বিরতি দিন",
     "resetSorting": "সিস্টেম রিসেট করুন",
-    "totalSorted": "মোট সাজানো",
     "cameraFeed": "ক্যামেরা ফিড",
     "analyzing": "বিশ্লেষণ করা হচ্ছে",
     "cameraIdle": "ক্যামেরা ফিড নিষ্ক্রিয়। বিশ্লেষণ শুরু করতে সাজানো শুরু করুন।",

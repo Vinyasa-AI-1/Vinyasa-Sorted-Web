@@ -27,13 +27,14 @@ import {
 } from 'lucide-react';
 import { Link } from 'wouter';
 import logoUrl from "@assets/logo_1756410067559.png";
-import wasteImageUrl from "@assets/generated_images/AI_waste_sorting_facility_a4fe898a.png";
-import produceImageUrl from "@assets/generated_images/Produce_quality_assessment_system_c692a721.png";
-import marketplaceImageUrl from "@assets/generated_images/Sustainable_marketplace_ecosystem_7318b173.png";
 
 export default function Homepage() {
   const [email, setEmail] = useState('');
   const [chatOpen, setChatOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState([
+    { id: 1, text: "Hello! I'm your AI assistant. How can I help you with Vinyasa-AI today?", sender: 'bot' }
+  ]);
+  const [chatInput, setChatInput] = useState('');
   const [contactForm, setContactForm] = useState({
     name: '',
     email: '',
@@ -49,9 +50,42 @@ export default function Homepage() {
 
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement contact form submission
     alert('Thank you for your message! We\'ll get back to you soon.');
     setContactForm({ name: '', email: '', message: '' });
+  };
+
+  const handleChatSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!chatInput.trim()) return;
+
+    // Add user message
+    const userMessage = { id: Date.now(), text: chatInput, sender: 'user' };
+    setChatMessages(prev => [...prev, userMessage]);
+
+    // Simulate AI response based on input
+    setTimeout(() => {
+      let botResponse = '';
+      const input = chatInput.toLowerCase();
+      
+      if (input.includes('waste') || input.includes('sorting')) {
+        botResponse = "Our AI waste sorting technology can categorize waste into 5 types: Dry, Wet, Plastic, Electronic, and Medical with 99.5% accuracy! Would you like to try our live sorting feature?";
+      } else if (input.includes('produce') || input.includes('quality')) {
+        botResponse = "Our produce quality assessment system grades produce from Premium to Rotten, helping farmers optimize their sales. The system can increase revenue by up to 40%!";
+      } else if (input.includes('coin') || input.includes('earning')) {
+        botResponse = "With Vinyasa Coins, you can earn up to 500+ coins daily through proper sorting and quality assessments. These can be redeemed for products or converted to rupees!";
+      } else if (input.includes('marketplace')) {
+        botResponse = "Our marketplace connects producers with buyers and recyclers. We have verified partners for export markets, local sales, and processing units with transparent pricing.";
+      } else if (input.includes('hello') || input.includes('hi')) {
+        botResponse = "Hello! I'm excited to help you learn about Vinyasa-AI's sustainable solutions. What would you like to know about?";
+      } else {
+        botResponse = "That's a great question! Vinyasa-AI offers AI-powered waste sorting, produce quality assessment, marketplace connections, and earning opportunities through Vinyasa Coins. What interests you most?";
+      }
+
+      const botMessage = { id: Date.now() + 1, text: botResponse, sender: 'bot' };
+      setChatMessages(prev => [...prev, botMessage]);
+    }, 1000);
+
+    setChatInput('');
   };
 
   return (
@@ -87,24 +121,26 @@ export default function Homepage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              Transform Waste into <span className="text-green-600">Wealth</span>
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+              Transform Waste into <span className="text-green-600 bg-gradient-to-r from-green-600 to-yellow-600 bg-clip-text text-transparent">Wealth</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
               Vinyasa-AI revolutionizes waste management and produce sorting with cutting-edge AI technology. 
               Earn Vinyasa Coins while creating a sustainable future.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
               <Link href="/dashboard">
-                <Button size="lg" className="bg-green-600 hover:bg-green-700 text-lg px-8 py-3">
+                <Button size="lg" className="bg-green-600 hover:bg-green-700 text-lg px-8 py-3 transform transition-all duration-200 hover:scale-105 hover:shadow-lg">
                   Consumer Dashboard
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Button size="lg" variant="outline" className="text-green-600 border-green-600 hover:bg-green-50 text-lg px-8 py-3">
-                Producer Dashboard
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link href="/producer-dashboard">
+                <Button size="lg" variant="outline" className="text-green-600 border-green-600 hover:bg-green-50 text-lg px-8 py-3 transform transition-all duration-200 hover:scale-105 hover:shadow-lg">
+                  Producer Dashboard
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -141,13 +177,15 @@ export default function Homepage() {
                 </CardContent>
               </Card>
             </Link>
-            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-              <CardContent className="p-6 text-center">
-                <Users className="h-12 w-12 text-purple-600 mx-auto mb-4" />
-                <h3 className="font-semibold text-lg mb-2">Producer Dashboard</h3>
-                <p className="text-gray-600 text-sm">Optimize produce sales and distribution</p>
-              </CardContent>
-            </Card>
+            <Link href="/producer-dashboard">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="p-6 text-center">
+                  <Users className="h-12 w-12 text-purple-600 mx-auto mb-4" />
+                  <h3 className="font-semibold text-lg mb-2">Producer Dashboard</h3>
+                  <p className="text-gray-600 text-sm">Optimize produce sales and distribution</p>
+                </CardContent>
+              </Card>
+            </Link>
           </div>
         </div>
       </section>
@@ -184,22 +222,26 @@ export default function Homepage() {
                 </li>
               </ul>
             </div>
-            <div className="rounded-lg overflow-hidden h-80">
-              <img 
-                src={wasteImageUrl} 
-                alt="Smart Waste Sorting Visualization" 
-                className="w-full h-full object-cover"
-              />
+            <div className="bg-gradient-to-br from-green-100 to-blue-100 rounded-lg p-8 h-80 flex items-center justify-center">
+              <div className="text-center">
+                <div className="bg-white rounded-full p-6 mb-4 shadow-lg mx-auto w-32 h-32 flex items-center justify-center">
+                  <Camera className="h-16 w-16 text-green-600" />
+                </div>
+                <h4 className="text-xl font-semibold text-gray-800 mb-2">AI Waste Sorting</h4>
+                <p className="text-gray-600">Real-time waste categorization using computer vision</p>
+              </div>
             </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="rounded-lg overflow-hidden h-80 order-2 lg:order-1">
-              <img 
-                src={produceImageUrl} 
-                alt="Produce Quality Assessment" 
-                className="w-full h-full object-cover"
-              />
+            <div className="bg-gradient-to-br from-yellow-100 to-green-100 rounded-lg p-8 h-80 flex items-center justify-center order-2 lg:order-1">
+              <div className="text-center">
+                <div className="bg-white rounded-full p-6 mb-4 shadow-lg mx-auto w-32 h-32 flex items-center justify-center">
+                  <Leaf className="h-16 w-16 text-green-600" />
+                </div>
+                <h4 className="text-xl font-semibold text-gray-800 mb-2">Produce Quality Assessment</h4>
+                <p className="text-gray-600">AI-powered grading from Premium to Processing quality</p>
+              </div>
             </div>
             <div className="order-1 lg:order-2">
               <h3 className="text-3xl font-bold text-gray-900 mb-6">Intelligent Produce Sorting</h3>
@@ -597,10 +639,13 @@ export default function Homepage() {
 
       {/* AI Chatbot */}
       {chatOpen && (
-        <div className="fixed bottom-20 right-4 w-80 h-96 bg-white rounded-lg shadow-xl border z-50">
+        <div className="fixed bottom-20 right-4 w-80 h-96 bg-white rounded-lg shadow-xl border z-50 animate-in slide-in-from-bottom-2">
           <div className="bg-green-600 text-white p-4 rounded-t-lg">
             <div className="flex justify-between items-center">
-              <h3 className="font-semibold">Vinyasa AI Assistant</h3>
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-green-300 rounded-full animate-pulse"></div>
+                <h3 className="font-semibold">Vinyasa AI Assistant</h3>
+              </div>
               <Button 
                 size="sm" 
                 variant="ghost" 
@@ -611,18 +656,36 @@ export default function Homepage() {
               </Button>
             </div>
           </div>
-          <div className="p-4 h-64 overflow-y-auto">
-            <div className="bg-gray-100 rounded-lg p-3 mb-4">
-              <p className="text-sm">Hello! I'm your AI assistant. How can I help you with Vinyasa-AI today?</p>
-            </div>
+          <div className="p-4 h-64 overflow-y-auto space-y-3">
+            {chatMessages.map((message) => (
+              <div
+                key={message.id}
+                className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className={`max-w-xs rounded-lg p-3 text-sm ${
+                    message.sender === 'user'
+                      ? 'bg-green-600 text-white'
+                      : 'bg-gray-100 text-gray-800'
+                  }`}
+                >
+                  {message.text}
+                </div>
+              </div>
+            ))}
           </div>
           <div className="p-4 border-t">
-            <div className="flex space-x-2">
-              <Input placeholder="Type your message..." className="flex-1" />
-              <Button size="sm" className="bg-green-600 hover:bg-green-700">
+            <form onSubmit={handleChatSubmit} className="flex space-x-2">
+              <Input 
+                placeholder="Type your message..." 
+                className="flex-1"
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+              />
+              <Button type="submit" size="sm" className="bg-green-600 hover:bg-green-700">
                 Send
               </Button>
-            </div>
+            </form>
           </div>
         </div>
       )}

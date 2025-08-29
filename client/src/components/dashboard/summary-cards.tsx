@@ -11,7 +11,7 @@ interface SummaryCardsProps {
 
 export default function SummaryCards({ summary, t, formatNumber }: SummaryCardsProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
       <Card className="border-l-4 border-forest">
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
@@ -58,12 +58,26 @@ export default function SummaryCards({ summary, t, formatNumber }: SummaryCardsP
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-gray-600 text-sm font-medium">{t('revenue')}</p>
+              <p className="text-gray-600 text-sm font-medium">{t('valueUnlocked')}</p>
               <p className="text-3xl font-bold text-forest" data-testid="text-revenue">
                 ₹{formatNumber(summary.revenue)}
               </p>
             </div>
             <IndianRupee className="text-fresh text-3xl" />
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="border-l-4 border-harvest">
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-gray-600 text-sm font-medium">{t('rewardsEarned')}</p>
+              <p className="text-3xl font-bold text-forest" data-testid="text-vinyasa-coins">
+                {formatNumber((summary as any).vinyasaCoins || 0)} {t('coins')}
+              </p>
+            </div>
+            <Star className="text-harvest text-3xl" />
           </div>
         </CardContent>
       </Card>

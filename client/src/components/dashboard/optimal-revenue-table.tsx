@@ -99,33 +99,53 @@ export default function OptimalRevenueTable({ variety, t, formatNumber }: Optima
                     </div>
                   </td>
                   <td className="p-3 font-medium" data-testid={`text-price-${variety.id}-${index}`}>
-                    ₹{formatNumber(plan.pricePerKg)}
+                    {(plan as any).isVinyasaCoins ? (
+                      <span className="text-harvest">{formatNumber(plan.pricePerKg)} {t('coins')}</span>
+                    ) : (
+                      <span className="text-fresh">₹{formatNumber(plan.pricePerKg)}/kg</span>
+                    )}
                   </td>
-                  <td className="p-3 font-bold text-fresh" data-testid={`text-total-${variety.id}-${index}`}>
-                    ₹{formatNumber(plan.total)}
-                  </td>
-                  <td className="p-3">
-                    <Select data-testid={`select-buyer-${variety.id}-${index}`}>
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder={t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="current">{t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name}</SelectItem>
-                        {plan.alternativeBuyers.map((buyer, buyerIndex) => (
-                          <SelectItem key={buyerIndex} value={`alt-${buyerIndex}`}>
-                            {t(buyer.name as keyof typeof translations.en) || buyer.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                  <td className="p-3 font-bold text-lg" data-testid={`text-total-${variety.id}-${index}`}>
+                    {(plan as any).isVinyasaCoins ? (
+                      <span className="text-harvest">{formatNumber(plan.total)} {t('coins')}</span>
+                    ) : (
+                      <span className="text-fresh">₹{formatNumber(plan.total)}</span>
+                    )}
                   </td>
                   <td className="p-3">
-                    <Button 
-                      className="bg-sage text-white hover:bg-green-600 transition-colors"
-                      data-testid={`button-sell-${variety.id}-${index}`}
-                    >
-                      {t('sellNow')}
-                    </Button>
+                    {(plan as any).isVinyasaCoins ? (
+                      <Button 
+                        size="sm" 
+                        className="bg-harvest text-forest hover:bg-yellow-400"
+                        data-testid={`button-redeem-${variety.id}-${index}`}
+                      >
+                        {t('redeemVinyasaCoins')}
+                      </Button>
+                    ) : (
+                      <Select data-testid={`select-buyer-${variety.id}-${index}`}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder={t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="current">{t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name}</SelectItem>
+                          {plan.alternativeBuyers.map((buyer, buyerIndex) => (
+                            <SelectItem key={buyerIndex} value={`alt-${buyerIndex}`}>
+                              {t(buyer.name as keyof typeof translations.en) || buyer.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  </td>
+                  <td className="p-3">
+                    {!(plan as any).isVinyasaCoins && (
+                      <Button 
+                        className="bg-sage text-white hover:bg-green-600 transition-colors"
+                        data-testid={`button-sell-${variety.id}-${index}`}
+                      >
+                        {t('sellNow')}
+                      </Button>
+                    )}
                   </td>
                 </tr>
               ))}

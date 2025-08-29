@@ -22,7 +22,7 @@ export const translations = {
     totalSorted: "Total Sorted",
     totalWeight: "Total Weight", 
     avgQuality: "Avg Quality",
-    revenue: "Revenue",
+    revenue: "Value Unlocked",
     
     // Quality Distribution
     qualityDistribution: "Quality Distribution by Variety",
@@ -43,17 +43,19 @@ export const translations = {
     recyclerPrices: "Recycler Prices",
     marketTrends: "Market Trends",
     redeemVinyasaCoins: "Redeem Vinyasa Coins",
+    valueUnlocked: "Value Unlocked",
+    rewardsEarned: "Rewards Earned",
     
     // Optimal Revenue Plan
-    optimalRevenuePlan: "Optimal Revenue Plan by Variety",
+    optimalRevenuePlan: "Optimal Recycling Plan by Bin Type",
     optimalRecyclingPlan: "Optimal Recycling Plan by Bin Type",
     recyclersMarketplace: "Recyclers Marketplace",
-    totalOptimalRevenue: "Total Optimal Revenue",
+    totalOptimalRevenue: "Total Value Unlocked",
     qualityCategory: "Quality Category",
     items: "Items",
     weight: "Weight (kg)",
-    recommendedSaleFor: "Recommended Sale For",
-    recommendedSaleTo: "Recommended Sale To",
+    recommendedSaleFor: "Recommended Recycling Method",
+    recommendedSaleTo: "Recommended Recycler",
     pricePerKg: "Price/kg",
     total: "Total",
     changeBuyer: "Change Buyer",
@@ -72,16 +74,16 @@ export const translations = {
     sell: "Sell",
     
     // Charts
-    revenueComparison: "Revenue Comparison by Variety",
+    revenueComparison: "Value Comparison by Bin Type",
     volumeTrends: "Volume Trends by Variety",
     today: "Today",
     seasonAvg: "Season Avg",
     lastYear: "Last Year",
     
     // Overall Summary
-    overallSummary: "Overall Optimal Revenue Summary",
+    overallSummary: "Overall Value Unlocked Summary",
     totalItems: "Total Items",
-    avgRevenuePerItem: "Avg Revenue per Item",
+    avgRevenuePerItem: "Avg Value per Item",
     vinyasaCoins: "Vinyasa Coins",
     totalVinyasaCoins: "Total Vinyasa Coins",
     coins: "Coins",
@@ -272,6 +274,10 @@ export const translations = {
     "Office": "कार्यालय",
     "Industrial": "औद्योगिक", 
     "Medical": "चिकित्सा",
+
+    // New consumer terms
+    valueUnlocked: "मूल्य अनलॉक",
+    rewardsEarned: "पुरस्कार अर्जित",
     
     // Chat
     assistant: "सहायक",
@@ -456,6 +462,10 @@ export const translations = {
     "Office": "অফিস",
     "Industrial": "শিল্প",
     "Medical": "চিকিৎসা",
+
+    // New consumer terms
+    valueUnlocked: "মূল্য আনলক",
+    rewardsEarned: "পুরস্কার অর্জিত",
     
     // Chat
     assistant: "সহায়ক",

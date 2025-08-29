@@ -2,10 +2,9 @@
   "version": 2,
   "buildCommand": "./build.sh",
   "outputDirectory": "dist",
-  "framework": null,
   "functions": {
     "api/*.js": {
-      "runtime": "@vercel/node@3.0.0"
+      "runtime": "nodejs18.x"
     }
   },
   "routes": [

@@ -8,7 +8,6 @@ export const translations = {
     
     // Menu Items
     liveSorting: "Live Produce Sorting",
-    liveWasteSorting: "Live Waste Sorting",
     harvestInsights: "Harvest Insights", 
     cropRecommendations: "Crop Recommendations",
     yieldOptimization: "Yield Optimization",
@@ -110,39 +109,6 @@ export const translations = {
     "Pusa A-4": "Pusa A-4",
     "Pusa Ruby": "Pusa Ruby",
     
-    // Waste categories
-    "dry-waste": "Dry Waste",
-    "wet-waste": "Wet Waste",
-    "plastic-waste": "Plastic Waste",
-    "electronic-waste": "Electronic Waste",
-    "medical-waste": "Medical Waste",
-    
-    // Recycler types
-    "Compost": "Compost",
-    "Plastic Recyclers": "Plastic Recyclers",
-    "eWaste Recyclers": "eWaste Recyclers",
-    "Medical Waste Recyclers": "Medical Waste Recyclers",
-    "Generic Recyclers": "Generic Recyclers",
-    "Local Recyclers": "Local Recyclers",
-    
-    // Payment types
-    "Rupees": "Rupees",
-    "Vinyasa Coins": "Vinyasa Coins",
-    "totalVinyasaCoins": "Total Vinyasa Coins",
-    "redeemCoins": "Redeem Coins",
-    "recyclerMarketplace": "Recyclers Marketplace",
-    
-    // Consumer dashboard
-    "consumerDashboard": "Sorted! Consumer Central Ops Dashboard",
-    "userName": "BKC-1 EcoCycler",
-    
-    // Quality categories for waste
-    "Fresh": "Fresh",
-    "Good": "Good",
-    "Average": "Average",
-    "Poor": "Poor",
-    "Contaminated": "Contaminated",
-    
     // Quality categories data
     "Premium": "Premium",
     "Ripe": "Ripe", 
@@ -202,7 +168,6 @@ export const translations = {
     
     // Menu Items
     liveSorting: "लाइव उत्पाद सॉर्टिंग",
-    liveWasteSorting: "लाइव अपशिष्ट सॉर्टिंग",
     harvestInsights: "फसल अंतर्दृष्टि",
     cropRecommendations: "फसल सुझाव",
     yieldOptimization: "उत्पादन अनुकूलन",
@@ -304,39 +269,6 @@ export const translations = {
     "Pusa A-4": "पूसा ए-4",
     "Pusa Ruby": "पूसा रूबी",
     
-    // Waste categories
-    "dry-waste": "सूखा अपशिष्ट",
-    "wet-waste": "गीला अपशिष्ट",
-    "plastic-waste": "प्लास्टिक अपशिष्ट",
-    "electronic-waste": "इलेक्ट्रॉनिक अपशिष्ट",
-    "medical-waste": "चिकित्सा अपशिष्ट",
-    
-    // Recycler types
-    "Compost": "खाद",
-    "Plastic Recyclers": "प्लास्टिक पुनर्चक्रणकर्ता",
-    "eWaste Recyclers": "ई-वेस्ट पुनर्चक्रणकर्ता",
-    "Medical Waste Recyclers": "चिकित्सा अपशिष्ट पुनर्चक्रणकर्ता",
-    "Generic Recyclers": "सामान्य पुनर्चक्रणकर्ता",
-    "Local Recyclers": "स्थानीय पुनर्चक्रणकर्ता",
-    
-    // Payment types
-    "Rupees": "रुपये",
-    "Vinyasa Coins": "विन्यास सिक्के",
-    "totalVinyasaCoins": "कुल विन्यास सिक्के",
-    "redeemCoins": "सिक्के रिडीम करें",
-    "recyclerMarketplace": "पुनर्चक्रणकर्ता बाजार",
-    
-    // Consumer dashboard
-    "consumerDashboard": "सॉर्टेड! उपभोक्ता केंद्रीय संचालन डैशबोर्ड",
-    "userName": "बीकेसी-1 इकोसाइकलर",
-    
-    // Quality categories for waste
-    "Fresh": "ताजा",
-    "Good": "अच्छा",
-    "Average": "औसत",
-    "Poor": "खराब",
-    "Contaminated": "दूषित",
-    
     // Quality categories data
     "Premium": "प्रीमियम",
     "Ripe": "पका हुआ", 
@@ -396,7 +328,6 @@ export const translations = {
     
     // Menu Items
     liveSorting: "লাইভ উৎপাদ সর্টিং",
-    liveWasteSorting: "লাইভ আবর্জনা সর্টিং",
     harvestInsights: "ফসল অন্তর্দৃষ্টি",
     cropRecommendations: "ফসল সুপারিশ",
     yieldOptimization: "ফলন অপ্টিমাইজেশন",
@@ -557,7 +488,6 @@ export const translations = {
     
     // Menu Items
     liveSorting: "లైవ్ ఉత్పాద సార్టింగ్",
-    liveWasteSorting: "లైవ్ వేస్ట్ సార్టింగ్",
     harvestInsights: "పంట అంతర్దృష్టులు",
     cropRecommendations: "పంట సిఫారసులు",
     yieldOptimization: "దిగుబడి అనుకూలీకరణ",
@@ -718,7 +648,6 @@ export const translations = {
     
     // Menu Items
     liveSorting: "लाइव्ह उत्पाद सॉर्टिंग",
-    liveWasteSorting: "लाइव्ह कचरा सॉर्टिंग",
     harvestInsights: "कापणी अंतर्दृष्टी",
     cropRecommendations: "पीक शिफारसी",
     yieldOptimization: "उत्पादन अनुकूलन",
@@ -874,11 +803,7 @@ export const translations = {
 };
 
 // Number formatting for different languages
-const formatNumber = (num: number | undefined, language: Language): string => {
-  if (num === undefined || num === null || isNaN(num)) {
-    return "0";
-  }
-  
+const formatNumber = (num: number, language: Language): string => {
   switch (language) {
     case 'hi':
       // Hindi numbers (Devanagari numerals)
@@ -903,6 +828,6 @@ export const useTranslation = (language: Language) => {
     t: (key: keyof typeof translations.en): string => {
       return translations[language][key] || translations.en[key] || key;
     },
-    formatNumber: (num: number | undefined) => formatNumber(num, language)
+    formatNumber: (num: number) => formatNumber(num, language)
   };
 };

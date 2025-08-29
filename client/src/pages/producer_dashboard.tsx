@@ -6,7 +6,6 @@ import MarketCards from "@/components/dashboard/market-cards";
 import RevenueCharts from "@/components/dashboard/revenue-charts";
 import ChatInterface from "@/components/dashboard/chat-interface";
 import { UserCircle, Globe } from "lucide-react";
-import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -53,12 +52,7 @@ export default function Dashboard() {
                 {t('title')}
               </h1>
             </div>
-            <div className="flex items-center space-x-4">
-              <Link to="/consumer">
-                <Button variant="ghost" size="sm" className="text-sage hover:text-white hover:bg-sage/20">
-                  Consumer Dashboard
-                </Button>
-              </Link>
+            <div className="flex items-center space-x-2">
               <div className="flex items-center space-x-1">
                 <Globe className="h-3 w-3 text-sage" />
                 <Select value={currentLanguage} onValueChange={(value) => changeLanguage(value as Language)}>

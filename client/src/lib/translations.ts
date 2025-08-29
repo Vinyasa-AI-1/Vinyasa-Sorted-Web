@@ -88,6 +88,8 @@ export const translations = {
     "alphonso-mango": "Alphonso Mango",
     "kesar-mango": "Kesar Mango", 
     "robust-mango": "Robust Mango",
+    "robusta-banana": "Robusta Banana",
+    "bhindi-okra": "Bhindi (Okra)",
     "valencia-orange": "Valencia Orange",
     "nagpur-orange": "Nagpur Orange",
     "pomegranate": "Pomegranate",
@@ -97,6 +99,15 @@ export const translations = {
     "onion": "Onion",
     "potato": "Potato",
     "tomato": "Tomato",
+    "okra": "Okra",
+    "bhindi": "Bhindi",
+    
+    // Variety names
+    "Svavlamban Hapus": "Svavlamban Hapus",
+    "Junagadh Kesar": "Junagadh Kesar",
+    "Robusta": "Robusta",
+    "Pusa A-4": "Pusa A-4",
+    "Pusa Ruby": "Pusa Ruby",
     
     // Quality categories data
     "Premium": "Premium",
@@ -237,6 +248,8 @@ export const translations = {
     "alphonso-mango": "अल्फांसो आम",
     "kesar-mango": "केसर आम", 
     "robust-mango": "रोबस्ट आम",
+    "robusta-banana": "रोबस्टा केला",
+    "bhindi-okra": "भिंडी (ओकरा)",
     "valencia-orange": "वेलेंसिया संतरा",
     "nagpur-orange": "नागपुर संतरा",
     "pomegranate": "अनार",
@@ -246,6 +259,15 @@ export const translations = {
     "onion": "प्याज",
     "potato": "आलू",
     "tomato": "टमाटर",
+    "okra": "ओकरा",
+    "bhindi": "भिंडी",
+    
+    // Variety names
+    "Svavlamban Hapus": "स्वावलंबन हापुस",
+    "Junagadh Kesar": "जूनागढ़ केसर",
+    "Robusta": "रोबस्टा",
+    "Pusa A-4": "पूसा ए-4",
+    "Pusa Ruby": "पूसा रूबी",
     
     // Quality categories data
     "Premium": "प्रीमियम",
@@ -386,6 +408,8 @@ export const translations = {
     "alphonso-mango": "আলফান্সো আম",
     "kesar-mango": "কেসর আম", 
     "robust-mango": "রবাস্ট আম",
+    "robusta-banana": "রবাস্টা কলা",
+    "bhindi-okra": "ভিন্ডি (ঢেঁড়স)",
     "valencia-orange": "ভ্যালেন্সিয়া কমলা",
     "nagpur-orange": "নাগপুর কমলা",
     "pomegranate": "ডালিম",
@@ -395,6 +419,15 @@ export const translations = {
     "onion": "পেঁয়াজ",
     "potato": "আলু",
     "tomato": "টমেটো",
+    "okra": "ঢেঁড়স",
+    "bhindi": "ভিন্ডি",
+    
+    // Variety names
+    "Svavlamban Hapus": "স্বাবলম্বন হাপুস",
+    "Junagadh Kesar": "জুনাগড় কেসর",
+    "Robusta": "রবাস্টা",
+    "Pusa A-4": "পুসা এ-৪",
+    "Pusa Ruby": "পুসা রুবি",
     
     // Quality categories data
     "Premium": "প্রিমিয়াম",
@@ -535,6 +568,8 @@ export const translations = {
     "alphonso-mango": "అల్ఫాన్సో మామిడి",
     "kesar-mango": "కేసర్ మామిడి", 
     "robust-mango": "రోబస్ట్ మామిడి",
+    "robusta-banana": "రోబస్టా అరటిపండు",
+    "bhindi-okra": "భిండి (బెండకాయ)",
     "valencia-orange": "వ్యాలెన్సియా నారింజ",
     "nagpur-orange": "నాగ్‌పూర్ నారింజ",
     "pomegranate": "దానిమ్మ",
@@ -544,6 +579,15 @@ export const translations = {
     "onion": "ఉల్లిపాయ",
     "potato": "బంగాళదుంప",
     "tomato": "టమాటో",
+    "okra": "బెండకాయ",
+    "bhindi": "భిండి",
+    
+    // Variety names
+    "Svavlamban Hapus": "స్వావలంబన్ హాపుస్",
+    "Junagadh Kesar": "జునాగడ్ కేసర్",
+    "Robusta": "రోబస్టా",
+    "Pusa A-4": "పుసా ఎ-4",
+    "Pusa Ruby": "పుసా రూబీ",
     
     // Quality categories data
     "Premium": "ప్రీమియం",
@@ -684,6 +728,8 @@ export const translations = {
     "alphonso-mango": "अल्फान्सो आंबा",
     "kesar-mango": "केसर आंबा", 
     "robust-mango": "रोबस्ट आंबा",
+    "robusta-banana": "रोबस्टा केळे",
+    "bhindi-okra": "भेंडी (ओकरा)",
     "valencia-orange": "व्हॅलेन्सिया संत्रे",
     "nagpur-orange": "नागपूर संत्रे",
     "pomegranate": "डाळिंब",
@@ -693,6 +739,15 @@ export const translations = {
     "onion": "कांदा",
     "potato": "बटाटा",
     "tomato": "टोमॅटो",
+    "okra": "ओकरा",
+    "bhindi": "भेंडी",
+    
+    // Variety names
+    "Svavlamban Hapus": "स्वावलंबन हापुस",
+    "Junagadh Kesar": "जुनागड केसर",
+    "Robusta": "रोबस्टा",
+    "Pusa A-4": "पुसा ए-४",
+    "Pusa Ruby": "पुसा रूबी",
     
     // Quality categories data
     "Premium": "प्रीमियम",

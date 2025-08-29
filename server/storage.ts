@@ -21,6 +21,7 @@ export class MemStorage implements IStorage {
       totalWeight: 1820,
       avgQuality: 92,
       revenue: 158420,
+      vinyasaCoins: 3250,
     };
 
     this.produceVarieties = [
@@ -651,6 +652,26 @@ export class MemStorage implements IStorage {
         capacity: "5 tons/day",
         grades: ["Medical"],
         category: "medical",
+      },
+      {
+        id: "powai-generic",
+        name: "EcoGeneral Recyclers",
+        location: "Powai, Mumbai",
+        distance: "12 km",
+        transport: "Same day",
+        capacity: "30 tons/day",
+        grades: ["Dry", "Plastic"],
+        category: "generic",
+      },
+      {
+        id: "thane-local",
+        name: "GreenCycle Local",
+        location: "Thane, Mumbai",
+        distance: "14 km",
+        transport: "Next day",
+        capacity: "15 tons/day",
+        grades: ["Dry", "Wet"],
+        category: "local",
       },
     ];
 

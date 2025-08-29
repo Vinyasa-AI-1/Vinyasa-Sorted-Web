@@ -147,6 +147,9 @@ export default function Dashboard() {
             <Button className="bg-fresh text-white hover:bg-green-600" data-testid="button-recycling-trends">
               {t('recyclingTrends')}
             </Button>
+            <Button className="bg-orange-500 text-white hover:bg-orange-600" data-testid="button-redeem-coins">
+              {t('redeemCoins')}
+            </Button>
           </div>
         </div>
 

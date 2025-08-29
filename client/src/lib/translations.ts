@@ -3,7 +3,7 @@ import type { Language } from '@/hooks/use-language';
 export const translations = {
   en: {
     // Header
-    title: "Sorted! Consumer Dashboard",
+    title: "Sorted! Consumer Central Ops Dashboard",
     farmName: "BKC-1 EcoCycler",
     
     // Menu Items
@@ -54,6 +54,11 @@ export const translations = {
     plasticRecyclers: "Plastic Recyclers", 
     ewasteRecyclers: "eWaste Recyclers",
     medicalWasteRecyclers: "Medical Waste Recyclers",
+    genericRecyclers: "Generic Recyclers",
+    localRecyclers: "Local Recyclers",
+    redeemCoins: "Redeem Vinyasa Coins",
+    vinyasaCoins: "Vinyasa Coins",
+    totalVinyasaCoins: "Total Vinyasa Coins",
     distance: "Distance",
     capacity: "Capacity",
     dispose: "Dispose",

@@ -45,6 +45,7 @@ export const summarySchema = z.object({
   totalWeight: z.number(),
   avgQuality: z.number(),
   revenue: z.number(),
+  vinyasaCoins: z.number().optional(),
 });
 
 export const overallSummarySchema = z.object({

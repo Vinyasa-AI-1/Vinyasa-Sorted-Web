@@ -11,6 +11,9 @@ export const translations = {
     wasteAnalytics: "Waste Analytics", 
     recyclingRecommendations: "Recycling Recommendations",
     disposalOptimization: "Disposal Optimization",
+    harvestInsights: "Harvest Insights",
+    cropRecommendations: "Crop Recommendations", 
+    yieldOptimization: "Yield Optimization",
     
     // Bin Categories
     smartBinResidential: "Residential Smart Bin",
@@ -41,11 +44,14 @@ export const translations = {
     // Quick Actions
     quickActions: "Quick Actions",
     viewAllBins: "View All Bins",
+    viewAllProduce: "View All Produce",
     priceAnalysis: "Price Analysis",
     recyclingTrends: "Recycling Trends",
+    marketTrends: "Market Trends",
     
     // Optimal Disposal Plan
     optimalDisposalPlan: "Optimal Disposal Plan by Bin Type",
+    optimalRevenuePlan: "Optimal Revenue Plan by Variety",
     totalOptimalRevenue: "Total Optimal Revenue",
     wasteCategory: "Waste Category",
     items: "Items",

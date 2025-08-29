@@ -12,11 +12,20 @@ export const translations = {
     recyclingRecommendations: "Recycling Recommendations",
     disposalOptimization: "Disposal Optimization",
     
+    // Bin Categories
+    smartBinResidential: "Residential Smart Bin",
+    smartBinCommercial: "Commercial Smart Bin", 
+    smartBinIndustrial: "Industrial Smart Bin",
+    smartBinOffice: "Office Smart Bin",
+    smartBinHospital: "Hospital Smart Bin",
+    
     // Summary Cards
     totalSorted: "Total Sorted",
     totalWeight: "Total Weight", 
     avgQuality: "Avg Quality",
     revenue: "Revenue",
+    vinyasaCoins: "Vinyasa Coins",
+    totalVinyasaCoins: "Total Vinyasa Coins",
     
     // Waste Distribution
     wasteDistribution: "Waste Distribution by Bin Type",
@@ -49,7 +58,7 @@ export const translations = {
     disposeNow: "Dispose Now",
     
     // Recycling Facilities Information
-    recyclingFacilities: "Recycling Facilities",
+    recyclingFacilities: "Recycler Network",
     compostFacilities: "Compost Facilities",
     plasticRecyclers: "Plastic Recyclers", 
     ewasteRecyclers: "eWaste Recyclers",
@@ -57,8 +66,6 @@ export const translations = {
     genericRecyclers: "Generic Recyclers",
     localRecyclers: "Local Recyclers",
     redeemCoins: "Redeem Vinyasa Coins",
-    vinyasaCoins: "Vinyasa Coins",
-    totalVinyasaCoins: "Total Vinyasa Coins",
     distance: "Distance",
     capacity: "Capacity",
     dispose: "Dispose",
@@ -76,14 +83,15 @@ export const translations = {
     avgRevenuePerItem: "Avg Revenue per Item",
     
     // Chat
-    assistant: "Assistant",
-    askAboutWaste: "Ask about your waste...",
+    assistant: "Waste Management Assistant",
+    askAboutWaste: "Ask about your waste disposal...",
     
     // Disposal Categories
     compost: "Compost",
     plasticRecycling: "Plastic Recycling", 
     ewasteRecycling: "eWaste Recycling",
     medicalWasteRecycling: "Medical Waste Recycling",
+    generalWaste: "General Waste",
     
     // Smart Bins
     "smart-bin-residential": "Residential Smart Bin",
@@ -153,31 +161,40 @@ export const translations = {
   
   hi: {
     // Header
-    title: "सॉर्टेड! उत्पादक डैशबोर्ड",
-    farmName: "स्वावलंबन फार्म्स",
+    title: "सॉर्टेड! उपभोक्ता केंद्रीय संचालन डैशबोर्ड",
+    farmName: "BKC-1 इकोसाइक्लर",
     
     // Menu Items
     liveSorting: "लाइव सॉर्टिंग",
-    harvestInsights: "फसल अंतर्दृष्टि",
-    cropRecommendations: "फसल सुझाव",
-    yieldOptimization: "उत्पादन अनुकूलन",
+    wasteAnalytics: "कचरा विश्लेषण",
+    recyclingRecommendations: "रीसाइक्लिंग सुझाव",
+    disposalOptimization: "निपटान अनुकूलन",
+    
+    // Bin Categories
+    smartBinResidential: "आवासीय स्मार्ट बिन",
+    smartBinCommercial: "व्यावसायिक स्मार्ट बिन",
+    smartBinIndustrial: "औद्योगिक स्मार्ट बिन",
+    smartBinOffice: "कार्यालय स्मार्ट बिन",
+    smartBinHospital: "अस्पताल स्मार्ट बिन",
     
     // Summary Cards
     totalSorted: "कुल सॉर्ट किया गया",
     totalWeight: "कुल वजन",
     avgQuality: "औसत गुणवत्ता", 
     revenue: "आय",
+    vinyasaCoins: "विन्यास सिक्के",
+    totalVinyasaCoins: "कुल विन्यास सिक्के",
     
-    // Quality Distribution
-    qualityDistribution: "किस्म के अनुसार गुणवत्ता वितरण",
+    // Waste Distribution
+    wasteDistribution: "बिन प्रकार के अनुसार कचरा वितरण",
     itemsTotal: "कुल आइटम",
     
-    // Quality Categories
-    premium: "प्रीमियम",
-    ripe: "पका हुआ",
-    yetToRipe: "अभी पकना है",
-    overripe: "अधिक पका हुआ",
-    rotten: "सड़ा हुआ",
+    // Waste Categories
+    dry: "सूखा",
+    wet: "गीला",
+    plastic: "प्लास्टिक",
+    electronic: "इलेक्ट्रॉनिक",
+    medical: "चिकित्सा",
     
     // Quick Actions
     quickActions: "त्वरित कार्य",
@@ -185,30 +202,31 @@ export const translations = {
     priceAnalysis: "मूल्य विश्लेषण",
     marketTrends: "बाजार रुझान",
     
-    // Optimal Revenue Plan
-    optimalRevenuePlan: "किस्म के अनुसार इष्टतम आय योजना",
+    // Optimal Disposal Plan
+    optimalDisposalPlan: "बिन प्रकार के अनुसार इष्टतम निपटान योजना",
     totalOptimalRevenue: "कुल इष्टतम आय",
-    qualityCategory: "गुणवत्ता श्रेणी",
+    wasteCategory: "कचरा श्रेणी",
     items: "आइटम",
     weight: "वजन (किग्रा)",
-    recommendedSaleFor: "बिक्री की सिफारिश",
-    recommendedSaleTo: "बिक्री स्थान",
+    recommendedDisposalTo: "निपटान की सिफारिश",
     pricePerKg: "मूल्य/किग्रा",
     total: "कुल",
-    changeBuyer: "खरीदार बदलें",
+    changeBuyer: "रीसाइक्लर बदलें",
     action: "कार्य",
-    sellNow: "अभी बेचें",
+    disposeNow: "अभी निपटान करें",
     
-    // Market Information
-    marketInformation: "बाजार जानकारी",
-    localMarkets: "स्थानीय बाजार",
-    distantMarkets: "दूर के बाजार",
-    exportMarkets: "निर्यात बाजार",
-    processingUnits: "प्रसंस्करण इकाइयां",
-    decompostMarkets: "कंपोस्ट बाजार",
+    // Recycling Facilities Information
+    recyclingFacilities: "रीसाइक्लर नेटवर्क",
+    compostFacilities: "कंपोस्ट सुविधाएं",
+    plasticRecyclers: "प्लास्टिक रीसाइक्लर",
+    ewasteRecyclers: "ई-वेस्ट रीसाइक्लर",
+    medicalWasteRecyclers: "चिकित्सा अपशिष्ट रीसाइक्लर",
+    genericRecyclers: "सामान्य रीसाइक्लर",
+    localRecyclers: "स्थानीय रीसाइक्लर",
+    redeemCoins: "विन्यास सिक्के रिडीम करें",
     distance: "दूरी",
     capacity: "क्षमता",
-    sell: "बेचें",
+    dispose: "निपटान करें",
     
     // Charts
     revenueComparison: "किस्म के अनुसार आय तुलना",
@@ -223,16 +241,15 @@ export const translations = {
     avgRevenuePerItem: "प्रति आइटम औसत आय",
     
     // Chat
-    assistant: "सहायक",
-    askAboutProduce: "अपनी फसल के बारे में पूछें...",
+    assistant: "कचरा प्रबंधन सहायक",
+    askAboutWaste: "अपने कचरे के निपटान के बारे में पूछें...",
     
-    // Sale Categories
-    export: "निर्यात",
-    localMarket: "स्थानीय बाजार",
-    distantMarket: "दूर का बाजार", 
-    processingUnit: "प्रसंस्करण इकाई",
-    biogas: "बायोगैस",
-    decompost: "कंपोस्ट",
+    // Disposal Categories
+    compost: "कंपोस्ट",
+    plasticRecycling: "प्लास्टिक रीसाइक्लिंग",
+    ewasteRecycling: "ई-वेस्ट रीसाइक्लिंग",
+    medicalWasteRecycling: "चिकित्सा अपशिष्ट रीसाइक्लिंग",
+    generalWaste: "सामान्य अपशिष्ट",
     
     // Fruits and vegetables
     "alphonso-mango": "अल्फांसो आम",
@@ -302,31 +319,40 @@ export const translations = {
   
   bn: {
     // Header
-    title: "সর্টেড! উৎপাদক ড্যাশবোর্ড",
-    farmName: "স্বাবলম্বন ফার্মস",
+    title: "সর্টেড! ভোক্তা কেন্দ্রীয় অপস ড্যাশবোর্ড",
+    farmName: "BKC-1 ইকোসাইক্লার",
     
     // Menu Items
     liveSorting: "লাইভ সর্টিং",
-    harvestInsights: "ফসল অন্তর্দৃষ্টি",
-    cropRecommendations: "ফসল সুপারিশ",
-    yieldOptimization: "ফলন অপ্টিমাইজেশন",
+    wasteAnalytics: "বর্জ্য বিশ্লেষণ",
+    recyclingRecommendations: "পুনর্ব্যবহার সুপারিশ",
+    disposalOptimization: "নিষ্পত্তি অপ্টিমাইজেশন",
+    
+    // Bin Categories
+    smartBinResidential: "আবাসিক স্মার্ট বিন",
+    smartBinCommercial: "বাণিজ্যিক স্মার্ট বিন",
+    smartBinIndustrial: "শিল্প স্মার্ট বিন",
+    smartBinOffice: "অফিস স্মার্ট বিন",
+    smartBinHospital: "হাসপাতাল স্মার্ট বিন",
     
     // Summary Cards
     totalSorted: "মোট সর্ট করা",
     totalWeight: "মোট ওজন",
     avgQuality: "গড় গুণমান",
     revenue: "আয়",
+    vinyasaCoins: "ভিনিয়াসা কয়েন",
+    totalVinyasaCoins: "মোট ভিনিয়াসা কয়েন",
     
-    // Quality Distribution
-    qualityDistribution: "জাত অনুযায়ী গুণমান বিতরণ",
+    // Waste Distribution
+    wasteDistribution: "বিন প্রকার অনুযায়ী বর্জ্য বিতরণ",
     itemsTotal: "মোট আইটেম",
     
-    // Quality Categories
-    premium: "প্রিমিয়াম",
-    ripe: "পাকা",
-    yetToRipe: "এখনো পাকেনি",
-    overripe: "বেশি পাকা",
-    rotten: "পচা",
+    // Waste Categories
+    dry: "শুকনো",
+    wet: "ভেজা",
+    plastic: "প্লাস্টিক",
+    electronic: "ইলেকট্রনিক",
+    medical: "চিকিৎসা",
     
     // Quick Actions
     quickActions: "দ্রুত কর্ম",
@@ -372,8 +398,8 @@ export const translations = {
     avgRevenuePerItem: "প্রতি আইটেম গড় আয়",
     
     // Chat
-    assistant: "সহায়ক",
-    askAboutProduce: "আপনার ফসল সম্পর্কে জিজ্ঞাসা করুন...",
+    assistant: "বর্জ্য ব্যবস্থাপনা সহায়ক",
+    askAboutWaste: "আপনার বর্জ্য নিষ্পত্তি সম্পর্কে জিজ্ঞাসা করুন...",
     
     // Sale Categories
     export: "রপ্তানি",
@@ -451,31 +477,40 @@ export const translations = {
   
   te: {
     // Header
-    title: "సార్టెడ్! ఉత్పాదకుల డాష్‌బోర్డ్",
-    farmName: "స్వావలంబన్ ఫార్మ్స్",
+    title: "సార్టెడ్! వినియోగదారు కేంద్రీయ ఆప్స్ డాష్‌బోర్డ్",
+    farmName: "BKC-1 ఎకోసైక్లర్",
     
     // Menu Items
     liveSorting: "లైవ్ సార్టింగ్",
-    harvestInsights: "పంట అంతర్దృష్టులు",
-    cropRecommendations: "పంట సిఫారసులు",
-    yieldOptimization: "దిగుబడి అనుకూలీకరణ",
+    wasteAnalytics: "వ్యర్థ విశ్లేషణ",
+    recyclingRecommendations: "రీసైక్లింగ్ సిఫారసులు",
+    disposalOptimization: "నిర్మూలన అనుకూలీకరణ",
+    
+    // Bin Categories
+    smartBinResidential: "నివాస స్మార్ట్ బిన్",
+    smartBinCommercial: "వాణిజ్య స్మార్ట్ బిన్",
+    smartBinIndustrial: "పారిశ్రామిక స్మార్ట్ బిన్",
+    smartBinOffice: "కార్యాలయ స్మార్ట్ బిన్",
+    smartBinHospital: "ఆసుపత్రి స్మార్ట్ బిన్",
     
     // Summary Cards
     totalSorted: "మొత్తం సార్ట్ చేయబడింది",
     totalWeight: "మొత్తం బరువు",
     avgQuality: "సగటు నాణ్యత",
     revenue: "ఆదాయం",
+    vinyasaCoins: "విన్యాస కాయిన్స్",
+    totalVinyasaCoins: "మొత్తం విన్యాస కాయిన్స్",
     
-    // Quality Distribution
-    qualityDistribution: "రకం వారీ నాణ్యత పంపిణీ",
+    // Waste Distribution
+    wasteDistribution: "బిన్ రకం వారీ వ్యర్థ పంపిణీ",
     itemsTotal: "మొత్తం వస్తువులు",
     
-    // Quality Categories
-    premium: "ప్రీమియం",
-    ripe: "పండిన",
-    yetToRipe: "ఇంకా పండలేదు",
-    overripe: "అధికంగా పండిన",
-    rotten: "కుళ్ళిన",
+    // Waste Categories
+    dry: "పొడిగా",
+    wet: "తేమగా",
+    plastic: "ప్లాస్టిక్",
+    electronic: "ఎలక్ట్రానిక్",
+    medical: "వైద్య",
     
     // Quick Actions
     quickActions: "త్వరిత చర్యలు",
@@ -521,8 +556,8 @@ export const translations = {
     avgRevenuePerItem: "వస్తువుకు సగటు ఆదాయం",
     
     // Chat
-    assistant: "సహాయకుడు",
-    askAboutProduce: "మీ పంట గురించి అడగండి...",
+    assistant: "వ్యర్థ నిర్వహణ సహాయకుడు",
+    askAboutWaste: "మీ వ్యర్థ నిర్మూలన గురించి అడగండి...",
     
     // Sale Categories
     export: "ఎగుమతి",

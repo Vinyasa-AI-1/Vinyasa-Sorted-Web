@@ -7,6 +7,13 @@ export interface IStorage {
   getOverallSummary(): Promise<OverallSummary>;
   getRevenueComparison(): Promise<any>;
   getVolumeTrends(): Promise<any>;
+  // Consumer dashboard methods
+  getBinTypes(): Promise<any[]>;
+  getRecyclers(): Promise<any[]>;
+  getConsumerSummary(): Promise<any>;
+  getConsumerOverallSummary(): Promise<any>;
+  getWasteComparison(): Promise<any>;
+  getWasteTrends(): Promise<any>;
 }
 
 export class MemStorage implements IStorage {
@@ -759,6 +766,262 @@ export class MemStorage implements IStorage {
         {
           label: "Tomato",
           data: [435, 450, 420, 435],
+          borderColor: "#DC2626",
+          backgroundColor: "rgba(220, 38, 38, 0.1)",
+        },
+      ],
+    };
+  }
+
+  // Consumer Dashboard Methods
+  async getBinTypes(): Promise<any[]> {
+    return [
+      {
+        id: "residential-bin",
+        name: "Residential Smart Bin",
+        type: "Residential",
+        totalItems: 450,
+        qualityDistribution: {
+          dry: 180,
+          wet: 150,
+          plastic: 80,
+          electronic: 25,
+          medical: 15,
+        },
+        optimalRecyclingPlan: [
+          {
+            wasteCategory: "dry",
+            items: 180,
+            weight: 90,
+            recommendedRecycler: "Green Earth Compost",
+            location: "Andheri West",
+            distance: "8 km",
+            pricePerKg: 12,
+            total: 1080,
+            vinyasaCoins: 180,
+          },
+          {
+            wasteCategory: "wet",
+            items: 150,
+            weight: 120,
+            recommendedRecycler: "Mumbai Biogas Plant",
+            location: "Powai",
+            distance: "15 km",
+            pricePerKg: 8,
+            total: 960,
+            vinyasaCoins: 150,
+          },
+        ],
+      },
+      {
+        id: "office-bin",
+        name: "Office Smart Bin",
+        type: "Office",
+        totalItems: 320,
+        qualityDistribution: {
+          dry: 50,
+          wet: 40,
+          plastic: 120,
+          electronic: 80,
+          medical: 30,
+        },
+        optimalRecyclingPlan: [
+          {
+            wasteCategory: "plastic",
+            items: 120,
+            weight: 60,
+            recommendedRecycler: "Plastic Recyclers Ltd",
+            location: "Malad",
+            distance: "12 km",
+            pricePerKg: 25,
+            total: 1500,
+            vinyasaCoins: 240,
+          },
+          {
+            wasteCategory: "electronic",
+            items: 80,
+            weight: 40,
+            recommendedRecycler: "TechCycle Solutions",
+            location: "BKC",
+            distance: "5 km",
+            pricePerKg: 150,
+            total: 6000,
+            vinyasaCoins: 400,
+          },
+        ],
+      },
+      {
+        id: "industrial-bin",
+        name: "Industrial Smart Bin",
+        type: "Industrial",
+        totalItems: 680,
+        qualityDistribution: {
+          dry: 200,
+          wet: 80,
+          plastic: 250,
+          electronic: 120,
+          medical: 30,
+        },
+        optimalRecyclingPlan: [
+          {
+            wasteCategory: "plastic",
+            items: 250,
+            weight: 125,
+            recommendedRecycler: "Industrial Plastic Recyclers",
+            location: "MIDC Andheri",
+            distance: "20 km",
+            pricePerKg: 30,
+            total: 3750,
+            vinyasaCoins: 500,
+          },
+        ],
+      },
+      {
+        id: "medical-bin",
+        name: "Medical Smart Bin",
+        type: "Medical",
+        totalItems: 180,
+        qualityDistribution: {
+          dry: 20,
+          wet: 10,
+          plastic: 40,
+          electronic: 30,
+          medical: 80,
+        },
+        optimalRecyclingPlan: [
+          {
+            wasteCategory: "medical",
+            items: 80,
+            weight: 40,
+            recommendedRecycler: "BioMedical Waste Solutions",
+            location: "Turbhe",
+            distance: "25 km",
+            pricePerKg: 200,
+            total: 8000,
+            vinyasaCoins: 800,
+          },
+        ],
+      },
+    ];
+  }
+
+  async getRecyclers(): Promise<any[]> {
+    return [
+      {
+        id: "green-earth",
+        name: "Green Earth Compost",
+        type: "Compost",
+        location: "Andheri West",
+        distance: "8 km",
+        capacity: "500 kg/day",
+        specializes: ["dry", "wet"],
+        rating: 4.8,
+        priceRange: "₹8-15/kg",
+      },
+      {
+        id: "plastic-recyclers",
+        name: "Plastic Recyclers Ltd",
+        type: "Plastic Processing",
+        location: "Malad",
+        distance: "12 km",
+        capacity: "2000 kg/day",
+        specializes: ["plastic"],
+        rating: 4.6,
+        priceRange: "₹20-30/kg",
+      },
+      {
+        id: "techcycle",
+        name: "TechCycle Solutions",
+        type: "E-Waste",
+        location: "BKC",
+        distance: "5 km",
+        capacity: "100 units/day",
+        specializes: ["electronic"],
+        rating: 4.9,
+        priceRange: "₹100-200/kg",
+      },
+      {
+        id: "biomedical-waste",
+        name: "BioMedical Waste Solutions",
+        type: "Medical Waste",
+        location: "Turbhe",
+        distance: "25 km",
+        capacity: "1000 kg/day",
+        specializes: ["medical"],
+        rating: 4.7,
+        priceRange: "₹150-250/kg",
+      },
+    ];
+  }
+
+  async getConsumerSummary(): Promise<any> {
+    return {
+      totalSorted: 1630,
+      totalWeight: 815,
+      avgRecyclingRate: 92,
+      revenue: 21290,
+      vinyasaCoins: 2270,
+    };
+  }
+
+  async getConsumerOverallSummary(): Promise<any> {
+    return {
+      totalOptimalRevenue: 21290,
+      totalItems: 1630,
+      avgRevenuePerItem: 13.1,
+      totalVinyasaCoins: 2270,
+      avgCoinsPerItem: 1.4,
+    };
+  }
+
+  async getWasteComparison(): Promise<any> {
+    return {
+      labels: ["Residential", "Office", "Industrial", "Medical"],
+      datasets: [
+        {
+          label: "Today",
+          data: [21290, 18750, 15600, 12300],
+          backgroundColor: "#22543D",
+        },
+        {
+          label: "This Week",
+          data: [19500, 17200, 14800, 11800],
+          backgroundColor: "#68D391",
+        },
+        {
+          label: "Last Month",
+          data: [18200, 16500, 13900, 11200],
+          backgroundColor: "#F6E05E",
+        },
+      ],
+    };
+  }
+
+  async getWasteTrends(): Promise<any> {
+    return {
+      labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+      datasets: [
+        {
+          label: "Residential",
+          data: [450, 480, 420, 450],
+          borderColor: "#22543D",
+          backgroundColor: "rgba(34, 84, 61, 0.1)",
+        },
+        {
+          label: "Office",
+          data: [320, 340, 300, 320],
+          borderColor: "#68D391",
+          backgroundColor: "rgba(104, 211, 145, 0.1)",
+        },
+        {
+          label: "Industrial",
+          data: [680, 720, 650, 680],
+          borderColor: "#F6E05E",
+          backgroundColor: "rgba(246, 224, 94, 0.1)",
+        },
+        {
+          label: "Medical",
+          data: [180, 190, 170, 180],
           borderColor: "#DC2626",
           backgroundColor: "rgba(220, 38, 38, 0.1)",
         },

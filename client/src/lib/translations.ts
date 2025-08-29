@@ -259,6 +259,19 @@ export const translations = {
     vinyasaCoins: "विन्यास कॉइन्स",
     totalVinyasaCoins: "कुल विन्यास कॉइन्स",
     coins: "कॉइन्स",
+
+    // Waste Categories
+    dry: "सूखा कचरा",
+    wet: "गीला कचरा", 
+    plastic: "प्लास्टिक",
+    electronic: "इलेक्ट्रॉनिक",
+    medical: "मेडिकल",
+
+    // Bin Types
+    "Residential": "आवासीय",
+    "Office": "कार्यालय",
+    "Industrial": "औद्योगिक", 
+    "Medical": "चिकित्सा",
     
     // Chat
     assistant: "सहायक",
@@ -430,6 +443,19 @@ export const translations = {
     overallSummary: "সামগ্রিক সর্বোত্তম আয় সারসংক্ষেপ",
     totalItems: "মোট আইটেম",
     avgRevenuePerItem: "প্রতি আইটেম গড় আয়",
+
+    // Waste Categories
+    dry: "শুকনো বর্জ্য",
+    wet: "ভেজা বর্জ্য",
+    plastic: "প্লাস্টিক",
+    electronic: "ইলেকট্রনিক",
+    medical: "মেডিকেল",
+
+    // Bin Types
+    "Residential": "আবাসিক",
+    "Office": "অফিস",
+    "Industrial": "শিল্প",
+    "Medical": "চিকিৎসা",
     
     // Chat
     assistant: "সহায়ক",

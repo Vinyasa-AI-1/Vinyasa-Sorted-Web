@@ -25,19 +25,19 @@ export default function CustomerCentralDashboard() {
   const { t, formatNumber } = useTranslation(currentLanguage);
   
   const { data: summary } = useQuery({
-    queryKey: ["/api/summary"],
+    queryKey: ["/api/consumer/summary"],
   });
 
-  const { data: varieties } = useQuery({
-    queryKey: ["/api/produce-varieties"],
+  const { data: binTypes } = useQuery({
+    queryKey: ["/api/consumer/bin-types"],
   });
 
-  const { data: markets } = useQuery({
-    queryKey: ["/api/markets"],
+  const { data: recyclers } = useQuery({
+    queryKey: ["/api/consumer/recyclers"],
   });
 
   const { data: overallSummary } = useQuery({
-    queryKey: ["/api/overall-summary"],
+    queryKey: ["/api/consumer/overall-summary"],
   });
 
   return (
@@ -147,7 +147,7 @@ export default function CustomerCentralDashboard() {
         {summary && <SummaryCards summary={summary} t={t} formatNumber={formatNumber} />}
 
         {/* Quality Distribution */}
-        {varieties && <QualityDistribution varieties={varieties} t={t} formatNumber={formatNumber} />}
+        {binTypes && <QualityDistribution varieties={binTypes} t={t} formatNumber={formatNumber} />}
 
         {/* Quick Actions */}
         <div className="bg-white rounded-xl shadow-lg p-6">
@@ -166,20 +166,20 @@ export default function CustomerCentralDashboard() {
         </div>
 
         {/* Optimal Revenue Plan Tables */}
-        {varieties && Array.isArray(varieties) && (
+        {binTypes && Array.isArray(binTypes) && (
           <div className="space-y-8">
             <h2 className="text-2xl font-bold text-forest">{t('optimalRecyclingPlan')}</h2>
-            {varieties.map((variety) => (
-              <OptimalRevenueTable key={variety.id} variety={variety} t={t} formatNumber={formatNumber} />
+            {binTypes.map((binType) => (
+              <OptimalRevenueTable key={binType.id} variety={binType} t={t} formatNumber={formatNumber} />
             ))}
           </div>
         )}
 
         {/* Recyclers Marketplace */}
-        {markets && Array.isArray(markets) && (
+        {recyclers && Array.isArray(recyclers) && (
           <div className="space-y-8">
             <h2 className="text-2xl font-bold text-forest">{t('recyclersMarketplace')}</h2>
-            <MarketCards markets={markets} t={t} />
+            <MarketCards markets={recyclers} t={t} />
           </div>
         )}
 

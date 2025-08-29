@@ -79,6 +79,18 @@ export default function CustomerCentralDashboard() {
           {/* Bottom row with navigation menu spread across full width */}
           <nav className="w-full -mt-1 pb-0">
             <div className="flex flex-wrap justify-center gap-x-8 gap-y-1">
+              <Link href="/">
+                <Button 
+                  variant="ghost" 
+                  className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
+                  data-testid="nav-producer-dashboard"
+                >
+                  <div className="flex flex-col">
+                    <span className="block text-sm leading-tight">Producer</span>
+                    <span className="block text-sm leading-tight">Dashboard</span>
+                  </div>
+                </Button>
+              </Link>
               <Link href="/live-waste-sorting">
                 <Button 
                   variant="ghost" 

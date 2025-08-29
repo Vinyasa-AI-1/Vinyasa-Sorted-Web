@@ -19,24 +19,25 @@ import logoUrl from "@assets/logo_1756410067559.png";
 import { useLanguage, type Language } from "@/hooks/use-language";
 import { useTranslation } from "@/lib/translations";
 import { Link } from "wouter";
+import type { Summary, OverallSummary } from "@shared/schema";
 
 export default function CustomerCentralDashboard() {
   const { currentLanguage, changeLanguage, languages } = useLanguage();
   const { t, formatNumber } = useTranslation(currentLanguage);
   
-  const { data: summary } = useQuery({
+  const { data: summary } = useQuery<Summary>({
     queryKey: ["/api/consumer/summary"],
   });
 
-  const { data: binTypes } = useQuery({
+  const { data: binTypes } = useQuery<any[]>({
     queryKey: ["/api/consumer/bin-types"],
   });
 
-  const { data: recyclers } = useQuery({
+  const { data: recyclers } = useQuery<any[]>({
     queryKey: ["/api/consumer/recyclers"],
   });
 
-  const { data: overallSummary } = useQuery({
+  const { data: overallSummary } = useQuery<any>({
     queryKey: ["/api/consumer/overall-summary"],
   });
 

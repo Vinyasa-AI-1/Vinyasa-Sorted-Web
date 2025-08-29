@@ -869,6 +869,11 @@ export const translations = {
 
 // Number formatting for different languages
 const formatNumber = (num: number, language: Language): string => {
+  // Handle undefined or null values
+  if (num === undefined || num === null || isNaN(num)) {
+    return '0';
+  }
+  
   switch (language) {
     case 'hi':
       // Hindi numbers (Devanagari numerals)

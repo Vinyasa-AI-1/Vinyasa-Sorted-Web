@@ -18,7 +18,6 @@ import {
 import logoUrl from "@assets/logo_1756410067559.png";
 import { useLanguage, type Language } from "@/hooks/use-language";
 import { useTranslation } from "@/lib/translations";
-import { Link } from "wouter";
 
 export default function Dashboard() {
   const { currentLanguage, changeLanguage, languages } = useLanguage();
@@ -79,26 +78,13 @@ export default function Dashboard() {
           {/* Bottom row with navigation menu spread across full width */}
           <nav className="w-full -mt-1 pb-0">
             <div className="flex flex-wrap justify-center gap-x-8 gap-y-1">
-              <Link href="/live-waste-sorting">
-                <Button 
-                  variant="ghost" 
-                  className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                  data-testid="nav-live-sorting"
-                >
-                  <div className="flex flex-col">
-                    {t('liveSorting').split(' ').map((word, index) => (
-                      <span key={index} className="block text-sm leading-tight">{word}</span>
-                    ))}
-                  </div>
-                </Button>
-              </Link>
               <Button 
                 variant="ghost" 
                 className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                data-testid="nav-waste-analytics"
+                data-testid="nav-live-sorting"
               >
                 <div className="flex flex-col">
-                  {t('wasteAnalytics').split(' ').map((word, index) => (
+                  {t('liveSorting').split(' ').map((word, index) => (
                     <span key={index} className="block text-sm leading-tight">{word}</span>
                   ))}
                 </div>
@@ -106,10 +92,10 @@ export default function Dashboard() {
               <Button 
                 variant="ghost" 
                 className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                data-testid="nav-recycling-recommendations"
+                data-testid="nav-harvest-insights"
               >
                 <div className="flex flex-col">
-                  {t('recyclingRecommendations').split(' ').map((word, index) => (
+                  {t('harvestInsights').split(' ').map((word, index) => (
                     <span key={index} className="block text-sm leading-tight">{word}</span>
                   ))}
                 </div>
@@ -117,10 +103,21 @@ export default function Dashboard() {
               <Button 
                 variant="ghost" 
                 className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                data-testid="nav-disposal-optimization"
+                data-testid="nav-crop-recommendations"
               >
                 <div className="flex flex-col">
-                  {t('disposalOptimization').split(' ').map((word, index) => (
+                  {t('cropRecommendations').split(' ').map((word, index) => (
+                    <span key={index} className="block text-sm leading-tight">{word}</span>
+                  ))}
+                </div>
+              </Button>
+              <Button 
+                variant="ghost" 
+                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
+                data-testid="nav-yield-optimization"
+              >
+                <div className="flex flex-col">
+                  {t('yieldOptimization').split(' ').map((word, index) => (
                     <span key={index} className="block text-sm leading-tight">{word}</span>
                   ))}
                 </div>
@@ -141,17 +138,14 @@ export default function Dashboard() {
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h2 className="text-xl font-bold text-forest mb-4">{t('quickActions')}</h2>
           <div className="flex flex-wrap gap-4">
-            <Button className="bg-sage text-white hover:bg-green-600" data-testid="button-view-bins">
-              {t('viewAllBins')}
+            <Button className="bg-sage text-white hover:bg-green-600" data-testid="button-view-produce">
+              {t('viewAllProduce')}
             </Button>
             <Button className="bg-harvest text-forest hover:bg-yellow-400" data-testid="button-price-analysis">
               {t('priceAnalysis')}
             </Button>
-            <Button className="bg-fresh text-white hover:bg-green-600" data-testid="button-recycling-trends">
-              {t('recyclingTrends')}
-            </Button>
-            <Button className="bg-orange-500 text-white hover:bg-orange-600" data-testid="button-redeem-coins">
-              {t('redeemCoins')}
+            <Button className="bg-fresh text-white hover:bg-green-600" data-testid="button-market-trends">
+              {t('marketTrends')}
             </Button>
           </div>
         </div>
@@ -159,7 +153,7 @@ export default function Dashboard() {
         {/* Optimal Revenue Plan Tables */}
         {varieties && Array.isArray(varieties) && (
           <div className="space-y-8">
-            <h2 className="text-2xl font-bold text-forest">{t('optimalDisposalPlan')}</h2>
+            <h2 className="text-2xl font-bold text-forest">{t('optimalRevenuePlan')}</h2>
             {varieties.map((variety) => (
               <OptimalRevenueTable key={variety.id} variety={variety} t={t} formatNumber={formatNumber} />
             ))}

@@ -10,11 +10,11 @@ interface QualityDistributionProps {
 }
 
 const COLORS = {
-  Dry: "#22543D", // Forest green
-  Wet: "#68D391", // Sage green
-  Plastic: "#F6E05E", // Harvest yellow
-  Electronic: "#9C4221", // Earth brown
-  Medical: "#DC2626", // Red
+  Premium: "#22543D", // Forest green
+  Ripe: "#68D391", // Sage green
+  YetToRipe: "#F6E05E", // Harvest yellow
+  Overripe: "#9C4221", // Earth brown
+  Rotten: "#DC2626", // Red
 };
 
 export default function QualityDistribution({ varieties, t, formatNumber }: QualityDistributionProps) {
@@ -29,7 +29,7 @@ export default function QualityDistribution({ varieties, t, formatNumber }: Qual
   return (
     <Card className="bg-white rounded-xl shadow-lg">
       <CardContent className="p-6">
-        <h2 className="text-2xl font-bold text-forest mb-6">{t('wasteDistribution')}</h2>
+        <h2 className="text-2xl font-bold text-forest mb-6">{t('qualityDistribution')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           {varieties.map((variety) => (
             <div key={variety.id} className="text-center">
@@ -40,7 +40,7 @@ export default function QualityDistribution({ varieties, t, formatNumber }: Qual
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
-                      data={createChartData(variety.wasteDistribution)}
+                      data={createChartData(variety.qualityDistribution)}
                       dataKey="value"
                       nameKey="name"
                       cx="50%"
@@ -48,7 +48,7 @@ export default function QualityDistribution({ varieties, t, formatNumber }: Qual
                       outerRadius={60}
                       innerRadius={30}
                     >
-                      {createChartData(variety.wasteDistribution).map((entry, index) => (
+                      {createChartData(variety.qualityDistribution).map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
@@ -60,14 +60,14 @@ export default function QualityDistribution({ varieties, t, formatNumber }: Qual
               </p>
               <div className="mt-4 space-y-2">
                 <div className="grid grid-cols-2 gap-2 text-xs">
-                  {Object.entries(variety.wasteDistribution).map(([wasteType, count]) => (
-                    <div key={wasteType} className="flex items-center justify-between">
+                  {Object.entries(variety.qualityDistribution).map(([quality, count]) => (
+                    <div key={quality} className="flex items-center justify-between">
                       <div className="flex items-center">
                         <div 
                           className="w-3 h-3 rounded-full mr-1"
-                          style={{ backgroundColor: COLORS[wasteType as keyof typeof COLORS] }}
+                          style={{ backgroundColor: COLORS[quality as keyof typeof COLORS] }}
                         />
-                        <span>{t(wasteType as keyof typeof translations.en) || wasteType}</span>
+                        <span>{t(quality as keyof typeof translations.en) || quality}</span>
                       </div>
                       <span className="font-medium">{formatNumber(count)}</span>
                     </div>

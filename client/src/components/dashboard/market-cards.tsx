@@ -11,14 +11,10 @@ interface MarketCardsProps {
 
 const getCategoryIcon = (category: string) => {
   switch (category) {
-    case "compost":
-      return <Factory className="text-green-500 mr-2" />;
-    case "plastic":
-      return <Factory className="text-blue-500 mr-2" />;
-    case "ewaste":
+    case "export":
+      return <Ship className="text-blue-500 mr-2" />;
+    case "processing":
       return <Factory className="text-purple-500 mr-2" />;
-    case "medical":
-      return <Factory className="text-red-500 mr-2" />;
     default:
       return <MapPin className="text-sage mr-2" />;
   }
@@ -26,14 +22,10 @@ const getCategoryIcon = (category: string) => {
 
 const getCategoryColor = (category: string) => {
   switch (category) {
-    case "compost":
-      return "border-green-500";
-    case "plastic":
+    case "export":
       return "border-blue-500";
-    case "ewaste":
+    case "processing":
       return "border-purple-500";
-    case "medical":
-      return "border-red-500";
     default:
       return "border-sage";
   }
@@ -41,20 +33,18 @@ const getCategoryColor = (category: string) => {
 
 const getCategoryTitle = (category: string, t: (key: keyof typeof translations.en) => string) => {
   switch (category) {
-    case "compost":
-      return t("compostFacilities");
-    case "plastic":
-      return t("plasticRecyclers");
-    case "ewaste":
-      return t("ewasteRecyclers");
-    case "medical":
-      return t("medicalWasteRecyclers");
-    case "generic":
-      return t("genericRecyclers");
     case "local":
-      return t("localRecyclers");
+      return t("localMarkets");
+    case "distant":
+      return t("distantMarkets");
+    case "export":
+      return t("exportMarkets");
+    case "processing":
+      return t("processingUnits");
+    case "decompost":
+      return t("decompostMarkets");
     default:
-      return t("recyclerNetwork");
+      return t("marketInformation");
   }
 };
 
@@ -69,7 +59,7 @@ export default function MarketCards({ markets, t }: MarketCardsProps) {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-forest">{t('recyclerNetwork')}</h2>
+      <h2 className="text-2xl font-bold text-forest">{t('marketInformation')}</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {Object.entries(marketsByCategory).slice(0, 3).map(([category, categoryMarkets]) => (

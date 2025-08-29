@@ -1,19 +1,19 @@
 import { z } from "zod";
 
-export const wasteCategories = ['Dry', 'Wet', 'Plastic', 'Electronic', 'Medical'] as const;
-export const recyclingCategories = ['Compost', 'Plastic Recycling', 'eWaste Recycling', 'Medical Waste Recycling', 'General Waste'] as const;
+export const qualityCategories = ['Premium', 'Ripe', 'YetToRipe', 'Overripe', 'Rotten'] as const;
+export const saleCategories = ['Export', 'Local Market', 'Distant Market', 'Processing Unit', 'Biogas', 'Decompost'] as const;
 
-export const wasteTypeSchema = z.object({
+export const produceVarietySchema = z.object({
   id: z.string(),
   name: z.string(),
-  binType: z.string(),
+  variety: z.string(),
   totalItems: z.number(),
-  wasteDistribution: z.record(z.enum(wasteCategories), z.number()),
-  optimalDisposalPlan: z.array(z.object({
-    wasteCategory: z.enum(wasteCategories),
+  qualityDistribution: z.record(z.enum(qualityCategories), z.number()),
+  optimalRevenuePlan: z.array(z.object({
+    qualityCategory: z.enum(qualityCategories),
     items: z.number(),
     weight: z.number(),
-    recommendedDisposalTo: z.enum(recyclingCategories),
+    recommendedSaleFor: z.enum(saleCategories),
     recommendedBuyer: z.object({
       name: z.string(),
       location: z.string(),
@@ -21,25 +21,23 @@ export const wasteTypeSchema = z.object({
     }),
     pricePerKg: z.number(),
     total: z.number(),
-    currency: z.enum(['INR', 'VC']).optional(),
     alternativeBuyers: z.array(z.object({
       name: z.string(),
       pricePerKg: z.number(),
     })),
   })),
   totalOptimalRevenue: z.number(),
-  totalVinyasaCoins: z.number().optional(),
 });
 
-export const recyclerSchema = z.object({
+export const marketSchema = z.object({
   id: z.string(),
   name: z.string(),
   location: z.string(),
   distance: z.string(),
   transport: z.string(),
   capacity: z.string(),
-  acceptedWaste: z.array(z.string()),
-  category: z.enum(['compost', 'plastic', 'ewaste', 'medical', 'general']),
+  grades: z.array(z.string()),
+  category: z.enum(['local', 'distant', 'export', 'processing', 'decompost']),
 });
 
 export const summarySchema = z.object({
@@ -47,7 +45,6 @@ export const summarySchema = z.object({
   totalWeight: z.number(),
   avgQuality: z.number(),
   revenue: z.number(),
-  vinyasaCoins: z.number().optional(),
 });
 
 export const overallSummarySchema = z.object({
@@ -62,11 +59,7 @@ export const overallSummarySchema = z.object({
   })),
 });
 
-export type WasteType = z.infer<typeof wasteTypeSchema>;
-export type Recycler = z.infer<typeof recyclerSchema>;
+export type ProduceVariety = z.infer<typeof produceVarietySchema>;
+export type Market = z.infer<typeof marketSchema>;
 export type Summary = z.infer<typeof summarySchema>;
 export type OverallSummary = z.infer<typeof overallSummarySchema>;
-
-// Legacy types for backward compatibility
-export type ProduceVariety = WasteType;
-export type Market = Recycler;

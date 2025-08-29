@@ -3,85 +3,69 @@ import type { Language } from '@/hooks/use-language';
 export const translations = {
   en: {
     // Header
-    title: "Sorted! Consumer Central Ops Dashboard",
-    farmName: "BKC-1 EcoCycler",
+    title: "Sorted! Producer Dashboard",
+    farmName: "Svavlamban Farms",
     
     // Menu Items
-    liveSorting: "Live Waste Sorting",
-    wasteAnalytics: "Waste Analytics", 
-    recyclingRecommendations: "Recycling Recommendations",
-    disposalOptimization: "Disposal Optimization",
-    harvestInsights: "Harvest Insights",
-    cropRecommendations: "Crop Recommendations", 
+    liveSorting: "Live Sorting",
+    harvestInsights: "Harvest Insights", 
+    cropRecommendations: "Crop Recommendations",
     yieldOptimization: "Yield Optimization",
-    
-    // Bin Categories
-    smartBinResidential: "Residential Smart Bin",
-    smartBinCommercial: "Commercial Smart Bin", 
-    smartBinIndustrial: "Industrial Smart Bin",
-    smartBinOffice: "Office Smart Bin",
-    smartBinHospital: "Hospital Smart Bin",
     
     // Summary Cards
     totalSorted: "Total Sorted",
     totalWeight: "Total Weight", 
     avgQuality: "Avg Quality",
     revenue: "Revenue",
-    vinyasaCoins: "Vinyasa Coins",
-    totalVinyasaCoins: "Total Vinyasa Coins",
     
-    // Waste Distribution
-    wasteDistribution: "Waste Distribution by Bin Type",
+    // Quality Distribution
+    qualityDistribution: "Quality Distribution by Variety",
     itemsTotal: "items total",
     
-    // Waste Categories
-    dry: "Dry",
-    wet: "Wet",
-    plastic: "Plastic",
-    electronic: "Electronic", 
-    medical: "Medical",
+    // Quality Categories
+    premium: "Premium",
+    ripe: "Ripe",
+    yetToRipe: "Yet To Ripe",
+    overripe: "Overripe", 
+    rotten: "Rotten",
     
     // Quick Actions
     quickActions: "Quick Actions",
-    viewAllBins: "View All Bins",
     viewAllProduce: "View All Produce",
     priceAnalysis: "Price Analysis",
-    recyclingTrends: "Recycling Trends",
     marketTrends: "Market Trends",
     
-    // Optimal Disposal Plan
-    optimalDisposalPlan: "Optimal Disposal Plan by Bin Type",
+    // Optimal Revenue Plan
     optimalRevenuePlan: "Optimal Revenue Plan by Variety",
     totalOptimalRevenue: "Total Optimal Revenue",
-    wasteCategory: "Waste Category",
+    qualityCategory: "Quality Category",
     items: "Items",
     weight: "Weight (kg)",
-    recommendedDisposalTo: "Recommended Disposal To",
+    recommendedSaleFor: "Recommended Sale For",
+    recommendedSaleTo: "Recommended Sale To",
     pricePerKg: "Price/kg",
     total: "Total",
-    changeBuyer: "Change Recycler",
+    changeBuyer: "Change Buyer",
     action: "Action",
-    disposeNow: "Dispose Now",
+    sellNow: "Sell Now",
     
-    // Recycling Facilities Information
-    recyclingFacilities: "Recycler Network",
-    compostFacilities: "Compost Facilities",
-    plasticRecyclers: "Plastic Recyclers", 
-    ewasteRecyclers: "eWaste Recyclers",
-    medicalWasteRecyclers: "Medical Waste Recyclers",
-    genericRecyclers: "Generic Recyclers",
-    localRecyclers: "Local Recyclers",
-    redeemCoins: "Redeem Vinyasa Coins",
+    // Market Information
+    marketInformation: "Market Information",
+    localMarkets: "Local Markets",
+    distantMarkets: "Distant Markets", 
+    exportMarkets: "Export Markets",
+    processingUnits: "Processing Units",
+    decompostMarkets: "Decompost Markets",
     distance: "Distance",
     capacity: "Capacity",
-    dispose: "Dispose",
+    sell: "Sell",
     
     // Charts
-    revenueComparison: "Revenue Comparison by Bin Type",
-    volumeTrends: "Volume Trends by Bin Type",
+    revenueComparison: "Revenue Comparison by Variety",
+    volumeTrends: "Volume Trends by Variety",
     today: "Today",
-    monthlyAvg: "Monthly Avg",
-    lastMonth: "Last Month",
+    seasonAvg: "Season Avg",
+    lastYear: "Last Year",
     
     // Overall Summary
     overallSummary: "Overall Optimal Revenue Summary",
@@ -89,44 +73,45 @@ export const translations = {
     avgRevenuePerItem: "Avg Revenue per Item",
     
     // Chat
-    assistant: "Waste Management Assistant",
-    askAboutWaste: "Ask about your waste disposal...",
+    assistant: "Assistant",
+    askAboutProduce: "Ask about your produce...",
     
-    // Disposal Categories
-    compost: "Compost",
-    plasticRecycling: "Plastic Recycling", 
-    ewasteRecycling: "eWaste Recycling",
-    medicalWasteRecycling: "Medical Waste Recycling",
-    generalWaste: "General Waste",
+    // Sale Categories
+    export: "Export",
+    localMarket: "Local Market", 
+    distantMarket: "Distant Market",
+    processingUnit: "Processing Unit",
+    biogas: "Biogas",
+    decompost: "Decompost",
     
-    // Smart Bins
-    "smart-bin-residential": "Residential Smart Bin",
-    "smart-bin-commercial": "Commercial Smart Bin", 
-    "smart-bin-industrial": "Industrial Smart Bin",
-    "smart-bin-office": "Office Smart Bin",
-    "smart-bin-hospital": "Hospital Smart Bin",
+    // Fruits and vegetables
+    "alphonso-mango": "Alphonso Mango",
+    "kesar-mango": "Kesar Mango", 
+    "robust-mango": "Robust Mango",
+    "valencia-orange": "Valencia Orange",
+    "nagpur-orange": "Nagpur Orange",
+    "pomegranate": "Pomegranate",
+    "grapes": "Grapes",
+    "apple": "Apple",
+    "banana": "Banana",
+    "onion": "Onion",
+    "potato": "Potato",
+    "tomato": "Tomato",
     
-    // Waste Types
-    wasteTypes: {
-      dry: "Dry",
-      wet: "Wet", 
-      plastic: "Plastic",
-      electronic: "Electronic",
-      medical: "Medical",
-    },
+    // Quality categories data
+    "Premium": "Premium",
+    "Ripe": "Ripe", 
+    "YetToRipe": "Yet To Ripe",
+    "Overripe": "Overripe",
+    "Rotten": "Rotten",
     
-    // Waste categories data
-    "Dry": "Dry",
-    "Wet": "Wet", 
-    "Plastic": "Plastic",
-    "Electronic": "Electronic",
-    "Medical": "Medical",
-    
-    // Disposal categories data
-    "Compost": "Compost",
-    "Plastic Recycling": "Plastic Recycling",
-    "eWaste Recycling": "eWaste Recycling", 
-    "Medical Waste Recycling": "Medical Waste Recycling",
+    // Sale categories data
+    "Export": "Export",
+    "Local Market": "Local Market",
+    "Distant Market": "Distant Market", 
+    "Processing Unit": "Processing Unit",
+    "Biogas": "Biogas",
+    "Decompost": "Decompost",
     
     // Buyer names
     "JNPT Export Terminal": "JNPT Export Terminal",
@@ -167,40 +152,31 @@ export const translations = {
   
   hi: {
     // Header
-    title: "सॉर्टेड! उपभोक्ता केंद्रीय संचालन डैशबोर्ड",
-    farmName: "BKC-1 इकोसाइक्लर",
+    title: "सॉर्टेड! उत्पादक डैशबोर्ड",
+    farmName: "स्वावलंबन फार्म्स",
     
     // Menu Items
-    liveSorting: "लाइव वेस्ट सॉर्टिंग",
-    wasteAnalytics: "कचरा विश्लेषण",
-    recyclingRecommendations: "रीसाइक्लिंग सुझाव",
-    disposalOptimization: "निपटान अनुकूलन",
-    
-    // Bin Categories
-    smartBinResidential: "आवासीय स्मार्ट बिन",
-    smartBinCommercial: "व्यावसायिक स्मार्ट बिन",
-    smartBinIndustrial: "औद्योगिक स्मार्ट बिन",
-    smartBinOffice: "कार्यालय स्मार्ट बिन",
-    smartBinHospital: "अस्पताल स्मार्ट बिन",
+    liveSorting: "लाइव सॉर्टिंग",
+    harvestInsights: "फसल अंतर्दृष्टि",
+    cropRecommendations: "फसल सुझाव",
+    yieldOptimization: "उत्पादन अनुकूलन",
     
     // Summary Cards
     totalSorted: "कुल सॉर्ट किया गया",
     totalWeight: "कुल वजन",
     avgQuality: "औसत गुणवत्ता", 
     revenue: "आय",
-    vinyasaCoins: "विन्यास सिक्के",
-    totalVinyasaCoins: "कुल विन्यास सिक्के",
     
-    // Waste Distribution
-    wasteDistribution: "बिन प्रकार के अनुसार कचरा वितरण",
+    // Quality Distribution
+    qualityDistribution: "किस्म के अनुसार गुणवत्ता वितरण",
     itemsTotal: "कुल आइटम",
     
-    // Waste Categories
-    dry: "सूखा",
-    wet: "गीला",
-    plastic: "प्लास्टिक",
-    electronic: "इलेक्ट्रॉनिक",
-    medical: "चिकित्सा",
+    // Quality Categories
+    premium: "प्रीमियम",
+    ripe: "पका हुआ",
+    yetToRipe: "अभी पकना है",
+    overripe: "अधिक पका हुआ",
+    rotten: "सड़ा हुआ",
     
     // Quick Actions
     quickActions: "त्वरित कार्य",
@@ -208,31 +184,30 @@ export const translations = {
     priceAnalysis: "मूल्य विश्लेषण",
     marketTrends: "बाजार रुझान",
     
-    // Optimal Disposal Plan
-    optimalDisposalPlan: "बिन प्रकार के अनुसार इष्टतम निपटान योजना",
+    // Optimal Revenue Plan
+    optimalRevenuePlan: "किस्म के अनुसार इष्टतम आय योजना",
     totalOptimalRevenue: "कुल इष्टतम आय",
-    wasteCategory: "कचरा श्रेणी",
+    qualityCategory: "गुणवत्ता श्रेणी",
     items: "आइटम",
     weight: "वजन (किग्रा)",
-    recommendedDisposalTo: "निपटान की सिफारिश",
+    recommendedSaleFor: "बिक्री की सिफारिश",
+    recommendedSaleTo: "बिक्री स्थान",
     pricePerKg: "मूल्य/किग्रा",
     total: "कुल",
-    changeBuyer: "रीसाइक्लर बदलें",
+    changeBuyer: "खरीदार बदलें",
     action: "कार्य",
-    disposeNow: "अभी निपटान करें",
+    sellNow: "अभी बेचें",
     
-    // Recycling Facilities Information
-    recyclingFacilities: "रीसाइक्लर नेटवर्क",
-    compostFacilities: "कंपोस्ट सुविधाएं",
-    plasticRecyclers: "प्लास्टिक रीसाइक्लर",
-    ewasteRecyclers: "ई-वेस्ट रीसाइक्लर",
-    medicalWasteRecyclers: "चिकित्सा अपशिष्ट रीसाइक्लर",
-    genericRecyclers: "सामान्य रीसाइक्लर",
-    localRecyclers: "स्थानीय रीसाइक्लर",
-    redeemCoins: "विन्यास सिक्के रिडीम करें",
+    // Market Information
+    marketInformation: "बाजार जानकारी",
+    localMarkets: "स्थानीय बाजार",
+    distantMarkets: "दूर के बाजार",
+    exportMarkets: "निर्यात बाजार",
+    processingUnits: "प्रसंस्करण इकाइयां",
+    decompostMarkets: "कंपोस्ट बाजार",
     distance: "दूरी",
     capacity: "क्षमता",
-    dispose: "निपटान करें",
+    sell: "बेचें",
     
     // Charts
     revenueComparison: "किस्म के अनुसार आय तुलना",
@@ -247,15 +222,16 @@ export const translations = {
     avgRevenuePerItem: "प्रति आइटम औसत आय",
     
     // Chat
-    assistant: "कचरा प्रबंधन सहायक",
-    askAboutWaste: "अपने कचरे के निपटान के बारे में पूछें...",
+    assistant: "सहायक",
+    askAboutProduce: "अपनी फसल के बारे में पूछें...",
     
-    // Disposal Categories
-    compost: "कंपोस्ट",
-    plasticRecycling: "प्लास्टिक रीसाइक्लिंग",
-    ewasteRecycling: "ई-वेस्ट रीसाइक्लिंग",
-    medicalWasteRecycling: "चिकित्सा अपशिष्ट रीसाइक्लिंग",
-    generalWaste: "सामान्य अपशिष्ट",
+    // Sale Categories
+    export: "निर्यात",
+    localMarket: "स्थानीय बाजार",
+    distantMarket: "दूर का बाजार", 
+    processingUnit: "प्रसंस्करण इकाई",
+    biogas: "बायोगैस",
+    decompost: "कंपोस्ट",
     
     // Fruits and vegetables
     "alphonso-mango": "अल्फांसो आम",
@@ -325,40 +301,31 @@ export const translations = {
   
   bn: {
     // Header
-    title: "সর্টেড! ভোক্তা কেন্দ্রীয় অপস ড্যাশবোর্ড",
-    farmName: "BKC-1 ইকোসাইক্লার",
+    title: "সর্টেড! উৎপাদক ড্যাশবোর্ড",
+    farmName: "স্বাবলম্বন ফার্মস",
     
     // Menu Items
-    liveSorting: "লাইভ বর্জ্য সর্টিং",
-    wasteAnalytics: "বর্জ্য বিশ্লেষণ",
-    recyclingRecommendations: "পুনর্ব্যবহার সুপারিশ",
-    disposalOptimization: "নিষ্পত্তি অপ্টিমাইজেশন",
-    
-    // Bin Categories
-    smartBinResidential: "আবাসিক স্মার্ট বিন",
-    smartBinCommercial: "বাণিজ্যিক স্মার্ট বিন",
-    smartBinIndustrial: "শিল্প স্মার্ট বিন",
-    smartBinOffice: "অফিস স্মার্ট বিন",
-    smartBinHospital: "হাসপাতাল স্মার্ট বিন",
+    liveSorting: "লাইভ সর্টিং",
+    harvestInsights: "ফসল অন্তর্দৃষ্টি",
+    cropRecommendations: "ফসল সুপারিশ",
+    yieldOptimization: "ফলন অপ্টিমাইজেশন",
     
     // Summary Cards
     totalSorted: "মোট সর্ট করা",
     totalWeight: "মোট ওজন",
     avgQuality: "গড় গুণমান",
     revenue: "আয়",
-    vinyasaCoins: "ভিনিয়াসা কয়েন",
-    totalVinyasaCoins: "মোট ভিনিয়াসা কয়েন",
     
-    // Waste Distribution
-    wasteDistribution: "বিন প্রকার অনুযায়ী বর্জ্য বিতরণ",
+    // Quality Distribution
+    qualityDistribution: "জাত অনুযায়ী গুণমান বিতরণ",
     itemsTotal: "মোট আইটেম",
     
-    // Waste Categories
-    dry: "শুকনো",
-    wet: "ভেজা",
-    plastic: "প্লাস্টিক",
-    electronic: "ইলেকট্রনিক",
-    medical: "চিকিৎসা",
+    // Quality Categories
+    premium: "প্রিমিয়াম",
+    ripe: "পাকা",
+    yetToRipe: "এখনো পাকেনি",
+    overripe: "বেশি পাকা",
+    rotten: "পচা",
     
     // Quick Actions
     quickActions: "দ্রুত কর্ম",
@@ -404,8 +371,8 @@ export const translations = {
     avgRevenuePerItem: "প্রতি আইটেম গড় আয়",
     
     // Chat
-    assistant: "বর্জ্য ব্যবস্থাপনা সহায়ক",
-    askAboutWaste: "আপনার বর্জ্য নিষ্পত্তি সম্পর্কে জিজ্ঞাসা করুন...",
+    assistant: "সহায়ক",
+    askAboutProduce: "আপনার ফসল সম্পর্কে জিজ্ঞাসা করুন...",
     
     // Sale Categories
     export: "রপ্তানি",
@@ -483,40 +450,31 @@ export const translations = {
   
   te: {
     // Header
-    title: "సార్టెడ్! వినియోగదారు కేంద్రీయ ఆప్స్ డాష్‌బోర్డ్",
-    farmName: "BKC-1 ఎకోసైక్లర్",
+    title: "సార్టెడ్! ఉత్పాదకుల డాష్‌బోర్డ్",
+    farmName: "స్వావలంబన్ ఫార్మ్స్",
     
     // Menu Items
-    liveSorting: "లైవ్ వేస్ట్ సార్టింగ్",
-    wasteAnalytics: "వ్యర్థ విశ్లేషణ",
-    recyclingRecommendations: "రీసైక్లింగ్ సిఫారసులు",
-    disposalOptimization: "నిర్మూలన అనుకూలీకరణ",
-    
-    // Bin Categories
-    smartBinResidential: "నివాస స్మార్ట్ బిన్",
-    smartBinCommercial: "వాణిజ్య స్మార్ట్ బిన్",
-    smartBinIndustrial: "పారిశ్రామిక స్మార్ట్ బిన్",
-    smartBinOffice: "కార్యాలయ స్మార్ట్ బిన్",
-    smartBinHospital: "ఆసుపత్రి స్మార్ట్ బిన్",
+    liveSorting: "లైవ్ సార్టింగ్",
+    harvestInsights: "పంట అంతర్దృష్టులు",
+    cropRecommendations: "పంట సిఫారసులు",
+    yieldOptimization: "దిగుబడి అనుకూలీకరణ",
     
     // Summary Cards
     totalSorted: "మొత్తం సార్ట్ చేయబడింది",
     totalWeight: "మొత్తం బరువు",
     avgQuality: "సగటు నాణ్యత",
     revenue: "ఆదాయం",
-    vinyasaCoins: "విన్యాస కాయిన్స్",
-    totalVinyasaCoins: "మొత్తం విన్యాస కాయిన్స్",
     
-    // Waste Distribution
-    wasteDistribution: "బిన్ రకం వారీ వ్యర్థ పంపిణీ",
+    // Quality Distribution
+    qualityDistribution: "రకం వారీ నాణ్యత పంపిణీ",
     itemsTotal: "మొత్తం వస్తువులు",
     
-    // Waste Categories
-    dry: "పొడిగా",
-    wet: "తేమగా",
-    plastic: "ప్లాస్టిక్",
-    electronic: "ఎలక్ట్రానిక్",
-    medical: "వైద్య",
+    // Quality Categories
+    premium: "ప్రీమియం",
+    ripe: "పండిన",
+    yetToRipe: "ఇంకా పండలేదు",
+    overripe: "అధికంగా పండిన",
+    rotten: "కుళ్ళిన",
     
     // Quick Actions
     quickActions: "త్వరిత చర్యలు",
@@ -562,8 +520,8 @@ export const translations = {
     avgRevenuePerItem: "వస్తువుకు సగటు ఆదాయం",
     
     // Chat
-    assistant: "వ్యర్థ నిర్వహణ సహాయకుడు",
-    askAboutWaste: "మీ వ్యర్థ నిర్మూలన గురించి అడగండి...",
+    assistant: "సహాయకుడు",
+    askAboutProduce: "మీ పంట గురించి అడగండి...",
     
     // Sale Categories
     export: "ఎగుమతి",

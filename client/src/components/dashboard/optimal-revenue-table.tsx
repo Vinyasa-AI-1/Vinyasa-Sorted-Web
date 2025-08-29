@@ -16,15 +16,18 @@ interface OptimalRevenueTableProps {
   formatNumber: (num: number) => string;
 }
 
-const getDisposalCategoryColor = (category: string) => {
+const getSaleCategoryColor = (category: string) => {
   switch (category) {
-    case "Compost":
-      return "bg-green-100 text-green-800";
-    case "Plastic Recycling":
+    case "Export":
       return "bg-blue-100 text-blue-800";
-    case "eWaste Recycling":
+    case "Distant Market":
+      return "bg-orange-100 text-orange-800";
+    case "Processing Unit":
       return "bg-purple-100 text-purple-800";
-    case "Medical Waste Recycling":
+    case "Local Market":
+      return "bg-green-100 text-green-800";
+    case "Biogas":
+    case "Decompost":
       return "bg-red-100 text-red-800";
     default:
       return "bg-gray-100 text-gray-800";
@@ -41,26 +44,14 @@ export default function OptimalRevenueTable({ variety, t, formatNumber }: Optima
               {t(variety.id as keyof typeof translations.en) || variety.name}
             </h3>
             <p className="text-gray-600" data-testid={`text-variety-details-${variety.id}`}>
-              {variety.binType} • {formatNumber(variety.totalItems)} items total
+              {variety.variety} • {formatNumber(variety.totalItems)} items total
             </p>
           </div>
           <div className="text-right">
-            <div className="flex flex-col space-y-1">
-              <div>
-                <p className="text-2xl font-bold text-fresh" data-testid={`text-variety-revenue-${variety.id}`}>
-                  ₹{formatNumber(variety.totalOptimalRevenue)}
-                </p>
-                <p className="text-gray-600 text-sm">{t('totalOptimalRevenue')}</p>
-              </div>
-              {variety.totalVinyasaCoins && (
-                <div>
-                  <p className="text-xl font-bold text-orange-500" data-testid={`text-variety-coins-${variety.id}`}>
-                    {formatNumber(variety.totalVinyasaCoins)} VC
-                  </p>
-                  <p className="text-gray-600 text-sm">{t('totalVinyasaCoins')}</p>
-                </div>
-              )}
-            </div>
+            <p className="text-2xl font-bold text-fresh" data-testid={`text-variety-revenue-${variety.id}`}>
+              ₹{formatNumber(variety.totalOptimalRevenue)}
+            </p>
+            <p className="text-gray-600">{t('totalOptimalRevenue')}</p>
           </div>
         </div>
 
@@ -68,11 +59,11 @@ export default function OptimalRevenueTable({ variety, t, formatNumber }: Optima
           <table className="w-full text-sm">
             <thead className="bg-gray-50">
               <tr>
-                <th className="text-left p-3 font-semibold text-forest">{t('wasteCategory')}</th>
+                <th className="text-left p-3 font-semibold text-forest">{t('qualityCategory')}</th>
                 <th className="text-left p-3 font-semibold text-forest">{t('items')}</th>
                 <th className="text-left p-3 font-semibold text-forest">{t('weight')}</th>
-                <th className="text-left p-3 font-semibold text-forest">{t('recommendedDisposalTo')}</th>
-                <th className="text-left p-3 font-semibold text-forest">Recycler</th>
+                <th className="text-left p-3 font-semibold text-forest">{t('recommendedSaleFor')}</th>
+                <th className="text-left p-3 font-semibold text-forest">{t('recommendedSaleTo')}</th>
                 <th className="text-left p-3 font-semibold text-forest">{t('pricePerKg')}</th>
                 <th className="text-left p-3 font-semibold text-forest">{t('total')}</th>
                 <th className="text-left p-3 font-semibold text-forest">{t('changeBuyer')}</th>
@@ -80,10 +71,10 @@ export default function OptimalRevenueTable({ variety, t, formatNumber }: Optima
               </tr>
             </thead>
             <tbody>
-              {variety.optimalDisposalPlan.map((plan, index) => (
+              {variety.optimalRevenuePlan.map((plan, index) => (
                 <tr key={index} className="border-b">
-                  <td className="p-3 font-medium" data-testid={`text-waste-${variety.id}-${index}`}>
-                    {t(plan.wasteCategory as keyof typeof translations.en) || plan.wasteCategory}
+                  <td className="p-3 font-medium" data-testid={`text-quality-${variety.id}-${index}`}>
+                    {t(plan.qualityCategory as keyof typeof translations.en) || plan.qualityCategory}
                   </td>
                   <td className="p-3" data-testid={`text-items-${variety.id}-${index}`}>
                     {formatNumber(plan.items)}
@@ -93,14 +84,14 @@ export default function OptimalRevenueTable({ variety, t, formatNumber }: Optima
                   </td>
                   <td className="p-3">
                     <span 
-                      className={`px-2 py-1 rounded text-xs ${getDisposalCategoryColor(plan.recommendedDisposalTo)}`}
-                      data-testid={`text-disposal-category-${variety.id}-${index}`}
+                      className={`px-2 py-1 rounded text-xs ${getSaleCategoryColor(plan.recommendedSaleFor)}`}
+                      data-testid={`text-sale-category-${variety.id}-${index}`}
                     >
-                      {t(plan.recommendedDisposalTo as keyof typeof translations.en) || plan.recommendedDisposalTo}
+                      {t(plan.recommendedSaleFor as keyof typeof translations.en) || plan.recommendedSaleFor}
                     </span>
                   </td>
                   <td className="p-3">
-                    <div className="text-sm" data-testid={`text-recycler-${variety.id}-${index}`}>
+                    <div className="text-sm" data-testid={`text-buyer-${variety.id}-${index}`}>
                       <p className="font-medium">{t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name}</p>
                       <p className="text-gray-600">
                         {plan.recommendedBuyer.location} • {plan.recommendedBuyer.distance}
@@ -108,12 +99,10 @@ export default function OptimalRevenueTable({ variety, t, formatNumber }: Optima
                     </div>
                   </td>
                   <td className="p-3 font-medium" data-testid={`text-price-${variety.id}-${index}`}>
-                    {plan.currency === 'VC' ? `${formatNumber(plan.pricePerKg)} VC` : `₹${formatNumber(plan.pricePerKg)}`}
+                    ₹{formatNumber(plan.pricePerKg)}
                   </td>
-                  <td className="p-3 font-bold" data-testid={`text-total-${variety.id}-${index}`}>
-                    <span className={plan.currency === 'VC' ? 'text-orange-500' : 'text-fresh'}>
-                      {plan.currency === 'VC' ? `${formatNumber(plan.total)} VC` : `₹${formatNumber(plan.total)}`}
-                    </span>
+                  <td className="p-3 font-bold text-fresh" data-testid={`text-total-${variety.id}-${index}`}>
+                    ₹{formatNumber(plan.total)}
                   </td>
                   <td className="p-3">
                     <Select data-testid={`select-buyer-${variety.id}-${index}`}>
@@ -135,7 +124,7 @@ export default function OptimalRevenueTable({ variety, t, formatNumber }: Optima
                       className="bg-sage text-white hover:bg-green-600 transition-colors"
                       data-testid={`button-sell-${variety.id}-${index}`}
                     >
-                      {t('disposeNow')}
+                      {t('sellNow')}
                     </Button>
                   </td>
                 </tr>

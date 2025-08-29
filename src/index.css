@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(45, 29%, 97%);
+  --foreground: hsl(150, 30%, 15%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(150, 30%, 15%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(150, 30%, 15%);
+  --primary: hsl(150, 40%, 30%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(150, 15%, 85%);
+  --secondary-foreground: hsl(150, 30%, 15%);
+  --muted: hsl(150, 10%, 92%);
+  --muted-foreground: hsl(150, 15%, 45%);
+  --accent: hsl(130, 50%, 60%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(150, 15%, 88%);
+  --input: hsl(150, 15%, 95%);
+  --ring: hsl(150, 40%, 30%);
+  --chart-1: hsl(150, 40%, 30%);
+  --chart-2: hsl(130, 50%, 60%);
+  --chart-3: hsl(45, 85%, 65%);
+  --chart-4: hsl(20, 65%, 45%);
+  --chart-5: hsl(0, 84%, 60%);
+  --forest: hsl(150, 40%, 30%);
+  --sage: hsl(130, 50%, 60%);
+  --earth: hsl(20, 65%, 45%);
+  --harvest: hsl(45, 85%, 65%);
+  --fresh: hsl(120, 50%, 50%);
+  --cream: hsl(45, 29%, 97%);
+  --font-sans: 'Inter', sans-serif;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: hsl(150, 15%, 8%);
+  --foreground: hsl(150, 10%, 90%);
+  --card: hsl(150, 15%, 12%);
+  --card-foreground: hsl(150, 10%, 90%);
+  --popover: hsl(150, 15%, 12%);
+  --popover-foreground: hsl(150, 10%, 90%);
+  --primary: hsl(130, 50%, 60%);
+  --primary-foreground: hsl(150, 15%, 8%);
+  --secondary: hsl(150, 15%, 18%);
+  --secondary-foreground: hsl(150, 10%, 90%);
+  --muted: hsl(150, 15%, 18%);
+  --muted-foreground: hsl(150, 10%, 65%);
+  --accent: hsl(130, 50%, 60%);
+  --accent-foreground: hsl(150, 15%, 8%);
+  --destructive: hsl(0, 62%, 30%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(150, 15%, 18%);
+  --input: hsl(150, 15%, 18%);
+  --ring: hsl(130, 50%, 60%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-cream font-sans antialiased text-foreground;
+    font-family: var(--font-sans);
+  }
+}
+
+@layer utilities {
+  .text-forest {
+    color: hsl(150, 40%, 30%);
+  }
+  
+  .text-sage {
+    color: hsl(130, 50%, 60%);
+  }
+  
+  .text-earth {
+    color: hsl(20, 65%, 45%);
+  }
+  
+  .text-harvest {
+    color: hsl(45, 85%, 65%);
+  }
+  
+  .text-fresh {
+    color: hsl(120, 50%, 50%);
+  }
+  
+  .bg-forest {
+    background-color: hsl(150, 40%, 30%);
+  }
+  
+  .bg-sage {
+    background-color: hsl(130, 50%, 60%);
+  }
+  
+  .bg-earth {
+    background-color: hsl(20, 65%, 45%);
+  }
+  
+  .bg-harvest {
+    background-color: hsl(45, 85%, 65%);
+  }
+  
+  .bg-fresh {
+    background-color: hsl(120, 50%, 50%);
+  }
+  
+  .bg-cream {
+    background-color: hsl(45, 29%, 97%);
+  }
+  
+  .border-forest {
+    border-color: hsl(150, 40%, 30%);
+  }
+  
+  .border-sage {
+    border-color: hsl(130, 50%, 60%);
+  }
+  
+  .border-harvest {
+    border-color: hsl(45, 85%, 65%);
+  }
+  
+  .border-fresh {
+    border-color: hsl(120, 50%, 50%);
+  }
+}

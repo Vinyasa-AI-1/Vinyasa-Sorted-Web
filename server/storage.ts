@@ -78,15 +78,16 @@ export class MemStorage implements IStorage {
             weight: 45,
             recommendedDisposalTo: "Plastic Recycling",
             recommendedBuyer: {
-              name: "EcoPlast Recyclers",
-              location: "Andheri, Mumbai",
-              distance: "8 km",
+              name: "Vinyasa Coins",
+              location: "Digital Rewards",
+              distance: "Online",
             },
-            pricePerKg: 22,
-            total: 990,
+            pricePerKg: 25,
+            total: 1125,
+            currency: "VC",
             alternativeBuyers: [
               { name: "Local Plastic (₹20/kg)", pricePerKg: 20 },
-              { name: "City Plastic (₹21/kg)", pricePerKg: 21 },
+              { name: "EcoPlast Recyclers (₹22/kg)", pricePerKg: 22 },
             ],
           },
           {
@@ -125,6 +126,7 @@ export class MemStorage implements IStorage {
           },
         ],
         totalOptimalRevenue: 21250,
+        totalVinyasaCoins: 1125,
       },
       {
         id: "smart-bin-commercial",
@@ -162,15 +164,16 @@ export class MemStorage implements IStorage {
             weight: 225,
             recommendedDisposalTo: "Compost",
             recommendedBuyer: {
-              name: "Mumbai Organic Compost",
-              location: "Kandivali, Mumbai",
-              distance: "18 km",
+              name: "Vinyasa Coins",
+              location: "Digital Rewards",
+              distance: "Online",
             },
-            pricePerKg: 7,
-            total: 1575,
+            pricePerKg: 12,
+            total: 2700,
+            currency: "VC",
             alternativeBuyers: [
               { name: "Local Compost (₹5/kg)", pricePerKg: 5 },
-              { name: "City Compost (₹6/kg)", pricePerKg: 6 },
+              { name: "Mumbai Organic (₹7/kg)", pricePerKg: 7 },
             ],
           },
           {
@@ -226,6 +229,7 @@ export class MemStorage implements IStorage {
           },
         ],
         totalOptimalRevenue: 13151,
+        totalVinyasaCoins: 2700,
       },
       {
         id: "smart-bin-industrial",
@@ -327,6 +331,7 @@ export class MemStorage implements IStorage {
           },
         ],
         totalOptimalRevenue: 65584,
+        totalVinyasaCoins: 1850,
       },
       {
         id: "smart-bin-office",

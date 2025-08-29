@@ -21,12 +21,14 @@ export const wasteTypeSchema = z.object({
     }),
     pricePerKg: z.number(),
     total: z.number(),
+    currency: z.enum(['INR', 'VC']).optional(),
     alternativeBuyers: z.array(z.object({
       name: z.string(),
       pricePerKg: z.number(),
     })),
   })),
   totalOptimalRevenue: z.number(),
+  totalVinyasaCoins: z.number().optional(),
 });
 
 export const recyclerSchema = z.object({

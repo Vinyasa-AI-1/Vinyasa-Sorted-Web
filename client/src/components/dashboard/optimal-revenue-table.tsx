@@ -45,10 +45,22 @@ export default function OptimalRevenueTable({ variety, t, formatNumber }: Optima
             </p>
           </div>
           <div className="text-right">
-            <p className="text-2xl font-bold text-fresh" data-testid={`text-variety-revenue-${variety.id}`}>
-              ₹{formatNumber(variety.totalOptimalRevenue)}
-            </p>
-            <p className="text-gray-600">{t('totalOptimalRevenue')}</p>
+            <div className="flex flex-col space-y-1">
+              <div>
+                <p className="text-2xl font-bold text-fresh" data-testid={`text-variety-revenue-${variety.id}`}>
+                  ₹{formatNumber(variety.totalOptimalRevenue)}
+                </p>
+                <p className="text-gray-600 text-sm">{t('totalOptimalRevenue')}</p>
+              </div>
+              {variety.totalVinyasaCoins && (
+                <div>
+                  <p className="text-xl font-bold text-orange-500" data-testid={`text-variety-coins-${variety.id}`}>
+                    {formatNumber(variety.totalVinyasaCoins)} VC
+                  </p>
+                  <p className="text-gray-600 text-sm">{t('totalVinyasaCoins')}</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
@@ -96,10 +108,12 @@ export default function OptimalRevenueTable({ variety, t, formatNumber }: Optima
                     </div>
                   </td>
                   <td className="p-3 font-medium" data-testid={`text-price-${variety.id}-${index}`}>
-                    ₹{formatNumber(plan.pricePerKg)}
+                    {plan.currency === 'VC' ? `${formatNumber(plan.pricePerKg)} VC` : `₹${formatNumber(plan.pricePerKg)}`}
                   </td>
-                  <td className="p-3 font-bold text-fresh" data-testid={`text-total-${variety.id}-${index}`}>
-                    ₹{formatNumber(plan.total)}
+                  <td className="p-3 font-bold" data-testid={`text-total-${variety.id}-${index}`}>
+                    <span className={plan.currency === 'VC' ? 'text-orange-500' : 'text-fresh'}>
+                      {plan.currency === 'VC' ? `${formatNumber(plan.total)} VC` : `₹${formatNumber(plan.total)}`}
+                    </span>
                   </td>
                   <td className="p-3">
                     <Select data-testid={`select-buyer-${variety.id}-${index}`}>

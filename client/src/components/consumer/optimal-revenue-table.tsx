@@ -35,6 +35,15 @@ const getSaleCategoryColor = (category: string) => {
 };
 
 export default function OptimalRevenueTable({ variety, t, formatNumber }: OptimalRevenueTableProps) {
+  // Calculate totals for value unlocked and Vinyasa Coins
+  const totalValueUnlocked = variety.optimalRevenuePlan
+    .filter(plan => !(plan as any).isVinyasaCoins)
+    .reduce((sum, plan) => sum + plan.total, 0);
+  
+  const totalVinyasaCoins = variety.optimalRevenuePlan
+    .filter(plan => (plan as any).isVinyasaCoins)
+    .reduce((sum, plan) => sum + plan.total, 0);
+
   return (
     <Card className="bg-white rounded-xl shadow-lg">
       <CardContent className="p-6">
@@ -47,11 +56,19 @@ export default function OptimalRevenueTable({ variety, t, formatNumber }: Optima
               {variety.variety} • {formatNumber(variety.totalItems)} items total
             </p>
           </div>
-          <div className="text-right">
-            <p className="text-2xl font-bold text-fresh" data-testid={`text-variety-revenue-${variety.id}`}>
-              ₹{formatNumber(variety.totalOptimalRevenue)}
-            </p>
-            <p className="text-gray-600">{t('totalOptimalRevenue')}</p>
+          <div className="text-right space-y-2">
+            <div>
+              <p className="text-2xl font-bold text-fresh" data-testid={`text-variety-value-unlocked-${variety.id}`}>
+                ₹{formatNumber(totalValueUnlocked)}
+              </p>
+              <p className="text-gray-600">{t('valueUnlocked')}</p>
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-harvest" data-testid={`text-variety-vinyasa-coins-${variety.id}`}>
+                {formatNumber(totalVinyasaCoins)} {t('coins')}
+              </p>
+              <p className="text-gray-600">{t('rewardsEarned')}</p>
+            </div>
           </div>
         </div>
 
@@ -113,39 +130,27 @@ export default function OptimalRevenueTable({ variety, t, formatNumber }: Optima
                     )}
                   </td>
                   <td className="p-3">
-                    {(plan as any).isVinyasaCoins ? (
-                      <Button 
-                        size="sm" 
-                        className="bg-harvest text-forest hover:bg-yellow-400"
-                        data-testid={`button-redeem-${variety.id}-${index}`}
-                      >
-                        {t('redeemVinyasaCoins')}
-                      </Button>
-                    ) : (
-                      <Select data-testid={`select-buyer-${variety.id}-${index}`}>
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder={t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="current">{t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name}</SelectItem>
-                          {plan.alternativeBuyers.map((buyer, buyerIndex) => (
-                            <SelectItem key={buyerIndex} value={`alt-${buyerIndex}`}>
-                              {t(buyer.name as keyof typeof translations.en) || buyer.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    )}
+                    <Select data-testid={`select-buyer-${variety.id}-${index}`}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder={t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="current">{t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name}</SelectItem>
+                        {plan.alternativeBuyers.map((buyer, buyerIndex) => (
+                          <SelectItem key={buyerIndex} value={`alt-${buyerIndex}`}>
+                            {t(buyer.name as keyof typeof translations.en) || buyer.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </td>
                   <td className="p-3">
-                    {!(plan as any).isVinyasaCoins && (
-                      <Button 
-                        className="bg-sage text-white hover:bg-green-600 transition-colors"
-                        data-testid={`button-sell-${variety.id}-${index}`}
-                      >
-                        {t('sellNow')}
-                      </Button>
-                    )}
+                    <Button 
+                      className="bg-sage text-white hover:bg-green-600 transition-colors"
+                      data-testid={`button-sell-${variety.id}-${index}`}
+                    >
+                      {t('sellNow')}
+                    </Button>
                   </td>
                 </tr>
               ))}

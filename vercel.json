@@ -3,7 +3,6 @@
   "buildCommand": "./build.sh",
   "outputDirectory": "dist",
   "framework": null,
-  "nodeVersion": "18.x",
   "functions": {
     "api/*.js": {
       "runtime": "@vercel/node@3.0.0"

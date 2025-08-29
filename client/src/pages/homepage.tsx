@@ -27,6 +27,10 @@ import {
 } from 'lucide-react';
 import { Link } from 'wouter';
 import logoUrl from "@assets/logo_1756410067559.png";
+import consumerExplainerUrl from "@assets/generated_images/Consumer_dashboard_explainer_infographic_53a2f894.png";
+import producerExplainerUrl from "@assets/generated_images/Producer_dashboard_explainer_infographic_93a2b2f5.png";
+import farmerVideoUrl from "@assets/generated_images/Farmer_video_thumbnail_4cd742d6.png";
+import consumerVideoUrl from "@assets/generated_images/Consumer_video_thumbnail_45e98365.png";
 
 export default function Homepage() {
   const [email, setEmail] = useState('');
@@ -122,24 +126,51 @@ export default function Homepage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-              Transform Waste into <span className="text-green-600 bg-gradient-to-r from-green-600 to-yellow-600 bg-clip-text text-transparent">Wealth</span>
+              Increase Value, Reduce Waste—<span className="text-green-600 bg-gradient-to-r from-green-600 to-yellow-600 bg-clip-text text-transparent">Sorting Harvests and Habits for a Greener Future</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
               Vinyasa-AI revolutionizes waste management and produce sorting with cutting-edge AI technology. 
               Earn Vinyasa Coins while creating a sustainable future.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
               <Link href="/dashboard">
-                <Button size="lg" className="bg-green-600 hover:bg-green-700 text-lg px-8 py-3 transform transition-all duration-200 hover:scale-105 hover:shadow-lg">
-                  Consumer Dashboard
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
+                <div className="group cursor-pointer">
+                  <div className="relative overflow-hidden rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                    <img 
+                      src={consumerExplainerUrl} 
+                      alt="Consumer Dashboard Features" 
+                      className="w-full h-64 object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4 text-white">
+                      <h3 className="text-2xl font-bold mb-2">Consumer Central Ops</h3>
+                      <p className="text-sm opacity-90">Smart waste sorting & recycling marketplace</p>
+                    </div>
+                    <div className="absolute top-4 right-4">
+                      <ArrowRight className="h-6 w-6 text-white group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                </div>
               </Link>
+              
               <Link href="/producer-dashboard">
-                <Button size="lg" variant="outline" className="text-green-600 border-green-600 hover:bg-green-50 text-lg px-8 py-3 transform transition-all duration-200 hover:scale-105 hover:shadow-lg">
-                  Producer Dashboard
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
+                <div className="group cursor-pointer">
+                  <div className="relative overflow-hidden rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                    <img 
+                      src={producerExplainerUrl} 
+                      alt="Producer Dashboard Features" 
+                      className="w-full h-64 object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4 text-white">
+                      <h3 className="text-2xl font-bold mb-2">Producer Dashboard</h3>
+                      <p className="text-sm opacity-90">AI produce grading & market optimization</p>
+                    </div>
+                    <div className="absolute top-4 right-4">
+                      <ArrowRight className="h-6 w-6 text-white group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                </div>
               </Link>
             </div>
           </div>
@@ -336,8 +367,84 @@ export default function Homepage() {
         </div>
       </section>
 
+      {/* Explainer Videos Section */}
+      <section className="py-20 bg-white px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Learn how Vinyasa-AI transforms your daily practices into sustainable income
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Farmer Video */}
+            <div className="group">
+              <div className="relative overflow-hidden rounded-lg shadow-lg">
+                <img 
+                  src={farmerVideoUrl} 
+                  alt="Farmer Tutorial Video" 
+                  className="w-full h-64 object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Button size="lg" className="bg-white text-gray-900 hover:bg-gray-100">
+                    <Play className="mr-2 h-6 w-6" />
+                    Watch Tutorial
+                  </Button>
+                </div>
+                <div className="absolute bottom-4 left-4 text-white">
+                  <h3 className="text-xl font-bold mb-1">For Farmers</h3>
+                  <p className="text-sm opacity-90">Optimize your produce sales with AI grading</p>
+                </div>
+                <div className="absolute top-4 right-4 bg-red-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                  VIDEO
+                </div>
+              </div>
+              <div className="mt-4">
+                <h4 className="text-lg font-semibold text-gray-900 mb-2">Producer Success Stories</h4>
+                <p className="text-gray-600">
+                  Learn how farmers are increasing their produce value by up to 40% using our AI quality assessment 
+                  and direct market connections. Watch real success stories from our partner farms.
+                </p>
+              </div>
+            </div>
+
+            {/* Consumer Video */}
+            <div className="group">
+              <div className="relative overflow-hidden rounded-lg shadow-lg">
+                <img 
+                  src={consumerVideoUrl} 
+                  alt="Consumer Tutorial Video" 
+                  className="w-full h-64 object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Button size="lg" className="bg-white text-gray-900 hover:bg-gray-100">
+                    <Play className="mr-2 h-6 w-6" />
+                    Watch Tutorial
+                  </Button>
+                </div>
+                <div className="absolute bottom-4 left-4 text-white">
+                  <h3 className="text-xl font-bold mb-1">For Consumers</h3>
+                  <p className="text-sm opacity-90">Earn money through smart waste sorting</p>
+                </div>
+                <div className="absolute top-4 right-4 bg-red-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                  VIDEO
+                </div>
+              </div>
+              <div className="mt-4">
+                <h4 className="text-lg font-semibold text-gray-900 mb-2">Consumer Impact Stories</h4>
+                <p className="text-gray-600">
+                  Discover how households are earning up to ₹500 daily through proper waste sorting and 
+                  Vinyasa Coins. See the environmental impact you can make while earning.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Earnings Section */}
-      <section id="earnings" className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id="earnings" className="py-20 bg-gray-50 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Earnings Potential</h2>

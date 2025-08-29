@@ -92,10 +92,10 @@ export default function Dashboard() {
               <Button 
                 variant="ghost" 
                 className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                data-testid="nav-harvest-insights"
+                data-testid="nav-waste-analytics"
               >
                 <div className="flex flex-col">
-                  {t('harvestInsights').split(' ').map((word, index) => (
+                  {t('wasteAnalytics').split(' ').map((word, index) => (
                     <span key={index} className="block text-sm leading-tight">{word}</span>
                   ))}
                 </div>
@@ -103,10 +103,10 @@ export default function Dashboard() {
               <Button 
                 variant="ghost" 
                 className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                data-testid="nav-crop-recommendations"
+                data-testid="nav-recycling-recommendations"
               >
                 <div className="flex flex-col">
-                  {t('cropRecommendations').split(' ').map((word, index) => (
+                  {t('recyclingRecommendations').split(' ').map((word, index) => (
                     <span key={index} className="block text-sm leading-tight">{word}</span>
                   ))}
                 </div>
@@ -114,10 +114,10 @@ export default function Dashboard() {
               <Button 
                 variant="ghost" 
                 className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                data-testid="nav-yield-optimization"
+                data-testid="nav-disposal-optimization"
               >
                 <div className="flex flex-col">
-                  {t('yieldOptimization').split(' ').map((word, index) => (
+                  {t('disposalOptimization').split(' ').map((word, index) => (
                     <span key={index} className="block text-sm leading-tight">{word}</span>
                   ))}
                 </div>
@@ -138,14 +138,14 @@ export default function Dashboard() {
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h2 className="text-xl font-bold text-forest mb-4">{t('quickActions')}</h2>
           <div className="flex flex-wrap gap-4">
-            <Button className="bg-sage text-white hover:bg-green-600" data-testid="button-view-produce">
-              {t('viewAllProduce')}
+            <Button className="bg-sage text-white hover:bg-green-600" data-testid="button-view-bins">
+              {t('viewAllBins')}
             </Button>
             <Button className="bg-harvest text-forest hover:bg-yellow-400" data-testid="button-price-analysis">
               {t('priceAnalysis')}
             </Button>
-            <Button className="bg-fresh text-white hover:bg-green-600" data-testid="button-market-trends">
-              {t('marketTrends')}
+            <Button className="bg-fresh text-white hover:bg-green-600" data-testid="button-recycling-trends">
+              {t('recyclingTrends')}
             </Button>
           </div>
         </div>
@@ -153,7 +153,7 @@ export default function Dashboard() {
         {/* Optimal Revenue Plan Tables */}
         {varieties && Array.isArray(varieties) && (
           <div className="space-y-8">
-            <h2 className="text-2xl font-bold text-forest">{t('optimalRevenuePlan')}</h2>
+            <h2 className="text-2xl font-bold text-forest">{t('optimalDisposalPlan')}</h2>
             {varieties.map((variety) => (
               <OptimalRevenueTable key={variety.id} variety={variety} t={t} formatNumber={formatNumber} />
             ))}

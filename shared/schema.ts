@@ -1,19 +1,19 @@
 import { z } from "zod";
 
-export const qualityCategories = ['Premium', 'Ripe', 'YetToRipe', 'Overripe', 'Rotten'] as const;
-export const saleCategories = ['Export', 'Local Market', 'Distant Market', 'Processing Unit', 'Biogas', 'Decompost'] as const;
+export const wasteCategories = ['Dry', 'Wet', 'Plastic', 'Electronic', 'Medical'] as const;
+export const recyclingCategories = ['Compost', 'Plastic Recycling', 'eWaste Recycling', 'Medical Waste Recycling', 'General Waste'] as const;
 
-export const produceVarietySchema = z.object({
+export const wasteTypeSchema = z.object({
   id: z.string(),
   name: z.string(),
-  variety: z.string(),
+  binType: z.string(),
   totalItems: z.number(),
-  qualityDistribution: z.record(z.enum(qualityCategories), z.number()),
-  optimalRevenuePlan: z.array(z.object({
-    qualityCategory: z.enum(qualityCategories),
+  wasteDistribution: z.record(z.enum(wasteCategories), z.number()),
+  optimalDisposalPlan: z.array(z.object({
+    wasteCategory: z.enum(wasteCategories),
     items: z.number(),
     weight: z.number(),
-    recommendedSaleFor: z.enum(saleCategories),
+    recommendedDisposalTo: z.enum(recyclingCategories),
     recommendedBuyer: z.object({
       name: z.string(),
       location: z.string(),
@@ -29,15 +29,15 @@ export const produceVarietySchema = z.object({
   totalOptimalRevenue: z.number(),
 });
 
-export const marketSchema = z.object({
+export const recyclerSchema = z.object({
   id: z.string(),
   name: z.string(),
   location: z.string(),
   distance: z.string(),
   transport: z.string(),
   capacity: z.string(),
-  grades: z.array(z.string()),
-  category: z.enum(['local', 'distant', 'export', 'processing', 'decompost']),
+  acceptedWaste: z.array(z.string()),
+  category: z.enum(['compost', 'plastic', 'ewaste', 'medical', 'general']),
 });
 
 export const summarySchema = z.object({
@@ -59,7 +59,11 @@ export const overallSummarySchema = z.object({
   })),
 });
 
-export type ProduceVariety = z.infer<typeof produceVarietySchema>;
-export type Market = z.infer<typeof marketSchema>;
+export type WasteType = z.infer<typeof wasteTypeSchema>;
+export type Recycler = z.infer<typeof recyclerSchema>;
 export type Summary = z.infer<typeof summarySchema>;
 export type OverallSummary = z.infer<typeof overallSummarySchema>;
+
+// Legacy types for backward compatibility
+export type ProduceVariety = WasteType;
+export type Market = Recycler;

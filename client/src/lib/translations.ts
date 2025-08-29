@@ -3,14 +3,14 @@ import type { Language } from '@/hooks/use-language';
 export const translations = {
   en: {
     // Header
-    title: "Sorted! Producer Dashboard",
-    farmName: "Svavlamban Farms",
+    title: "Sorted! Consumer Dashboard",
+    farmName: "BKC-1 EcoCycler",
     
     // Menu Items
     liveSorting: "Live Sorting",
-    harvestInsights: "Harvest Insights", 
-    cropRecommendations: "Crop Recommendations",
-    yieldOptimization: "Yield Optimization",
+    wasteAnalytics: "Waste Analytics", 
+    recyclingRecommendations: "Recycling Recommendations",
+    disposalOptimization: "Disposal Optimization",
     
     // Summary Cards
     totalSorted: "Total Sorted",
@@ -18,54 +18,52 @@ export const translations = {
     avgQuality: "Avg Quality",
     revenue: "Revenue",
     
-    // Quality Distribution
-    qualityDistribution: "Quality Distribution by Variety",
+    // Waste Distribution
+    wasteDistribution: "Waste Distribution by Bin Type",
     itemsTotal: "items total",
     
-    // Quality Categories
-    premium: "Premium",
-    ripe: "Ripe",
-    yetToRipe: "Yet To Ripe",
-    overripe: "Overripe", 
-    rotten: "Rotten",
+    // Waste Categories
+    dry: "Dry",
+    wet: "Wet",
+    plastic: "Plastic",
+    electronic: "Electronic", 
+    medical: "Medical",
     
     // Quick Actions
     quickActions: "Quick Actions",
-    viewAllProduce: "View All Produce",
+    viewAllBins: "View All Bins",
     priceAnalysis: "Price Analysis",
-    marketTrends: "Market Trends",
+    recyclingTrends: "Recycling Trends",
     
-    // Optimal Revenue Plan
-    optimalRevenuePlan: "Optimal Revenue Plan by Variety",
+    // Optimal Disposal Plan
+    optimalDisposalPlan: "Optimal Disposal Plan by Bin Type",
     totalOptimalRevenue: "Total Optimal Revenue",
-    qualityCategory: "Quality Category",
+    wasteCategory: "Waste Category",
     items: "Items",
     weight: "Weight (kg)",
-    recommendedSaleFor: "Recommended Sale For",
-    recommendedSaleTo: "Recommended Sale To",
+    recommendedDisposalTo: "Recommended Disposal To",
     pricePerKg: "Price/kg",
     total: "Total",
-    changeBuyer: "Change Buyer",
+    changeBuyer: "Change Recycler",
     action: "Action",
-    sellNow: "Sell Now",
+    disposeNow: "Dispose Now",
     
-    // Market Information
-    marketInformation: "Market Information",
-    localMarkets: "Local Markets",
-    distantMarkets: "Distant Markets", 
-    exportMarkets: "Export Markets",
-    processingUnits: "Processing Units",
-    decompostMarkets: "Decompost Markets",
+    // Recycling Facilities Information
+    recyclingFacilities: "Recycling Facilities",
+    compostFacilities: "Compost Facilities",
+    plasticRecyclers: "Plastic Recyclers", 
+    ewasteRecyclers: "eWaste Recyclers",
+    medicalWasteRecyclers: "Medical Waste Recyclers",
     distance: "Distance",
     capacity: "Capacity",
-    sell: "Sell",
+    dispose: "Dispose",
     
     // Charts
-    revenueComparison: "Revenue Comparison by Variety",
-    volumeTrends: "Volume Trends by Variety",
+    revenueComparison: "Revenue Comparison by Bin Type",
+    volumeTrends: "Volume Trends by Bin Type",
     today: "Today",
-    seasonAvg: "Season Avg",
-    lastYear: "Last Year",
+    monthlyAvg: "Monthly Avg",
+    lastMonth: "Last Month",
     
     // Overall Summary
     overallSummary: "Overall Optimal Revenue Summary",
@@ -74,44 +72,42 @@ export const translations = {
     
     // Chat
     assistant: "Assistant",
-    askAboutProduce: "Ask about your produce...",
+    askAboutWaste: "Ask about your waste...",
     
-    // Sale Categories
-    export: "Export",
-    localMarket: "Local Market", 
-    distantMarket: "Distant Market",
-    processingUnit: "Processing Unit",
-    biogas: "Biogas",
-    decompost: "Decompost",
+    // Disposal Categories
+    compost: "Compost",
+    plasticRecycling: "Plastic Recycling", 
+    ewasteRecycling: "eWaste Recycling",
+    medicalWasteRecycling: "Medical Waste Recycling",
     
-    // Fruits and vegetables
-    "alphonso-mango": "Alphonso Mango",
-    "kesar-mango": "Kesar Mango", 
-    "robust-mango": "Robust Mango",
-    "valencia-orange": "Valencia Orange",
-    "nagpur-orange": "Nagpur Orange",
-    "pomegranate": "Pomegranate",
-    "grapes": "Grapes",
-    "apple": "Apple",
-    "banana": "Banana",
-    "onion": "Onion",
-    "potato": "Potato",
-    "tomato": "Tomato",
+    // Smart Bins
+    "smart-bin-residential": "Residential Smart Bin",
+    "smart-bin-commercial": "Commercial Smart Bin", 
+    "smart-bin-industrial": "Industrial Smart Bin",
+    "smart-bin-office": "Office Smart Bin",
+    "smart-bin-hospital": "Hospital Smart Bin",
     
-    // Quality categories data
-    "Premium": "Premium",
-    "Ripe": "Ripe", 
-    "YetToRipe": "Yet To Ripe",
-    "Overripe": "Overripe",
-    "Rotten": "Rotten",
+    // Waste Types
+    wasteTypes: {
+      dry: "Dry",
+      wet: "Wet", 
+      plastic: "Plastic",
+      electronic: "Electronic",
+      medical: "Medical",
+    },
     
-    // Sale categories data
-    "Export": "Export",
-    "Local Market": "Local Market",
-    "Distant Market": "Distant Market", 
-    "Processing Unit": "Processing Unit",
-    "Biogas": "Biogas",
-    "Decompost": "Decompost",
+    // Waste categories data
+    "Dry": "Dry",
+    "Wet": "Wet", 
+    "Plastic": "Plastic",
+    "Electronic": "Electronic",
+    "Medical": "Medical",
+    
+    // Disposal categories data
+    "Compost": "Compost",
+    "Plastic Recycling": "Plastic Recycling",
+    "eWaste Recycling": "eWaste Recycling", 
+    "Medical Waste Recycling": "Medical Waste Recycling",
     
     // Buyer names
     "JNPT Export Terminal": "JNPT Export Terminal",

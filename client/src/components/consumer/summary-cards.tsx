@@ -32,7 +32,7 @@ export default function SummaryCards({ summary, t, formatNumber }: SummaryCardsP
             <div>
               <p className="text-gray-600 text-sm font-medium">{t('totalWeight')}</p>
               <p className="text-3xl font-bold text-forest" data-testid="text-total-weight">
-                {formatNumber(summary.totalWeight)} kg
+                {formatNumber(summary.totalWeight)} {t('kg' as keyof typeof translations.en) || 'kg'}
               </p>
             </div>
             <Weight className="text-sage text-3xl" />
@@ -58,7 +58,7 @@ export default function SummaryCards({ summary, t, formatNumber }: SummaryCardsP
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-gray-600 text-sm font-medium">{t('valueUnlocked')}</p>
+              <p className="text-gray-600 text-sm font-medium">{t('revenue')}</p>
               <p className="text-3xl font-bold text-forest" data-testid="text-revenue">
                 ₹{formatNumber(summary.revenue)}
               </p>
@@ -72,7 +72,7 @@ export default function SummaryCards({ summary, t, formatNumber }: SummaryCardsP
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-gray-600 text-sm font-medium">{t('rewardsEarned')}</p>
+              <p className="text-gray-600 text-sm font-medium">{t('vinyasaCoins')}</p>
               <p className="text-3xl font-bold text-forest" data-testid="text-vinyasa-coins">
                 {formatNumber((summary as any).vinyasaCoins || 0)} {t('coins')}
               </p>

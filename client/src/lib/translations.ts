@@ -235,7 +235,10 @@ export const translations = {
     "Processing": "Processing",
 
     // Rating
-    "rating": "Rating"
+    "rating": "Rating",
+
+    // Additional terms
+    "priceRange": "Price Range"
   },
   
   hi: {
@@ -480,7 +483,10 @@ export const translations = {
     "Processing": "प्रसंस्करण",
 
     // Rating
-    "rating": "रेटिंग"
+    "rating": "रेटिंग",
+
+    // Additional terms  
+    "priceRange": "मूल्य सीमा"
   },
   
   bn: {
@@ -722,7 +728,10 @@ export const translations = {
     "Processing": "প্রক্রিয়াকরণ",
 
     // Rating
-    "rating": "রেটিং"
+    "rating": "রেটিং",
+
+    // Additional terms
+    "priceRange": "দামের পরিসর"
   },
   
   te: {

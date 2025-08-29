@@ -64,34 +64,34 @@ export default function MarketCards({ markets, t }: MarketCardsProps) {
             </div>
             
             <h3 className="text-lg font-bold text-forest mb-2" data-testid={`text-market-name-${market.id}`}>
-              {market.name}
+              {t(market.name as keyof typeof translations.en) || market.name}
             </h3>
             
             <div className="space-y-2 text-sm text-gray-600">
               <div className="flex items-center">
                 <MapPin size={14} className="mr-2" />
-                <span>{market.location}</span>
+                <span>{t(market.location as keyof typeof translations.en) || market.location}</span>
               </div>
               <div className="flex justify-between">
                 <span>{t('distance')}:</span>
-                <span className="font-medium">{market.distance}</span>
+                <span className="font-medium">{market.distance.replace('km', '')} {t('km' as keyof typeof translations.en) || 'km'}</span>
               </div>
               <div className="flex justify-between">
                 <span>{t('capacity')}:</span>
-                <span className="font-medium">{(market as any).capacity || market.capacity}</span>
+                <span className="font-medium">{((market as any).capacity || market.capacity).replace(/kg\/day|units\/day/g, (match: string) => t(match as keyof typeof translations.en) || match)}</span>
               </div>
               {(market as any).specializes && (
                 <div className="flex flex-wrap gap-1 mt-2">
                   {(market as any).specializes.map((item: string, index: number) => (
                     <span key={index} className="px-2 py-1 bg-sage text-white text-xs rounded">
-                      {t(item as keyof typeof translations.en) || item}
+                      {t(item as keyof typeof translations.en) || item.charAt(0).toUpperCase() + item.slice(1)}
                     </span>
                   ))}
                 </div>
               )}
               {(market as any).priceRange && (
                 <div className="flex justify-between pt-2 border-t">
-                  <span>Price Range:</span>
+                  <span>{t('priceRange' as keyof typeof translations.en) || 'Price Range'}:</span>
                   <span className="font-medium text-fresh">{(market as any).priceRange}</span>
                 </div>
               )}

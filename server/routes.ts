@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import chatRoutes from "./routes/chat";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Get dashboard data
@@ -112,6 +113,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Failed to fetch waste trends" });
     }
   });
+
+  // Chat API
+  app.use("/api/chat", chatRoutes);
 
   const httpServer = createServer(app);
   return httpServer;

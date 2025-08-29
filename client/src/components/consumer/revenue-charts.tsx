@@ -25,9 +25,10 @@ export default function RevenueCharts({ t }: RevenueChartsProps) {
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={wasteComparison?.datasets?.map((dataset: any, index: number) => ({
-                name: dataset.label,
+                name: t(dataset.label as keyof typeof translations.en) || dataset.label,
                 ...wasteComparison.labels.reduce((acc: any, label: string, idx: number) => {
-                  acc[label] = dataset.data[idx];
+                  const translatedLabel = t(label as keyof typeof translations.en) || label;
+                  acc[translatedLabel] = dataset.data[idx];
                   return acc;
                 }, {})
               })) || []}>

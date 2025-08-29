@@ -7,6 +7,7 @@ import type { translations } from "@/lib/translations";
 
 interface ChatInterfaceProps {
   t: (key: keyof typeof translations.en) => string;
+  currentLanguage: string;
 }
 
 interface Message {
@@ -16,7 +17,7 @@ interface Message {
   timestamp: Date;
 }
 
-export default function ChatInterface({ t }: ChatInterfaceProps) {
+export default function ChatInterface({ t, currentLanguage }: ChatInterfaceProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -28,7 +29,7 @@ export default function ChatInterface({ t }: ChatInterfaceProps) {
   ]);
   const [input, setInput] = useState("");
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
 
     const userMessage: Message = {
@@ -40,8 +41,32 @@ export default function ChatInterface({ t }: ChatInterfaceProps) {
 
     setMessages(prev => [...prev, userMessage]);
 
-    // Simulate assistant response
-    setTimeout(() => {
+    try {
+      // Call OpenAI API with language context
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: input,
+          language: currentLanguage
+        })
+      });
+
+      if (!response.ok) throw new Error('Failed to get response');
+
+      const data = await response.json();
+      
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: data.message,
+        sender: "assistant",
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, assistantMessage]);
+    } catch (error) {
+      // Fallback response
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         text: "Thank you for your question about waste management. Based on your bin data, I recommend focusing on optimizing your plastic and electronic waste streams for maximum value and Vinyasa Coins. Would you like specific recommendations for recyclers in your area?",
@@ -49,7 +74,7 @@ export default function ChatInterface({ t }: ChatInterfaceProps) {
         timestamp: new Date(),
       };
       setMessages(prev => [...prev, assistantMessage]);
-    }, 1000);
+    }
 
     setInput("");
   };

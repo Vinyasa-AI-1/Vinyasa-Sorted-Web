@@ -139,6 +139,33 @@ export default function ChatInterface({ t, currentLanguage = 'en' }: ChatInterfa
       return responses[currentLang] || responses.en;
     }
     
+    // Fruit and vegetable specific keywords in all languages
+    if (question.includes('mango') || question.includes('orange') || question.includes('pomegranate') || question.includes('grapes') || question.includes('apple') || question.includes('banana') ||
+        question.includes('आम') || question.includes('संतरा') || question.includes('अनार') || question.includes('अंगूर') || question.includes('सेब') || question.includes('केला') ||
+        question.includes('আম') || question.includes('কমলা') || question.includes('ডালিম') || question.includes('আঙুর') || question.includes('আপেল') || question.includes('কলা') ||
+        question.includes('మామిడి') || question.includes('నారింజ') || question.includes('దానిమ್మ') || question.includes('ద్రాక్షపండు') || question.includes('సేబు') || question.includes('అరటిపండు') ||
+        question.includes('आंबा') || question.includes('संत्रे') || question.includes('डाळिंब') || question.includes('द्राक्षे') || question.includes('सफरचंद') || question.includes('केळे') ||
+        question.includes('alphonso') || question.includes('kesar') || question.includes('robust') || question.includes('valencia') || question.includes('nagpur') ||
+        question.includes('अल्फांसो') || question.includes('केसर') || question.includes('रोबस्ट') || question.includes('वेलेंसिया') || question.includes('नागपुर') ||
+        question.includes('আলফান্সো') || question.includes('কেসর') || question.includes('রবাস্ট') || question.includes('ভ্যালেন্সিয়া') || question.includes('নাগপুর') ||
+        question.includes('అల్ఫాన్సో') || question.includes('కేసర్') || question.includes('రోబస్ట్') || question.includes('వ్యాలెన్సియా') || question.includes('నాగ్‌పూర్') ||
+        question.includes('अल्फान्सो') || question.includes('केसर') || question.includes('रोबस्ट') || question.includes('व्हॅलेन्सिया') || question.includes('नागपूर')) {
+      
+      const varietyData = varieties?.find(v => 
+        question.includes(v.name.toLowerCase()) || 
+        question.includes(v.id.toLowerCase())
+      );
+      
+      const responses = {
+        en: `${varietyData ? `For ${varietyData.name}:` : 'For your produce:'} I recommend focusing on premium quality sorting. Based on current market data, export markets offer ₹200-220/kg for premium grades, while local markets pay ₹80-120/kg for regular quality. Proper post-harvest handling is crucial for maintaining quality.`,
+        hi: `${varietyData ? `${varietyData.name} के लिए:` : 'आपके उत्पाद के लिए:'} मैं प्रीमियम गुणवत्ता सॉर्टिंग पर ध्यान देने की सलाह देता हूं। वर्तमान बाजार डेटा के आधार पर, निर्यात बाजार प्रीमियम ग्रेड के लिए ₹200-220/किग्रा देते हैं, जबकि स्थानीय बाजार नियमित गुणवत्ता के लिए ₹80-120/किग्रा देते हैं।`,
+        bn: `${varietyData ? `${varietyData.name} এর জন্য:` : 'আপনার পণ্যের জন্য:'} আমি প্রিমিয়াম মানের সর্টিংয়ে মনোযোগ দেওয়ার পরামর্শ দিই। বর্তমান বাজার ডেটা অনুযায়ী, রপ্তানি বাজার প্রিমিয়াম গ্রেডের জন্য ₹200-220/কেজি দেয়, যখন স্থানীয় বাজার নিয়মিত মানের জন্য ₹80-120/কেজি দেয়।`,
+        te: `${varietyData ? `${varietyData.name} కోసం:` : 'మీ ఉత్పత్తులకు:'} నేను ప్రీমియం నాణ్యత సార్టింగ్‌పై దృష్టి పెట్టాలని సిఫారసు చేస్తున్নాను। ప్రస్తుత మార్కెట్ డేటా ఆధారంగా, ఎగుమతి మార్కెట్లు ప్రీమియం గ్రేడ్‌లకు ₹200-220/కిలో ఇస్తాయి, స్థానిక మార్కెట్లు సాధారణ నాణ్యతకు ₹80-120/కిలో చెల్లిస్తాయి।`,
+        mr: `${varietyData ? `${varietyData.name} साठी:` : 'तुमच्या उत्पादनासाठी:'} मी प्रीमियम गुणवत्ता सॉर्टिंगवर लक्ष केंद्रित करण्याची शिफारस करतो। सध्याच्या बाजार डेटावर आधारित, निर्यात बाजारपेठा प्रीमियम ग्रेडसाठी ₹200-220/किलो देतात, तर स्थानिक बाजारपेठा नियमित गुणवत्तेसाठी ₹80-120/किलो देतात.`
+      };
+      return responses[currentLang] || responses.en;
+    }
+    
     // Default response for other questions
     const defaultResponses = {
       en: `I'm analyzing your dashboard data to help optimize your produce sales. You have ${summary?.totalSorted || 0} items sorted with ${summary?.totalWeight || 0}kg total weight. I can help with revenue optimization, market selection, and quality management.`,

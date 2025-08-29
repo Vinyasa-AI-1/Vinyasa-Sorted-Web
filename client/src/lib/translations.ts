@@ -7,7 +7,7 @@ export const translations = {
     farmName: "Svavlamban Farms",
     
     // Menu Items
-    liveSorting: "Live Sorting",
+    liveSorting: "Live Produce Sorting",
     harvestInsights: "Harvest Insights", 
     cropRecommendations: "Crop Recommendations",
     yieldOptimization: "Yield Optimization",
@@ -156,7 +156,7 @@ export const translations = {
     farmName: "स्वावलंबन फार्म्स",
     
     // Menu Items
-    liveSorting: "लाइव सॉर्टिंग",
+    liveSorting: "लाइव उत्पाद सॉर्टिंग",
     harvestInsights: "फसल अंतर्दृष्टि",
     cropRecommendations: "फसल सुझाव",
     yieldOptimization: "उत्पादन अनुकूलन",
@@ -305,7 +305,7 @@ export const translations = {
     farmName: "স্বাবলম্বন ফার্মস",
     
     // Menu Items
-    liveSorting: "লাইভ সর্টিং",
+    liveSorting: "লাইভ উৎপাদ সর্টিং",
     harvestInsights: "ফসল অন্তর্দৃষ্টি",
     cropRecommendations: "ফসল সুপারিশ",
     yieldOptimization: "ফলন অপ্টিমাইজেশন",
@@ -454,7 +454,7 @@ export const translations = {
     farmName: "స్వావలంబన్ ఫార్మ్స్",
     
     // Menu Items
-    liveSorting: "లైవ్ సార్టింగ్",
+    liveSorting: "లైవ్ ఉత్పాద సార్టింగ్",
     harvestInsights: "పంట అంతర్దృష్టులు",
     cropRecommendations: "పంట సిఫారసులు",
     yieldOptimization: "దిగుబడి అనుకూలీకరణ",
@@ -538,9 +538,9 @@ export const translations = {
     "valencia-orange": "వ్యాలెన్సియా నారింజ",
     "nagpur-orange": "నాగ్‌పూర్ నారింజ",
     "pomegranate": "దానిమ్మ",
-    "grapes": "ద్రాక్ష",
-    "apple": "యాపిల్",
-    "banana": "అరటి",
+    "grapes": "ద్రాక్షపండు",
+    "apple": "సేబు",
+    "banana": "అరటిపండు",
     "onion": "ఉల్లిపాయ",
     "potato": "బంగాళదుంప",
     "tomato": "టమాటో",
@@ -603,7 +603,7 @@ export const translations = {
     farmName: "स्वावलंबन फार्म्स",
     
     // Menu Items
-    liveSorting: "लाइव्ह सॉर्टिंग",
+    liveSorting: "लाइव्ह उत्पाद सॉर्टिंग",
     harvestInsights: "कापणी अंतर्दृष्टी",
     cropRecommendations: "पीक शिफारसी",
     yieldOptimization: "उत्पादन अनुकूलन",

@@ -1,4 +1,4 @@
-import { type ProduceVariety, type Market, type Summary, type OverallSummary } from "@shared/schema";
+import { type ProduceVariety, type Market, type Summary, type OverallSummary, type WasteVariety, type Recycler, type WasteSummary, type WasteOverallSummary } from "@shared/schema";
 
 export interface IStorage {
   getProduceVarieties(): Promise<ProduceVariety[]>;
@@ -7,6 +7,14 @@ export interface IStorage {
   getOverallSummary(): Promise<OverallSummary>;
   getRevenueComparison(): Promise<any>;
   getVolumeTrends(): Promise<any>;
+  
+  // Waste management methods
+  getWasteVarieties(): Promise<WasteVariety[]>;
+  getRecyclers(): Promise<Recycler[]>;
+  getWasteSummary(): Promise<WasteSummary>;
+  getWasteOverallSummary(): Promise<WasteOverallSummary>;
+  getWasteRevenueComparison(): Promise<any>;
+  getWasteVolumeTrends(): Promise<any>;
 }
 
 export class MemStorage implements IStorage {
@@ -14,6 +22,12 @@ export class MemStorage implements IStorage {
   private markets: Market[];
   private summary: Summary;
   private overallSummary: OverallSummary;
+  
+  // Waste management data
+  private wasteVarieties: WasteVariety[];
+  private recyclers: Recycler[];
+  private wasteSummary: WasteSummary;
+  private wasteOverallSummary: WasteOverallSummary;
 
   constructor() {
     this.summary = {
@@ -687,6 +701,318 @@ export class MemStorage implements IStorage {
         },
       ],
     };
+
+    // Initialize waste management data
+    this.wasteSummary = {
+      totalSorted: 1450,
+      totalWeight: 2840,
+      avgQuality: 82,
+      revenue: 18500,
+      totalVinyasaCoins: 2840,
+    };
+
+    this.wasteVarieties = [
+      {
+        id: "dry-waste",
+        name: "Dry Waste",
+        category: "Dry",
+        totalItems: 420,
+        qualityDistribution: {
+          Fresh: 95,
+          Good: 180,
+          Average: 100,
+          Poor: 35,
+          Contaminated: 10,
+        },
+        optimalRevenuePlan: [
+          {
+            qualityCategory: "Fresh",
+            items: 95,
+            weight: 190,
+            recommendedRecycler: "Generic Recyclers",
+            recommendedBuyer: {
+              name: "Mumbai Paper Mills",
+              location: "Thane, Maharashtra",
+              distance: "15 km",
+            },
+            paymentType: "Rupees",
+            pricePerKg: 12,
+            total: 2280,
+            alternativeBuyers: [
+              { name: "Local (₹10/kg)", paymentType: "Rupees", pricePerKg: 10 },
+              { name: "Vinyasa Coins (15 coins/kg)", paymentType: "Vinyasa Coins", vinyasaCoins: 15 },
+            ],
+          },
+          {
+            qualityCategory: "Good",
+            items: 180,
+            weight: 360,
+            recommendedRecycler: "Local Recyclers",
+            recommendedBuyer: {
+              name: "BKC Recycling Center",
+              location: "BKC, Mumbai",
+              distance: "2 km",
+            },
+            paymentType: "Vinyasa Coins",
+            vinyasaCoins: 12,
+            total: 4320,
+            alternativeBuyers: [
+              { name: "Generic (₹8/kg)", paymentType: "Rupees", pricePerKg: 8 },
+              { name: "Local (10 coins/kg)", paymentType: "Vinyasa Coins", vinyasaCoins: 10 },
+            ],
+          },
+        ],
+        totalOptimalRevenue: 6600,
+        totalVinyasaCoins: 4320,
+      },
+      {
+        id: "wet-waste",
+        name: "Wet Waste", 
+        category: "Wet",
+        totalItems: 380,
+        qualityDistribution: {
+          Fresh: 120,
+          Good: 140,
+          Average: 80,
+          Poor: 30,
+          Contaminated: 10,
+        },
+        optimalRevenuePlan: [
+          {
+            qualityCategory: "Fresh",
+            items: 120,
+            weight: 240,
+            recommendedRecycler: "Compost",
+            recommendedBuyer: {
+              name: "Green Earth Composting",
+              location: "Mulund, Mumbai",
+              distance: "18 km",
+            },
+            paymentType: "Vinyasa Coins",
+            vinyasaCoins: 20,
+            total: 4800,
+            alternativeBuyers: [
+              { name: "Local Compost (₹15/kg)", paymentType: "Rupees", pricePerKg: 15 },
+              { name: "Biogas (18 coins/kg)", paymentType: "Vinyasa Coins", vinyasaCoins: 18 },
+            ],
+          },
+        ],
+        totalOptimalRevenue: 2400,
+        totalVinyasaCoins: 4800,
+      },
+      {
+        id: "plastic-waste",
+        name: "Plastic Waste",
+        category: "Plastic", 
+        totalItems: 350,
+        qualityDistribution: {
+          Fresh: 80,
+          Good: 150,
+          Average: 90,
+          Poor: 25,
+          Contaminated: 5,
+        },
+        optimalRevenuePlan: [
+          {
+            qualityCategory: "Fresh",
+            items: 80,
+            weight: 160,
+            recommendedRecycler: "Plastic Recyclers",
+            recommendedBuyer: {
+              name: "Mumbai Plastic Industries",
+              location: "Andheri, Mumbai", 
+              distance: "12 km",
+            },
+            paymentType: "Rupees",
+            pricePerKg: 25,
+            total: 4000,
+            alternativeBuyers: [
+              { name: "Local (₹20/kg)", paymentType: "Rupees", pricePerKg: 20 },
+              { name: "Vinyasa (30 coins/kg)", paymentType: "Vinyasa Coins", vinyasaCoins: 30 },
+            ],
+          },
+        ],
+        totalOptimalRevenue: 4000,
+        totalVinyasaCoins: 4800,
+      },
+      {
+        id: "electronic-waste", 
+        name: "Electronic Waste",
+        category: "Electronic",
+        totalItems: 200,
+        qualityDistribution: {
+          Fresh: 45,
+          Good: 90,
+          Average: 50,
+          Poor: 12,
+          Contaminated: 3,
+        },
+        optimalRevenuePlan: [
+          {
+            qualityCategory: "Fresh",
+            items: 45,
+            weight: 90,
+            recommendedRecycler: "eWaste Recyclers",
+            recommendedBuyer: {
+              name: "TechnoGreen E-Waste",
+              location: "Powai, Mumbai",
+              distance: "8 km",
+            },
+            paymentType: "Rupees",
+            pricePerKg: 150,
+            total: 13500,
+            alternativeBuyers: [
+              { name: "Local (₹120/kg)", paymentType: "Rupees", pricePerKg: 120 },
+              { name: "Vinyasa (180 coins/kg)", paymentType: "Vinyasa Coins", vinyasaCoins: 180 },
+            ],
+          },
+        ],
+        totalOptimalRevenue: 13500,
+        totalVinyasaCoins: 16200,
+      },
+      {
+        id: "medical-waste",
+        name: "Medical Waste",
+        category: "Medical",
+        totalItems: 100,
+        qualityDistribution: {
+          Fresh: 25,
+          Good: 40,
+          Average: 25,
+          Poor: 8,
+          Contaminated: 2,
+        },
+        optimalRevenuePlan: [
+          {
+            qualityCategory: "Fresh", 
+            items: 25,
+            weight: 50,
+            recommendedRecycler: "Medical Waste Recyclers",
+            recommendedBuyer: {
+              name: "SafeMed Disposal",
+              location: "Mahape, Navi Mumbai",
+              distance: "22 km",
+            },
+            paymentType: "Rupees",
+            pricePerKg: 200,
+            total: 10000,
+            alternativeBuyers: [
+              { name: "Authorized Disposal (₹180/kg)", paymentType: "Rupees", pricePerKg: 180 },
+              { name: "Vinyasa (250 coins/kg)", paymentType: "Vinyasa Coins", vinyasaCoins: 250 },
+            ],
+          },
+        ],
+        totalOptimalRevenue: 10000,
+        totalVinyasaCoins: 12500,
+      },
+    ];
+
+    this.recyclers = [
+      {
+        id: "green-earth-composting",
+        name: "Green Earth Composting",
+        location: "Mulund, Mumbai",
+        distance: "18 km",
+        transport: "Truck",
+        capacity: "500 kg/day",
+        acceptedWasteTypes: ["Wet"],
+        category: "Compost",
+        paymentType: "Vinyasa Coins",
+        priceRange: "15-20 coins/kg",
+      },
+      {
+        id: "mumbai-plastic-industries",
+        name: "Mumbai Plastic Industries", 
+        location: "Andheri, Mumbai",
+        distance: "12 km",
+        transport: "Truck",
+        capacity: "1000 kg/day",
+        acceptedWasteTypes: ["Plastic"],
+        category: "Plastic Recyclers",
+        paymentType: "Rupees",
+        priceRange: "₹20-25/kg",
+      },
+      {
+        id: "techno-green-ewaste",
+        name: "TechnoGreen E-Waste",
+        location: "Powai, Mumbai",
+        distance: "8 km",
+        transport: "Van",
+        capacity: "200 kg/day",
+        acceptedWasteTypes: ["Electronic"],
+        category: "eWaste Recyclers",
+        paymentType: "Rupees",
+        priceRange: "₹120-150/kg",
+      },
+      {
+        id: "safemed-disposal",
+        name: "SafeMed Disposal",
+        location: "Mahape, Navi Mumbai",
+        distance: "22 km",
+        transport: "Specialized Vehicle",
+        capacity: "100 kg/day",
+        acceptedWasteTypes: ["Medical"],
+        category: "Medical Waste Recyclers",
+        paymentType: "Rupees", 
+        priceRange: "₹180-200/kg",
+      },
+      {
+        id: "bkc-recycling-center",
+        name: "BKC Recycling Center",
+        location: "BKC, Mumbai",
+        distance: "2 km",
+        transport: "Cart",
+        capacity: "300 kg/day",
+        acceptedWasteTypes: ["Dry", "Plastic"],
+        category: "Local Recyclers",
+        paymentType: "Vinyasa Coins",
+        priceRange: "8-12 coins/kg",
+      },
+    ];
+
+    this.wasteOverallSummary = {
+      totalOptimalRevenue: 40900,
+      totalVinyasaCoins: 42620,
+      totalItems: 1450,
+      avgRevenuePerItem: 28.2,
+      breakdown: [
+        {
+          category: "Electronic",
+          revenue: 13500,
+          vinyasaCoins: 16200,
+          items: 200,
+          percentage: 13.8,
+        },
+        {
+          category: "Medical",
+          revenue: 10000,
+          vinyasaCoins: 12500,
+          items: 100,
+          percentage: 6.9,
+        },
+        {
+          category: "Dry",
+          revenue: 6600,
+          vinyasaCoins: 4320,
+          items: 420,
+          percentage: 29.0,
+        },
+        {
+          category: "Plastic",
+          revenue: 4000,
+          vinyasaCoins: 4800,
+          items: 350,
+          percentage: 24.1,
+        },
+        {
+          category: "Wet",
+          revenue: 2400,
+          vinyasaCoins: 4800,
+          items: 380,
+          percentage: 26.2,
+        },
+      ],
+    };
   }
 
   async getProduceVarieties(): Promise<ProduceVariety[]> {
@@ -759,6 +1085,84 @@ export class MemStorage implements IStorage {
         {
           label: "Tomato",
           data: [435, 450, 420, 435],
+          borderColor: "#DC2626",
+          backgroundColor: "rgba(220, 38, 38, 0.1)",
+        },
+      ],
+    };
+  }
+
+  // Waste management methods
+  async getWasteVarieties(): Promise<WasteVariety[]> {
+    return this.wasteVarieties;
+  }
+
+  async getRecyclers(): Promise<Recycler[]> {
+    return this.recyclers;
+  }
+
+  async getWasteSummary(): Promise<WasteSummary> {
+    return this.wasteSummary;
+  }
+
+  async getWasteOverallSummary(): Promise<WasteOverallSummary> {
+    return this.wasteOverallSummary;
+  }
+
+  async getWasteRevenueComparison(): Promise<any> {
+    return {
+      labels: ["Dry", "Wet", "Plastic", "Electronic", "Medical"],
+      datasets: [
+        {
+          label: "Today",
+          data: [6600, 2400, 4000, 13500, 10000],
+          backgroundColor: "#22543D",
+        },
+        {
+          label: "Week Avg",
+          data: [6200, 2200, 3800, 12800, 9500],
+          backgroundColor: "#68D391",
+        },
+        {
+          label: "Last Month",
+          data: [5800, 2000, 3500, 12000, 9000],
+          backgroundColor: "#F6E05E",
+        },
+      ],
+    };
+  }
+
+  async getWasteVolumeTrends(): Promise<any> {
+    return {
+      labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+      datasets: [
+        {
+          label: "Dry Waste",
+          data: [420, 440, 400, 420],
+          borderColor: "#22543D",
+          backgroundColor: "rgba(34, 84, 61, 0.1)",
+        },
+        {
+          label: "Wet Waste",
+          data: [380, 400, 360, 380],
+          borderColor: "#68D391",
+          backgroundColor: "rgba(104, 211, 145, 0.1)",
+        },
+        {
+          label: "Plastic",
+          data: [350, 370, 330, 350],
+          borderColor: "#F6E05E",
+          backgroundColor: "rgba(246, 224, 94, 0.1)",
+        },
+        {
+          label: "Electronic",
+          data: [200, 220, 180, 200],
+          borderColor: "#9C4221",
+          backgroundColor: "rgba(156, 66, 33, 0.1)",
+        },
+        {
+          label: "Medical",
+          data: [100, 110, 90, 100],
           borderColor: "#DC2626",
           backgroundColor: "rgba(220, 38, 38, 0.1)",
         },

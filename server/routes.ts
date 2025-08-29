@@ -58,6 +58,61 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Waste management API endpoints
+  app.get("/api/waste-varieties", async (_req, res) => {
+    try {
+      const varieties = await storage.getWasteVarieties();
+      res.json(varieties);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch waste varieties" });
+    }
+  });
+
+  app.get("/api/recyclers", async (_req, res) => {
+    try {
+      const recyclers = await storage.getRecyclers();
+      res.json(recyclers);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch recyclers" });
+    }
+  });
+
+  app.get("/api/waste-summary", async (_req, res) => {
+    try {
+      const summary = await storage.getWasteSummary();
+      res.json(summary);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch waste summary" });
+    }
+  });
+
+  app.get("/api/waste-overall-summary", async (_req, res) => {
+    try {
+      const overallSummary = await storage.getWasteOverallSummary();
+      res.json(overallSummary);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch waste overall summary" });
+    }
+  });
+
+  app.get("/api/waste-revenue-comparison", async (_req, res) => {
+    try {
+      const revenueComparison = await storage.getWasteRevenueComparison();
+      res.json(revenueComparison);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch waste revenue comparison" });
+    }
+  });
+
+  app.get("/api/waste-volume-trends", async (_req, res) => {
+    try {
+      const volumeTrends = await storage.getWasteVolumeTrends();
+      res.json(volumeTrends);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch waste volume trends" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

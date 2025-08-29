@@ -171,7 +171,7 @@ export default function CustomerCentralDashboard() {
           <div className="space-y-8">
             <h2 className="text-2xl font-bold text-forest">{t('optimalRecyclingPlan')}</h2>
             {binTypes.map((binType) => (
-              <OptimalRevenueTable key={binType.id} variety={binType} t={t} formatNumber={formatNumber} />
+              <OptimalRevenueTable key={binType.id} variety={binType} t={t} formatNumber={formatNumber} recyclers={recyclers} />
             ))}
           </div>
         )}
@@ -252,7 +252,7 @@ export default function CustomerCentralDashboard() {
         )}
       </main>
 
-      {/* Chat Interface */}
+      {/* Chat Interface - now floating popup */}
       <ChatInterface t={t} currentLanguage={currentLanguage} />
     </div>
   );

@@ -14,6 +14,7 @@ interface OptimalRevenueTableProps {
   variety: ProduceVariety;
   t: (key: keyof typeof translations.en) => string;
   formatNumber: (num: number) => string;
+  recyclers?: any[];
 }
 
 const getSaleCategoryColor = (category: string) => {
@@ -34,7 +35,18 @@ const getSaleCategoryColor = (category: string) => {
   }
 };
 
-export default function OptimalRevenueTable({ variety, t, formatNumber }: OptimalRevenueTableProps) {
+const capitalizeCategory = (category: string) => {
+  return category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+};
+
+const getActualRecyclerForVinyasa = (recyclers: any[] = []) => {
+  // Return a random recycler from the marketplace for Vinyasa Coins rows
+  if (recyclers.length === 0) return null;
+  const randomIndex = Math.floor(Math.random() * recyclers.length);
+  return recyclers[randomIndex];
+};
+
+export default function OptimalRevenueTable({ variety, t, formatNumber, recyclers = [] }: OptimalRevenueTableProps) {
   // Calculate totals for value unlocked and Vinyasa Coins
   const totalValueUnlocked = variety.optimalRevenuePlan
     .filter(plan => !(plan as any).isVinyasaCoins)
@@ -91,7 +103,7 @@ export default function OptimalRevenueTable({ variety, t, formatNumber }: Optima
               {variety.optimalRevenuePlan.map((plan, index) => (
                 <tr key={index} className="border-b">
                   <td className="p-3 font-medium" data-testid={`text-quality-${variety.id}-${index}`}>
-                    {t(plan.qualityCategory as keyof typeof translations.en) || plan.qualityCategory}
+                    {t(plan.qualityCategory as keyof typeof translations.en) || capitalizeCategory(plan.qualityCategory)}
                   </td>
                   <td className="p-3" data-testid={`text-items-${variety.id}-${index}`}>
                     {formatNumber(plan.items)}
@@ -109,10 +121,17 @@ export default function OptimalRevenueTable({ variety, t, formatNumber }: Optima
                   </td>
                   <td className="p-3">
                     <div className="text-sm" data-testid={`text-buyer-${variety.id}-${index}`}>
-                      <p className="font-medium">{t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name}</p>
-                      <p className="text-gray-600">
-                        {plan.recommendedBuyer.location} • {plan.recommendedBuyer.distance}
-                      </p>
+                      {(() => {
+                        const displayBuyer = (plan as any).isVinyasaCoins ? getActualRecyclerForVinyasa(recyclers) || plan.recommendedBuyer : plan.recommendedBuyer;
+                        return (
+                          <>
+                            <p className="font-medium">{t(displayBuyer.name as keyof typeof translations.en) || displayBuyer.name}</p>
+                            <p className="text-gray-600">
+                              {displayBuyer.location} • {displayBuyer.distance}
+                            </p>
+                          </>
+                        );
+                      })()}
                     </div>
                   </td>
                   <td className="p-3 font-medium" data-testid={`text-price-${variety.id}-${index}`}>
@@ -132,15 +151,28 @@ export default function OptimalRevenueTable({ variety, t, formatNumber }: Optima
                   <td className="p-3">
                     <Select data-testid={`select-buyer-${variety.id}-${index}`}>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder={t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name} />
+                        <SelectValue placeholder={(() => {
+                          const displayBuyer = (plan as any).isVinyasaCoins ? getActualRecyclerForVinyasa(recyclers) || plan.recommendedBuyer : plan.recommendedBuyer;
+                          return t(displayBuyer.name as keyof typeof translations.en) || displayBuyer.name;
+                        })()} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="current">{t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name}</SelectItem>
-                        {plan.alternativeBuyers.map((buyer, buyerIndex) => (
-                          <SelectItem key={buyerIndex} value={`alt-${buyerIndex}`}>
-                            {t(buyer.name as keyof typeof translations.en) || buyer.name}
-                          </SelectItem>
-                        ))}
+                        {(plan as any).isVinyasaCoins ? (
+                          recyclers.map((recycler, recyclerIndex) => (
+                            <SelectItem key={recyclerIndex} value={`recycler-${recyclerIndex}`}>
+                              {t(recycler.name as keyof typeof translations.en) || recycler.name}
+                            </SelectItem>
+                          ))
+                        ) : (
+                          <>
+                            <SelectItem value="current">{t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name}</SelectItem>
+                            {plan.alternativeBuyers.map((buyer, buyerIndex) => (
+                              <SelectItem key={buyerIndex} value={`alt-${buyerIndex}`}>
+                                {t(buyer.name as keyof typeof translations.en) || buyer.name}
+                              </SelectItem>
+                            ))}
+                          </>
+                        )}
                       </SelectContent>
                     </Select>
                   </td>

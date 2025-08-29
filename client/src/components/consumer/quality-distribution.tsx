@@ -73,7 +73,7 @@ export default function QualityDistribution({ varieties, t, formatNumber }: Qual
                           className="w-3 h-3 rounded-full mr-1"
                           style={{ backgroundColor: COLORS[quality as keyof typeof COLORS] }}
                         />
-                        <span>{t(quality as keyof typeof translations.en) || quality}</span>
+                        <span>{t(quality as keyof typeof translations.en) || quality.charAt(0).toUpperCase() + quality.slice(1).toLowerCase()}</span>
                       </div>
                       <span className="font-medium">{formatNumber(count)}</span>
                     </div>

@@ -17,6 +17,7 @@ interface Message {
 }
 
 export default function ChatInterface({ t }: ChatInterfaceProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -60,62 +61,89 @@ export default function ChatInterface({ t }: ChatInterfaceProps) {
     }
   };
 
-  return (
-    <Card className="bg-white rounded-xl shadow-lg">
-      <CardContent className="p-6">
-        <h3 className="text-xl font-bold text-forest mb-4 flex items-center">
-          <Bot className="mr-2" size={24} />
-          {t('assistant')}
-        </h3>
-        
-        <div className="h-64 overflow-y-auto border rounded-lg p-4 mb-4 space-y-4">
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={`flex items-start space-x-2 ${
-                message.sender === "user" ? "justify-end" : "justify-start"
-              }`}
-            >
-              {message.sender === "assistant" && (
-                <Bot className="text-sage mt-1" size={20} />
-              )}
-              <div
-                className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                  message.sender === "user"
-                    ? "bg-fresh text-white"
-                    : "bg-gray-100 text-gray-800"
-                }`}
-              >
-                <p className="text-sm">{message.text}</p>
-                <p className="text-xs opacity-70 mt-1">
-                  {message.timestamp.toLocaleTimeString()}
-                </p>
-              </div>
-              {message.sender === "user" && (
-                <User className="text-fresh mt-1" size={20} />
-              )}
-            </div>
-          ))}
-        </div>
+  // Floating chat button when minimized
+  if (!isOpen) {
+    return (
+      <div className="fixed bottom-6 right-6 z-50">
+        <Button
+          onClick={() => setIsOpen(true)}
+          className="bg-forest text-white hover:bg-green-800 rounded-full w-14 h-14 p-0 shadow-lg"
+          data-testid="button-chat-open"
+        >
+          <Bot className="w-6 h-6" />
+        </Button>
+      </div>
+    );
+  }
 
-        <div className="flex space-x-2">
-          <Input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder={t('askAboutProduce') || "Ask about your waste management..."}
-            className="flex-1"
-            data-testid="input-chat-message"
-          />
+  // Full chat interface when open
+  return (
+    <div className="fixed bottom-6 right-6 z-50 w-80 max-h-96">
+      <Card className="bg-white rounded-xl shadow-2xl border border-gray-200">
+        <div className="bg-forest text-white p-3 rounded-t-xl flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Bot className="text-sage" size={20} />
+            <h3 className="text-sm font-semibold">{t('assistant')}</h3>
+          </div>
           <Button
-            onClick={handleSend}
-            className="bg-fresh text-white hover:bg-green-600"
-            data-testid="button-send-message"
+            onClick={() => setIsOpen(false)}
+            className="bg-transparent hover:bg-green-800 text-white p-1 h-auto"
+            data-testid="button-chat-close"
           >
-            <Send size={20} />
+            ×
           </Button>
         </div>
-      </CardContent>
-    </Card>
+        
+        <CardContent className="p-4">
+          <div className="h-48 overflow-y-auto border rounded-lg p-3 mb-3 space-y-3 text-sm">
+            {messages.map((message) => (
+              <div
+                key={message.id}
+                className={`flex items-start space-x-2 ${
+                  message.sender === "user" ? "justify-end" : "justify-start"
+                }`}
+              >
+                {message.sender === "assistant" && (
+                  <Bot className="text-sage mt-1" size={16} />
+                )}
+                <div
+                  className={`max-w-xs px-3 py-2 rounded-lg text-xs ${
+                    message.sender === "user"
+                      ? "bg-fresh text-white"
+                      : "bg-gray-100 text-gray-800"
+                  }`}
+                >
+                  <p>{message.text}</p>
+                  <p className="text-xs opacity-70 mt-1">
+                    {message.timestamp.toLocaleTimeString()}
+                  </p>
+                </div>
+                {message.sender === "user" && (
+                  <User className="text-fresh mt-1" size={16} />
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="flex space-x-2">
+            <Input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="Ask about waste management..."
+              className="flex-1 text-sm h-8"
+              data-testid="input-chat-message"
+            />
+            <Button
+              onClick={handleSend}
+              className="bg-fresh text-white hover:bg-green-600 h-8 px-3"
+              data-testid="button-send-message"
+            >
+              <Send size={14} />
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

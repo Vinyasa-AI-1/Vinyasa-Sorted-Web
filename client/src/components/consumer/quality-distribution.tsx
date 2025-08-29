@@ -15,6 +15,12 @@ const COLORS = {
   YetToRipe: "#F6E05E", // Harvest yellow
   Overripe: "#9C4221", // Earth brown
   Rotten: "#DC2626", // Red
+  // Waste category colors
+  dry: "#9C4221", // Earth brown
+  wet: "#22543D", // Forest green
+  plastic: "#3B82F6", // Blue
+  electronic: "#8B5CF6", // Purple
+  medical: "#DC2626", // Red
 };
 
 export default function QualityDistribution({ varieties, t, formatNumber }: QualityDistributionProps) {
@@ -22,7 +28,7 @@ export default function QualityDistribution({ varieties, t, formatNumber }: Qual
     return Object.entries(distribution).map(([name, value]) => ({
       name,
       value,
-      color: COLORS[name as keyof typeof COLORS],
+      color: COLORS[name as keyof typeof COLORS] || "#94A3B8",
     }));
   };
 

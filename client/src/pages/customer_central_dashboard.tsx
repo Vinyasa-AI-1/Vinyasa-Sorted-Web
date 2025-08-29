@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import SummaryCards from "@/components/dashboard/summary-cards";
-import QualityDistribution from "@/components/dashboard/quality-distribution";
-import OptimalRevenueTable from "@/components/dashboard/optimal-revenue-table";
-import MarketCards from "@/components/dashboard/market-cards";
-import RevenueCharts from "@/components/dashboard/revenue-charts";
-import ChatInterface from "@/components/dashboard/chat-interface";
+import SummaryCards from "@/components/consumer/summary-cards";
+import QualityDistribution from "@/components/consumer/quality-distribution";
+import OptimalRevenueTable from "@/components/consumer/optimal-revenue-table";
+import MarketCards from "@/components/consumer/market-cards";
+import RevenueCharts from "@/components/consumer/revenue-charts";
+import ChatInterface from "@/components/consumer/chat-interface";
 import { UserCircle, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";

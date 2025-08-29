@@ -276,12 +276,12 @@ export const translations = {
     "Medical": "चिकित्सा",
 
     // New consumer terms
-    valueUnlocked: "मूल्य अनलॉक",
-    rewardsEarned: "पुरस्कार अर्जित",
+    "valueUnlocked": "मूल्य अनलॉक",
+    "rewardsEarned": "पुरस्कार अर्जित",
     
     // Chat
-    assistant: "सहायक",
-    askAboutProduce: "अपनी फसल के बारे में पूछें...",
+    "assistant": "सहायक",
+    "askAboutProduce": "अपनी फसल के बारे में पूछें...",
     
     // Sale Categories
     export: "निर्यात",
@@ -464,12 +464,12 @@ export const translations = {
     "Medical": "চিকিৎসা",
 
     // New consumer terms
-    valueUnlocked: "মূল্য আনলক",
-    rewardsEarned: "পুরস্কার অর্জিত",
+    "valueUnlocked": "মূল্য আনলক",
+    "rewardsEarned": "পুরস্কার অর্জিত",
     
     // Chat
-    assistant: "সহায়ক",
-    askAboutProduce: "আপনার ফসল সম্পর্কে জিজ্ঞাসা করুন...",
+    "assistant": "সহায়ক",
+    "askAboutProduce": "আপনার ফসল সম্পর্কে জিজ্ঞাসা করুন...",
     
     // Sale Categories
     export: "রপ্তানি",

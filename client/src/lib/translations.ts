@@ -174,7 +174,68 @@ export const translations = {
     "Distant (₹150/kg)": "Distant (₹150/kg)",
     "Processing (₹120/kg)": "Processing (₹120/kg)",
     "Local (₹100/kg)": "Local (₹100/kg)",
-    "Processing (₹90/kg)": "Processing (₹90/kg)"
+    "Processing (₹90/kg)": "Processing (₹90/kg)",
+
+    // Consumer Waste Categories
+    "dry": "Dry",
+    "wet": "Wet", 
+    "plastic": "Plastic",
+    "electronic": "Electronic",
+    "medical": "Medical",
+
+    // Bin Types
+    "residential-bin": "Residential Bin",
+    "office-bin": "Office Bin",
+    "industrial-bin": "Industrial Bin",
+    "medical-bin": "Medical Bin",
+
+    // Recycler Names
+    "Green Earth Compost": "Green Earth Compost",
+    "Plastic Recyclers Ltd": "Plastic Recyclers Ltd",
+    "TechCycle Solutions": "TechCycle Solutions",
+    "BioMedical Waste Solutions": "BioMedical Waste Solutions",
+    "EcoWaste Management": "EcoWaste Management",
+    "Mumbai Recycling Hub": "Mumbai Recycling Hub",
+    "Clean City Initiative": "Clean City Initiative",
+    "Waste Warriors": "Waste Warriors",
+
+    // Recycler Types
+    "Compost": "Compost",
+    "Plastic Processing": "Plastic Processing",
+    "E-Waste": "E-Waste",
+    "Medical Waste": "Medical Waste",
+    "Mixed Waste": "Mixed Waste",
+    "Organic Waste": "Organic Waste",
+
+    // Locations
+    "Andheri West": "Andheri West",
+    "Malad": "Malad",
+    "BKC": "BKC",
+    "Turbhe": "Turbhe",
+    "Bandra": "Bandra",
+    "Powai": "Powai",
+    "Ghatkopar": "Ghatkopar",
+    "Thane": "Thane",
+
+    // Units and Measurements
+    "kg/day": "kg/day",
+    "units/day": "units/day",
+    "km": "km",
+    "kg": "kg",
+
+    // Chart labels
+    "Week 1": "Week 1",
+    "Week 2": "Week 2",
+    "Week 3": "Week 3",
+    "Week 4": "Week 4",
+
+    // Market categories
+    "Local": "Local",
+    "Distant": "Distant",
+    "Processing": "Processing",
+
+    // Rating
+    "rating": "Rating"
   },
   
   hi: {
@@ -365,7 +426,61 @@ export const translations = {
     "Distant (₹150/kg)": "दूर (₹150/किग्रा)",
     "Processing (₹120/kg)": "प्रसंस्करण (₹120/किग्रा)",
     "Local (₹100/kg)": "स्थानीय (₹100/किग्रा)",
-    "Processing (₹90/kg)": "प्रसंस्करण (₹90/किग्रा)"
+    "Processing (₹90/kg)": "प्रसंस्करण (₹90/किग्रा)",
+
+    // Bin Types
+    "residential-bin": "आवासीय बिन",
+    "office-bin": "कार्यालय बिन",
+    "industrial-bin": "औद्योगिक बिन",
+    "medical-bin": "चिकित्सा बिन",
+
+    // Recycler Names
+    "Green Earth Compost": "ग्रीन अर्थ कंपोस्ट",
+    "Plastic Recyclers Ltd": "प्लास्टिक रीसाइक्लर्स लिमिटेड",
+    "TechCycle Solutions": "टेकसाइकल सॉल्यूशंस",
+    "BioMedical Waste Solutions": "बायोमेडिकल वेस्ट सॉल्यूशंस",
+    "EcoWaste Management": "इकोवेस्ट मैनेजमेंट",
+    "Mumbai Recycling Hub": "मुंबई रीसाइक्लिंग हब",
+    "Clean City Initiative": "क्लीन सिटी इनिशिएटिव",
+    "Waste Warriors": "वेस्ट वारियर्स",
+
+    // Recycler Types
+    "Compost": "कंपोस्ट",
+    "Plastic Processing": "प्लास्टिक प्रोसेसिंग",
+    "E-Waste": "ई-वेस्ट",
+    "Medical Waste": "चिकित्सा अपशिष्ट",
+    "Mixed Waste": "मिश्रित अपशिष्ट",
+    "Organic Waste": "जैविक अपशिष्ट",
+
+    // Locations
+    "Andheri West": "अंधेरी वेस्ट",
+    "Malad": "मलाड",
+    "BKC": "बीकेसी",
+    "Turbhe": "तुर्भे",
+    "Bandra": "बांद्रा",
+    "Powai": "पवई",
+    "Ghatkopar": "घाटकोपर",
+    "Thane": "ठाणे",
+
+    // Units and Measurements
+    "kg/day": "किग्रा/दिन",
+    "units/day": "यूनिट्स/दिन",
+    "km": "किमी",
+    "kg": "किग्रा",
+
+    // Chart labels
+    "Week 1": "सप्ताह 1",
+    "Week 2": "सप्ताह 2",
+    "Week 3": "सप्ताह 3",
+    "Week 4": "सप्ताह 4",
+
+    // Market categories
+    "Local": "स्थानीय",
+    "Distant": "दूर",
+    "Processing": "प्रसंस्करण",
+
+    // Rating
+    "rating": "रेटिंग"
   },
   
   bn: {
@@ -553,7 +668,61 @@ export const translations = {
     "Distant (₹150/kg)": "দূরের (₹১৫০/কেজি)",
     "Processing (₹120/kg)": "প্রক্রিয়াকরণ (₹১২০/কেজি)",
     "Local (₹100/kg)": "স্থানীয় (₹১০০/কেজি)",
-    "Processing (₹90/kg)": "প্রক্রিয়াকরণ (₹৯০/কেজি)"
+    "Processing (₹90/kg)": "প্রক্রিয়াকরণ (৯০৳/কেজি)",
+
+    // Bin Types
+    "residential-bin": "আবাসিক বিন",
+    "office-bin": "অফিস বিন",
+    "industrial-bin": "শিল্প বিন",
+    "medical-bin": "চিকিৎসা বিন",
+
+    // Recycler Names
+    "Green Earth Compost": "গ্রিন আর্থ কম্পোস্ট",
+    "Plastic Recyclers Ltd": "প্লাস্টিক রিসাইক্লার্স লিমিটেড",
+    "TechCycle Solutions": "টেকসাইকেল সলিউশনস",
+    "BioMedical Waste Solutions": "বায়োমেডিক্যাল ওয়েস্ট সলিউশনস",
+    "EcoWaste Management": "ইকোওয়েস্ট ম্যানেজমেন্ট",
+    "Mumbai Recycling Hub": "মুম্বাই রিসাইক্লিং হাব",
+    "Clean City Initiative": "ক্লিন সিটি ইনিশিয়েটিভ",
+    "Waste Warriors": "ওয়েস্ট ওয়ারিয়র্স",
+
+    // Recycler Types
+    "Compost": "কম্পোস্ট",
+    "Plastic Processing": "প্লাস্টিক প্রসেসিং",
+    "E-Waste": "ই-ওয়েস্ট",
+    "Medical Waste": "চিকিৎসা বর্জ্য",
+    "Mixed Waste": "মিশ্র বর্জ্য",
+    "Organic Waste": "জৈব বর্জ্য",
+
+    // Locations
+    "Andheri West": "আন্ধেরি পশ্চিম",
+    "Malad": "মালাদ",
+    "BKC": "বিকেসি",
+    "Turbhe": "তুর্ভে",
+    "Bandra": "বান্দ্রা",
+    "Powai": "পাওয়াই",
+    "Ghatkopar": "ঘাটকোপর",
+    "Thane": "ঠাণে",
+
+    // Units and Measurements
+    "kg/day": "কেজি/দিন",
+    "units/day": "ইউনিট/দিন",
+    "km": "কিমি",
+    "kg": "কেজি",
+
+    // Chart labels
+    "Week 1": "সপ্তাহ ১",
+    "Week 2": "সপ্তাহ ২",
+    "Week 3": "সপ্তাহ ৩",
+    "Week 4": "সপ্তাহ ৪",
+
+    // Market categories
+    "Local": "স্থানীয়",
+    "Distant": "দূরের",
+    "Processing": "প্রক্রিয়াকরণ",
+
+    // Rating
+    "rating": "রেটিং"
   },
   
   te: {

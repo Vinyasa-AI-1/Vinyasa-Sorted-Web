@@ -56,22 +56,28 @@ Deploy this project to Vercel in one click:
 ## 📁 Project Structure
 
 ```
+├── client/                 # Frontend React application
+│   ├── src/
+│   │   ├── components/     # React components
+│   │   │   ├── ui/        # shadcn/ui components
+│   │   │   ├── dashboard/ # Producer components
+│   │   │   └── consumer/  # Consumer components
+│   │   ├── pages/         # Page components
+│   │   ├── lib/           # Utilities & translations
+│   │   └── hooks/         # Custom React hooks
+│   └── index.html         # Main HTML template
+├── server/                 # Backend Express server (dev only)
 ├── api/                    # Vercel serverless functions
 │   ├── chat.js            # AI chat endpoint
 │   ├── summary.js         # Producer dashboard data
 │   ├── markets.js         # Market data
 │   └── consumer/          # Consumer dashboard endpoints
-├── src/
-│   ├── components/        # React components
-│   │   ├── ui/           # shadcn/ui components
-│   │   ├── dashboard/    # Producer components
-│   │   └── consumer/     # Consumer components
-│   ├── pages/            # Page components
-│   ├── lib/              # Utilities & translations
-│   └── hooks/            # Custom React hooks
-├── attached_assets/       # Generated images
-├── vercel.json           # Vercel configuration
-└── README.md
+├── attached_assets/        # Generated images and assets
+├── dist/                   # Build output (created during build)
+├── build.sh               # Custom build script for Vercel
+├── vercel.json            # Vercel deployment configuration
+├── vite.config.ts         # Vite build configuration
+└── README.md              # This file
 ```
 
 ## 🚀 Quick Deploy to Vercel
@@ -110,6 +116,51 @@ Deploy this project to Vercel in one click:
    - Frontend: `https://your-project.vercel.app`
    - API endpoints: `https://your-project.vercel.app/api/*`
 
+### 🔧 Troubleshooting Vercel Deployment
+
+**Issue: Vercel shows server code instead of the home page**
+
+If you see server/index.ts code instead of your website:
+
+1. **Check Build Settings in Vercel Dashboard:**
+   - Framework Preset: `Vite`
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+   - Install Command: `npm install`
+
+2. **Verify Project Structure:**
+   ```
+   ✅ Correct structure:
+   ├── client/src/           # React app source
+   ├── api/                  # Vercel functions
+   ├── vercel.json          # Deployment config
+   └── package.json         # Build scripts
+   ```
+
+3. **Run Custom Build Script:**
+   ```bash
+   # Use the included build script
+   ./build.sh
+   ```
+
+4. **Manual Build Fix:**
+   ```bash
+   # If build script doesn't work
+   npm run build
+   cp -r dist/public/* dist/
+   rm -rf dist/public
+   ```
+
+5. **Redeploy:**
+   - Push changes to your repository
+   - Vercel will automatically redeploy
+   - Or trigger manual deployment in Vercel dashboard
+
+**Common Issues:**
+- Build output in wrong directory → Check `dist/` contains `index.html`
+- Missing API functions → Ensure `api/` folder is in root
+- Routing problems → Verify `vercel.json` routes configuration
+
 ## 🛠️ Development
 
 ### Local Development Setup
@@ -126,8 +177,21 @@ Deploy this project to Vercel in one click:
 
 3. **Open in browser**
    ```
-   http://localhost:5173
+   http://localhost:5000
    ```
+
+### Build Process
+
+```bash
+# Development build
+npm run build
+
+# Custom build for Vercel (recommended)
+./build.sh
+
+# Production server build
+npm run build:server
+```
 
 ### API Endpoints
 

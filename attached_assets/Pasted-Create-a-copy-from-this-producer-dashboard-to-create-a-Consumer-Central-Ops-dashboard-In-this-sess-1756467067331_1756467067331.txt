@@ -1,0 +1,20 @@
+Create a copy from this producer dashboard to create a Consumer Central Ops dashboard. 
+In this session, leave the producer dashboard as is without any changes.
+Name the new copied dashboard code file customer_central_dashboard differently from the producer dashboard. 
+Make sure all the code files for both the producer dashboard and customer central dashboard are all present together in the repository.
+
+All of the below changes apply only to the consumer central dashboard. None of these apply to the producer dashboard -
+Apply the same color schemes and layouts as the producer dashboard.
+This consumer dashboard is for consumers using various types of Vinyasa-AI waste segregation Smart waste bins. 
+Name of the dashboard "Sorted! Consumer Central Ops dashboard". 
+In the consumers dashboard show various types of Bins as Residential, Office, Industrial, Medical Smart Bins.
+For each of these bins have the categories as dry, wet, plastic, electronic, medical. 
+Include buyers as compost, plastic recyclers, eWaste recyclers, medical waste recyclers from nearby ecosystem. 
+Name of the user as "BKC-1 EcoCycler".
+Have the individual buyer category names explicitly mentioned like Compost, Plastic Recylers, eWaste recyclers, Medical recyclers, Generic Recyclers, Local Recylers etc along with their location, distance under a section called Recyclers Marketplace. 
+For some rows, instead of having a Recycler, Price per kg, have Vinyasa Coins as the Recyler column and the number of coins in the Price per kg column. Hence for each category of bin, show both the Total Optimal Revenue and Total Vinyasa Coins. Have an option to Redeem Vinyasa Coins. Show the Vinyasa Coins statistics along with the Rupee statistics. 
+
+Ensure every menu, text, category, name, number, AI assistant inputs are all translated correctly based on the language chosen.
+
+Change the Menu "Live Sorting" to "Live Waste Sorting". 
+Have the live waste sorting link point to a separate Live Waste Soring page that has the same headers and menu, has a place holder to show the camera output, shows a table below that increments the respective waste category counts based on inputs received from a p5.js script.

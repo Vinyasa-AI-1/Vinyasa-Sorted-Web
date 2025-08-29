@@ -4,13 +4,19 @@ export const translations = {
   en: {
     // Header
     title: "Sorted! Producer Dashboard",
+    consumerTitle: "Sorted! Consumer Central Ops Dashboard",
     farmName: "Svavlamban Farms",
+    consumerUserName: "BKC-1 EcoCycler",
     
     // Menu Items
     liveSorting: "Live Produce Sorting",
-    harvestInsights: "Harvest Insights", 
+    liveWasteSorting: "Live Waste Sorting",
+    harvestInsights: "Harvest Insights",
+    binInsights: "Bin Insights",
     cropRecommendations: "Crop Recommendations",
+    recyclingTips: "Recycling Tips",
     yieldOptimization: "Yield Optimization",
+    ecoRewards: "Eco Rewards",
     
     // Summary Cards
     totalSorted: "Total Sorted",
@@ -32,11 +38,16 @@ export const translations = {
     // Quick Actions
     quickActions: "Quick Actions",
     viewAllProduce: "View All Produce",
+    viewAllBins: "View All Bins",
     priceAnalysis: "Price Analysis",
+    recyclerPrices: "Recycler Prices",
     marketTrends: "Market Trends",
+    redeemVinyasaCoins: "Redeem Vinyasa Coins",
     
     // Optimal Revenue Plan
     optimalRevenuePlan: "Optimal Revenue Plan by Variety",
+    optimalRecyclingPlan: "Optimal Recycling Plan by Bin Type",
+    recyclersMarketplace: "Recyclers Marketplace",
     totalOptimalRevenue: "Total Optimal Revenue",
     qualityCategory: "Quality Category",
     items: "Items",
@@ -71,6 +82,9 @@ export const translations = {
     overallSummary: "Overall Optimal Revenue Summary",
     totalItems: "Total Items",
     avgRevenuePerItem: "Avg Revenue per Item",
+    vinyasaCoins: "Vinyasa Coins",
+    totalVinyasaCoins: "Total Vinyasa Coins",
+    coins: "Coins",
     
     // Chat
     assistant: "Assistant",
@@ -164,13 +178,19 @@ export const translations = {
   hi: {
     // Header
     title: "सॉर्टेड! उत्पादक डैशबोर्ड",
+    consumerTitle: "सॉर्टेड! उपभोक्ता केंद्रीय संचालन डैशबोर्ड",
     farmName: "स्वावलंबन फार्म्स",
+    consumerUserName: "बीकेसी-1 इकोसाइक्लर",
     
     // Menu Items
     liveSorting: "लाइव उत्पाद सॉर्टिंग",
+    liveWasteSorting: "लाइव वेस्ट सॉर्टिंग",
     harvestInsights: "फसल अंतर्दृष्टि",
+    binInsights: "बिन अंतर्दृष्टि",
     cropRecommendations: "फसल सुझाव",
+    recyclingTips: "रीसाइक्लिंग टिप्स",
     yieldOptimization: "उत्पादन अनुकूलन",
+    ecoRewards: "इको रिवार्ड्स",
     
     // Summary Cards
     totalSorted: "कुल सॉर्ट किया गया",
@@ -192,11 +212,16 @@ export const translations = {
     // Quick Actions
     quickActions: "त्वरित कार्य",
     viewAllProduce: "सभी उत्पाद देखें",
+    viewAllBins: "सभी बिन देखें",
     priceAnalysis: "मूल्य विश्लेषण",
+    recyclerPrices: "रीसाइक्लर कीमतें",
     marketTrends: "बाजार रुझान",
+    redeemVinyasaCoins: "विन्यास कॉइन्स रिडीम करें",
     
     // Optimal Revenue Plan
     optimalRevenuePlan: "किस्म के अनुसार इष्टतम आय योजना",
+    optimalRecyclingPlan: "बिन प्रकार के अनुसार इष्टतम रीसाइक्लिंग योजना",
+    recyclersMarketplace: "रीसाइक्लर्स मार्केटप्लेस",
     totalOptimalRevenue: "कुल इष्टतम आय",
     qualityCategory: "गुणवत्ता श्रेणी",
     items: "आइटम",
@@ -231,6 +256,9 @@ export const translations = {
     overallSummary: "समग्र इष्टतम आय सारांश",
     totalItems: "कुल आइटम",
     avgRevenuePerItem: "प्रति आइटम औसत आय",
+    vinyasaCoins: "विन्यास कॉइन्स",
+    totalVinyasaCoins: "कुल विन्यास कॉइन्स",
+    coins: "कॉइन्स",
     
     // Chat
     assistant: "सहायक",
@@ -324,13 +352,19 @@ export const translations = {
   bn: {
     // Header
     title: "সর্টেড! উৎপাদক ড্যাশবোর্ড",
+    consumerTitle: "সর্টেড! কনজিউমার সেন্ট্রাল অপস ড্যাশবোর্ড",
     farmName: "স্বাবলম্বন ফার্মস",
+    consumerUserName: "বিকেসি-১ ইকোসাইক্লার",
     
     // Menu Items
     liveSorting: "লাইভ উৎপাদ সর্টিং",
+    liveWasteSorting: "লাইভ ওয়েস্ট সর্টিং",
     harvestInsights: "ফসল অন্তর্দৃষ্টি",
+    binInsights: "বিন অন্তর্দৃষ্টি",
     cropRecommendations: "ফসল সুপারিশ",
+    recyclingTips: "রিসাইক্লিং টিপস",
     yieldOptimization: "ফলন অপ্টিমাইজেশন",
+    ecoRewards: "ইকো রিওয়ার্ডস",
     
     // Summary Cards
     totalSorted: "মোট সর্ট করা",
@@ -352,11 +386,16 @@ export const translations = {
     // Quick Actions
     quickActions: "দ্রুত কর্ম",
     viewAllProduce: "সব পণ্য দেখুন",
+    viewAllBins: "সব বিন দেখুন",
     priceAnalysis: "মূল্য বিশ্লেষণ",
+    recyclerPrices: "রিসাইক্লার দাম",
     marketTrends: "বাজার প্রবণতা",
+    redeemVinyasaCoins: "ভিন্যাস কয়েন রিডিম করুন",
     
     // Optimal Revenue Plan
     optimalRevenuePlan: "জাত অনুযায়ী সর্বোত্তম আয় পরিকল্পনা",
+    optimalRecyclingPlan: "বিনের ধরন অনুযায়ী সর্বোত্তম রিসাইক্লিং পরিকল্পনা",
+    recyclersMarketplace: "রিসাইক্লার মার্কেটপ্লেস",
     totalOptimalRevenue: "মোট সর্বোত্তম আয়",
     qualityCategory: "গুণমান বিভাগ",
     items: "আইটেম",

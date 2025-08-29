@@ -7,7 +7,7 @@ export const translations = {
     farmName: "BKC-1 EcoCycler",
     
     // Menu Items
-    liveSorting: "Live Sorting",
+    liveSorting: "Live Waste Sorting",
     wasteAnalytics: "Waste Analytics", 
     recyclingRecommendations: "Recycling Recommendations",
     disposalOptimization: "Disposal Optimization",
@@ -165,7 +165,7 @@ export const translations = {
     farmName: "BKC-1 इकोसाइक्लर",
     
     // Menu Items
-    liveSorting: "लाइव सॉर्टिंग",
+    liveSorting: "लाइव वेस्ट सॉर्टिंग",
     wasteAnalytics: "कचरा विश्लेषण",
     recyclingRecommendations: "रीसाइक्लिंग सुझाव",
     disposalOptimization: "निपटान अनुकूलन",
@@ -323,7 +323,7 @@ export const translations = {
     farmName: "BKC-1 ইকোসাইক্লার",
     
     // Menu Items
-    liveSorting: "লাইভ সর্টিং",
+    liveSorting: "লাইভ বর্জ্য সর্টিং",
     wasteAnalytics: "বর্জ্য বিশ্লেষণ",
     recyclingRecommendations: "পুনর্ব্যবহার সুপারিশ",
     disposalOptimization: "নিষ্পত্তি অপ্টিমাইজেশন",
@@ -481,7 +481,7 @@ export const translations = {
     farmName: "BKC-1 ఎకోసైక్లర్",
     
     // Menu Items
-    liveSorting: "లైవ్ సార్టింగ్",
+    liveSorting: "లైవ్ వేస్ట్ సార్టింగ్",
     wasteAnalytics: "వ్యర్థ విశ్లేషణ",
     recyclingRecommendations: "రీసైక్లింగ్ సిఫారసులు",
     disposalOptimization: "నిర్మూలన అనుకూలీకరణ",

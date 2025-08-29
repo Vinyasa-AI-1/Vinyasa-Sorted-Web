@@ -18,6 +18,7 @@ import {
 import logoUrl from "@assets/logo_1756410067559.png";
 import { useLanguage, type Language } from "@/hooks/use-language";
 import { useTranslation } from "@/lib/translations";
+import { Link } from "wouter";
 
 export default function Dashboard() {
   const { currentLanguage, changeLanguage, languages } = useLanguage();
@@ -78,17 +79,19 @@ export default function Dashboard() {
           {/* Bottom row with navigation menu spread across full width */}
           <nav className="w-full -mt-1 pb-0">
             <div className="flex flex-wrap justify-center gap-x-8 gap-y-1">
-              <Button 
-                variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                data-testid="nav-live-sorting"
-              >
-                <div className="flex flex-col">
-                  {t('liveSorting').split(' ').map((word, index) => (
-                    <span key={index} className="block text-sm leading-tight">{word}</span>
-                  ))}
-                </div>
-              </Button>
+              <Link href="/live-waste-sorting">
+                <Button 
+                  variant="ghost" 
+                  className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
+                  data-testid="nav-live-sorting"
+                >
+                  <div className="flex flex-col">
+                    {t('liveSorting').split(' ').map((word, index) => (
+                      <span key={index} className="block text-sm leading-tight">{word}</span>
+                    ))}
+                  </div>
+                </Button>
+              </Link>
               <Button 
                 variant="ghost" 
                 className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"

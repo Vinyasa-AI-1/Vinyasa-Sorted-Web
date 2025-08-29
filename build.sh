@@ -18,6 +18,17 @@ else
     echo "No dist/public directory found"
 fi
 
+# Copy API functions to dist/api for Vercel
+echo "Setting up API functions..."
+mkdir -p dist/api
+cp -r api/* dist/api/
+
+# Remove the server index.js that might conflict
+if [ -f "dist/index.js" ]; then
+    echo "Removing conflicting server index.js..."
+    rm dist/index.js
+fi
+
 # Verify index.html is in the right place
 if [ -f "dist/index.html" ]; then
     echo "✅ index.html found in dist/"

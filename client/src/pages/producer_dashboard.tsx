@@ -25,19 +25,19 @@ export default function Dashboard() {
   const { t, formatNumber } = useTranslation(currentLanguage);
   
   const { data: summary } = useQuery({
-    queryKey: ["/api/summary"],
+    queryKey: ["/api/producer?endpoint=summary"],
   });
 
   const { data: varieties } = useQuery({
-    queryKey: ["/api/produce-varieties"],
+    queryKey: ["/api/producer?endpoint=produce-varieties"],
   });
 
   const { data: markets } = useQuery({
-    queryKey: ["/api/markets"],
+    queryKey: ["/api/producer-data?endpoint=markets"],
   });
 
   const { data: overallSummary } = useQuery({
-    queryKey: ["/api/overall-summary"],
+    queryKey: ["/api/producer-data?endpoint=overall-summary"],
   });
 
   return (

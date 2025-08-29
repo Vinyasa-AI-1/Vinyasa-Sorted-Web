@@ -10,6 +10,16 @@ export default function handler(req, res) {
     return;
   }
 
+  const { endpoint } = req.query;
+
+  // Producer dashboard summary data
+  const summaryData = {
+    totalSorted: 1910,
+    totalWeight: 3670, // in kg
+    avgQualityScore: 92.5,
+    valueUnlocked: 260124 // in rupees
+  };
+
   // Producer produce varieties data
   const produceVarieties = [
     {
@@ -84,5 +94,40 @@ export default function handler(req, res) {
     }
   ];
 
-  res.status(200).json(produceVarieties);
+  // Revenue comparison data
+  const revenueComparison = [
+    { month: "Jan", revenue: 45000, target: 50000 },
+    { month: "Feb", revenue: 52000, target: 55000 },
+    { month: "Mar", revenue: 48000, target: 52000 },
+    { month: "Apr", revenue: 61000, target: 58000 },
+    { month: "May", revenue: 55000, target: 60000 },
+    { month: "Jun", revenue: 67000, target: 65000 }
+  ];
+
+  // Volume trends data
+  const volumeTrends = [
+    { month: "Jan", volume: 2800, trend: "up" },
+    { month: "Feb", volume: 3200, trend: "up" },
+    { month: "Mar", volume: 2950, trend: "down" },
+    { month: "Apr", volume: 3600, trend: "up" },
+    { month: "May", volume: 3400, trend: "down" },
+    { month: "Jun", volume: 3850, trend: "up" }
+  ];
+
+  switch (endpoint) {
+    case 'summary':
+      res.status(200).json(summaryData);
+      break;
+    case 'produce-varieties':
+      res.status(200).json(produceVarieties);
+      break;
+    case 'revenue-comparison':
+      res.status(200).json(revenueComparison);
+      break;
+    case 'volume-trends':
+      res.status(200).json(volumeTrends);
+      break;
+    default:
+      res.status(400).json({ error: 'Invalid endpoint. Use: summary, produce-varieties, revenue-comparison, or volume-trends' });
+  }
 }

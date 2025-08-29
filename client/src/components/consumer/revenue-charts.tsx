@@ -9,11 +9,11 @@ interface RevenueChartsProps {
 
 export default function RevenueCharts({ t }: RevenueChartsProps) {
   const { data: wasteComparison } = useQuery({
-    queryKey: ["/api/consumer/waste-comparison"],
+    queryKey: ["/api/consumer-data?endpoint=waste-comparison"],
   });
 
   const { data: wasteTrends } = useQuery({
-    queryKey: ["/api/consumer/waste-trends"],
+    queryKey: ["/api/consumer-data?endpoint=waste-trends"],
   });
 
   return (

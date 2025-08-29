@@ -10,6 +10,9 @@ export default function handler(req, res) {
     return;
   }
 
+  const { endpoint } = req.query;
+
+  // Markets data
   const markets = [
     {
       id: "vashi-apmc",
@@ -58,5 +61,24 @@ export default function handler(req, res) {
     }
   ];
 
-  res.status(200).json(markets);
+  // Overall summary data
+  const overallSummary = {
+    totalProduceSorted: 1910,
+    totalWeightProcessed: 3670,
+    qualityImprovement: 15.2,
+    revenueIncrease: 23.8,
+    wasteReduction: 12.5,
+    efficiencyGain: 18.7
+  };
+
+  switch (endpoint) {
+    case 'markets':
+      res.status(200).json(markets);
+      break;
+    case 'overall-summary':
+      res.status(200).json(overallSummary);
+      break;
+    default:
+      res.status(400).json({ error: 'Invalid endpoint. Use: markets or overall-summary' });
+  }
 }

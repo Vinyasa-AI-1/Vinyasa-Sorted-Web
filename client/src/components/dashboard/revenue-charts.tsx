@@ -9,11 +9,11 @@ interface RevenueChartsProps {
 
 export default function RevenueCharts({ t }: RevenueChartsProps) {
   const { data: revenueComparison } = useQuery({
-    queryKey: ["/api/revenue-comparison"],
+    queryKey: ["/api/producer?endpoint=revenue-comparison"],
   });
 
   const { data: volumeTrends } = useQuery({
-    queryKey: ["/api/volume-trends"],
+    queryKey: ["/api/producer?endpoint=volume-trends"],
   });
 
   const revenueData = revenueComparison && 'labels' in revenueComparison && 'datasets' in revenueComparison ? 

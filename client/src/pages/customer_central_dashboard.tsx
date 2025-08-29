@@ -26,19 +26,19 @@ export default function CustomerCentralDashboard() {
   const { t, formatNumber } = useTranslation(currentLanguage);
   
   const { data: summary } = useQuery<Summary>({
-    queryKey: ["/api/consumer/summary"],
+    queryKey: ["/api/consumer?endpoint=summary"],
   });
 
   const { data: binTypes } = useQuery<any[]>({
-    queryKey: ["/api/consumer/bin-types"],
+    queryKey: ["/api/consumer?endpoint=bin-types"],
   });
 
   const { data: recyclers } = useQuery<any[]>({
-    queryKey: ["/api/consumer/recyclers"],
+    queryKey: ["/api/consumer?endpoint=recyclers"],
   });
 
   const { data: overallSummary } = useQuery<any>({
-    queryKey: ["/api/consumer/overall-summary"],
+    queryKey: ["/api/consumer-data?endpoint=overall-summary"],
   });
 
   return (

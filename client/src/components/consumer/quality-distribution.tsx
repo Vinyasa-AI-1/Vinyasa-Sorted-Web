@@ -16,11 +16,11 @@ const COLORS = {
   Overripe: "#9C4221", // Earth brown
   Rotten: "#DC2626", // Red
   // Map waste categories to same colors as produce qualities
-  dry: "#9C4221", // Earth brown (same as Overripe)
-  wet: "#22543D", // Forest green (same as Premium)
-  plastic: "#F6E05E", // Harvest yellow (same as YetToRipe)
-  electronic: "#68D391", // Sage green (same as Ripe)
-  medical: "#DC2626", // Red (same as Rotten)
+  Dry: "#9C4221", // Earth brown (same as Overripe)
+  Wet: "#22543D", // Forest green (same as Premium)
+  Plastic: "#F6E05E", // Harvest yellow (same as YetToRipe)
+  Electronic: "#68D391", // Sage green (same as Ripe)
+  Medical: "#DC2626", // Red (same as Rotten)
 };
 
 export default function QualityDistribution({ varieties, t, formatNumber }: QualityDistributionProps) {

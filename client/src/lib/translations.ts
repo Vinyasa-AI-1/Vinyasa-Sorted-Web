@@ -184,10 +184,11 @@ export const translations = {
     "medical": "Medical",
 
     // Bin Types
-    "residential-bin": "Residential Bin",
-    "office-bin": "Office Bin",
-    "industrial-bin": "Industrial Bin",
-    "medical-bin": "Medical Bin",
+    "residential-bin": "Residential Smart Bin",
+    "office-bin": "Office Smart Bin",
+    "public-bin": "Public Smart Bin",
+    "industrial-bin": "Industrial Smart Bin",
+    "hospital-bin": "Hospital Smart Bin",
 
     // Recycler Names
     "Green Earth Compost": "Green Earth Compost",
@@ -638,10 +639,11 @@ export const translations = {
     "Processing (₹90/kg)": "प्रसंस्करण (₹90/किग्रा)",
 
     // Bin Types
-    "residential-bin": "आवासीय बिन",
-    "office-bin": "कार्यालय बिन",
-    "industrial-bin": "औद्योगिक बिन",
-    "medical-bin": "चिकित्सा बिन",
+    "residential-bin": "आवासीय स्मार्ट बिन",
+    "office-bin": "कार्यालय स्मार्ट बिन",
+    "public-bin": "सार्वजनिक स्मार्ट बिन",
+    "industrial-bin": "औद्योगिक स्मार्ट बिन",
+    "hospital-bin": "अस्पताल स्मार्ट बिन",
 
     // Recycler Names
     "Green Earth Compost": "ग्रीन अर्थ कंपोस्ट",
@@ -1030,10 +1032,11 @@ export const translations = {
     "Processing (₹90/kg)": "প্রক্রিয়াকরণ (৯০৳/কেজি)",
 
     // Bin Types
-    "residential-bin": "আবাসিক বিন",
-    "office-bin": "অফিস বিন",
-    "industrial-bin": "শিল্প বিন",
-    "medical-bin": "চিকিৎসা বিন",
+    "residential-bin": "আবাসিক স্মার্ট বিন",
+    "office-bin": "অফিস স্মার্ট বিন",
+    "public-bin": "পাবলিক স্মার্ট বিন",
+    "industrial-bin": "শিল্প স্মার্ট বিন",
+    "hospital-bin": "হাসপাতাল স্মার্ট বিন",
 
     // Recycler Names
     "Green Earth Compost": "গ্রিন আর্থ কম্পোস্ট",

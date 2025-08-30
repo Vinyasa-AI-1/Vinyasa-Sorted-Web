@@ -8,12 +8,14 @@ interface RevenueChartsProps {
 }
 
 export default function RevenueCharts({ t }: RevenueChartsProps) {
-  const { data: wasteComparison } = useQuery({
-    queryKey: ["/api/consumer-data?endpoint=waste-comparison"],
+  const { data: revenueComparison } = useQuery({
+    queryKey: ["/api/consumer", { endpoint: "revenue-comparison" }],
+    queryFn: () => fetch("/api/consumer?endpoint=revenue-comparison").then(res => res.json()),
   });
 
-  const { data: wasteTrends } = useQuery({
-    queryKey: ["/api/consumer-data?endpoint=waste-trends"],
+  const { data: volumeTrends } = useQuery({
+    queryKey: ["/api/consumer", { endpoint: "volume-trends" }],
+    queryFn: () => fetch("/api/consumer?endpoint=volume-trends").then(res => res.json()),
   });
 
   return (
@@ -24,21 +26,13 @@ export default function RevenueCharts({ t }: RevenueChartsProps) {
           <h3 className="text-xl font-bold text-forest mb-4">{t('revenueComparison')}</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={wasteComparison?.datasets?.map((dataset: any, index: number) => ({
-                name: t(dataset.label as keyof typeof translations.en) || dataset.label,
-                ...wasteComparison.labels.reduce((acc: any, label: string, idx: number) => {
-                  const translatedLabel = t(label as keyof typeof translations.en) || label;
-                  acc[translatedLabel] = dataset.data[idx];
-                  return acc;
-                }, {})
-              })) || []}>
+              <BarChart data={revenueComparison || []}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
+                <XAxis dataKey="month" />
                 <YAxis />
-                <Tooltip />
-                {wasteComparison?.labels?.map((label: string, index: number) => (
-                  <Bar key={label} dataKey={label} fill={index === 0 ? "#22543D" : index === 1 ? "#68D391" : "#F6E05E"} />
-                ))}
+                <Tooltip formatter={(value) => [`₹${Number(value).toLocaleString()}`, ""]} />
+                <Bar dataKey="revenue" fill="#22543D" name="Revenue" />
+                <Bar dataKey="target" fill="#68D391" name="Target" />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -51,26 +45,12 @@ export default function RevenueCharts({ t }: RevenueChartsProps) {
           <h3 className="text-xl font-bold text-forest mb-4">{t('volumeTrends')}</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={wasteTrends?.labels?.map((label: string, index: number) => ({
-                name: label,
-                ...wasteTrends.datasets.reduce((acc: any, dataset: any) => {
-                  acc[dataset.label] = dataset.data[index];
-                  return acc;
-                }, {})
-              })) || []}>
+              <LineChart data={volumeTrends || []}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
+                <XAxis dataKey="month" />
                 <YAxis />
                 <Tooltip />
-                {wasteTrends?.datasets?.map((dataset: any) => (
-                  <Line 
-                    key={dataset.label} 
-                    type="monotone" 
-                    dataKey={dataset.label} 
-                    stroke={dataset.borderColor} 
-                    strokeWidth={2}
-                  />
-                ))}
+                <Line type="monotone" dataKey="volume" stroke="#22543D" strokeWidth={2} />
               </LineChart>
             </ResponsiveContainer>
           </div>

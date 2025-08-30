@@ -1,60 +1,54 @@
+import OpenAI from "openai";
+
+// the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
 export default async function handler(req, res) {
-  // CORS headers
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
-
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
-
   if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method not allowed' });
-    return;
+    return res.status(405).json({ error: 'Method not allowed' });
   }
+
+  const { message, language } = req.body;
 
   try {
-    const { message, language } = req.body;
+    const systemPrompt = `You are a helpful waste management and sustainability assistant for the Vinyasa-AI platform. 
+    You help users optimize their waste sorting, recycling strategies, and maximize their Vinyasa Coins earnings.
+    
+    Key context:
+    - Users have smart bins that sort waste into categories: Dry, Wet, Plastic, Electronic, Medical
+    - Vinyasa Coins are earned through proper waste sorting and recycling
+    - There's a marketplace of recyclers with different pricing
+    - Users want to maximize both environmental impact and financial returns
+    
+    Please respond in ${language === 'hi' ? 'Hindi' : language === 'bn' ? 'Bengali' : 'English'}.
+    Keep responses helpful, concise, and focused on waste management optimization.`;
 
-    // Mock AI response based on common queries
-    let response = '';
-    const lowerMessage = message.toLowerCase();
-
-    if (lowerMessage.includes('sorting') || lowerMessage.includes('quality')) {
-      response = language === 'hi' 
-        ? 'हमारी AI सिस्टम 99% सटीकता के साथ उत्पादों की गुणवत्ता का विश्लेषण करती है। यह रंग, आकार, और पकाव के आधार पर स्वचालित रूप से सॉर्ट करती है।'
-        : language === 'bn'
-        ? 'আমাদের এআই সিস্টেম ৯৯% নির্ভুলতার সাথে পণ্যের গুণমান বিশ্লেষণ করে। এটি রং, আকার এবং পাকাপাকির ভিত্তিতে স্বয়ংক্রিয়ভাবে সাজায়।'
-        : 'Our AI system analyzes produce quality with 99% accuracy. It automatically sorts based on color, size, and ripeness levels.';
-    } else if (lowerMessage.includes('price') || lowerMessage.includes('market')) {
-      response = language === 'hi'
-        ? 'हमारा सिस्टम रियल-टाइम बाजार की कीमतों को ट्रैक करता है और आपके उत्पाद के लिए सबसे अच्छे बाजार की सिफारिश करता है।'
-        : language === 'bn'
-        ? 'আমাদের সিস্টেম রিয়েল-টাইম বাজার দাম ট্র্যাক করে এবং আপনার পণ্যের জন্য সেরা বাজারের সুপারিশ করে।'
-        : 'Our system tracks real-time market prices and recommends the best markets for your produce to maximize revenue.';
-    } else if (lowerMessage.includes('waste') || lowerMessage.includes('recycle')) {
-      response = language === 'hi'
-        ? 'আমাদের স্মার্ট বিন ৫ ধরনের বর্জ্য আলাদা করে এবং প্রতিটি সঠিক পুনর্ব্যবহারের জন্য রিসাইক্লার সাথে যুক্ত করে। ভিন্যাস কয়েন উপার্জন করুন!'
-        : language === 'bn'
-        ? 'আমাদের স্মার্ট বিন ৫ ধরনের বর্জ্য আলাদা করে এবং প্রতিটি সঠিক পুনর্ব্যবহারের জন্য রিসাইক্লার সাথে যুক্ত করে। ভিন্যাস কয়েন উপার্জন করুন!'
-        : 'Our smart bins sort 5 types of waste and connect each to proper recyclers. Earn Vinyasa Coins for proper waste sorting!';
-    } else {
-      response = language === 'hi'
-        ? 'मैं आपकी खेती और कचरा प्रबंधन संबंधी सभी जरूरतों में मदद कर सकता हूं। कृपया अपना प्रश्न पूछें!'
-        : language === 'bn'
-        ? 'আমি আপনার কৃষি এবং বর্জ্য ব্যবস্থাপনা সংক্রান্ত সকল প্রয়োজনে সাহায্য করতে পারি। দয়া করে আপনার প্রশ্ন জিজ্ঞাসা করুন!'
-        : 'I can help you with all your agricultural and waste management needs. Please ask me any questions!';
-    }
+    const response = await openai.chat.completions.create({
+      model: "gpt-5",
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: message }
+      ],
+      max_tokens: 300,
+      temperature: 0.7
+    });
 
     res.status(200).json({ 
-      response,
-      timestamp: new Date().toISOString()
+      message: response.choices[0].message.content 
     });
 
   } catch (error) {
-    console.error('Chat API error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error('OpenAI API error:', error);
+    
+    // Fallback response
+    const fallbackResponses = {
+      en: "Thank you for your question about waste management. Based on your bin data, I recommend focusing on optimizing your plastic and electronic waste streams for maximum value and Vinyasa Coins. Would you like specific recommendations for recyclers in your area?",
+      hi: "आपके अपशिष्ट प्रबंधन के बारे में प्रश्न के लिए धन्यवाद। आपके बिन डेटा के आधार पर, मैं अधिकतम मूल्य और विन्यास सिक्कों के लिए आपके प्लास्टिक और इलेक्ट्रॉनिक अपशिष्ट धाराओं को अनुकूलित करने पर ध्यान देने की सलाह देता हूं।",
+      bn: "বর্জ্য ব্যবস্থাপনা সম্পর্কে আপনার প্রশ্নের জন্য ধন্যবাদ। আপনার বিন ডেটার ভিত্তিতে, আমি সর্বোচ্চ মূল্য এবং বিন্যাস কয়েনের জন্য আপনার প্লাস্টিক এবং ইলেকট্রনিক বর্জ্য স্রোত অপ্টিমাইজ করার দিকে ফোকাস করার পরামর্শ দিই।"
+    };
+    
+    res.status(200).json({ 
+      message: fallbackResponses[language] || fallbackResponses.en 
+    });
   }
 }

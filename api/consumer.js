@@ -52,6 +52,23 @@ export default function handler(req, res) {
           alternativeBuyers: [
             { name: "EcoWaste Solutions", location: "Bandra", distance: "5.1 km" }
           ]
+        },
+        {
+          qualityCategory: "Plastic",
+          items: 280,
+          weight: 280,
+          recommendedSaleFor: "Recycling",
+          recommendedBuyer: {
+            name: "EcoWaste Solutions",
+            location: "Bandra",
+            distance: "5.1 km"
+          },
+          pricePerKg: 25,
+          total: 7000,
+          isVinyasaCoins: true,
+          alternativeBuyers: [
+            { name: "Green Earth Recyclers", location: "Andheri East", distance: "3.2 km" }
+          ]
         }
       ]
     },
@@ -85,6 +102,23 @@ export default function handler(req, res) {
           alternativeBuyers: [
             { name: "Green Earth Recyclers", location: "Andheri East", distance: "3.2 km" }
           ]
+        },
+        {
+          qualityCategory: "Electronic",
+          items: 180,
+          weight: 180,
+          recommendedSaleFor: "E-Waste Recycling",
+          recommendedBuyer: {
+            name: "Tech Recyclers Ltd.",
+            location: "Goregaon",
+            distance: "8.2 km"
+          },
+          pricePerKg: 45,
+          total: 8100,
+          isVinyasaCoins: true,
+          alternativeBuyers: [
+            { name: "Digital Waste Co.", location: "Malad", distance: "12 km" }
+          ]
         }
       ]
     },
@@ -117,6 +151,106 @@ export default function handler(req, res) {
           isVinyasaCoins: true,
           alternativeBuyers: [
             { name: "City Composting Unit", location: "Kurla", distance: "12 km" }
+          ]
+        }
+      ]
+    },
+    {
+      id: "industrial-bin",
+      name: "Industrial Smart Bin",
+      variety: "Industrial Waste",
+      totalItems: 2150,
+      totalOptimalRevenue: 1580,
+      qualityDistribution: {
+        Dry: 680,
+        Wet: 320,
+        Plastic: 850,
+        Electronic: 250,
+        Medical: 50
+      },
+      optimalRevenuePlan: [
+        {
+          qualityCategory: "Plastic",
+          items: 850,
+          weight: 850,
+          recommendedSaleFor: "Industrial Recycling",
+          recommendedBuyer: {
+            name: "Industrial Waste Solutions",
+            location: "MIDC Andheri",
+            distance: "15 km"
+          },
+          pricePerKg: 18,
+          total: 15300,
+          isVinyasaCoins: true,
+          alternativeBuyers: [
+            { name: "Heavy Industries Recycling", location: "Turbhe", distance: "25 km" }
+          ]
+        },
+        {
+          qualityCategory: "Electronic",
+          items: 250,
+          weight: 250,
+          recommendedSaleFor: "E-Waste Processing",
+          recommendedBuyer: {
+            name: "Tech Recyclers Ltd.",
+            location: "Goregaon",
+            distance: "8.2 km"
+          },
+          pricePerKg: 50,
+          total: 12500,
+          isVinyasaCoins: true,
+          alternativeBuyers: [
+            { name: "Digital Waste Co.", location: "Malad", distance: "12 km" }
+          ]
+        }
+      ]
+    },
+    {
+      id: "hospital-bin",
+      name: "Hospital Smart Bin",
+      variety: "Medical Waste",
+      totalItems: 890,
+      totalOptimalRevenue: 720,
+      qualityDistribution: {
+        Dry: 180,
+        Wet: 120,
+        Plastic: 250,
+        Electronic: 90,
+        Medical: 250
+      },
+      optimalRevenuePlan: [
+        {
+          qualityCategory: "Medical",
+          items: 250,
+          weight: 250,
+          recommendedSaleFor: "Medical Waste Treatment",
+          recommendedBuyer: {
+            name: "BioMedical Waste Solutions",
+            location: "Thane",
+            distance: "22 km"
+          },
+          pricePerKg: 35,
+          total: 8750,
+          isVinyasaCoins: true,
+          alternativeBuyers: [
+            { name: "HealthCare Disposal Ltd.", location: "Navi Mumbai", distance: "28 km" }
+          ]
+        },
+        {
+          qualityCategory: "Plastic",
+          items: 250,
+          weight: 250,
+          recommendedSaleFor: "Medical Grade Recycling",
+          recommendedBuyer: {
+            name: "MedPlastic Recyclers",
+            location: "Vashi",
+            distance: "18 km"
+          },
+          pricePerKg: 22,
+          total: 5500,
+          isVinyasaCoins: true,
+          alternativeBuyers: [
+            { name: "SafeRecycle Medical", location: "Kalyan", distance: "35 km" }
           ]
         }
       ]

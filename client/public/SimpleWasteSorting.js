@@ -72,7 +72,7 @@ class ReactWasteSorting {
       }
 
       console.log('🤖 Loading Teachable Machine model...');
-      const modelURL = "https://teachablemachine.withgoogle.com/models/2JfuDAEaL/";
+      const modelURL = "https://teachablemachine.withgoogle.com/models/vVMXGyiCi/";
       
       this.classifier = await ml5.imageClassifier(modelURL + "model.json");
       this.classificationMode = 'ai';

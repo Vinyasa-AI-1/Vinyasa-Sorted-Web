@@ -41,8 +41,8 @@ export default function CustomerCentralDashboard() {
   });
 
   const { data: overallSummary } = useQuery<any>({
-    queryKey: ["/api/consumer-data", { endpoint: "overall-summary" }],
-    queryFn: () => fetch("/api/consumer-data?endpoint=overall-summary").then(res => res.json()),
+    queryKey: ["/api/consumer", { endpoint: "overall-summary" }],
+    queryFn: () => fetch("/api/consumer?endpoint=overall-summary").then(res => res.json()),
   });
 
   return (

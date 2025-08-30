@@ -35,13 +35,23 @@ export default function Dashboard() {
   });
 
   const { data: markets } = useQuery({
-    queryKey: ["/api/producer-data", { endpoint: "markets" }],
-    queryFn: () => fetch("/api/producer-data?endpoint=markets").then(res => res.json()),
+    queryKey: ["/api/producer", { endpoint: "markets" }],
+    queryFn: () => fetch("/api/producer?endpoint=markets").then(res => res.json()),
   });
 
   const { data: overallSummary } = useQuery({
-    queryKey: ["/api/producer-data", { endpoint: "overall-summary" }],
-    queryFn: () => fetch("/api/producer-data?endpoint=overall-summary").then(res => res.json()),
+    queryKey: ["/api/producer", { endpoint: "overall-summary" }],
+    queryFn: () => fetch("/api/producer?endpoint=overall-summary").then(res => res.json()),
+  });
+
+  const { data: revenueComparison } = useQuery({
+    queryKey: ["/api/producer", { endpoint: "revenue-comparison" }],
+    queryFn: () => fetch("/api/producer?endpoint=revenue-comparison").then(res => res.json()),
+  });
+
+  const { data: volumeTrends } = useQuery({
+    queryKey: ["/api/producer", { endpoint: "volume-trends" }],
+    queryFn: () => fetch("/api/producer?endpoint=volume-trends").then(res => res.json()),
   });
 
   return (
@@ -177,11 +187,18 @@ export default function Dashboard() {
           </div>
         )}
 
-        {/* Market Information Cards */}
-        {markets && Array.isArray(markets) && <MarketCards markets={markets} t={t} />}
+        {/* Harvest Marketplace */}
+        {markets && Array.isArray(markets) && (
+          <Card className="bg-white rounded-xl shadow-lg">
+            <CardContent className="p-6">
+              <h2 className="text-2xl font-bold text-forest mb-6">Harvest Marketplace</h2>
+              <MarketCards markets={markets} t={t} />
+            </CardContent>
+          </Card>
+        )}
 
         {/* Revenue and Volume Charts */}
-        <RevenueCharts t={t} />
+        <RevenueCharts t={t} revenueComparison={revenueComparison} volumeTrends={volumeTrends} />
 
         {/* Overall Revenue Summary */}
         {overallSummary && 'totalOptimalRevenue' in overallSummary && (

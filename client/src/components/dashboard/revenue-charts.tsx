@@ -5,34 +5,29 @@ import type { translations } from "@/lib/translations";
 
 interface RevenueChartsProps {
   t: (key: keyof typeof translations.en) => string;
+  revenueComparison?: any[];
+  volumeTrends?: any[];
 }
 
-export default function RevenueCharts({ t }: RevenueChartsProps) {
-  const { data: revenueComparison } = useQuery({
-    queryKey: ["/api/producer?endpoint=revenue-comparison"],
-  });
+export default function RevenueCharts({ t, revenueComparison, volumeTrends }: RevenueChartsProps) {
+  // Use provided data directly
+  const revenueData = revenueComparison || [
+    { month: "Jan", revenue: 45000, target: 50000 },
+    { month: "Feb", revenue: 52000, target: 55000 },
+    { month: "Mar", revenue: 48000, target: 52000 },
+    { month: "Apr", revenue: 61000, target: 58000 },
+    { month: "May", revenue: 55000, target: 60000 },
+    { month: "Jun", revenue: 67000, target: 65000 }
+  ];
 
-  const { data: volumeTrends } = useQuery({
-    queryKey: ["/api/producer?endpoint=volume-trends"],
-  });
-
-  const revenueData = revenueComparison && 'labels' in revenueComparison && 'datasets' in revenueComparison ? 
-    revenueComparison.labels.map((label: string, index: number) => ({
-      variety: label,
-      today: revenueComparison.datasets[0].data[index],
-      seasonAvg: revenueComparison.datasets[1].data[index],
-      lastYear: revenueComparison.datasets[2].data[index],
-    })) : [];
-
-  const volumeData = volumeTrends && 'labels' in volumeTrends && 'datasets' in volumeTrends ? 
-    volumeTrends.labels.map((label: string, index: number) => ({
-      week: label,
-      Alphonso: volumeTrends.datasets[0].data[index],
-      Kesar: volumeTrends.datasets[1].data[index],
-      Banana: volumeTrends.datasets[2].data[index],
-      Bhindi: volumeTrends.datasets[3].data[index],
-      Tomato: volumeTrends.datasets[4].data[index],
-    })) : [];
+  const volumeData = volumeTrends || [
+    { month: "Jan", volume: 2800 },
+    { month: "Feb", volume: 3200 },
+    { month: "Mar", volume: 2950 },
+    { month: "Apr", volume: 3600 },
+    { month: "May", volume: 3400 },
+    { month: "Jun", volume: 3850 }
+  ];
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -43,12 +38,11 @@ export default function RevenueCharts({ t }: RevenueChartsProps) {
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={revenueData}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="variety" />
+                <XAxis dataKey="month" />
                 <YAxis />
                 <Tooltip formatter={(value) => [`₹${Number(value).toLocaleString()}`, ""]} />
-                <Bar dataKey="today" fill="#22543D" name={t('today')} />
-                <Bar dataKey="seasonAvg" fill="#68D391" name={t('seasonAvg')} />
-                <Bar dataKey="lastYear" fill="#F6E05E" name={t('lastYear')} />
+                <Bar dataKey="revenue" fill="#22543D" name="Revenue" />
+                <Bar dataKey="target" fill="#68D391" name="Target" />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -62,14 +56,10 @@ export default function RevenueCharts({ t }: RevenueChartsProps) {
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={volumeData}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="week" />
+                <XAxis dataKey="month" />
                 <YAxis />
                 <Tooltip />
-                <Line type="monotone" dataKey="Alphonso" stroke="#22543D" strokeWidth={2} />
-                <Line type="monotone" dataKey="Kesar" stroke="#68D391" strokeWidth={2} />
-                <Line type="monotone" dataKey="Banana" stroke="#F6E05E" strokeWidth={2} />
-                <Line type="monotone" dataKey="Bhindi" stroke="#9C4221" strokeWidth={2} />
-                <Line type="monotone" dataKey="Tomato" stroke="#DC2626" strokeWidth={2} />
+                <Line type="monotone" dataKey="volume" stroke="#22543D" strokeWidth={2} />
               </LineChart>
             </ResponsiveContainer>
           </div>

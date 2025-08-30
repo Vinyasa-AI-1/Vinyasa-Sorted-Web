@@ -16,8 +16,8 @@ export default function handler(req, res) {
   const summaryData = {
     totalSorted: 1910,
     totalWeight: 3670, // in kg
-    avgQualityScore: 92.5,
-    valueUnlocked: 260124 // in rupees
+    avgQuality: 88,
+    revenue: 245680 // in rupees
   };
 
   // Producer produce varieties data
@@ -25,6 +25,9 @@ export default function handler(req, res) {
     {
       id: "alphonso-mango",
       name: "Alphonso Mango",
+      variety: "Premium Fruit",
+      totalItems: 950,
+      totalOptimalRevenue: 89250,
       qualityDistribution: {
         Premium: 450,
         Ripe: 280,
@@ -32,13 +35,48 @@ export default function handler(req, res) {
         Overripe: 80,
         Rotten: 20
       },
-      avgPrice: 180,
-      totalWeight: 850,
-      valueUnlocked: 89250
+      optimalRevenuePlan: [
+        {
+          qualityCategory: "Premium",
+          items: 450,
+          weight: 450,
+          recommendedSaleFor: "Export",
+          recommendedBuyer: {
+            name: "Premium Export Co.",
+            location: "Mumbai Port",
+            distance: "25 km"
+          },
+          pricePerKg: 220,
+          total: 99000,
+          alternativeBuyers: [
+            { name: "Elite Fruits Ltd.", location: "Delhi", distance: "1200 km" },
+            { name: "Luxury Market", location: "Pune", distance: "150 km" }
+          ]
+        },
+        {
+          qualityCategory: "Ripe",
+          items: 280,
+          weight: 280,
+          recommendedSaleFor: "Local Market",
+          recommendedBuyer: {
+            name: "City Market",
+            location: "Local",
+            distance: "5 km"
+          },
+          pricePerKg: 180,
+          total: 50400,
+          alternativeBuyers: [
+            { name: "Wholesale Market", location: "Nearby", distance: "8 km" }
+          ]
+        }
+      ]
     },
     {
       id: "kesar-mango",
-      name: "Kesar Mango", 
+      name: "Kesar Mango",
+      variety: "Premium Fruit", 
+      totalItems: 700,
+      totalOptimalRevenue: 67200,
       qualityDistribution: {
         Premium: 320,
         Ripe: 220,
@@ -46,13 +84,31 @@ export default function handler(req, res) {
         Overripe: 60,
         Rotten: 10
       },
-      avgPrice: 160,
-      totalWeight: 700,
-      valueUnlocked: 67200
+      optimalRevenuePlan: [
+        {
+          qualityCategory: "Premium",
+          items: 320,
+          weight: 320,
+          recommendedSaleFor: "Export",
+          recommendedBuyer: {
+            name: "Premium Export Co.",
+            location: "Mumbai Port",
+            distance: "25 km"
+          },
+          pricePerKg: 200,
+          total: 64000,
+          alternativeBuyers: [
+            { name: "Elite Fruits Ltd.", location: "Delhi", distance: "1200 km" }
+          ]
+        }
+      ]
     },
     {
       id: "robust-tomato",
       name: "Robust Tomato",
+      variety: "Vegetable",
+      totalItems: 770,
+      totalOptimalRevenue: 42800,
       qualityDistribution: {
         Premium: 290,
         Ripe: 200,
@@ -60,13 +116,31 @@ export default function handler(req, res) {
         Overripe: 100,
         Rotten: 30
       },
-      avgPrice: 45,
-      totalWeight: 1200,
-      valueUnlocked: 42800
+      optimalRevenuePlan: [
+        {
+          qualityCategory: "Premium",
+          items: 290,
+          weight: 290,
+          recommendedSaleFor: "Distant Market",
+          recommendedBuyer: {
+            name: "Metro Wholesale",
+            location: "Chennai",
+            distance: "350 km"
+          },
+          pricePerKg: 55,
+          total: 15950,
+          alternativeBuyers: [
+            { name: "Fresh Market", location: "Local", distance: "10 km" }
+          ]
+        }
+      ]
     },
     {
       id: "cherry-tomato", 
       name: "Cherry Tomato",
+      variety: "Specialty Vegetable",
+      totalItems: 475,
+      totalOptimalRevenue: 32150,
       qualityDistribution: {
         Premium: 180,
         Ripe: 140,
@@ -74,13 +148,31 @@ export default function handler(req, res) {
         Overripe: 50,
         Rotten: 15
       },
-      avgPrice: 85,
-      totalWeight: 475,
-      valueUnlocked: 32150
+      optimalRevenuePlan: [
+        {
+          qualityCategory: "Premium",
+          items: 180,
+          weight: 180,
+          recommendedSaleFor: "Export",
+          recommendedBuyer: {
+            name: "Specialty Foods Ltd.",
+            location: "Bangalore",
+            distance: "280 km"
+          },
+          pricePerKg: 95,
+          total: 17100,
+          alternativeBuyers: [
+            { name: "Gourmet Market", location: "Local", distance: "12 km" }
+          ]
+        }
+      ]
     },
     {
       id: "bell-pepper",
       name: "Bell Pepper",
+      variety: "Vegetable",
+      totalItems: 400,
+      totalOptimalRevenue: 28724,
       qualityDistribution: {
         Premium: 160,
         Ripe: 120,
@@ -88,9 +180,24 @@ export default function handler(req, res) {
         Overripe: 40,
         Rotten: 10
       },
-      avgPrice: 75,
-      totalWeight: 400,
-      valueUnlocked: 28724
+      optimalRevenuePlan: [
+        {
+          qualityCategory: "Premium",
+          items: 160,
+          weight: 160,
+          recommendedSaleFor: "Distant Market",
+          recommendedBuyer: {
+            name: "Fresh Vegetable Co.",
+            location: "Hyderabad",
+            distance: "450 km"
+          },
+          pricePerKg: 85,
+          total: 13600,
+          alternativeBuyers: [
+            { name: "Local Wholesaler", location: "Nearby", distance: "15 km" }
+          ]
+        }
+      ]
     }
   ];
 
@@ -114,12 +221,102 @@ export default function handler(req, res) {
     { month: "Jun", volume: 3850, trend: "up" }
   ];
 
+  // Markets data
+  const marketsData = [
+    {
+      id: "premium-export",
+      name: "Premium Export Co.",
+      location: "Mumbai Port",
+      distance: "25 km",
+      category: "export",
+      capacity: "500 tons/day",
+      rating: 4.8,
+      type: "Export",
+      specializes: ["Premium Fruits", "Organic Produce"],
+      priceRange: "₹150-250/kg"
+    },
+    {
+      id: "city-market",
+      name: "City Market",
+      location: "Local Market Area",
+      distance: "5 km", 
+      category: "local",
+      capacity: "200 tons/day",
+      rating: 4.2,
+      type: "Local Market",
+      specializes: ["Fresh Vegetables", "Daily Fruits"],
+      priceRange: "₹30-80/kg"
+    },
+    {
+      id: "metro-wholesale",
+      name: "Metro Wholesale",
+      location: "Chennai",
+      distance: "350 km",
+      category: "distant",
+      capacity: "800 tons/day", 
+      rating: 4.5,
+      type: "Distant Market",
+      specializes: ["Bulk Vegetables", "Commercial Supply"],
+      priceRange: "₹40-120/kg"
+    },
+    {
+      id: "processing-unit",
+      name: "Agro Processing Unit",
+      location: "Industrial Area",
+      distance: "45 km",
+      category: "processing",
+      capacity: "300 tons/day",
+      rating: 4.0,
+      type: "Processing Unit", 
+      specializes: ["Juice Making", "Pulp Processing"],
+      priceRange: "₹20-60/kg"
+    },
+    {
+      id: "specialty-foods",
+      name: "Specialty Foods Ltd.",
+      location: "Bangalore",
+      distance: "280 km",
+      category: "export",
+      capacity: "150 tons/day",
+      rating: 4.7,
+      type: "Export",
+      specializes: ["Gourmet Items", "Premium Vegetables"],
+      priceRange: "₹80-200/kg"
+    },
+    {
+      id: "fresh-vegetable-co",
+      name: "Fresh Vegetable Co.",
+      location: "Hyderabad", 
+      distance: "450 km",
+      category: "distant",
+      capacity: "600 tons/day",
+      rating: 4.3,
+      type: "Distant Market",
+      specializes: ["Fresh Vegetables", "Daily Supply"],
+      priceRange: "₹35-95/kg"
+    }
+  ];
+
+  // Overall summary data
+  const overallSummaryData = {
+    totalRevenue: 245680,
+    totalProduceSorted: 1910,
+    avgOptimization: 92.5,
+    topPerformingVariety: "Alphonso Mango"
+  };
+
   switch (endpoint) {
     case 'summary':
       res.status(200).json(summaryData);
       break;
     case 'produce-varieties':
       res.status(200).json(produceVarieties);
+      break;
+    case 'markets':
+      res.status(200).json(marketsData);
+      break;
+    case 'overall-summary':
+      res.status(200).json(overallSummaryData);
       break;
     case 'revenue-comparison':
       res.status(200).json(revenueComparison);
@@ -128,6 +325,6 @@ export default function handler(req, res) {
       res.status(200).json(volumeTrends);
       break;
     default:
-      res.status(400).json({ error: 'Invalid endpoint. Use: summary, produce-varieties, revenue-comparison, or volume-trends' });
+      res.status(400).json({ message: 'Invalid endpoint' });
   }
 }

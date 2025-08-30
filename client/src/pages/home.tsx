@@ -20,13 +20,18 @@ import producerVideoThumb from "@assets/generated_images/Producer_complete_video
 import consumerVideoThumb from "@assets/generated_images/Consumer_complete_video_thumbnail_e10b1b3e.png";
 
 export default function Home() {
-  const { language, setLanguage } = useLanguage();
-  const t = (key: keyof typeof translations.en) => {
-    return translations[language as keyof typeof translations]?.[key] || translations.en[key] || key;
+  const { currentLanguage, changeLanguage } = useLanguage();
+  const t = (key: string) => {
+    const lang = currentLanguage as keyof typeof translations;
+    try {
+      return translations[lang]?.[key as keyof typeof translations.en] || translations.en[key as keyof typeof translations.en] || key;
+    } catch {
+      return key;
+    }
   };
 
   const formatNumber = (num: number) => {
-    return new Intl.NumberFormat(language === 'hi' ? 'hi-IN' : language === 'bn' ? 'bn-BD' : 'en-IN').format(num);
+    return new Intl.NumberFormat(currentLanguage === 'hi' ? 'hi-IN' : currentLanguage === 'bn' ? 'bn-BD' : 'en-IN').format(num);
   };
 
   const languages = {
@@ -51,7 +56,7 @@ export default function Home() {
             <div className="flex items-center space-x-2">
               <div className="flex items-center space-x-1">
                 <Globe className="h-3 w-3 text-sage" />
-                <Select value={language} onValueChange={(value) => setLanguage(value as Language)}>
+                <Select value={currentLanguage} onValueChange={(value) => changeLanguage(value as Language)}>
                   <SelectTrigger className="bg-transparent border-sage text-white w-24 h-7 text-xs">
                     <SelectValue />
                   </SelectTrigger>
@@ -407,7 +412,7 @@ export default function Home() {
       </footer>
 
       {/* Global AI Assistant */}
-      <ChatInterface t={t} currentLanguage={language} />
+      <ChatInterface t={t} currentLanguage={currentLanguage} />
     </div>
   );
 }

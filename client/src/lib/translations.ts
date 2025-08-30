@@ -75,6 +75,7 @@ export const translations = {
     
     // Charts
     revenueComparison: "Value Comparison by Bin Type",
+    revenueComparisonByVariety: "Value Comparison by Variety",
     volumeTrends: "Volume Trends by Variety",
     today: "Today",
     seasonAvg: "Season Avg",

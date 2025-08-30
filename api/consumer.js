@@ -358,21 +358,21 @@ export default function handler(req, res) {
     }
   ];
 
-  // Calculate summary data from all bin types
+  // Calculate summary data from all bin types - match table calculations exactly
   const totalItemsForSummary = binTypes.reduce((sum, bin) => sum + bin.totalItems, 0);
   const totalWeightForSummary = totalItemsForSummary; // Assuming 1:1 ratio items to kg
   
+  // Calculate total revenue from ALL plans (both regular revenue and Vinyasa coin value)
   const totalRevenueForSummary = binTypes.reduce((sum, bin) => {
-    const binRevenue = bin.optimalRevenuePlan
-      .filter(plan => !plan.isVinyasaCoins)
-      .reduce((planSum, plan) => planSum + plan.total, 0);
+    const binRevenue = bin.optimalRevenuePlan.reduce((planSum, plan) => planSum + plan.total, 0);
     return sum + binRevenue;
   }, 0);
 
+  // Calculate Vinyasa coins separately (convert coin value to coin count)
   const totalVinyasaCoinsForSummary = binTypes.reduce((sum, bin) => {
     const binCoins = bin.optimalRevenuePlan
       .filter(plan => plan.isVinyasaCoins)
-      .reduce((planSum, plan) => planSum + plan.total, 0);
+      .reduce((planSum, plan) => planSum + Math.floor(plan.total / 10), 0); // 10 rupees = 1 coin
     return sum + binCoins;
   }, 0);
 

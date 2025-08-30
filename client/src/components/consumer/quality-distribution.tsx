@@ -55,7 +55,10 @@ export default function QualityDistribution({ varieties, t, formatNumber }: Qual
                       innerRadius={30}
                     >
                       {createChartData(variety.qualityDistribution).map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
+                        <Cell 
+                          key={`cell-${index}`} 
+                          fill={COLORS[entry.name as keyof typeof COLORS] || "#94A3B8"}
+                        />
                       ))}
                     </Pie>
                   </PieChart>

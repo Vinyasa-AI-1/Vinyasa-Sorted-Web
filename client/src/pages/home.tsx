@@ -22,19 +22,94 @@ import consumerVideoThumb from "@assets/generated_images/Consumer_complete_video
 export default function Home() {
   const { currentLanguage, changeLanguage } = useLanguage();
   const t = (key: string) => {
-    // Hardcoded English text for immediate loading
+    // Comprehensive hardcoded English text for immediate loading
     const hardcodedText: Record<string, string> = {
+      // Header & Navigation
       'title': 'Sorted! Waste Management',
+      'home': 'Home',
+      'about': 'About Us', 
+      'contact': 'Contact Us',
+      'privacy': 'Privacy',
+      'buyProducts': 'Buy Products',
+      
+      // Hero Section
+      'heroTitle': 'Increase Value, Reduce Waste',
+      'heroSubtitle': 'Sorting Harvests and Habits for a greener future',
       'tagline': 'Increase Value, Reduce Waste - Sorting Harvests and Habits for a greener future',
       'learnMore': 'Learn More',
       'watchVideo': 'Watch Video',
       'getStarted': 'Get Started',
+      
+      // Features Section
+      'featuresTitle': 'Comprehensive Waste Management Solutions',
+      'producerFeatures': 'For Farmers & Producers',
+      'producerFeaturesDesc': 'Smart AI-powered produce sorting and quality analysis',
+      'consumerFeatures': 'For Smart Cities & Consumers', 
+      'consumerFeaturesDesc': 'Intelligent waste bins with automated sorting and rewards',
+      
+      // Dashboards
       'producerDashboard': 'Producer Dashboard',
       'consumerDashboard': 'Consumer Dashboard',
       'harvestMarketplace': 'Harvest Marketplace',
       'harvestMarketplaceDesc': 'Connect with buyers for your sorted produce',
       'recyclersMarketplace': 'Recyclers Marketplace', 
-      'recyclersMarketplaceDesc': 'Find certified recyclers for your waste'
+      'recyclersMarketplaceDesc': 'Find certified recyclers for your waste',
+      
+      // Video Section
+      'videoSectionTitle': 'See Our Technology in Action',
+      'producerVideoTitle': 'AI Produce Sorting System',
+      'producerVideoDesc': 'Watch how our AI technology sorts agricultural produce by quality, maximizing farmer revenue and reducing waste.',
+      'consumerVideoTitle': 'Smart Waste Management',
+      'consumerVideoDesc': 'Discover how our intelligent bins automatically sort waste and reward users with Vinyasa Coins.',
+      
+      // Statistics
+      'wasteReduced': 'Waste Reduced',
+      'farmersHelped': 'Farmers Helped', 
+      'citiesConnected': 'Cities Connected',
+      'coinsEarned': 'Vinyasa Coins Earned',
+      
+      // Footer
+      'newsletter': 'Newsletter',
+      'newsletterDescription': 'Subscribe to get updates on our latest features and sustainability tips.',
+      'emailPlaceholder': 'Enter your email',
+      'subscribe': 'Subscribe',
+      'allRightsReserved': 'All rights reserved.',
+      
+      // Language
+      'language': 'Language',
+      'english': 'English',
+      'hindi': 'Hindi', 
+      'bengali': 'Bengali',
+      
+      // Additional Features
+      'featuresSubtitle': 'Complete ecosystem for sustainable waste management and agricultural optimization',
+      'smartSorting': 'Smart AI Sorting',
+      'smartSortingDesc': 'Advanced AI technology automatically sorts produce and waste by quality and type',
+      'wasteOptimization': 'Waste Optimization',
+      'wasteOptimizationDesc': 'Reduce waste through intelligent sorting and optimal recycling strategies',
+      'valueMaximization': 'Value Maximization', 
+      'valueMaximizationDesc': 'Maximize revenue from your produce and earn rewards from your waste',
+      'vinyasaRewards': 'Vinyasa Coin Rewards',
+      'vinyasaRewardsDesc': 'Earn digital coins for sustainable practices and redeem for eco-friendly products',
+      
+      // How It Works
+      'howItWorks': 'How Our Technology Works',
+      'howItWorksDesc': 'See our AI-powered sorting systems in action',
+      
+      // Call to Action
+      'ctaTitle': 'Ready to Transform Your Waste Management?',
+      'ctaDescription': 'Join thousands of farmers and cities already using our smart sorting technology',
+      'startSortingProduce': 'Start Sorting Produce',
+      'startSortingWaste': 'Start Sorting Waste',
+      
+      // Footer Content
+      'footerDescription': 'Leading the future of sustainable waste management through AI-powered sorting technology.',
+      'products': 'Products',
+      'company': 'Company',
+      'aboutUs': 'About Us',
+      'contactUs': 'Contact Us',
+      'liveWasteSorting': 'Live Waste Sorting',
+      'liveProduceSorting': 'Live Produce Sorting'
     };
     return hardcodedText[key] || key;
   };

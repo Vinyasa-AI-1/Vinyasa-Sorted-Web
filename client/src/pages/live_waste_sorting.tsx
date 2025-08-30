@@ -20,6 +20,7 @@ interface WasteCounts {
   plastic: number;
   electronic: number;
   medical: number;
+  metal: number;
 }
 
 export default function LiveWasteSorting() {
@@ -32,7 +33,8 @@ export default function LiveWasteSorting() {
     wet: 0,
     plastic: 0,
     electronic: 0,
-    medical: 0
+    medical: 0,
+    metal: 0
   });
   const [isP5Active, setIsP5Active] = useState(false);
   const [currentClassification, setCurrentClassification] = useState<{label: string, confidence: number} | null>(null);

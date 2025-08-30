@@ -139,7 +139,7 @@ class ReactWasteSorting {
     
     // Status overlay
     this.ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
-    this.ctx.fillRect(10, 10, 300, 90);
+    this.ctx.fillRect(10, 10, 300, 110);
     
     this.ctx.fillStyle = 'white';
     this.ctx.font = '16px Arial';
@@ -160,6 +160,7 @@ class ReactWasteSorting {
     this.ctx.fillStyle = 'white';
     const counts = window.p5WasteSorting?.getWasteCounts() || this.wasteCounts;
     this.ctx.fillText(`Metal: ${counts.metal} | Wet: ${counts.wet} | Dry: ${counts.dry}`, 20, 75);
+    this.ctx.fillText(`Plastic: ${counts.plastic} | Electronic: ${counts.electronic}`, 20, 90);
   }
 
   startClassification() {
@@ -285,8 +286,8 @@ class ReactWasteSorting {
     // Map exact Teachable Machine class names to React waste types
     switch (classification) {
       case 'Metal':
-        console.log(`🔧 Mapped to: electronic`);
-        return 'electronic';
+        console.log(`🔧 Mapped to: metal`);
+        return 'metal';
       case 'Wet':
         console.log(`💧 Mapped to: wet`);
         return 'wet';

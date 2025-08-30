@@ -377,6 +377,22 @@ class ReactWasteSorting {
     }
   }
 
+  resetCounts() {
+    this.wasteCounts = {
+      metal: 0,
+      wet: 0,
+      dry: 0,
+      plastic: 0,
+      electronic: 0,
+      medical: 0
+    };
+    console.log('🔄 Waste counts reset to zero');
+  }
+
+  getWasteCounts() {
+    return this.wasteCounts;
+  }
+
   stopClassification() {
     console.log('⏹️ Stopping classification...');
     this.isClassifying = false;

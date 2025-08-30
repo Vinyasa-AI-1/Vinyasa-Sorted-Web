@@ -38,6 +38,7 @@ export default function LiveWasteSorting() {
   });
   const [isP5Active, setIsP5Active] = useState(false);
   const [currentClassification, setCurrentClassification] = useState<{label: string, confidence: number} | null>(null);
+  const [isArduinoConnected, setIsArduinoConnected] = useState(false);
   const cameraContainerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -135,7 +136,8 @@ export default function LiveWasteSorting() {
       wet: 0,
       plastic: 0,
       electronic: 0,
-      medical: 0
+      medical: 0,
+      metal: 0
     });
     
     // Reset P5.js counts as well
@@ -144,6 +146,29 @@ export default function LiveWasteSorting() {
     }
     
     setCurrentClassification(null);
+  };
+
+  const handleArduinoConnect = async () => {
+    if ((window as any).p5WasteSorting) {
+      console.log('🔌 User requesting Arduino connection...');
+      const success = await (window as any).p5WasteSorting.connectArduino();
+      setIsArduinoConnected(success);
+      
+      if (success) {
+        console.log('✅ Arduino connection established - UI updated');
+      } else {
+        console.log('❌ Arduino connection failed - UI updated');
+      }
+    }
+  };
+
+  const handleArduinoDisconnect = async () => {
+    if ((window as any).p5WasteSorting) {
+      console.log('🔌 User disconnecting Arduino...');
+      await (window as any).p5WasteSorting.disconnectArduino();
+      setIsArduinoConnected(false);
+      console.log('🔌 Arduino disconnected - UI updated');
+    }
   };
 
   const getWasteTypeColor = (type: string) => {
@@ -158,6 +183,8 @@ export default function LiveWasteSorting() {
         return 'bg-purple-100 text-purple-800';
       case 'medical':
         return 'bg-red-100 text-red-800';
+      case 'metal':
+        return 'bg-gray-100 text-gray-800';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -274,6 +301,14 @@ export default function LiveWasteSorting() {
                 >
                   Reset Counts
                 </Button>
+                <Button
+                  onClick={isArduinoConnected ? handleArduinoDisconnect : handleArduinoConnect}
+                  variant="outline"
+                  className={`${isArduinoConnected ? 'border-red-500 text-red-500 hover:bg-red-500' : 'border-blue-500 text-blue-500 hover:bg-blue-500'} hover:text-white`}
+                  data-testid="button-arduino-connection"
+                >
+                  {isArduinoConnected ? 'Disconnect Arduino' : 'Connect Arduino'}
+                </Button>
               </div>
             </div>
             
@@ -335,7 +370,7 @@ export default function LiveWasteSorting() {
               </div>
               
               <div className="text-xs text-gray-500">
-                Model: {isP5Active ? 'Teachable Machine Loaded' : 'Loading...'}
+                Model: {isP5Active ? 'Teachable Machine Loaded' : 'Loading...'} | Arduino: {isArduinoConnected ? 'Connected' : 'Disconnected'}
               </div>
             </div>
           </CardContent>
@@ -380,6 +415,7 @@ export default function LiveWasteSorting() {
                           {type === 'plastic' && 'Plastic Recyclers'}
                           {type === 'electronic' && 'eWaste Recyclers'}
                           {type === 'medical' && 'Medical Waste Recyclers'}
+                          {type === 'metal' && 'Metal Recyclers'}
                         </td>
                       </tr>
                     );

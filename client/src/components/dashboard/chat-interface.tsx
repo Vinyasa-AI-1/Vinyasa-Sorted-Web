@@ -178,7 +178,7 @@ export default function ChatInterface({ t, currentLanguage = 'en' }: ChatInterfa
     return defaultResponses[currentLang] || defaultResponses.en;
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 
     const userMessage = {
@@ -187,13 +187,44 @@ export default function ChatInterface({ t, currentLanguage = 'en' }: ChatInterfa
       isBot: false,
     };
 
-    const botResponse = {
-      id: messages.length + 2,
-      text: generateBotResponse(inputValue, currentLanguage),
-      isBot: true,
-    };
+    setMessages(prev => [...prev, userMessage]);
 
-    setMessages([...messages, userMessage, botResponse]);
+    try {
+      // Call OpenAI API with language context
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: inputValue,
+          language: currentLanguage,
+          context: 'producer'
+        })
+      });
+
+      if (!response.ok) throw new Error('Failed to get response');
+
+      const data = await response.json();
+      
+      const botResponse = {
+        id: messages.length + 2,
+        text: data.message,
+        isBot: true,
+      };
+
+      setMessages(prev => [...prev, botResponse]);
+    } catch (error) {
+      // Fallback to generated response if API fails
+      const botResponse = {
+        id: messages.length + 2,
+        text: generateBotResponse(inputValue, currentLanguage),
+        isBot: true,
+      };
+
+      setMessages(prev => [...prev, botResponse]);
+    }
+
     setInputValue("");
   };
 

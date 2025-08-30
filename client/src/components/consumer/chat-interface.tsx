@@ -50,7 +50,8 @@ export default function ChatInterface({ t, currentLanguage }: ChatInterfaceProps
         },
         body: JSON.stringify({
           message: input,
-          language: currentLanguage
+          language: currentLanguage,
+          context: 'consumer'
         })
       });
 

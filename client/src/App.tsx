@@ -19,7 +19,9 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/producer" component={Dashboard} />
+      <Route path="/producer-dashboard" component={Dashboard} />
       <Route path="/customer-central" component={CustomerCentralDashboard} />
+      <Route path="/customer-central-dashboard" component={CustomerCentralDashboard} />
       <Route path="/live-waste-sorting" component={LiveWasteSorting} />
       <Route path="/live-produce-sorting" component={LiveProduceSorting} />
       <Route path="/about" component={About} />

@@ -43,6 +43,7 @@ export default function LiveWasteSorting() {
     // Set up event listener for P5.js waste detection events
     const handleWasteDetected = (event: CustomEvent) => {
       const { type, confidence, originalLabel } = event.detail;
+      console.log('React received waste detected event:', type, confidence, originalLabel);
       
       if (confidence > 0.6 && type && type in wasteCounts) {
         setWasteCounts(prev => ({
@@ -61,12 +62,18 @@ export default function LiveWasteSorting() {
     
     // Set up model status callback
     (window as any).updateModelStatus = (loaded: boolean) => {
+      console.log('Model status updated:', loaded);
       setIsP5Active(loaded);
     };
     
     return () => {
       window.removeEventListener('wasteDetected', handleWasteDetected as EventListener);
       delete (window as any).updateModelStatus;
+      
+      // Cleanup P5.js when component unmounts
+      if ((window as any).p5WasteSorting) {
+        (window as any).p5WasteSorting.cleanup();
+      }
     };
   }, []);
 
@@ -233,7 +240,7 @@ export default function LiveWasteSorting() {
             
             {/* Camera Stream - P5.js will render here */}
             <div className="relative">
-              <div id="camera-container" ref={cameraContainerRef} className="w-full h-96 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
+              <div id="camera-container" ref={cameraContainerRef} className="w-full h-96 bg-gray-100 rounded-lg overflow-hidden relative">
                 {!isP5Active && (
                   <div className="text-center">
                     <Camera className="w-16 h-16 text-gray-400 mx-auto mb-4" />

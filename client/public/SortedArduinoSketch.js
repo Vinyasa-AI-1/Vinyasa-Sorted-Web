@@ -52,11 +52,21 @@ function modelReady() {
 }
 
 function setup() {
+  // Wait for the DOM to be ready and camera container to exist
+  if (!document.getElementById('camera-container')) {
+    console.log('Camera container not found, retrying in 100ms...');
+    setTimeout(setup, 100);
+    return;
+  }
+
   // Create canvas and place it in the designated container
   let canvas = createCanvas(640, 480);
-  if (document.getElementById('camera-container')) {
-    canvas.parent('camera-container');
-  }
+  canvas.parent('camera-container');
+  
+  // Style the canvas to fit the container properly
+  canvas.style('width', '100%');
+  canvas.style('height', '100%');
+  canvas.style('object-fit', 'cover');
 
   frameRate(TARGET_FPS); // Set a target frame rate
   delayFrames = DELAY_SECONDS * TARGET_FPS;
@@ -229,6 +239,13 @@ function sendToArduino(classification) {
 }
 
 function updateReactComponent(classification, confidence) {
+  // Update global state for React access
+  window.lastClassification = {
+    label: classification,
+    confidence: confidence,
+    timestamp: Date.now()
+  };
+  
   // Create custom event to communicate with React component
   const event = new CustomEvent('wasteDetected', {
     detail: {
@@ -239,6 +256,7 @@ function updateReactComponent(classification, confidence) {
     }
   });
   
+  console.log('Dispatching waste detected event:', classification, confidence);
   window.dispatchEvent(event);
 }
 
@@ -272,5 +290,30 @@ window.p5WasteSorting = {
       console.log("Stopping classification from React");
       classifier.classifyStop();
     }
+  },
+  cleanup: () => {
+    // Stop classification
+    if (classifier) {
+      classifier.classifyStop();
+    }
+    // Stop video stream
+    if (video && video.elt && video.elt.srcObject) {
+      let stream = video.elt.srcObject;
+      let tracks = stream.getTracks();
+      tracks.forEach(track => track.stop());
+    }
+    // Remove canvas
+    let canvas = document.querySelector('#camera-container canvas');
+    if (canvas) {
+      canvas.remove();
+    }
+    console.log('P5.js cleanup completed');
   }
 };
+
+// Cleanup when page unloads
+window.addEventListener('beforeunload', () => {
+  if (window.p5WasteSorting) {
+    window.p5WasteSorting.cleanup();
+  }
+});

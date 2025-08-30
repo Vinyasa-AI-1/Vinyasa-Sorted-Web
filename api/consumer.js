@@ -12,14 +12,6 @@ export default function handler(req, res) {
 
   const { endpoint } = req.query;
 
-  // Consumer dashboard summary data
-  const summaryData = {
-    totalSorted: 1630,
-    totalWeight: 815, // in kg
-    avgQuality: 88,
-    vinyasaCoins: 2450
-  };
-
   // Bin types data  
   const binTypes = [
     {
@@ -365,6 +357,33 @@ export default function handler(req, res) {
       ]
     }
   ];
+
+  // Calculate summary data from all bin types
+  const totalItemsForSummary = binTypes.reduce((sum, bin) => sum + bin.totalItems, 0);
+  const totalWeightForSummary = totalItemsForSummary; // Assuming 1:1 ratio items to kg
+  
+  const totalRevenueForSummary = binTypes.reduce((sum, bin) => {
+    const binRevenue = bin.optimalRevenuePlan
+      .filter(plan => !plan.isVinyasaCoins)
+      .reduce((planSum, plan) => planSum + plan.total, 0);
+    return sum + binRevenue;
+  }, 0);
+
+  const totalVinyasaCoinsForSummary = binTypes.reduce((sum, bin) => {
+    const binCoins = bin.optimalRevenuePlan
+      .filter(plan => plan.isVinyasaCoins)
+      .reduce((planSum, plan) => planSum + plan.total, 0);
+    return sum + binCoins;
+  }, 0);
+
+  // Consumer dashboard summary data
+  const summaryData = {
+    totalSorted: totalItemsForSummary,
+    totalWeight: totalWeightForSummary,
+    avgQuality: 88,
+    revenue: totalRevenueForSummary,
+    vinyasaCoins: totalVinyasaCoinsForSummary
+  };
 
   // Recyclers data
   const recyclers = [

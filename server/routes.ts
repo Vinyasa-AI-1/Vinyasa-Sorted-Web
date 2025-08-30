@@ -69,6 +69,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const recyclers = await storage.getRecyclers();
           res.json(recyclers);
           break;
+        case 'revenue-comparison':
+          const revenueComparison = await storage.getWasteComparison();
+          res.json(revenueComparison);
+          break;
+        case 'volume-trends':
+          const volumeTrends = await storage.getWasteTrends();
+          res.json(volumeTrends);
+          break;
         default:
           res.status(400).json({ message: "Invalid endpoint" });
       }
@@ -86,10 +94,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
           res.json(overallSummary);
           break;
         case 'waste-comparison':
+        case 'revenue-comparison':
           const wasteComparison = await storage.getWasteComparison();
           res.json(wasteComparison);
           break;
         case 'waste-trends':
+        case 'volume-trends':
           const wasteTrends = await storage.getWasteTrends();
           res.json(wasteTrends);
           break;

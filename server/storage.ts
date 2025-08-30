@@ -782,11 +782,11 @@ export class MemStorage implements IStorage {
         type: "Residential",
         totalItems: 450,
         qualityDistribution: {
-          dry: 180,
-          wet: 150,
-          plastic: 80,
-          electronic: 25,
-          medical: 15,
+          Dry: 180,
+          Wet: 150,
+          Plastic: 80,
+          Electronic: 25,
+          Medical: 15,
         },
         variety: "Smart Waste Bin",
         optimalRevenuePlan: [
@@ -828,11 +828,11 @@ export class MemStorage implements IStorage {
         type: "Office",
         totalItems: 320,
         qualityDistribution: {
-          dry: 50,
-          wet: 40,
-          plastic: 120,
-          electronic: 80,
-          medical: 30,
+          Dry: 50,
+          Wet: 40,
+          Plastic: 120,
+          Electronic: 80,
+          Medical: 30,
         },
         variety: "Smart Waste Bin",
         optimalRevenuePlan: [
@@ -874,11 +874,11 @@ export class MemStorage implements IStorage {
         type: "Industrial",
         totalItems: 680,
         qualityDistribution: {
-          dry: 200,
-          wet: 80,
-          plastic: 250,
-          electronic: 120,
-          medical: 30,
+          Dry: 200,
+          Wet: 80,
+          Plastic: 250,
+          Electronic: 120,
+          Medical: 30,
         },
         variety: "Smart Waste Bin",
         optimalRevenuePlan: [
@@ -905,11 +905,11 @@ export class MemStorage implements IStorage {
         type: "Medical",
         totalItems: 180,
         qualityDistribution: {
-          dry: 20,
-          wet: 10,
-          plastic: 40,
-          electronic: 30,
-          medical: 80,
+          Dry: 20,
+          Wet: 10,
+          Plastic: 40,
+          Electronic: 30,
+          Medical: 80,
         },
         variety: "Smart Waste Bin",
         optimalRevenuePlan: [
@@ -983,12 +983,24 @@ export class MemStorage implements IStorage {
   }
 
   async getConsumerSummary(): Promise<any> {
+    // Calculate totals from all bin types to match table values exactly
+    const bins = await this.getBinTypes();
+    const totalItems = bins.reduce((sum, bin) => sum + bin.totalItems, 0);
+    const totalWeight = totalItems; // 1:1 ratio
+    const totalRevenue = bins.reduce((sum, bin) => sum + bin.totalOptimalRevenue, 0);
+    const totalVinyasaCoins = bins.reduce((sum, bin) => {
+      const coinsValue = bin.optimalRevenuePlan
+        .filter((plan: any) => plan.isVinyasaCoins)
+        .reduce((planSum: number, plan: any) => planSum + plan.total, 0);
+      return sum + Math.floor(coinsValue / 10); // Convert to coin count
+    }, 0);
+    
     return {
-      totalSorted: 1630,
-      totalWeight: 815,
+      totalSorted: totalItems,
+      totalWeight: totalWeight,
       avgQuality: 92,
-      revenue: 21290,
-      vinyasaCoins: 2270,
+      revenue: totalRevenue,
+      vinyasaCoins: totalVinyasaCoins,
     };
   }
 
@@ -1003,58 +1015,25 @@ export class MemStorage implements IStorage {
   }
 
   async getWasteComparison(): Promise<any> {
-    return {
-      labels: ["Residential", "Office", "Industrial", "Medical"],
-      datasets: [
-        {
-          label: "Today",
-          data: [21290, 18750, 15600, 12300],
-          backgroundColor: "#22543D",
-        },
-        {
-          label: "This Week",
-          data: [19500, 17200, 14800, 11800],
-          backgroundColor: "#68D391",
-        },
-        {
-          label: "Last Month",
-          data: [18200, 16500, 13900, 11200],
-          backgroundColor: "#F6E05E",
-        },
-      ],
-    };
+    return [
+      { month: "Jan", revenue: 12000, target: 15000 },
+      { month: "Feb", revenue: 18000, target: 20000 },
+      { month: "Mar", revenue: 16000, target: 18000 },
+      { month: "Apr", revenue: 22000, target: 25000 },
+      { month: "May", revenue: 19000, target: 22000 },
+      { month: "Jun", revenue: 25000, target: 28000 }
+    ];
   }
 
   async getWasteTrends(): Promise<any> {
-    return {
-      labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
-      datasets: [
-        {
-          label: "Residential",
-          data: [450, 480, 420, 450],
-          borderColor: "#22543D",
-          backgroundColor: "rgba(34, 84, 61, 0.1)",
-        },
-        {
-          label: "Office",
-          data: [320, 340, 300, 320],
-          borderColor: "#68D391",
-          backgroundColor: "rgba(104, 211, 145, 0.1)",
-        },
-        {
-          label: "Industrial",
-          data: [680, 720, 650, 680],
-          borderColor: "#F6E05E",
-          backgroundColor: "rgba(246, 224, 94, 0.1)",
-        },
-        {
-          label: "Medical",
-          data: [180, 190, 170, 180],
-          borderColor: "#DC2626",
-          backgroundColor: "rgba(220, 38, 38, 0.1)",
-        },
-      ],
-    };
+    return [
+      { month: "Jan", volume: 1200 },
+      { month: "Feb", volume: 1800 },
+      { month: "Mar", volume: 1600 },
+      { month: "Apr", volume: 2200 },
+      { month: "May", volume: 1900 },
+      { month: "Jun", volume: 2500 }
+    ];
   }
 }
 

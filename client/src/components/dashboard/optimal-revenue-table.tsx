@@ -35,21 +35,26 @@ const getSaleCategoryColor = (category: string) => {
 };
 
 export default function OptimalRevenueTable({ variety, t, formatNumber }: OptimalRevenueTableProps) {
+  // Add null safety for variety
+  if (!variety) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Card className="bg-white rounded-xl shadow-lg">
       <CardContent className="p-6">
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h3 className="text-xl font-bold text-forest" data-testid={`text-variety-name-${variety.id}`}>
-              {t(variety.id as keyof typeof translations.en) || variety.name}
+            <h3 className="text-xl font-bold text-forest" data-testid={`text-variety-name-${variety?.id || 'unknown'}`}>
+              {t((variety?.id || 'unknown') as keyof typeof translations.en) || variety?.name || 'Unknown'}
             </h3>
-            <p className="text-gray-600" data-testid={`text-variety-details-${variety.id}`}>
-              {variety.variety} • {formatNumber(variety.totalItems)} items total
+            <p className="text-gray-600" data-testid={`text-variety-details-${variety?.id || 'unknown'}`}>
+              {variety?.variety || 'Unknown'} • {formatNumber(variety?.totalItems || 0)} items total
             </p>
           </div>
           <div className="text-right">
-            <p className="text-2xl font-bold text-fresh" data-testid={`text-variety-revenue-${variety.id}`}>
-              ₹{formatNumber(variety.totalOptimalRevenue)}
+            <p className="text-2xl font-bold text-fresh" data-testid={`text-variety-revenue-${variety?.id || 'unknown'}`}>
+              ₹{formatNumber(variety?.totalOptimalRevenue || 0)}
             </p>
             <p className="text-gray-600">{t('totalOptimalRevenue')}</p>
           </div>
@@ -62,8 +67,8 @@ export default function OptimalRevenueTable({ variety, t, formatNumber }: Optima
                 <th className="text-left p-3 font-semibold text-forest">{t('qualityCategory')}</th>
                 <th className="text-left p-3 font-semibold text-forest">{t('items')}</th>
                 <th className="text-left p-3 font-semibold text-forest">{t('weight')}</th>
-                <th className="text-left p-3 font-semibold text-forest">{t('saleFor')}</th>
-                <th className="text-left p-3 font-semibold text-forest">{t('saleTo')}</th>
+                <th className="text-left p-3 font-semibold text-forest">Sale For</th>
+                <th className="text-left p-3 font-semibold text-forest">Sale To</th>
                 <th className="text-left p-3 font-semibold text-forest">{t('pricePerKg')}</th>
                 <th className="text-left p-3 font-semibold text-forest">{t('total')}</th>
                 <th className="text-left p-3 font-semibold text-forest">{t('changeBuyer')}</th>
@@ -71,51 +76,51 @@ export default function OptimalRevenueTable({ variety, t, formatNumber }: Optima
               </tr>
             </thead>
             <tbody>
-              {variety.optimalRevenuePlan.map((plan, index) => (
+              {(variety?.optimalRevenuePlan || []).map((plan, index) => (
                 <tr key={index} className="border-b">
-                  <td className="p-3 font-medium" data-testid={`text-quality-${variety.id}-${index}`}>
-                    {t(plan.qualityCategory as keyof typeof translations.en) || plan.qualityCategory}
+                  <td className="p-3 font-medium" data-testid={`text-quality-${variety?.id || 'unknown'}-${index}`}>
+                    {t((plan?.qualityCategory || 'unknown') as keyof typeof translations.en) || plan?.qualityCategory || 'N/A'}
                   </td>
-                  <td className="p-3" data-testid={`text-items-${variety.id}-${index}`}>
-                    {formatNumber(plan.items)}
+                  <td className="p-3" data-testid={`text-items-${variety?.id || 'unknown'}-${index}`}>
+                    {formatNumber(plan?.items || 0)}
                   </td>
-                  <td className="p-3" data-testid={`text-weight-${variety.id}-${index}`}>
-                    {formatNumber(plan.weight)}
+                  <td className="p-3" data-testid={`text-weight-${variety?.id || 'unknown'}-${index}`}>
+                    {formatNumber(plan?.weight || 0)}
                   </td>
                   <td className="p-3">
                     <span 
-                      className={`px-2 py-1 rounded text-xs ${getSaleCategoryColor(plan.recommendedSaleFor)}`}
-                      data-testid={`text-sale-category-${variety.id}-${index}`}
+                      className={`px-2 py-1 rounded text-xs ${getSaleCategoryColor(plan?.recommendedSaleFor || 'unknown')}`}
+                      data-testid={`text-sale-category-${variety?.id || 'unknown'}-${index}`}
                     >
-                      {t(plan.recommendedSaleFor as keyof typeof translations.en) || plan.recommendedSaleFor}
+                      {t((plan?.recommendedSaleFor || 'unknown') as keyof typeof translations.en) || plan?.recommendedSaleFor || 'N/A'}
                     </span>
                   </td>
                   <td className="p-3">
-                    <div className="text-sm" data-testid={`text-buyer-${variety.id}-${index}`}>
-                      <p className="font-medium">{t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name}</p>
+                    <div className="text-sm" data-testid={`text-buyer-${variety?.id || 'unknown'}-${index}`}>
+                      <p className="font-medium">{t((plan?.recommendedBuyer?.name || 'unknown') as keyof typeof translations.en) || plan?.recommendedBuyer?.name || 'N/A'}</p>
                       <p className="text-gray-600">
-                        {plan.recommendedBuyer.location} • {plan.recommendedBuyer.distance}
+                        {plan?.recommendedBuyer?.location || 'N/A'} • {plan?.recommendedBuyer?.distance || 'N/A'}
                       </p>
                     </div>
                   </td>
-                  <td className="p-3 font-medium" data-testid={`text-price-${variety.id}-${index}`}>
-                    ₹{formatNumber(plan.pricePerKg)}
+                  <td className="p-3 font-medium" data-testid={`text-price-${variety?.id || 'unknown'}-${index}`}>
+                    ₹{formatNumber(plan?.pricePerKg || 0)}
                   </td>
-                  <td className="p-3 font-bold text-fresh" data-testid={`text-total-${variety.id}-${index}`}>
-                    ₹{formatNumber(plan.total)}
+                  <td className="p-3 font-bold text-fresh" data-testid={`text-total-${variety?.id || 'unknown'}-${index}`}>
+                    ₹{formatNumber(plan?.total || 0)}
                   </td>
                   <td className="p-3">
-                    <Select data-testid={`select-buyer-${variety.id}-${index}`}>
+                    <Select data-testid={`select-buyer-${variety?.id || 'unknown'}-${index}`}>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder={t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name} />
+                        <SelectValue placeholder={t((plan?.recommendedBuyer?.name || 'unknown') as keyof typeof translations.en) || plan?.recommendedBuyer?.name || 'N/A'} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="current">{t(plan.recommendedBuyer.name as keyof typeof translations.en) || plan.recommendedBuyer.name}</SelectItem>
-                        {plan.alternativeBuyers.map((buyer, buyerIndex) => (
+                        <SelectItem value="current">{t((plan?.recommendedBuyer?.name || 'unknown') as keyof typeof translations.en) || plan?.recommendedBuyer?.name || 'N/A'}</SelectItem>
+                        {plan?.alternativeBuyers?.map?.((buyer, buyerIndex) => (
                           <SelectItem key={buyerIndex} value={`alt-${buyerIndex}`}>
-                            {t(buyer.name as keyof typeof translations.en) || buyer.name}
+                            {t((buyer?.name || 'unknown') as keyof typeof translations.en) || buyer?.name || 'N/A'}
                           </SelectItem>
-                        ))}
+                        )) || []}
                       </SelectContent>
                     </Select>
                   </td>

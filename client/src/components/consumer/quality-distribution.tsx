@@ -37,7 +37,7 @@ export default function QualityDistribution({ varieties, t, formatNumber }: Qual
       <CardContent className="p-6">
         <h2 className="text-2xl font-bold text-forest mb-6">{t('qualityDistribution')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-          {varieties.map((variety) => (
+          {(varieties || []).map((variety) => (
             <div key={variety.id} className="text-center">
               <h3 className="font-semibold text-lg text-forest mb-4" data-testid={`text-variety-${variety.id}`}>
                 {t(variety.id as keyof typeof translations.en) || variety.name}

@@ -45,7 +45,7 @@ const getCategoryColor = (category: string) => {
 export default function MarketCards({ markets, t }: MarketCardsProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {markets.map((market) => (
+      {(markets || []).map((market) => (
         <Card key={market.id} className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
           <CardContent className="p-6">
             <div className="flex items-start justify-between mb-4">
@@ -78,11 +78,11 @@ export default function MarketCards({ markets, t }: MarketCardsProps) {
               </div>
               <div className="flex justify-between">
                 <span>{t('capacity')}:</span>
-                <span className="font-medium">{((market as any).capacity || market.capacity).replace(/kg\/day|units\/day/g, (match: string) => t(match as keyof typeof translations.en) || match)}</span>
+                <span className="font-medium">{(((market as any).capacity || market.capacity) || '').toString().replace(/kg\/day|units\/day/g, (match: string) => t(match as keyof typeof translations.en) || match)}</span>
               </div>
               {(market as any).specializes && (
                 <div className="flex flex-wrap gap-1 mt-2">
-                  {(market as any).specializes.map((item: string, index: number) => (
+                  {((market as any).specializes || []).map((item: string, index: number) => (
                     <span key={index} className="px-2 py-1 bg-sage text-white text-xs rounded">
                       {t(item as keyof typeof translations.en) || item.charAt(0).toUpperCase() + item.slice(1)}
                     </span>

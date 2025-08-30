@@ -26,19 +26,23 @@ export default function CustomerCentralDashboard() {
   const { t, formatNumber } = useTranslation(currentLanguage);
   
   const { data: summary } = useQuery<Summary>({
-    queryKey: ["/api/consumer?endpoint=summary"],
+    queryKey: ["/api/consumer", { endpoint: "summary" }],
+    queryFn: () => fetch("/api/consumer?endpoint=summary").then(res => res.json()),
   });
 
   const { data: binTypes } = useQuery<any[]>({
-    queryKey: ["/api/consumer?endpoint=bin-types"],
+    queryKey: ["/api/consumer", { endpoint: "bin-types" }],
+    queryFn: () => fetch("/api/consumer?endpoint=bin-types").then(res => res.json()),
   });
 
   const { data: recyclers } = useQuery<any[]>({
-    queryKey: ["/api/consumer?endpoint=recyclers"],
+    queryKey: ["/api/consumer", { endpoint: "recyclers" }],
+    queryFn: () => fetch("/api/consumer?endpoint=recyclers").then(res => res.json()),
   });
 
   const { data: overallSummary } = useQuery<any>({
-    queryKey: ["/api/consumer-data?endpoint=overall-summary"],
+    queryKey: ["/api/consumer-data", { endpoint: "overall-summary" }],
+    queryFn: () => fetch("/api/consumer-data?endpoint=overall-summary").then(res => res.json()),
   });
 
   return (

@@ -48,13 +48,13 @@ const getActualRecyclerForVinyasa = (recyclers: any[] = []) => {
 
 export default function OptimalRevenueTable({ variety, t, formatNumber, recyclers = [] }: OptimalRevenueTableProps) {
   // Calculate totals for value unlocked and Vinyasa Coins
-  const totalValueUnlocked = variety.optimalRevenuePlan
-    .filter(plan => !(plan as any).isVinyasaCoins)
-    .reduce((sum, plan) => sum + plan.total, 0);
+  const totalValueUnlocked = variety?.optimalRevenuePlan
+    ?.filter?.(plan => !(plan as any).isVinyasaCoins)
+    ?.reduce((sum, plan) => sum + plan.total, 0) || 0;
   
-  const totalVinyasaCoins = variety.optimalRevenuePlan
-    .filter(plan => (plan as any).isVinyasaCoins)
-    .reduce((sum, plan) => sum + plan.total, 0);
+  const totalVinyasaCoins = variety?.optimalRevenuePlan
+    ?.filter?.(plan => (plan as any).isVinyasaCoins)
+    ?.reduce((sum, plan) => sum + plan.total, 0) || 0;
 
   return (
     <Card className="bg-white rounded-xl shadow-lg">

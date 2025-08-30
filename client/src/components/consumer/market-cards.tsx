@@ -74,7 +74,7 @@ export default function MarketCards({ markets, t }: MarketCardsProps) {
               </div>
               <div className="flex justify-between">
                 <span>{t('distance')}:</span>
-                <span className="font-medium">{market.distance.replace('km', '')} {t('km' as keyof typeof translations.en) || 'km'}</span>
+                <span className="font-medium">{market.distance?.toString?.()?.replace?.('km', '') || market.distance || '0'} {t('km' as keyof typeof translations.en) || 'km'}</span>
               </div>
               <div className="flex justify-between">
                 <span>{t('capacity')}:</span>

@@ -25,19 +25,23 @@ export default function Dashboard() {
   const { t, formatNumber } = useTranslation(currentLanguage);
   
   const { data: summary } = useQuery({
-    queryKey: ["/api/producer?endpoint=summary"],
+    queryKey: ["/api/producer", { endpoint: "summary" }],
+    queryFn: () => fetch("/api/producer?endpoint=summary").then(res => res.json()),
   });
 
   const { data: varieties } = useQuery({
-    queryKey: ["/api/producer?endpoint=produce-varieties"],
+    queryKey: ["/api/producer", { endpoint: "produce-varieties" }],
+    queryFn: () => fetch("/api/producer?endpoint=produce-varieties").then(res => res.json()),
   });
 
   const { data: markets } = useQuery({
-    queryKey: ["/api/producer-data?endpoint=markets"],
+    queryKey: ["/api/producer-data", { endpoint: "markets" }],
+    queryFn: () => fetch("/api/producer-data?endpoint=markets").then(res => res.json()),
   });
 
   const { data: overallSummary } = useQuery({
-    queryKey: ["/api/producer-data?endpoint=overall-summary"],
+    queryKey: ["/api/producer-data", { endpoint: "overall-summary" }],
+    queryFn: () => fetch("/api/producer-data?endpoint=overall-summary").then(res => res.json()),
   });
 
   return (

@@ -1,0 +1,310 @@
+/*
+ * React-friendly Waste Sorting - No DOM manipulation conflicts
+ */
+
+class ReactWasteSorting {
+  constructor() {
+    this.initialized = false;
+    this.video = null;
+    this.stream = null;
+    this.canvas = null;
+    this.ctx = null;
+    this.classifier = null;
+    this.hasCamera = false;
+    this.classificationMode = 'demo';
+    this.isClassifying = false;
+    this.animationFrame = null;
+    
+    this.wasteCounts = {
+      metal: 0,
+      wet: 0,
+      dry: 0,
+      plastic: 0,
+      electronic: 0,
+      medical: 0
+    };
+  }
+
+  async initCamera() {
+    console.log('🚀 Initializing camera system...');
+    
+    try {
+      // Get camera access
+      this.stream = await navigator.mediaDevices.getUserMedia({ 
+        video: { width: 640, height: 480 } 
+      });
+      
+      this.video = document.createElement('video');
+      this.video.srcObject = this.stream;
+      this.video.autoplay = true;
+      this.video.muted = true;
+      
+      await new Promise((resolve) => {
+        this.video.onloadedmetadata = resolve;
+      });
+      
+      this.hasCamera = true;
+      console.log('📹 Camera initialized successfully');
+      
+      // Try to load Teachable Machine model
+      await this.loadTeachableMachine();
+      
+    } catch (error) {
+      console.log('📹 Camera permission denied or not available:', error.message);
+      this.hasCamera = false;
+      this.classificationMode = 'demo';
+    }
+    
+    this.initialized = true;
+    
+    // Notify React component
+    if (window.updateModelStatus) {
+      window.updateModelStatus(true);
+    }
+    
+    return true;
+  }
+
+  async loadTeachableMachine() {
+    try {
+      if (typeof ml5 === 'undefined') {
+        throw new Error('ML5.js not available');
+      }
+
+      console.log('🤖 Loading Teachable Machine model...');
+      const modelURL = "https://teachablemachine.withgoogle.com/models/2JfuDAEaL/";
+      
+      this.classifier = await ml5.imageClassifier(modelURL + "model.json");
+      this.classificationMode = 'ai';
+      console.log('✅ Teachable Machine model loaded - Real AI detection enabled!');
+      
+    } catch (error) {
+      console.log('⚠️ Teachable Machine model failed:', error.message);
+      this.classifier = null;
+      this.classificationMode = 'demo';
+    }
+  }
+
+  attachToCanvas(canvasElement) {
+    this.canvas = canvasElement;
+    this.ctx = this.canvas.getContext('2d');
+    console.log('🎨 Canvas attached successfully');
+    
+    // Start drawing loop
+    this.startDrawLoop();
+  }
+
+  startDrawLoop() {
+    const draw = () => {
+      if (!this.ctx || !this.canvas) return;
+      
+      if (this.hasCamera && this.video) {
+        // Draw live video
+        this.ctx.drawImage(this.video, 0, 0, 640, 480);
+      } else {
+        // Demo background
+        const gradient = this.ctx.createLinearGradient(0, 0, 0, 480);
+        gradient.addColorStop(0, '#1F2937');
+        gradient.addColorStop(1, '#111827');
+        this.ctx.fillStyle = gradient;
+        this.ctx.fillRect(0, 0, 640, 480);
+        
+        // Demo text
+        this.ctx.fillStyle = 'white';
+        this.ctx.font = 'bold 24px Arial';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillText('🤖 AI Waste Detection Demo', 320, 200);
+        
+        this.ctx.font = '16px Arial';
+        this.ctx.fillText('Simulating waste classification...', 320, 240);
+        this.ctx.fillText('Real camera would stream here', 320, 280);
+      }
+      
+      // Draw overlay
+      this.drawOverlay();
+      
+      this.animationFrame = requestAnimationFrame(draw);
+    };
+    
+    draw();
+  }
+
+  drawOverlay() {
+    if (!this.ctx) return;
+    
+    // Status overlay
+    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+    this.ctx.fillRect(10, 10, 300, 90);
+    
+    this.ctx.fillStyle = 'white';
+    this.ctx.font = '16px Arial';
+    this.ctx.textAlign = 'left';
+    
+    const modeText = this.classificationMode === 'ai' ? 'AI Detection' : 'Demo Mode';
+    this.ctx.fillText(`Mode: ${modeText}`, 20, 35);
+    this.ctx.fillText(`Status: ${this.isClassifying ? 'Active' : 'Standby'}`, 20, 55);
+    
+    // Status indicator
+    this.ctx.fillStyle = this.isClassifying ? '#10B981' : '#F59E0B';
+    this.ctx.beginPath();
+    this.ctx.arc(280, 40, 8, 0, 2 * Math.PI);
+    this.ctx.fill();
+    
+    // Counts
+    this.ctx.font = '12px Arial';
+    this.ctx.fillStyle = 'white';
+    this.ctx.fillText(`Metal: ${this.wasteCounts.metal} | Wet: ${this.wasteCounts.wet} | Dry: ${this.wasteCounts.dry}`, 20, 75);
+  }
+
+  startClassification() {
+    if (this.isClassifying) {
+      console.log('⚠️ Classification already active');
+      return;
+    }
+    
+    console.log('🚀 Starting waste classification...');
+    this.isClassifying = true;
+    
+    if (this.classifier && this.hasCamera && this.classificationMode === 'ai') {
+      console.log('🤖 Using real Teachable Machine AI');
+      this.classifyWithAI();
+    } else {
+      console.log('🎭 Using simulated detection');
+      this.simulateDetection();
+    }
+  }
+
+  classifyWithAI() {
+    if (!this.isClassifying || !this.classifier || !this.video) {
+      return;
+    }
+
+    // Create temp canvas for AI classification
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = 640;
+    tempCanvas.height = 480;
+    const tempCtx = tempCanvas.getContext('2d');
+    tempCtx.drawImage(this.video, 0, 0, 640, 480);
+
+    this.classifier.classify(tempCanvas, (results) => {
+      if (!this.isClassifying) return;
+      
+      if (results && results[0]) {
+        const result = results[0];
+        const classification = result.label;
+        const confidence = result.confidence;
+        
+        console.log(`🤖 AI Detected: ${classification} (${(confidence * 100).toFixed(1)}%)`);
+        
+        this.updateWasteCounts(classification, confidence);
+        this.notifyReact(classification, confidence);
+      }
+      
+      if (this.isClassifying) {
+        setTimeout(() => this.classifyWithAI(), 1000);
+      }
+    });
+  }
+
+  simulateDetection() {
+    if (!this.isClassifying) return;
+    
+    const wasteTypes = ['metal', 'wet', 'dry'];
+    const randomType = wasteTypes[Math.floor(Math.random() * wasteTypes.length)];
+    const confidence = 0.65 + Math.random() * 0.35;
+    
+    console.log(`🎭 Simulated: ${randomType} (${(confidence * 100).toFixed(1)}%)`);
+    
+    this.updateWasteCounts(randomType, confidence);
+    this.notifyReact(randomType, confidence);
+    
+    if (this.isClassifying) {
+      setTimeout(() => this.simulateDetection(), 2000 + Math.random() * 2000);
+    }
+  }
+
+  updateWasteCounts(classification, confidence) {
+    if (confidence > 0.6) {
+      if (classification in this.wasteCounts) {
+        this.wasteCounts[classification]++;
+      }
+    }
+  }
+
+  notifyReact(classification, confidence) {
+    const event = new CustomEvent('wasteDetected', {
+      detail: {
+        type: this.mapClassificationToWasteType(classification),
+        confidence: confidence,
+        timestamp: Date.now(),
+        originalLabel: classification
+      }
+    });
+    
+    console.log('📡 Notifying React:', classification, confidence);
+    window.dispatchEvent(event);
+  }
+
+  mapClassificationToWasteType(classification) {
+    const mapping = {
+      'metal': 'electronic',
+      'wet': 'wet', 
+      'dry': 'dry'
+    };
+    return mapping[classification] || 'dry';
+  }
+
+  stopClassification() {
+    console.log('⏹️ Stopping classification...');
+    this.isClassifying = false;
+  }
+
+  resetCounts() {
+    this.wasteCounts = { metal: 0, wet: 0, dry: 0, plastic: 0, electronic: 0, medical: 0 };
+    console.log('🔄 Counts reset');
+  }
+
+  cleanup() {
+    console.log('🧹 Cleaning up camera system...');
+    this.isClassifying = false;
+    
+    if (this.animationFrame) {
+      cancelAnimationFrame(this.animationFrame);
+      this.animationFrame = null;
+    }
+    
+    if (this.stream) {
+      this.stream.getTracks().forEach(track => track.stop());
+      this.stream = null;
+    }
+    
+    if (this.ctx && this.canvas) {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+    
+    this.video = null;
+    this.canvas = null;
+    this.ctx = null;
+    this.initialized = false;
+    
+    console.log('✅ Cleanup completed');
+  }
+}
+
+// Global instance
+const wasteSystem = new ReactWasteSorting();
+
+// API for React integration
+window.p5WasteSorting = {
+  init: () => wasteSystem.initCamera(),
+  attachToCanvas: (canvas) => wasteSystem.attachToCanvas(canvas),
+  startClassification: () => wasteSystem.startClassification(),
+  stopClassification: () => wasteSystem.stopClassification(),
+  resetCounts: () => wasteSystem.resetCounts(),
+  cleanup: () => wasteSystem.cleanup(),
+  isModelLoaded: () => wasteSystem.initialized,
+  getWasteCounts: () => wasteSystem.wasteCounts,
+  getCurrentClassification: () => ({ label: 'ready', confidence: 1 })
+};
+
+console.log('✅ Simple waste sorting system loaded');

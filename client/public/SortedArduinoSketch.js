@@ -73,8 +73,21 @@ class WasteSortingSystem {
 
   setupCanvas() {
     const container = document.getElementById('camera-container');
+    if (!container) {
+      console.error('❌ Camera container not found');
+      return;
+    }
     
-    // Create canvas element
+    // Check if canvas already exists
+    let existingCanvas = container.querySelector('canvas');
+    if (existingCanvas) {
+      this.canvas = existingCanvas;
+      this.ctx = this.canvas.getContext('2d');
+      console.log('🎨 Using existing canvas');
+      return;
+    }
+    
+    // Create canvas element safely
     this.canvas = document.createElement('canvas');
     this.canvas.width = 640;
     this.canvas.height = 480;
@@ -82,9 +95,12 @@ class WasteSortingSystem {
     this.canvas.style.height = '100%';
     this.canvas.style.objectFit = 'cover';
     this.canvas.style.display = 'block';
+    this.canvas.style.position = 'absolute';
+    this.canvas.style.top = '0';
+    this.canvas.style.left = '0';
+    this.canvas.style.zIndex = '1';
     
-    // Clear container and add canvas
-    container.innerHTML = '';
+    // Add canvas without clearing the container
     container.appendChild(this.canvas);
     
     this.ctx = this.canvas.getContext('2d');
@@ -358,14 +374,18 @@ class WasteSortingSystem {
       this.stream = null;
     }
     
-    // Clear canvas safely
-    if (this.canvas) {
+    // Clear canvas safely - don't remove it, just clear it
+    if (this.canvas && this.ctx) {
       try {
-        if (this.canvas.parentNode && this.canvas.parentNode.contains(this.canvas)) {
-          this.canvas.parentNode.removeChild(this.canvas);
-        }
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillStyle = '#374151';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillStyle = 'white';
+        this.ctx.font = '16px Arial';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillText('Camera Stopped', this.canvas.width/2, this.canvas.height/2);
       } catch (error) {
-        console.log('Canvas already removed:', error.message);
+        console.log('Canvas cleanup error:', error.message);
       }
     }
     

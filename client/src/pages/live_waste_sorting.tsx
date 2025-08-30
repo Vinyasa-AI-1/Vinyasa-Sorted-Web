@@ -37,6 +37,7 @@ export default function LiveWasteSorting() {
   const [isP5Active, setIsP5Active] = useState(false);
   const [currentClassification, setCurrentClassification] = useState<{label: string, confidence: number} | null>(null);
   const cameraContainerRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Integration with P5.js waste detection
   useEffect(() => {
@@ -75,20 +76,25 @@ export default function LiveWasteSorting() {
     };
   }, []);
 
-  // Initialize P5.js when component mounts and reinitialize on page visits
+  // Initialize camera system when component mounts
   useEffect(() => {
     const initializeCamera = async () => {
-      // Wait for the DOM and libraries to be ready
-      if (!(window as any).p5WasteSorting) {
-        console.log('Waste sorting system not ready, retrying...');
+      // Wait for the canvas to be available
+      if (!canvasRef.current || !(window as any).p5WasteSorting) {
+        console.log('Canvas or waste sorting system not ready, retrying...');
         setTimeout(initializeCamera, 200);
         return;
       }
 
       console.log('Initializing camera system...');
+      
+      // First initialize the camera
       const success = await (window as any).p5WasteSorting.init();
       if (success) {
         console.log('Camera initialized successfully');
+        
+        // Then attach to our canvas
+        (window as any).p5WasteSorting.attachToCanvas(canvasRef.current);
       } else {
         console.error('Failed to initialize camera');
       }
@@ -98,7 +104,7 @@ export default function LiveWasteSorting() {
     setTimeout(initializeCamera, 1000);
     
     return () => {
-      // Only stop classification, don't cleanup canvas on hot reloads
+      // Only stop classification on unmount
       if ((window as any).p5WasteSorting) {
         console.log('🧹 Component unmounting - stopping classification only');
         (window as any).p5WasteSorting.stopClassification();
@@ -269,7 +275,7 @@ export default function LiveWasteSorting() {
               </div>
             </div>
             
-            {/* Camera Stream - P5.js will render here */}
+            {/* Camera Stream */}
             <div className="relative">
               <div 
                 id="camera-container" 
@@ -277,14 +283,22 @@ export default function LiveWasteSorting() {
                 className="w-full h-96 bg-gray-900 rounded-lg overflow-hidden relative"
                 style={{ position: 'relative', width: '640px', height: '480px', maxWidth: '100%' }}
               >
+                {/* React-managed canvas */}
+                <canvas 
+                  ref={canvasRef}
+                  width={640}
+                  height={480}
+                  className="absolute top-0 left-0 w-full h-full object-cover z-10"
+                />
+                
                 {!isP5Active && (
-                  <div className="absolute inset-0 flex items-center justify-center text-center z-10">
+                  <div className="absolute inset-0 flex items-center justify-center text-center z-20 bg-gray-900">
                     <div>
                       <Camera className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                      <p className="text-gray-600 text-lg">
+                      <p className="text-white text-lg">
                         {isStreaming ? 'Loading AI Model...' : 'Camera Stream Inactive'}
                       </p>
-                      <p className="text-gray-500 text-sm mt-2">
+                      <p className="text-gray-300 text-sm mt-2">
                         {isStreaming ? 'Initializing Teachable Machine model...' : 'Click "Start Stream" to begin waste detection'}
                       </p>
                     </div>

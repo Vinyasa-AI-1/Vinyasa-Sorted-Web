@@ -124,6 +124,9 @@ export const translations = {
     "Robusta": "Robusta",
     "Pusa A-4": "Pusa A-4",
     "Pusa Ruby": "Pusa Ruby",
+    "robust-tomato": "Robust Tomato",
+    "cherry-tomato": "Cherry Tomato",
+    "bell-pepper": "Bell Pepper",
     
     // Quality categories data
     "Premium": "Premium",
@@ -224,11 +227,17 @@ export const translations = {
     "km": "km",
     "kg": "kg",
 
-    // Chart labels
+    // Chart labels  
     "Week 1": "Week 1",
     "Week 2": "Week 2",
     "Week 3": "Week 3",
     "Week 4": "Week 4",
+    "Revenue": "Revenue",
+    "Target": "Target",
+    "Volume": "Volume",
+    "Waste": "Waste",
+    "Plastic": "Plastic",
+    "Electronic": "Electronic",
 
     // Market categories
     "Local": "Local",
@@ -586,6 +595,9 @@ export const translations = {
     "Robusta": "रोबस्टा",
     "Pusa A-4": "पूसा ए-4",
     "Pusa Ruby": "पूसा रूबी",
+    "robust-tomato": "रोबस्ट टमाटर",
+    "cherry-tomato": "चेरी टमाटर",
+    "bell-pepper": "शिमला मिर्च",
     
     // Quality categories data
     "Premium": "प्रीमियम",
@@ -681,9 +693,15 @@ export const translations = {
 
     // Chart labels
     "Week 1": "सप्ताह 1",
-    "Week 2": "सप्ताह 2",
+    "Week 2": "सप्ताह 2", 
     "Week 3": "सप्ताह 3",
     "Week 4": "सप्ताह 4",
+    "Revenue": "आय",
+    "Target": "लक्ष्य",
+    "Volume": "मात्रा",
+    "Waste": "अपशिष्ट",
+    "Plastic": "प्लास्टिक",
+    "Electronic": "इलेक्ट्रॉनिक",
 
     // Market categories
     "Local": "स्थानीय",
@@ -979,6 +997,9 @@ export const translations = {
     "Robusta": "রবাস্টা",
     "Pusa A-4": "পুসা এ-৪",
     "Pusa Ruby": "পুসা রুবি",
+    "robust-tomato": "রোবাস্ট টমেটো",
+    "cherry-tomato": "চেরি টমেটো",
+    "bell-pepper": "বেল পেপার",
     
     // Quality categories data
     "Premium": "প্রিমিয়াম",
@@ -1077,6 +1098,12 @@ export const translations = {
     "Week 2": "সপ্তাহ ২",
     "Week 3": "সপ্তাহ ৩",
     "Week 4": "সপ্তাহ ৪",
+    "Revenue": "আয়",
+    "Target": "লক্ষ্য",
+    "Volume": "ভলিউম",
+    "Waste": "বর্জ্য",
+    "Plastic": "প্লাস্টিক",
+    "Electronic": "ইলেকট্রনিক",
 
     // Market categories
     "Local": "স্থানীয়",

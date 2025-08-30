@@ -92,15 +92,14 @@ export default function handler(req, res) {
           weight: 320,
           recommendedSaleFor: "Recycling",
           recommendedBuyer: {
-            name: "EcoWaste Solutions",
+            name: "Plastic Recyclers Ltd",
             location: "Bandra",
             distance: "5.1 km"
           },
-          pricePerKg: 12,
-          total: 3840,
-          isVinyasaCoins: true,
+          pricePerKg: 18,
+          total: 5760,
           alternativeBuyers: [
-            { name: "Green Earth Recyclers", location: "Andheri East", distance: "3.2 km" }
+            { name: "EcoWaste Management", location: "Andheri East", distance: "3.2 km" }
           ]
         },
         {
@@ -109,15 +108,47 @@ export default function handler(req, res) {
           weight: 180,
           recommendedSaleFor: "E-Waste Recycling",
           recommendedBuyer: {
-            name: "Tech Recyclers Ltd.",
+            name: "TechCycle Solutions",
             location: "Goregaon",
             distance: "8.2 km"
           },
-          pricePerKg: 45,
-          total: 8100,
+          pricePerKg: 65,
+          total: 11700,
+          alternativeBuyers: [
+            { name: "Mumbai Recycling Hub", location: "Malad", distance: "12 km" }
+          ]
+        },
+        {
+          qualityCategory: "Dry",
+          items: 350,
+          weight: 350,
+          recommendedSaleFor: "Recycling",
+          recommendedBuyer: {
+            name: "Clean City Initiative",
+            location: "BKC",
+            distance: "7.3 km"
+          },
+          pricePerKg: 8,
+          total: 2800,
+          alternativeBuyers: [
+            { name: "Waste Warriors", location: "Turbhe", distance: "15 km" }
+          ]
+        },
+        {
+          qualityCategory: "Wet",
+          items: 200,
+          weight: 200,
+          recommendedSaleFor: "Composting",
+          recommendedBuyer: {
+            name: "Green Earth Compost",
+            location: "Powai",
+            distance: "4.8 km"
+          },
+          pricePerKg: 12,
+          total: 2400,
           isVinyasaCoins: true,
           alternativeBuyers: [
-            { name: "Digital Waste Co.", location: "Malad", distance: "12 km" }
+            { name: "Mumbai Recycling Hub", location: "Thane", distance: "12 km" }
           ]
         }
       ]
@@ -142,15 +173,63 @@ export default function handler(req, res) {
           weight: 450,
           recommendedSaleFor: "Composting",
           recommendedBuyer: {
-            name: "Urban Compost Co.",
+            name: "Green Earth Compost",
             location: "Powai",
             distance: "8.5 km"
           },
-          pricePerKg: 6,
-          total: 2700,
+          pricePerKg: 15,
+          total: 6750,
+          alternativeBuyers: [
+            { name: "EcoWaste Management", location: "Kurla", distance: "12 km" }
+          ]
+        },
+        {
+          qualityCategory: "Plastic",
+          items: 380,
+          weight: 380,
+          recommendedSaleFor: "Recycling", 
+          recommendedBuyer: {
+            name: "Plastic Recyclers Ltd",
+            location: "Andheri West",
+            distance: "6.2 km"
+          },
+          pricePerKg: 16,
+          total: 6080,
+          alternativeBuyers: [
+            { name: "Mumbai Recycling Hub", location: "Malad", distance: "10 km" }
+          ]
+        },
+        {
+          qualityCategory: "Electronic",
+          items: 95,
+          weight: 95,
+          recommendedSaleFor: "E-Waste Recycling",
+          recommendedBuyer: {
+            name: "TechCycle Solutions",
+            location: "BKC",
+            distance: "4.8 km"
+          },
+          pricePerKg: 75,
+          total: 7125,
+          alternativeBuyers: [
+            { name: "Clean City Initiative", location: "Ghatkopar", distance: "14 km" }
+          ]
+        },
+        {
+          qualityCategory: "Dry",
+          items: 480,
+          weight: 480,
+          recommendedSaleFor: "Recycling",
+          recommendedBuyer: {
+            name: "Waste Warriors",
+            location: "Thane",
+            distance: "12.5 km"
+          },
+          pricePerKg: 5,
+          total: 2400,
           isVinyasaCoins: true,
           alternativeBuyers: [
-            { name: "City Composting Unit", location: "Kurla", distance: "12 km" }
+            { name: "Clean City Initiative", location: "Turbhe", distance: "15 km" }
           ]
         }
       ]
@@ -173,34 +252,65 @@ export default function handler(req, res) {
           qualityCategory: "Plastic",
           items: 850,
           weight: 850,
-          recommendedSaleFor: "Industrial Recycling",
+          recommendedSaleFor: "Recycling",
           recommendedBuyer: {
-            name: "Industrial Waste Solutions",
+            name: "Plastic Recyclers Ltd",
             location: "MIDC Andheri",
             distance: "15 km"
           },
-          pricePerKg: 18,
-          total: 15300,
-          isVinyasaCoins: true,
+          pricePerKg: 30,
+          total: 25500,
           alternativeBuyers: [
-            { name: "Heavy Industries Recycling", location: "Turbhe", distance: "25 km" }
+            { name: "Mumbai Recycling Hub", location: "Turbhe", distance: "25 km" }
           ]
         },
         {
           qualityCategory: "Electronic",
           items: 250,
           weight: 250,
-          recommendedSaleFor: "E-Waste Processing",
+          recommendedSaleFor: "E-Waste Recycling",
           recommendedBuyer: {
-            name: "Tech Recyclers Ltd.",
+            name: "TechCycle Solutions",
             location: "Goregaon",
             distance: "8.2 km"
           },
-          pricePerKg: 50,
-          total: 12500,
+          pricePerKg: 95,
+          total: 23750,
+          alternativeBuyers: [
+            { name: "EcoWaste Management", location: "Malad", distance: "12 km" }
+          ]
+        },
+        {
+          qualityCategory: "Dry",
+          items: 680,
+          weight: 680,
+          recommendedSaleFor: "Recycling",
+          recommendedBuyer: {
+            name: "Clean City Initiative",
+            location: "BKC",
+            distance: "12.5 km"
+          },
+          pricePerKg: 12,
+          total: 8160,
+          alternativeBuyers: [
+            { name: "Waste Warriors", location: "Powai", distance: "15 km" }
+          ]
+        },
+        {
+          qualityCategory: "Wet",
+          items: 320,
+          weight: 320,
+          recommendedSaleFor: "Composting",
+          recommendedBuyer: {
+            name: "Green Earth Compost",
+            location: "Ghatkopar",
+            distance: "18.8 km"
+          },
+          pricePerKg: 22,
+          total: 7040,
           isVinyasaCoins: true,
           alternativeBuyers: [
-            { name: "Digital Waste Co.", location: "Malad", distance: "12 km" }
+            { name: "EcoWaste Management", location: "Thane", distance: "22 km" }
           ]
         }
       ]
@@ -229,20 +339,19 @@ export default function handler(req, res) {
             location: "Thane",
             distance: "22 km"
           },
-          pricePerKg: 35,
-          total: 8750,
-          isVinyasaCoins: true,
+          pricePerKg: 45,
+          total: 11250,
           alternativeBuyers: [
-            { name: "HealthCare Disposal Ltd.", location: "Navi Mumbai", distance: "28 km" }
+            { name: "EcoWaste Management", location: "Navi Mumbai", distance: "28 km" }
           ]
         },
         {
           qualityCategory: "Plastic",
           items: 250,
           weight: 250,
-          recommendedSaleFor: "Medical Grade Recycling",
+          recommendedSaleFor: "Recycling",
           recommendedBuyer: {
-            name: "MedPlastic Recyclers",
+            name: "Plastic Recyclers Ltd",
             location: "Vashi",
             distance: "18 km"
           },

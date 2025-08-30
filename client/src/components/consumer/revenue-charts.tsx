@@ -31,8 +31,8 @@ export default function RevenueCharts({ t }: RevenueChartsProps) {
                 <XAxis dataKey="month" />
                 <YAxis />
                 <Tooltip formatter={(value) => [`₹${Number(value).toLocaleString()}`, ""]} />
-                <Bar dataKey="revenue" fill="#22543D" name="Revenue" />
-                <Bar dataKey="target" fill="#68D391" name="Target" />
+                <Bar dataKey="revenue" fill="#22543D" name={t('Revenue')} />
+                <Bar dataKey="target" fill="#68D391" name={t('Target')} />
               </BarChart>
             </ResponsiveContainer>
           </div>

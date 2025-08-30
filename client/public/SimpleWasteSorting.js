@@ -150,10 +150,11 @@ class ReactWasteSorting {
     this.ctx.arc(280, 40, 8, 0, 2 * Math.PI);
     this.ctx.fill();
     
-    // Counts
+    // Counts - refresh from global state
     this.ctx.font = '12px Arial';
     this.ctx.fillStyle = 'white';
-    this.ctx.fillText(`Metal: ${this.wasteCounts.metal} | Wet: ${this.wasteCounts.wet} | Dry: ${this.wasteCounts.dry}`, 20, 75);
+    const counts = window.p5WasteSorting?.getWasteCounts() || this.wasteCounts;
+    this.ctx.fillText(`Metal: ${counts.metal} | Wet: ${counts.wet} | Dry: ${counts.dry}`, 20, 75);
   }
 
   startClassification() {
@@ -224,10 +225,31 @@ class ReactWasteSorting {
   }
 
   updateWasteCounts(classification, confidence) {
-    if (confidence > 0.6) {
-      if (classification in this.wasteCounts) {
-        this.wasteCounts[classification]++;
+    if (confidence > 0.5) {
+      console.log(`📊 Raw AI classification received: "${classification}" (${(confidence * 100).toFixed(1)}% confidence)`);
+      
+      // Map AI classifications to waste count categories - exact matching first
+      const exactMatch = classification.toLowerCase().trim();
+      
+      if (exactMatch === 'metal' || exactMatch === 'electronic' || exactMatch.includes('metal')) {
+        this.wasteCounts.metal++;
+        console.log(`🔧 Metal count increased to: ${this.wasteCounts.metal}`);
+      } else if (exactMatch === 'wet' || exactMatch === 'organic' || exactMatch.includes('wet') || exactMatch.includes('food')) {
+        this.wasteCounts.wet++;
+        console.log(`💧 Wet count increased to: ${this.wasteCounts.wet}`);
+      } else if (exactMatch === 'dry' || exactMatch === 'paper' || exactMatch.includes('dry') || exactMatch.includes('paper')) {
+        this.wasteCounts.dry++;
+        console.log(`📄 Dry count increased to: ${this.wasteCounts.dry}`);
+      } else {
+        // Log what we're getting and default to dry
+        console.log(`❓ Unmapped classification: "${classification}" -> defaulting to dry`);
+        this.wasteCounts.dry++;
+        console.log(`📄 Dry count increased to: ${this.wasteCounts.dry}`);
       }
+      
+      console.log(`📊 Current internal counts:`, this.wasteCounts);
+    } else {
+      console.log(`⚠️ Classification confidence too low: ${classification} (${(confidence * 100).toFixed(1)}%)`);
     }
   }
 
@@ -246,12 +268,30 @@ class ReactWasteSorting {
   }
 
   mapClassificationToWasteType(classification) {
-    const mapping = {
-      'metal': 'electronic',
-      'wet': 'wet', 
-      'dry': 'dry'
-    };
-    return mapping[classification] || 'dry';
+    const exactMatch = classification.toLowerCase().trim();
+    
+    console.log(`🗺️ Mapping "${classification}" to React waste type...`);
+    
+    // Enhanced mapping for Teachable Machine classifications
+    if (exactMatch === 'metal' || exactMatch.includes('metal') || exactMatch.includes('electronic')) {
+      console.log(`🔧 Mapped to: electronic`);
+      return 'electronic';
+    } else if (exactMatch === 'wet' || exactMatch.includes('wet') || exactMatch.includes('organic') || exactMatch.includes('food')) {
+      console.log(`💧 Mapped to: wet`);
+      return 'wet';
+    } else if (exactMatch === 'dry' || exactMatch.includes('dry') || exactMatch.includes('paper') || exactMatch.includes('cardboard')) {
+      console.log(`📄 Mapped to: dry`);
+      return 'dry';
+    } else if (exactMatch.includes('plastic')) {
+      console.log(`♻️ Mapped to: plastic`);
+      return 'plastic';
+    } else if (exactMatch.includes('medical')) {
+      console.log(`🏥 Mapped to: medical`);
+      return 'medical';
+    }
+    
+    console.log(`❓ Unknown classification "${classification}" -> defaulting to dry`);
+    return 'dry';
   }
 
   stopClassification() {
@@ -261,7 +301,8 @@ class ReactWasteSorting {
 
   resetCounts() {
     this.wasteCounts = { metal: 0, wet: 0, dry: 0, plastic: 0, electronic: 0, medical: 0 };
-    console.log('🔄 Counts reset');
+    console.log('🔄 Counts reset to:', this.wasteCounts);
+    return this.wasteCounts;
   }
 
   cleanup() {

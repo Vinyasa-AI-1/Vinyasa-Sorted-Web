@@ -23,6 +23,11 @@ class ReactWasteSorting {
       electronic: 0,
       medical: 0
     };
+    
+    // Arduino serial communication
+    this.serialPort = null;
+    this.writer = null;
+    this.isSerialConnected = false;
   }
 
   async initCamera() {
@@ -252,6 +257,9 @@ class ReactWasteSorting {
       }
       
       console.log(`📊 Current internal counts:`, this.wasteCounts);
+      
+      // Send to Arduino after updating counts
+      this.sendToArduino(classification);
     } else {
       console.log(`⚠️ Classification confidence too low: ${classification} (${(confidence * 100).toFixed(1)}%)`);
     }
@@ -294,6 +302,80 @@ class ReactWasteSorting {
     }
   }
 
+  // Arduino Serial Communication using Web Serial API
+  async connectArduino() {
+    try {
+      if (!navigator.serial) {
+        console.log('❌ Web Serial API not supported in this browser');
+        return false;
+      }
+
+      console.log('🔌 Requesting Arduino connection...');
+      this.serialPort = await navigator.serial.requestPort();
+      
+      await this.serialPort.open({ baudRate: 9600 });
+      this.writer = this.serialPort.writable.getWriter();
+      this.isSerialConnected = true;
+      
+      console.log('✅ Arduino connected successfully');
+      return true;
+    } catch (error) {
+      console.log('❌ Arduino connection failed:', error.message);
+      this.isSerialConnected = false;
+      return false;
+    }
+  }
+
+  async sendToArduino(classification) {
+    if (!this.isSerialConnected || !this.writer) {
+      console.log(`🔌 Arduino not connected - would send: ${classification}`);
+      return;
+    }
+
+    try {
+      let command;
+      switch (classification) {
+        case 'Metal':
+          command = '0'; // Send 0 for metal
+          break;
+        case 'Wet':
+          command = '1'; // Send 1 for wet
+          break;
+        case 'Dry':
+          command = '2'; // Send 2 for dry
+          break;
+        default:
+          return; // Don't send anything for unclassified
+      }
+
+      const data = new TextEncoder().encode(command + '\n');
+      await this.writer.write(data);
+      console.log(`🔌 Sent to Arduino: ${classification} (${command})`);
+    } catch (error) {
+      console.log('❌ Failed to send to Arduino:', error.message);
+      this.isSerialConnected = false;
+    }
+  }
+
+  async disconnectArduino() {
+    try {
+      if (this.writer) {
+        this.writer.releaseLock();
+        this.writer = null;
+      }
+      
+      if (this.serialPort) {
+        await this.serialPort.close();
+        this.serialPort = null;
+      }
+      
+      this.isSerialConnected = false;
+      console.log('🔌 Arduino disconnected');
+    } catch (error) {
+      console.log('❌ Error disconnecting Arduino:', error.message);
+    }
+  }
+
   stopClassification() {
     console.log('⏹️ Stopping classification...');
     this.isClassifying = false;
@@ -323,6 +405,9 @@ class ReactWasteSorting {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
     
+    // Disconnect Arduino on cleanup
+    this.disconnectArduino();
+    
     this.video = null;
     this.canvas = null;
     this.ctx = null;
@@ -345,7 +430,11 @@ window.p5WasteSorting = {
   cleanup: () => wasteSystem.cleanup(),
   isModelLoaded: () => wasteSystem.initialized,
   getWasteCounts: () => wasteSystem.wasteCounts,
-  getCurrentClassification: () => ({ label: 'ready', confidence: 1 })
+  getCurrentClassification: () => ({ label: 'ready', confidence: 1 }),
+  // Arduino communication
+  connectArduino: () => wasteSystem.connectArduino(),
+  disconnectArduino: () => wasteSystem.disconnectArduino(),
+  isArduinoConnected: () => wasteSystem.isSerialConnected
 };
 
 console.log('✅ Simple waste sorting system loaded');

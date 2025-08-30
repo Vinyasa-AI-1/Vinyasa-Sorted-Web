@@ -43,9 +43,10 @@ export default function LiveWasteSorting() {
     // Set up event listener for P5.js waste detection events
     const handleWasteDetected = (event: CustomEvent) => {
       const { type, confidence, originalLabel } = event.detail;
-      console.log('React received waste detected event:', type, confidence, originalLabel);
+      console.log('🎯 React received waste detected event:', type, confidence, originalLabel);
       
-      if (confidence > 0.6 && type && type in wasteCounts) {
+      if (confidence > 0.5 && type && type in wasteCounts) {
+        console.log('📊 Updating waste counts for type:', type);
         setWasteCounts(prev => ({
           ...prev,
           [type]: prev[type as keyof WasteCounts] + 1
@@ -55,6 +56,8 @@ export default function LiveWasteSorting() {
           label: originalLabel,
           confidence: confidence
         });
+      } else {
+        console.log('⚠️ Classification not counted - confidence too low or invalid type:', confidence, type);
       }
     };
 
@@ -77,11 +80,43 @@ export default function LiveWasteSorting() {
     };
   }, []);
 
+  // Initialize P5.js when component mounts and reinitialize on page visits
+  useEffect(() => {
+    const initializeCamera = async () => {
+      // Wait for the DOM and libraries to be ready
+      if (!(window as any).p5WasteSorting || !(window as any).ml5) {
+        console.log('Libraries not ready, retrying...');
+        setTimeout(initializeCamera, 200);
+        return;
+      }
+
+      console.log('Initializing camera system...');
+      const success = await (window as any).p5WasteSorting.init();
+      if (success) {
+        console.log('Camera initialized successfully');
+      } else {
+        console.error('Failed to initialize camera');
+      }
+    };
+
+    // Wait for DOM and libraries to load
+    setTimeout(initializeCamera, 1000);
+    
+    return () => {
+      // Cleanup when leaving the page
+      if ((window as any).p5WasteSorting) {
+        (window as any).p5WasteSorting.cleanup();
+      }
+    };
+  }, []); // Empty dependency array ensures this runs on every page mount
+
   // Handle streaming toggle with P5.js integration
   useEffect(() => {
     if (isStreaming && (window as any).p5WasteSorting) {
+      console.log('🚀 Starting classification from React...');
       (window as any).p5WasteSorting.startClassification();
     } else if (!isStreaming && (window as any).p5WasteSorting) {
+      console.log('⏹️ Stopping classification from React...');
       (window as any).p5WasteSorting.stopClassification();
     }
   }, [isStreaming]);
@@ -240,16 +275,23 @@ export default function LiveWasteSorting() {
             
             {/* Camera Stream - P5.js will render here */}
             <div className="relative">
-              <div id="camera-container" ref={cameraContainerRef} className="w-full h-96 bg-gray-100 rounded-lg overflow-hidden relative">
+              <div 
+                id="camera-container" 
+                ref={cameraContainerRef} 
+                className="w-full h-96 bg-gray-900 rounded-lg overflow-hidden relative"
+                style={{ position: 'relative', width: '640px', height: '480px', maxWidth: '100%' }}
+              >
                 {!isP5Active && (
-                  <div className="text-center">
-                    <Camera className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-600 text-lg">
-                      {isStreaming ? 'Loading AI Model...' : 'Camera Stream Inactive'}
-                    </p>
-                    <p className="text-gray-500 text-sm mt-2">
-                      {isStreaming ? 'Initializing Teachable Machine model...' : 'Click "Start Stream" to begin waste detection'}
-                    </p>
+                  <div className="absolute inset-0 flex items-center justify-center text-center z-10">
+                    <div>
+                      <Camera className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                      <p className="text-gray-600 text-lg">
+                        {isStreaming ? 'Loading AI Model...' : 'Camera Stream Inactive'}
+                      </p>
+                      <p className="text-gray-500 text-sm mt-2">
+                        {isStreaming ? 'Initializing Teachable Machine model...' : 'Click "Start Stream" to begin waste detection'}
+                      </p>
+                    </div>
                   </div>
                 )}
               </div>

@@ -4,7 +4,104 @@ import { storage } from "./storage";
 import chatRoutes from "./routes/chat";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Get dashboard data
+  // New consolidated API endpoints to match Vercel functions
+  app.get("/api/producer", async (req, res) => {
+    const { endpoint } = req.query;
+    try {
+      switch (endpoint) {
+        case 'summary':
+          const summary = await storage.getSummary();
+          res.json(summary);
+          break;
+        case 'produce-varieties':
+          const varieties = await storage.getProduceVarieties();
+          res.json(varieties);
+          break;
+        case 'revenue-comparison':
+          const revenueComparison = await storage.getRevenueComparison();
+          res.json(revenueComparison);
+          break;
+        case 'volume-trends':
+          const volumeTrends = await storage.getVolumeTrends();
+          res.json(volumeTrends);
+          break;
+        default:
+          res.status(400).json({ message: "Invalid endpoint" });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch producer data" });
+    }
+  });
+
+  app.get("/api/producer-data", async (req, res) => {
+    const { endpoint } = req.query;
+    try {
+      switch (endpoint) {
+        case 'markets':
+          const markets = await storage.getMarkets();
+          res.json(markets);
+          break;
+        case 'overall-summary':
+          const overallSummary = await storage.getOverallSummary();
+          res.json(overallSummary);
+          break;
+        default:
+          res.status(400).json({ message: "Invalid endpoint" });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch producer data" });
+    }
+  });
+
+  app.get("/api/consumer", async (req, res) => {
+    const { endpoint } = req.query;
+    try {
+      switch (endpoint) {
+        case 'summary':
+          const summary = await storage.getConsumerSummary();
+          res.json(summary);
+          break;
+        case 'bin-types':
+          const binTypes = await storage.getBinTypes();
+          res.json(binTypes);
+          break;
+        case 'recyclers':
+          const recyclers = await storage.getRecyclers();
+          res.json(recyclers);
+          break;
+        default:
+          res.status(400).json({ message: "Invalid endpoint" });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch consumer data" });
+    }
+  });
+
+  app.get("/api/consumer-data", async (req, res) => {
+    const { endpoint } = req.query;
+    try {
+      switch (endpoint) {
+        case 'overall-summary':
+          const overallSummary = await storage.getConsumerOverallSummary();
+          res.json(overallSummary);
+          break;
+        case 'waste-comparison':
+          const wasteComparison = await storage.getWasteComparison();
+          res.json(wasteComparison);
+          break;
+        case 'waste-trends':
+          const wasteTrends = await storage.getWasteTrends();
+          res.json(wasteTrends);
+          break;
+        default:
+          res.status(400).json({ message: "Invalid endpoint" });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch consumer data" });
+    }
+  });
+
+  // Legacy individual endpoints (keeping for backward compatibility)
   app.get("/api/produce-varieties", async (_req, res) => {
     try {
       const varieties = await storage.getProduceVarieties();
@@ -59,7 +156,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Consumer Dashboard API endpoints
+  // Legacy consumer endpoints (keeping for backward compatibility)
   app.get("/api/consumer/bin-types", async (_req, res) => {
     try {
       const binTypes = await storage.getBinTypes();

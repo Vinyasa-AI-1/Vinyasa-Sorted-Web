@@ -35,27 +35,39 @@ class ReactWasteSorting {
     
     try {
       // Get camera access
+      console.log('🎥 Requesting camera permissions...');
       this.stream = await navigator.mediaDevices.getUserMedia({ 
-        video: { width: 640, height: 480 } 
+        video: { 
+          width: { ideal: 640 }, 
+          height: { ideal: 480 },
+          facingMode: 'environment' // Try back camera first for waste detection
+        } 
       });
       
       this.video = document.createElement('video');
       this.video.srcObject = this.stream;
       this.video.autoplay = true;
       this.video.muted = true;
+      this.video.playsInline = true;
       
-      await new Promise((resolve) => {
-        this.video.onloadedmetadata = resolve;
+      await new Promise((resolve, reject) => {
+        this.video.onloadedmetadata = () => {
+          console.log('📹 Video metadata loaded, starting playback...');
+          this.video.play().then(resolve).catch(reject);
+        };
+        this.video.onerror = reject;
+        setTimeout(reject, 5000); // 5 second timeout
       });
       
       this.hasCamera = true;
-      console.log('📹 Camera initialized successfully');
+      console.log('📹 Camera initialized successfully - Real camera mode enabled');
       
       // Try to load Teachable Machine model
       await this.loadTeachableMachine();
       
     } catch (error) {
-      console.log('📹 Camera permission denied or not available:', error.message);
+      console.log('📹 Camera initialization failed:', error.message);
+      console.log('🎭 Falling back to demo mode');
       this.hasCamera = false;
       this.classificationMode = 'demo';
     }
@@ -67,7 +79,7 @@ class ReactWasteSorting {
       window.updateModelStatus(true);
     }
     
-    return true;
+    return this.hasCamera;
   }
 
   async loadTeachableMachine() {
@@ -103,26 +115,20 @@ class ReactWasteSorting {
     const draw = () => {
       if (!this.ctx || !this.canvas) return;
       
-      if (this.hasCamera && this.video) {
+      if (this.hasCamera && this.video && this.video.readyState >= 2) {
         // Draw live video
-        this.ctx.drawImage(this.video, 0, 0, 640, 480);
+        try {
+          this.ctx.drawImage(this.video, 0, 0, 640, 480);
+        } catch (error) {
+          console.log('❌ Error drawing video frame:', error.message);
+          this.drawErrorState();
+        }
+      } else if (this.hasCamera && this.video) {
+        // Camera initializing
+        this.drawLoadingState();
       } else {
         // Demo background
-        const gradient = this.ctx.createLinearGradient(0, 0, 0, 480);
-        gradient.addColorStop(0, '#1F2937');
-        gradient.addColorStop(1, '#111827');
-        this.ctx.fillStyle = gradient;
-        this.ctx.fillRect(0, 0, 640, 480);
-        
-        // Demo text
-        this.ctx.fillStyle = 'white';
-        this.ctx.font = 'bold 24px Arial';
-        this.ctx.textAlign = 'center';
-        this.ctx.fillText('🤖 AI Waste Detection Demo', 320, 200);
-        
-        this.ctx.font = '16px Arial';
-        this.ctx.fillText('Simulating waste classification...', 320, 240);
-        this.ctx.fillText('Real camera would stream here', 320, 280);
+        this.drawDemoState();
       }
       
       // Draw overlay
@@ -132,6 +138,51 @@ class ReactWasteSorting {
     };
     
     draw();
+  }
+
+  drawDemoState() {
+    const gradient = this.ctx.createLinearGradient(0, 0, 0, 480);
+    gradient.addColorStop(0, '#1F2937');
+    gradient.addColorStop(1, '#111827');
+    this.ctx.fillStyle = gradient;
+    this.ctx.fillRect(0, 0, 640, 480);
+    
+    // Demo text
+    this.ctx.fillStyle = 'white';
+    this.ctx.font = 'bold 24px Arial';
+    this.ctx.textAlign = 'center';
+    this.ctx.fillText('🤖 AI Waste Detection Demo', 320, 200);
+    
+    this.ctx.font = '16px Arial';
+    this.ctx.fillText('Simulating waste classification...', 320, 240);
+    this.ctx.fillText('Real camera would stream here', 320, 280);
+  }
+
+  drawLoadingState() {
+    this.ctx.fillStyle = '#000000';
+    this.ctx.fillRect(0, 0, 640, 480);
+    
+    this.ctx.fillStyle = 'white';
+    this.ctx.font = 'bold 20px Arial';
+    this.ctx.textAlign = 'center';
+    this.ctx.fillText('📹 Loading Camera Feed...', 320, 220);
+    
+    this.ctx.font = '14px Arial';
+    this.ctx.fillText('Please wait while camera initializes', 320, 260);
+  }
+
+  drawErrorState() {
+    this.ctx.fillStyle = '#1F2937';
+    this.ctx.fillRect(0, 0, 640, 480);
+    
+    this.ctx.fillStyle = '#EF4444';
+    this.ctx.font = 'bold 20px Arial';
+    this.ctx.textAlign = 'center';
+    this.ctx.fillText('❌ Camera Error', 320, 220);
+    
+    this.ctx.fillStyle = 'white';
+    this.ctx.font = '14px Arial';
+    this.ctx.fillText('Check camera permissions and refresh page', 320, 260);
   }
 
   drawOverlay() {
@@ -172,45 +223,66 @@ class ReactWasteSorting {
     console.log('🚀 Starting waste classification...');
     this.isClassifying = true;
     
-    if (this.classifier && this.hasCamera && this.classificationMode === 'ai') {
-      console.log('🤖 Using real Teachable Machine AI');
+    if (this.classifier && this.hasCamera && this.video && this.classificationMode === 'ai') {
+      console.log('🤖 Using real Teachable Machine AI with camera feed');
       this.classifyWithAI();
-    } else {
-      console.log('🎭 Using simulated detection');
+    } else if (!this.hasCamera) {
+      console.log('🎭 No camera available - using simulated detection');
       this.simulateDetection();
+    } else if (!this.classifier) {
+      console.log('⚠️ AI model not loaded - classification disabled');
+      this.isClassifying = false;
+    } else {
+      console.log('⚠️ Camera or video not ready - classification disabled');
+      this.isClassifying = false;
     }
   }
 
   classifyWithAI() {
-    if (!this.isClassifying || !this.classifier || !this.video) {
+    if (!this.isClassifying || !this.classifier || !this.video || !this.hasCamera) {
+      console.log('❌ AI classification stopped - missing requirements');
       return;
     }
 
-    // Create temp canvas for AI classification
-    const tempCanvas = document.createElement('canvas');
-    tempCanvas.width = 640;
-    tempCanvas.height = 480;
-    const tempCtx = tempCanvas.getContext('2d');
-    tempCtx.drawImage(this.video, 0, 0, 640, 480);
+    // Check video is ready and playing
+    if (this.video.readyState < 2) {
+      console.log('⏳ Video not ready, retrying in 500ms...');
+      setTimeout(() => this.classifyWithAI(), 500);
+      return;
+    }
 
-    this.classifier.classify(tempCanvas, (results) => {
-      if (!this.isClassifying) return;
-      
-      if (results && results[0]) {
-        const result = results[0];
-        const classification = result.label;
-        const confidence = result.confidence;
+    try {
+      // Create temp canvas for AI classification
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = 640;
+      tempCanvas.height = 480;
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCtx.drawImage(this.video, 0, 0, 640, 480);
+
+      this.classifier.classify(tempCanvas, (results) => {
+        if (!this.isClassifying) return;
         
-        console.log(`🤖 AI Detected: ${classification} (${(confidence * 100).toFixed(1)}%)`);
+        if (results && results[0]) {
+          const result = results[0];
+          const classification = result.label;
+          const confidence = result.confidence;
+          
+          console.log(`🤖 AI Detected: ${classification} (${(confidence * 100).toFixed(1)}%)`);
+          
+          this.updateWasteCounts(classification, confidence);
+          this.notifyReact(classification, confidence);
+        }
         
-        this.updateWasteCounts(classification, confidence);
-        this.notifyReact(classification, confidence);
-      }
-      
+        if (this.isClassifying) {
+          setTimeout(() => this.classifyWithAI(), 1500); // Slower detection rate
+        }
+      });
+    } catch (error) {
+      console.log('❌ AI classification error:', error.message);
       if (this.isClassifying) {
-        setTimeout(() => this.classifyWithAI(), 1000);
+        setTimeout(() => this.classifyWithAI(), 2000);
       }
-    });
+    }
   }
 
   simulateDetection() {
@@ -387,6 +459,7 @@ class ReactWasteSorting {
       medical: 0
     };
     console.log('🔄 Waste counts reset to zero');
+    return this.wasteCounts;
   }
 
   getWasteCounts() {
@@ -396,12 +469,6 @@ class ReactWasteSorting {
   stopClassification() {
     console.log('⏹️ Stopping classification...');
     this.isClassifying = false;
-  }
-
-  resetCounts() {
-    this.wasteCounts = { metal: 0, wet: 0, dry: 0, plastic: 0, electronic: 0, medical: 0 };
-    console.log('🔄 Counts reset to:', this.wasteCounts);
-    return this.wasteCounts;
   }
 
   cleanup() {

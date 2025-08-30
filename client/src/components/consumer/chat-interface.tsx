@@ -6,7 +6,7 @@ import { Send, Bot, User } from "lucide-react";
 import type { translations } from "@/lib/translations";
 
 interface ChatInterfaceProps {
-  t: (key: keyof typeof translations.en) => string;
+  t: (key: string) => string;
   currentLanguage: string;
 }
 

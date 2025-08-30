@@ -1583,8 +1583,9 @@ const formatNumber = (num: number, language: Language): string => {
 
 export const useTranslation = (language: Language) => {
   return {
-    t: (key: keyof typeof translations.en): string => {
-      return translations[language][key] || translations.en[key] || key;
+    t: (key: string): string => {
+      const translationKey = key as keyof typeof translations.en;
+      return translations[language][translationKey] || translations.en[translationKey] || key;
     },
     formatNumber: (num: number) => formatNumber(num, language)
   };

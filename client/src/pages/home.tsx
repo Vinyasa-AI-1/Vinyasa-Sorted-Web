@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Leaf, Recycle, TrendingUp, Coins, UserCircle, Globe, ShoppingCart, Building } from "lucide-react";
 import { useLanguage, type Language } from "@/hooks/use-language";
-import { translations } from "@/lib/translations";
+// import { translations } from "@/lib/translations";
 import ChatInterface from "@/components/consumer/chat-interface";
 import {
   Select,
@@ -22,12 +22,21 @@ import consumerVideoThumb from "@assets/generated_images/Consumer_complete_video
 export default function Home() {
   const { currentLanguage, changeLanguage } = useLanguage();
   const t = (key: string) => {
-    const lang = currentLanguage as keyof typeof translations;
-    try {
-      return translations[lang]?.[key as keyof typeof translations.en] || translations.en[key as keyof typeof translations.en] || key;
-    } catch {
-      return key;
-    }
+    // Hardcoded English text for immediate loading
+    const hardcodedText: Record<string, string> = {
+      'title': 'Sorted! Waste Management',
+      'tagline': 'Increase Value, Reduce Waste - Sorting Harvests and Habits for a greener future',
+      'learnMore': 'Learn More',
+      'watchVideo': 'Watch Video',
+      'getStarted': 'Get Started',
+      'producerDashboard': 'Producer Dashboard',
+      'consumerDashboard': 'Consumer Dashboard',
+      'harvestMarketplace': 'Harvest Marketplace',
+      'harvestMarketplaceDesc': 'Connect with buyers for your sorted produce',
+      'recyclersMarketplace': 'Recyclers Marketplace', 
+      'recyclersMarketplaceDesc': 'Find certified recyclers for your waste'
+    };
+    return hardcodedText[key] || key;
   };
 
   const formatNumber = (num: number) => {

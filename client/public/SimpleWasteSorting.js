@@ -228,23 +228,27 @@ class ReactWasteSorting {
     if (confidence > 0.5) {
       console.log(`📊 Raw AI classification received: "${classification}" (${(confidence * 100).toFixed(1)}% confidence)`);
       
-      // Map AI classifications to waste count categories - exact matching first
-      const exactMatch = classification.toLowerCase().trim();
-      
-      if (exactMatch === 'metal' || exactMatch === 'electronic' || exactMatch.includes('metal')) {
-        this.wasteCounts.metal++;
-        console.log(`🔧 Metal count increased to: ${this.wasteCounts.metal}`);
-      } else if (exactMatch === 'wet' || exactMatch === 'organic' || exactMatch.includes('wet') || exactMatch.includes('food')) {
-        this.wasteCounts.wet++;
-        console.log(`💧 Wet count increased to: ${this.wasteCounts.wet}`);
-      } else if (exactMatch === 'dry' || exactMatch === 'paper' || exactMatch.includes('dry') || exactMatch.includes('paper')) {
-        this.wasteCounts.dry++;
-        console.log(`📄 Dry count increased to: ${this.wasteCounts.dry}`);
-      } else {
-        // Log what we're getting and default to dry
-        console.log(`❓ Unmapped classification: "${classification}" -> defaulting to dry`);
-        this.wasteCounts.dry++;
-        console.log(`📄 Dry count increased to: ${this.wasteCounts.dry}`);
+      // Map exact Teachable Machine class names to waste count categories
+      switch (classification) {
+        case 'Metal':
+          this.wasteCounts.metal++;
+          console.log(`🔧 Metal count increased to: ${this.wasteCounts.metal}`);
+          break;
+        case 'Wet':
+          this.wasteCounts.wet++;
+          console.log(`💧 Wet count increased to: ${this.wasteCounts.wet}`);
+          break;
+        case 'Dry':
+          this.wasteCounts.dry++;
+          console.log(`📄 Dry count increased to: ${this.wasteCounts.dry}`);
+          break;
+        case 'Unclassified':
+          // Don't increment any count for unclassified
+          console.log(`❓ Unclassified waste - not counting`);
+          break;
+        default:
+          console.log(`❓ Unknown classification: "${classification}" -> not counting`);
+          break;
       }
       
       console.log(`📊 Current internal counts:`, this.wasteCounts);
@@ -268,30 +272,26 @@ class ReactWasteSorting {
   }
 
   mapClassificationToWasteType(classification) {
-    const exactMatch = classification.toLowerCase().trim();
-    
     console.log(`🗺️ Mapping "${classification}" to React waste type...`);
     
-    // Enhanced mapping for Teachable Machine classifications
-    if (exactMatch === 'metal' || exactMatch.includes('metal') || exactMatch.includes('electronic')) {
-      console.log(`🔧 Mapped to: electronic`);
-      return 'electronic';
-    } else if (exactMatch === 'wet' || exactMatch.includes('wet') || exactMatch.includes('organic') || exactMatch.includes('food')) {
-      console.log(`💧 Mapped to: wet`);
-      return 'wet';
-    } else if (exactMatch === 'dry' || exactMatch.includes('dry') || exactMatch.includes('paper') || exactMatch.includes('cardboard')) {
-      console.log(`📄 Mapped to: dry`);
-      return 'dry';
-    } else if (exactMatch.includes('plastic')) {
-      console.log(`♻️ Mapped to: plastic`);
-      return 'plastic';
-    } else if (exactMatch.includes('medical')) {
-      console.log(`🏥 Mapped to: medical`);
-      return 'medical';
+    // Map exact Teachable Machine class names to React waste types
+    switch (classification) {
+      case 'Metal':
+        console.log(`🔧 Mapped to: electronic`);
+        return 'electronic';
+      case 'Wet':
+        console.log(`💧 Mapped to: wet`);
+        return 'wet';
+      case 'Dry':
+        console.log(`📄 Mapped to: dry`);
+        return 'dry';
+      case 'Unclassified':
+        console.log(`❓ Mapped to: dry (default for unclassified)`);
+        return 'dry';
+      default:
+        console.log(`❓ Unknown classification "${classification}" -> defaulting to dry`);
+        return 'dry';
     }
-    
-    console.log(`❓ Unknown classification "${classification}" -> defaulting to dry`);
-    return 'dry';
   }
 
   stopClassification() {

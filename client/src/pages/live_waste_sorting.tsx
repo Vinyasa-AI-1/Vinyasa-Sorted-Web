@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { UserCircle, Globe, Camera, Play, Pause } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -34,21 +34,48 @@ export default function LiveWasteSorting() {
     electronic: 0,
     medical: 0
   });
+  const [isP5Active, setIsP5Active] = useState(false);
+  const [currentClassification, setCurrentClassification] = useState<{label: string, confidence: number} | null>(null);
+  const cameraContainerRef = useRef<HTMLDivElement>(null);
 
-  // Simulate waste detection for demo purposes
+  // Integration with P5.js waste detection
   useEffect(() => {
-    if (isStreaming) {
-      const interval = setInterval(() => {
-        const wasteTypes = ['dry', 'wet', 'plastic', 'electronic', 'medical'] as const;
-        const randomType = wasteTypes[Math.floor(Math.random() * wasteTypes.length)];
-        
+    // Set up event listener for P5.js waste detection events
+    const handleWasteDetected = (event: CustomEvent) => {
+      const { type, confidence, originalLabel } = event.detail;
+      
+      if (confidence > 0.6 && type && type in wasteCounts) {
         setWasteCounts(prev => ({
           ...prev,
-          [randomType]: prev[randomType] + 1
+          [type]: prev[type as keyof WasteCounts] + 1
         }));
-      }, 2000);
-      
-      return () => clearInterval(interval);
+        
+        setCurrentClassification({
+          label: originalLabel,
+          confidence: confidence
+        });
+      }
+    };
+
+    window.addEventListener('wasteDetected', handleWasteDetected as EventListener);
+    
+    // Set up model status callback
+    (window as any).updateModelStatus = (loaded: boolean) => {
+      setIsP5Active(loaded);
+    };
+    
+    return () => {
+      window.removeEventListener('wasteDetected', handleWasteDetected as EventListener);
+      delete (window as any).updateModelStatus;
+    };
+  }, []);
+
+  // Handle streaming toggle with P5.js integration
+  useEffect(() => {
+    if (isStreaming && (window as any).p5WasteSorting) {
+      (window as any).p5WasteSorting.startClassification();
+    } else if (!isStreaming && (window as any).p5WasteSorting) {
+      (window as any).p5WasteSorting.stopClassification();
     }
   }, [isStreaming]);
 
@@ -64,6 +91,13 @@ export default function LiveWasteSorting() {
       electronic: 0,
       medical: 0
     });
+    
+    // Reset P5.js counts as well
+    if ((window as any).p5WasteSorting) {
+      (window as any).p5WasteSorting.resetCounts();
+    }
+    
+    setCurrentClassification(null);
   };
 
   const getWasteTypeColor = (type: string) => {
@@ -197,25 +231,51 @@ export default function LiveWasteSorting() {
               </div>
             </div>
             
-            {/* Camera Placeholder */}
-            <div className="bg-gray-100 rounded-lg h-96 flex items-center justify-center mb-6">
-              <div className="text-center">
-                <Camera className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 text-lg">
-                  {isStreaming ? 'AI Waste Sorting Camera Active' : 'Camera Stream Inactive'}
-                </p>
-                <p className="text-gray-500 text-sm mt-2">
-                  {isStreaming ? 'Detecting and sorting waste in real-time...' : 'Click "Start Stream" to begin waste detection'}
-                </p>
+            {/* Camera Stream - P5.js will render here */}
+            <div className="relative">
+              <div id="camera-container" ref={cameraContainerRef} className="w-full h-96 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
+                {!isP5Active && (
+                  <div className="text-center">
+                    <Camera className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                    <p className="text-gray-600 text-lg">
+                      {isStreaming ? 'Loading AI Model...' : 'Camera Stream Inactive'}
+                    </p>
+                    <p className="text-gray-500 text-sm mt-2">
+                      {isStreaming ? 'Initializing Teachable Machine model...' : 'Click "Start Stream" to begin waste detection'}
+                    </p>
+                  </div>
+                )}
               </div>
+              
+              {/* Live Classification Display */}
+              {currentClassification && isStreaming && (
+                <div className="absolute top-4 right-4 bg-black bg-opacity-75 text-white p-3 rounded-lg">
+                  <p className="text-sm font-semibold">
+                    Detected: {currentClassification.label}
+                  </p>
+                  <p className="text-xs">
+                    Confidence: {(currentClassification.confidence * 100).toFixed(1)}%
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Status Indicator */}
-            <div className="flex items-center justify-center">
-              <div className={`w-3 h-3 rounded-full mr-2 ${isStreaming ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></div>
-              <span className="text-sm text-gray-600">
-                {isStreaming ? 'Live Detection Active' : 'Detection Stopped'}
-              </span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <div className={`w-3 h-3 rounded-full mr-2 ${
+                  isStreaming && isP5Active ? 'bg-green-500 animate-pulse' : 
+                  isStreaming ? 'bg-yellow-500 animate-pulse' : 'bg-red-500'
+                }`}></div>
+                <span className="text-sm text-gray-600">
+                  {isStreaming && isP5Active ? 'Live AI Detection Active' : 
+                   isStreaming ? 'Loading AI Model...' : 'Detection Stopped'}
+                </span>
+              </div>
+              
+              <div className="text-xs text-gray-500">
+                Model: {isP5Active ? 'Teachable Machine Loaded' : 'Loading...'}
+              </div>
             </div>
           </CardContent>
         </Card>

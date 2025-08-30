@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Legend } from "recharts";
 import { useQuery } from "@tanstack/react-query";
 import type { translations } from "@/lib/translations";
 
@@ -31,6 +31,7 @@ export default function RevenueCharts({ t }: RevenueChartsProps) {
                 <XAxis dataKey="month" />
                 <YAxis />
                 <Tooltip formatter={(value) => [`₹${Number(value).toLocaleString()}`, ""]} />
+                <Legend />
                 <Bar dataKey="revenue" fill="#22543D" name={t('Revenue')} />
                 <Bar dataKey="target" fill="#68D391" name={t('Target')} />
               </BarChart>
@@ -50,7 +51,8 @@ export default function RevenueCharts({ t }: RevenueChartsProps) {
                 <XAxis dataKey="month" />
                 <YAxis />
                 <Tooltip />
-                <Line type="monotone" dataKey="volume" stroke="#22543D" strokeWidth={2} />
+                <Legend />
+                <Line type="monotone" dataKey="volume" stroke="#22543D" strokeWidth={2} name={t('Volume')} />
               </LineChart>
             </ResponsiveContainer>
           </div>

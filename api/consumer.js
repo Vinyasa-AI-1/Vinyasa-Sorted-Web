@@ -412,12 +412,39 @@ export default function handler(req, res) {
     }
   ];
 
+  // Calculate overall summary from all bin types
+  const totalOptimalRevenue = binTypes.reduce((sum, bin) => {
+    const binRevenue = bin.optimalRevenuePlan
+      .filter(plan => !plan.isVinyasaCoins)
+      .reduce((planSum, plan) => planSum + plan.total, 0);
+    return sum + binRevenue;
+  }, 0);
+
+  const totalVinyasaCoins = binTypes.reduce((sum, bin) => {
+    const binCoins = bin.optimalRevenuePlan
+      .filter(plan => plan.isVinyasaCoins)
+      .reduce((planSum, plan) => planSum + plan.total, 0);
+    return sum + binCoins;
+  }, 0);
+
+  const totalItems = binTypes.reduce((sum, bin) => sum + bin.totalItems, 0);
+  const avgRevenuePerItem = totalItems > 0 ? totalOptimalRevenue / totalItems : 0;
+
   // Overall summary data
   const overallSummaryData = {
-    totalVinyasaCoins: 2450,
+    totalOptimalRevenue: totalOptimalRevenue,
+    totalVinyasaCoins: totalVinyasaCoins,
+    totalItems: totalItems,
+    avgRevenuePerItem: avgRevenuePerItem,
     totalWasteSorted: 1630,
     avgOptimization: 88.5,
-    topPerformingBin: "Public Smart Bin"
+    topPerformingBin: "Public Smart Bin",
+    breakdown: [
+      { category: "Plastic", revenue: 58590, percentage: 45, items: 1800 },
+      { category: "Electronic", revenue: 42625, percentage: 33, items: 775 },
+      { category: "Dry", revenue: 17080, percentage: 13, items: 1710 },
+      { category: "Medical", revenue: 11250, percentage: 9, items: 250 }
+    ]
   };
 
   // Revenue comparison data

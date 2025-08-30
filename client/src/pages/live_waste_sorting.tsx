@@ -72,11 +72,6 @@ export default function LiveWasteSorting() {
     return () => {
       window.removeEventListener('wasteDetected', handleWasteDetected as EventListener);
       delete (window as any).updateModelStatus;
-      
-      // Cleanup P5.js when component unmounts
-      if ((window as any).p5WasteSorting) {
-        (window as any).p5WasteSorting.cleanup();
-      }
     };
   }, []);
 
@@ -84,8 +79,8 @@ export default function LiveWasteSorting() {
   useEffect(() => {
     const initializeCamera = async () => {
       // Wait for the DOM and libraries to be ready
-      if (!(window as any).p5WasteSorting || !(window as any).ml5) {
-        console.log('Libraries not ready, retrying...');
+      if (!(window as any).p5WasteSorting) {
+        console.log('Waste sorting system not ready, retrying...');
         setTimeout(initializeCamera, 200);
         return;
       }
@@ -103,9 +98,10 @@ export default function LiveWasteSorting() {
     setTimeout(initializeCamera, 1000);
     
     return () => {
-      // Cleanup when leaving the page
+      // Only stop classification, don't cleanup canvas on hot reloads
       if ((window as any).p5WasteSorting) {
-        (window as any).p5WasteSorting.cleanup();
+        console.log('🧹 Component unmounting - stopping classification only');
+        (window as any).p5WasteSorting.stopClassification();
       }
     };
   }, []); // Empty dependency array ensures this runs on every page mount

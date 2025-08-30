@@ -358,9 +358,15 @@ class WasteSortingSystem {
       this.stream = null;
     }
     
-    // Clear canvas
-    if (this.canvas && this.canvas.parentNode) {
-      this.canvas.parentNode.removeChild(this.canvas);
+    // Clear canvas safely
+    if (this.canvas) {
+      try {
+        if (this.canvas.parentNode && this.canvas.parentNode.contains(this.canvas)) {
+          this.canvas.parentNode.removeChild(this.canvas);
+        }
+      } catch (error) {
+        console.log('Canvas already removed:', error.message);
+      }
     }
     
     this.initialized = false;
@@ -368,6 +374,8 @@ class WasteSortingSystem {
     this.video = null;
     this.ctx = null;
     this.hasCamera = false;
+    this.classifier = null;
+    this.classificationMode = 'demo';
     
     console.log('✅ Cleanup completed');
   }

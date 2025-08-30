@@ -109,9 +109,36 @@ class WasteSortingSystem {
       
       this.hasCamera = true;
       console.log('📹 Camera initialized successfully');
+      
+      // Try to load Teachable Machine model
+      await this.setupTeachableMachine();
+      
     } catch (error) {
       console.log('📹 Camera not available - using demo mode:', error.message);
       this.hasCamera = false;
+    }
+  }
+
+  async setupTeachableMachine() {
+    try {
+      // Check if ML5 is available and working
+      if (typeof ml5 === 'undefined') {
+        throw new Error('ML5.js not available');
+      }
+
+      console.log('🤖 Loading Teachable Machine model...');
+      const modelURL = "https://teachablemachine.withgoogle.com/models/2JfuDAEaL/";
+      
+      // Load the model
+      this.classifier = await ml5.imageClassifier(modelURL + "model.json");
+      this.classificationMode = 'ai';
+      console.log('✅ Teachable Machine model loaded - Real AI detection enabled!');
+      
+    } catch (error) {
+      console.log('⚠️ Teachable Machine model failed to load:', error.message);
+      console.log('🎭 Falling back to demo detection mode');
+      this.classifier = null;
+      this.classificationMode = 'demo';
     }
   }
 
@@ -161,7 +188,10 @@ class WasteSortingSystem {
     this.ctx.fillStyle = 'white';
     this.ctx.font = '16px Arial';
     this.ctx.textAlign = 'left';
-    this.ctx.fillText(`Mode: ${this.hasCamera ? 'Live Camera' : 'Demo Mode'}`, 20, 35);
+    
+    const modeText = this.classificationMode === 'ai' ? 'AI Detection' : 
+                    this.hasCamera ? 'Camera Demo' : 'Demo Mode';
+    this.ctx.fillText(`Mode: ${modeText}`, 20, 35);
     this.ctx.fillText(`Status: ${isClassifying ? 'Active Detection' : 'Standby'}`, 20, 55);
     
     // Status indicator
@@ -185,8 +215,49 @@ class WasteSortingSystem {
     console.log('🚀 Starting waste classification...');
     isClassifying = true;
     
-    // Start detection simulation
-    this.simulateDetection();
+    if (this.classifier && this.hasCamera && this.classificationMode === 'ai') {
+      console.log('🤖 Using real Teachable Machine AI detection');
+      this.classifyWithAI();
+    } else {
+      console.log('🎭 Using simulated detection mode');
+      this.simulateDetection();
+    }
+  }
+
+  classifyWithAI() {
+    if (!isClassifying || !this.classifier || !this.video) {
+      return;
+    }
+
+    // Create a canvas to capture video frame for classification
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = 640;
+    tempCanvas.height = 480;
+    const tempCtx = tempCanvas.getContext('2d');
+    tempCtx.drawImage(this.video, 0, 0, 640, 480);
+
+    // Classify the current frame
+    this.classifier.classify(tempCanvas, (results) => {
+      if (!isClassifying) return;
+      
+      if (results && results[0]) {
+        const result = results[0];
+        const classification = result.label;
+        const confidence = result.confidence;
+        
+        console.log(`🤖 AI Detected: ${classification} (${(confidence * 100).toFixed(1)}% confidence)`);
+        
+        // Update counts and notify React
+        this.updateWasteCounts(classification, confidence);
+        this.sendToArduino(classification);
+        this.updateReactComponent(classification, confidence);
+      }
+      
+      // Continue classification
+      if (isClassifying) {
+        setTimeout(() => this.classifyWithAI(), 1000);
+      }
+    });
   }
 
   stopClassification() {

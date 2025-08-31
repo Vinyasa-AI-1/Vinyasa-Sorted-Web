@@ -33,6 +33,9 @@ class ReactWasteSorting {
   async initCamera() {
     console.log('🚀 Initializing camera system...');
     
+    // First cleanup any existing camera
+    this.cleanup();
+    
     try {
       // Get camera access
       console.log('🎥 Requesting camera permissions...');
@@ -480,11 +483,31 @@ class ReactWasteSorting {
       this.animationFrame = null;
     }
     
-    if (this.stream) {
-      this.stream.getTracks().forEach(track => track.stop());
-      this.stream = null;
+    // Force stop video element first
+    if (this.video) {
+      console.log('📹 Stopping video element...');
+      this.video.pause();
+      this.video.srcObject = null;
+      this.video.remove();
+      this.video = null;
+      console.log('📹 Video element stopped and removed');
     }
     
+    // Stop all camera tracks to turn off camera light
+    if (this.stream) {
+      console.log('📹 Stopping camera tracks to turn off camera light...');
+      this.stream.getTracks().forEach(track => {
+        console.log('🔴 Stopping track:', track.kind, track.readyState);
+        if (track.readyState === 'live') {
+          track.stop();
+          console.log('🔴 Track stopped successfully');
+        }
+      });
+      this.stream = null;
+      console.log('📹 All camera tracks stopped');
+    }
+    
+    // Clear canvas
     if (this.ctx && this.canvas) {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
@@ -492,17 +515,33 @@ class ReactWasteSorting {
     // Disconnect Arduino on cleanup
     this.disconnectArduino();
     
-    this.video = null;
     this.canvas = null;
     this.ctx = null;
     this.initialized = false;
     
-    console.log('✅ Cleanup completed');
+    // Force garbage collection hint
+    setTimeout(() => {
+      console.log('📹 Camera cleanup completed - light should be off now');
+    }, 100);
+    
+    console.log('✅ Cleanup completed - camera light should be off');
   }
 }
 
 // Global instance
 const wasteSystem = new ReactWasteSorting();
+
+// Global cleanup function for emergency camera release
+window.forceCleanupCamera = () => {
+  console.log('🚨 Emergency camera cleanup triggered');
+  wasteSystem.cleanup();
+};
+
+// Ensure camera cleanup on page unload
+window.addEventListener('beforeunload', () => {
+  console.log('📴 Page unloading - ensuring camera cleanup');
+  wasteSystem.cleanup();
+});
 
 // API for React integration
 window.p5WasteSorting = {

@@ -26,6 +26,18 @@ export default function LiveProduceSorting() {
   const { currentLanguage, changeLanguage, languages } = useLanguage();
   const { t, formatNumber } = useTranslation(currentLanguage);
   
+  // Add cleanup on browser navigation
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      if ((window as any).p5WasteSorting) {
+        (window as any).p5WasteSorting.cleanup();
+      }
+    };
+    
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, []);
+  
   const [selectedVariety, setSelectedVariety] = useState("Apples");
   const [isStreaming, setIsStreaming] = useState(false);
   const [produceCounts, setProduceCounts] = useState<ProduceCounts>({
@@ -139,6 +151,13 @@ export default function LiveProduceSorting() {
         console.log('🧹 Component unmounting - cleaning up camera system');
         (window as any).p5WasteSorting.stopClassification();
         (window as any).p5WasteSorting.cleanup();
+        
+        // Force additional cleanup after a brief delay
+        setTimeout(() => {
+          if ((window as any).forceCleanupCamera) {
+            (window as any).forceCleanupCamera();
+          }
+        }, 100);
       }
       // Reset streaming state when component unmounts
       setIsStreaming(false);

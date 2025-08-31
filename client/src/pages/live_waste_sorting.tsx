@@ -76,6 +76,11 @@ export default function LiveWasteSorting() {
     return () => {
       window.removeEventListener('wasteDetected', handleWasteDetected as EventListener);
       delete (window as any).updateModelStatus;
+      
+      // Also stop classification and cleanup camera on event listener cleanup
+      if ((window as any).p5WasteSorting) {
+        (window as any).p5WasteSorting.stopClassification();
+      }
     };
   }, []);
 
@@ -110,8 +115,11 @@ export default function LiveWasteSorting() {
       // Properly cleanup camera and stop all processes on unmount
       if ((window as any).p5WasteSorting) {
         console.log('🧹 Component unmounting - cleaning up camera system');
+        (window as any).p5WasteSorting.stopClassification();
         (window as any).p5WasteSorting.cleanup();
       }
+      // Reset streaming state when component unmounts
+      setIsStreaming(false);
     };
   }, []); // Empty dependency array ensures this runs on every page mount
 

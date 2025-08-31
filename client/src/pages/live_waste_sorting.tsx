@@ -291,7 +291,7 @@ export default function LiveWasteSorting() {
                   data-testid="button-toggle-stream"
                 >
                   {isStreaming ? <Pause className="w-4 h-4 mr-2" /> : <Play className="w-4 h-4 mr-2" />}
-                  {isStreaming ? 'Stop Stream' : 'Start Stream'}
+                  {isStreaming ? t('stopStream') : t('startStream')}
                 </Button>
                 <Button
                   onClick={handleReset}
@@ -299,15 +299,15 @@ export default function LiveWasteSorting() {
                   className="border-forest text-forest hover:bg-forest hover:text-white"
                   data-testid="button-reset-counts"
                 >
-                  Reset Counts
+                  {t('resetCounts')}
                 </Button>
                 <Button
                   onClick={isArduinoConnected ? handleArduinoDisconnect : handleArduinoConnect}
                   variant="outline"
                   className={`${isArduinoConnected ? 'border-red-500 text-red-500 hover:bg-red-500' : 'border-blue-500 text-blue-500 hover:bg-blue-500'} hover:text-white`}
-                  data-testid="button-arduino-connection"
+                  data-testid="button-vinyasa-sorter-connection"
                 >
-                  {isArduinoConnected ? 'Disconnect Arduino' : 'Connect Arduino'}
+                  {isArduinoConnected ? t('disconnectVinyasaSorter') : t('connectVinyasaSorter')}
                 </Button>
               </div>
             </div>
@@ -333,10 +333,10 @@ export default function LiveWasteSorting() {
                     <div>
                       <Camera className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                       <p className="text-white text-lg">
-                        {isStreaming ? 'Loading AI Model...' : 'Camera Stream Inactive'}
+                        {isStreaming ? t('loadingAiModel') : t('cameraStreamInactive')}
                       </p>
                       <p className="text-gray-300 text-sm mt-2">
-                        {isStreaming ? 'Initializing Teachable Machine model...' : 'Click "Start Stream" to begin waste detection'}
+                        {isStreaming ? t('initializingVinyasaAi') : t('clickStartStream')}
                       </p>
                     </div>
                   </div>
@@ -347,10 +347,10 @@ export default function LiveWasteSorting() {
               {currentClassification && isStreaming && (
                 <div className="absolute top-4 right-4 bg-black bg-opacity-75 text-white p-3 rounded-lg">
                   <p className="text-sm font-semibold">
-                    Detected: {currentClassification.label}
+                    {t('detected')}: {currentClassification.label}
                   </p>
                   <p className="text-xs">
-                    Confidence: {(currentClassification.confidence * 100).toFixed(1)}%
+                    {t('confidence')}: {(currentClassification.confidence * 100).toFixed(1)}%
                   </p>
                 </div>
               )}
@@ -364,13 +364,13 @@ export default function LiveWasteSorting() {
                   isStreaming ? 'bg-yellow-500 animate-pulse' : 'bg-red-500'
                 }`}></div>
                 <span className="text-sm text-gray-600">
-                  {isStreaming && isP5Active ? 'Live AI Detection Active' : 
-                   isStreaming ? 'Loading AI Model...' : 'Detection Stopped'}
+                  {isStreaming && isP5Active ? t('liveAiDetectionActive') : 
+                   isStreaming ? t('loadingAiModel') : t('detectionStopped')}
                 </span>
               </div>
               
               <div className="text-xs text-gray-500">
-                Model: {isP5Active ? 'Teachable Machine Loaded' : 'Loading...'} | Arduino: {isArduinoConnected ? 'Connected' : 'Disconnected'}
+                Model: {isP5Active ? t('vinyasaAiLoaded') : t('loading')} | {t('vinyasaSorterMachine')}: {isArduinoConnected ? t('connected') : t('disconnected')}
               </div>
             </div>
           </CardContent>
@@ -379,16 +379,16 @@ export default function LiveWasteSorting() {
         {/* Waste Counts Table */}
         <Card className="bg-white rounded-xl shadow-lg">
           <CardContent className="p-6">
-            <h2 className="text-2xl font-bold text-forest mb-6">Waste Category Counts</h2>
+            <h2 className="text-2xl font-bold text-forest mb-6">{t('wasteCategoryCounts')}</h2>
             
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="text-left p-4 font-semibold text-forest">Waste Category</th>
-                    <th className="text-left p-4 font-semibold text-forest">Count</th>
-                    <th className="text-left p-4 font-semibold text-forest">Percentage</th>
-                    <th className="text-left p-4 font-semibold text-forest">Recycler Type</th>
+                    <th className="text-left p-4 font-semibold text-forest">{t('wasteCategory')}</th>
+                    <th className="text-left p-4 font-semibold text-forest">{t('count')}</th>
+                    <th className="text-left p-4 font-semibold text-forest">{t('percentage')}</th>
+                    <th className="text-left p-4 font-semibold text-forest">{t('recyclerType')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -400,7 +400,7 @@ export default function LiveWasteSorting() {
                       <tr key={type} className="border-b hover:bg-gray-50">
                         <td className="p-4">
                           <span className={`px-3 py-1 rounded-full text-sm font-medium ${getWasteTypeColor(type)}`}>
-                            {type.charAt(0).toUpperCase() + type.slice(1)} Waste
+                            {t(`${type}Waste`)}
                           </span>
                         </td>
                         <td className="p-4 font-semibold text-lg" data-testid={`count-${type}`}>
@@ -410,12 +410,12 @@ export default function LiveWasteSorting() {
                           {percentage}%
                         </td>
                         <td className="p-4 text-gray-600">
-                          {type === 'dry' && 'Compost Recyclers'}
-                          {type === 'wet' && 'Biogas Plants'}
-                          {type === 'plastic' && 'Plastic Recyclers'}
-                          {type === 'electronic' && 'eWaste Recyclers'}
-                          {type === 'medical' && 'Medical Waste Recyclers'}
-                          {type === 'metal' && 'Metal Recyclers'}
+                          {type === 'dry' && t('compostRecyclers')}
+                          {type === 'wet' && t('biogasPlants')}
+                          {type === 'plastic' && t('plasticRecyclers')}
+                          {type === 'electronic' && t('ewasteRecyclers')}
+                          {type === 'medical' && t('medicalWasteRecyclers')}
+                          {type === 'metal' && t('metalRecyclers')}
                         </td>
                       </tr>
                     );
@@ -430,19 +430,19 @@ export default function LiveWasteSorting() {
                 <p className="text-2xl font-bold text-forest" data-testid="total-items-detected">
                   {formatNumber(Object.values(wasteCounts).reduce((sum, val) => sum + val, 0))}
                 </p>
-                <p className="text-gray-600">Total Items Detected</p>
+                <p className="text-gray-600">{t('totalItemsDetected')}</p>
               </div>
               <div className="bg-harvest/10 p-4 rounded-lg text-center">
                 <p className="text-2xl font-bold text-forest" data-testid="detection-rate">
-                  {isStreaming ? '1 item/2sec' : '0 items/sec'}
+                  {isStreaming ? `1 ${t('itemsPerSec').replace('items/sec', 'item/2sec')}` : `0 ${t('itemsPerSec')}`}
                 </p>
-                <p className="text-gray-600">Detection Rate</p>
+                <p className="text-gray-600">{t('detectionRate')}</p>
               </div>
               <div className="bg-fresh/10 p-4 rounded-lg text-center">
                 <p className="text-2xl font-bold text-forest" data-testid="accuracy-rate">
                   95.8%
                 </p>
-                <p className="text-gray-600">AI Accuracy</p>
+                <p className="text-gray-600">{t('aiAccuracy')}</p>
               </div>
             </div>
           </CardContent>

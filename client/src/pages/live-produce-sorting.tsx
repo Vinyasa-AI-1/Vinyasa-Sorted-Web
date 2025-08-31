@@ -47,22 +47,39 @@ export default function LiveProduceSorting() {
     "Potatoes", "Onions", "Carrots", "Bell Peppers", "Cucumbers", "Spinach"
   ];
 
-  // Integration with P5.js produce detection
+  // Map waste detection results to produce quality categories
+  const mapWasteToProduceQuality = (wasteType: string): string => {
+    // Map waste categories to produce quality categories
+    switch (wasteType) {
+      case 'dry': return 'premium';
+      case 'wet': return 'ripe';
+      case 'plastic': return 'yetToRipe';
+      case 'electronic': return 'overripe';
+      case 'medical': return 'rotten';
+      case 'metal': return 'premium';
+      default: return 'ripe';
+    }
+  };
+
+  // Integration with P5.js waste detection system (reused for produce)
   useEffect(() => {
-    // Set up event listener for P5.js produce detection events
-    const handleProduceDetected = (event: CustomEvent) => {
+    // Set up event listener for P5.js waste detection events (reused for produce)
+    const handleWasteDetected = (event: CustomEvent) => {
       const { type, confidence, originalLabel } = event.detail;
-      console.log('🎯 React received produce detected event:', type, confidence, originalLabel);
+      console.log('🎯 React received detection event (mapped to produce):', type, confidence, originalLabel);
       
-      if (confidence > 0.5 && type && type in produceCounts) {
-        console.log('📊 Updating produce counts for type:', type);
+      // Map waste type to produce quality
+      const produceQuality = mapWasteToProduceQuality(type);
+      
+      if (confidence > 0.5 && produceQuality && produceQuality in produceCounts) {
+        console.log('📊 Updating produce counts for quality:', produceQuality);
         setProduceCounts(prev => ({
           ...prev,
-          [type]: prev[type as keyof ProduceCounts] + 1
+          [produceQuality]: prev[produceQuality as keyof ProduceCounts] + 1
         }));
         
         setCurrentClassification({
-          label: originalLabel,
+          label: `${selectedVariety} - ${produceQuality}`,
           confidence: confidence
         });
       } else {
@@ -70,41 +87,41 @@ export default function LiveProduceSorting() {
       }
     };
 
-    window.addEventListener('produceDetected', handleProduceDetected as EventListener);
+    window.addEventListener('wasteDetected', handleWasteDetected as EventListener);
     
     // Set up model status callback
-    (window as any).updateProduceModelStatus = (loaded: boolean) => {
-      console.log('Produce model status updated:', loaded);
+    (window as any).updateModelStatus = (loaded: boolean) => {
+      console.log('Model status updated for produce sorting:', loaded);
       setIsP5Active(loaded);
     };
     
     return () => {
-      window.removeEventListener('produceDetected', handleProduceDetected as EventListener);
-      delete (window as any).updateProduceModelStatus;
+      window.removeEventListener('wasteDetected', handleWasteDetected as EventListener);
+      delete (window as any).updateModelStatus;
     };
-  }, []);
+  }, [selectedVariety]);
 
-  // Initialize camera system when component mounts
+  // Initialize camera system when component mounts (using waste sorting system)
   useEffect(() => {
     const initializeCamera = async () => {
       // Wait for the canvas to be available
-      if (!canvasRef.current || !(window as any).p5ProduceSorting) {
-        console.log('Canvas or produce sorting system not ready, retrying...');
+      if (!canvasRef.current || !(window as any).p5WasteSorting) {
+        console.log('Canvas or waste sorting system not ready, retrying...');
         setTimeout(initializeCamera, 200);
         return;
       }
 
-      console.log('Initializing produce camera system...');
+      console.log('Initializing camera system for produce sorting...');
       
-      // First initialize the camera
-      const success = await (window as any).p5ProduceSorting.init();
+      // First initialize the camera using the waste sorting system
+      const success = await (window as any).p5WasteSorting.init();
       if (success) {
-        console.log('Produce camera initialized successfully');
+        console.log('Camera initialized successfully for produce sorting');
         
         // Then attach to our canvas
-        (window as any).p5ProduceSorting.attachToCanvas(canvasRef.current);
+        (window as any).p5WasteSorting.attachToCanvas(canvasRef.current);
       } else {
-        console.error('Failed to initialize produce camera');
+        console.error('Failed to initialize camera for produce sorting');
       }
     };
 
@@ -113,21 +130,21 @@ export default function LiveProduceSorting() {
     
     return () => {
       // Properly cleanup camera and stop all processes on unmount
-      if ((window as any).p5ProduceSorting) {
-        console.log('🧹 Component unmounting - cleaning up produce camera system');
-        (window as any).p5ProduceSorting.cleanup();
+      if ((window as any).p5WasteSorting) {
+        console.log('🧹 Component unmounting - cleaning up camera system');
+        (window as any).p5WasteSorting.cleanup();
       }
     };
   }, []); // Empty dependency array ensures this runs on every page mount
 
-  // Handle streaming toggle with P5.js integration
+  // Handle streaming toggle with P5.js integration (using waste sorting system)
   useEffect(() => {
-    if (isStreaming && (window as any).p5ProduceSorting) {
-      console.log('🚀 Starting produce classification from React...');
-      (window as any).p5ProduceSorting.startClassification();
-    } else if (!isStreaming && (window as any).p5ProduceSorting) {
-      console.log('⏹️ Stopping produce classification from React...');
-      (window as any).p5ProduceSorting.stopClassification();
+    if (isStreaming && (window as any).p5WasteSorting) {
+      console.log('🚀 Starting classification for produce sorting from React...');
+      (window as any).p5WasteSorting.startClassification();
+    } else if (!isStreaming && (window as any).p5WasteSorting) {
+      console.log('⏹️ Stopping classification for produce sorting from React...');
+      (window as any).p5WasteSorting.stopClassification();
     }
   }, [isStreaming]);
 
@@ -145,17 +162,17 @@ export default function LiveProduceSorting() {
     });
     
     // Reset P5.js counts as well
-    if ((window as any).p5ProduceSorting) {
-      (window as any).p5ProduceSorting.resetCounts();
+    if ((window as any).p5WasteSorting) {
+      (window as any).p5WasteSorting.resetCounts();
     }
     
     setCurrentClassification(null);
   };
 
   const handleVinyasaSorterConnect = async () => {
-    if ((window as any).p5ProduceSorting) {
+    if ((window as any).p5WasteSorting) {
       console.log('🔌 User requesting Vinyasa Sorter connection...');
-      const success = await (window as any).p5ProduceSorting.connectSorter();
+      const success = await (window as any).p5WasteSorting.connectArduino();
       setIsVinyasaSorterConnected(success);
       
       if (success) {
@@ -167,9 +184,9 @@ export default function LiveProduceSorting() {
   };
 
   const handleVinyasaSorterDisconnect = async () => {
-    if ((window as any).p5ProduceSorting) {
+    if ((window as any).p5WasteSorting) {
       console.log('🔌 User disconnecting Vinyasa Sorter...');
-      await (window as any).p5ProduceSorting.disconnectSorter();
+      await (window as any).p5WasteSorting.disconnectArduino();
       setIsVinyasaSorterConnected(false);
       console.log('🔌 Vinyasa Sorter disconnected - UI updated');
     }
@@ -358,7 +375,7 @@ export default function LiveProduceSorting() {
             {/* Camera Stream */}
             <div className="relative">
               <div 
-                id="produce-camera-container" 
+                id="camera-container" 
                 ref={cameraContainerRef} 
                 className="w-full h-96 bg-gray-900 rounded-lg overflow-hidden relative"
                 style={{ position: 'relative', width: '640px', height: '480px', maxWidth: '100%' }}

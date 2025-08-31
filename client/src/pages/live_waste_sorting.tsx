@@ -107,10 +107,10 @@ export default function LiveWasteSorting() {
     setTimeout(initializeCamera, 1000);
     
     return () => {
-      // Only stop classification on unmount
+      // Properly cleanup camera and stop all processes on unmount
       if ((window as any).p5WasteSorting) {
-        console.log('🧹 Component unmounting - stopping classification only');
-        (window as any).p5WasteSorting.stopClassification();
+        console.log('🧹 Component unmounting - cleaning up camera system');
+        (window as any).p5WasteSorting.cleanup();
       }
     };
   }, []); // Empty dependency array ensures this runs on every page mount

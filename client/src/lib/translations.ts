@@ -475,6 +475,14 @@ export const translations = {
     "connected": "Connected",
     "disconnected": "Disconnected",
     "detected": "Detected",
+    
+    // Live Produce Sorting Page
+    "selectProduce": "Select Produce Variety",
+    "selectVariety": "Choose variety",
+    "produceQualityCounts": "Produce Quality Counts",
+    "producerUserName": "Rahul Patil",
+    "storage": "Storage",
+    "processing": "Processing",
     "wasteCategoryCounts": "Waste Category Counts",
     "wasteCategory": "Waste Category",
     "count": "Count",
@@ -920,6 +928,14 @@ export const translations = {
     "connected": "कनेक्टेड",
     "disconnected": "डिस्कनेक्टेड",
     "detected": "पता लगाया गया",
+    
+    // Live Produce Sorting Page
+    "selectProduce": "उत्पादन किस्म चुनें",
+    "selectVariety": "किस्म चुनें",
+    "produceQualityCounts": "उत्पादन गुणवत्ता गणना",
+    "producerUserName": "राहुल पाटिल",
+    "storage": "भंडारण",
+    "processing": "प्रसंस्करण",
     "wasteCategoryCounts": "वेस्ट श्रेणी गिनती",
     "wasteCategory": "वेस्ट श्रेणी",
     "count": "गिनती",
@@ -1362,6 +1378,14 @@ export const translations = {
     "connected": "সংযুক্ত",
     "disconnected": "সংযোগ বিচ্ছিন্ন",
     "detected": "সনাক্ত করা হয়েছে",
+    
+    // Live Produce Sorting Page
+    "selectProduce": "উৎপাদন বৈচিত্র্য নির্বাচন করুন",
+    "selectVariety": "বৈচিত্র্য নির্বাচন করুন",
+    "produceQualityCounts": "উৎপাদন গুণমান গণনা",
+    "producerUserName": "রাহুল পাটিল",
+    "storage": "ভাণ্ডার",
+    "processing": "প্রক্রিয়াকরণ",
     "wasteCategoryCounts": "বর্জ্য শ্রেণী গণনা",
     "wasteCategory": "বর্জ্য শ্রেণী",
     "count": "গণনা",
@@ -1542,7 +1566,35 @@ export const translations = {
     "Distant (₹150/kg)": "దూర (₹150/కిలో)",
     "Processing (₹120/kg)": "ప్రాసెసింగ్ (₹120/కిలో)",
     "Local (₹100/kg)": "స్థానిక (₹100/కిలో)",
-    "Processing (₹90/kg)": "ప్రాసెసింగ్ (₹90/కిలో)"
+    "Processing (₹90/kg)": "ప్రాసెసింగ్ (₹90/కిలో)",
+    
+    // Live Waste Sorting Page
+    "startStream": "స్ట్రీమ్ ప్రారంభించండి",
+    "stopStream": "స్ట్రీమ్ ఆపండి",
+    "resetCounts": "లెక్కలు రీసెట్ చేయండి",
+    "connectVinyasaSorter": "విన్యాస సార్టర్ కనెక్ట్ చేయండి",
+    "disconnectVinyasaSorter": "విన్యాస సార్టర్ డిస్కనెక్ట్ చేయండి",
+    "loadingAiModel": "AI మోడల్ లోడ్ అవుతోంది...",
+    "cameraStreamInactive": "కెమెరా స్ట్రీమ్ నిష్క్రియం",
+    "initializingVinyasaAi": "విన్యాస AI మోడల్ ప్రారంభం అవుతోంది...",
+    "clickStartStream": "వేస్ట్ డిటెక్షన్ ప్రారంభించడానికి \"స్ట్రీమ్ ప్రారంభించండి\" క్లిక్ చేయండి",
+    "detected": "గుర్తించబడింది",
+    "confidence": "విశ్వాసం",
+    "liveAiDetectionActive": "లైవ్ AI డిటెక్షన్ క్రియాశీలం",
+    "detectionStopped": "డిటెక్షన్ ఆపబడింది",
+    "vinyasaAiLoaded": "విన్యాస AI లోడ్ అయింది",
+    "loading": "లోడ్ అవుతోంది...",
+    "vinyasaSorterMachine": "విన్యాస సార్టర్ మెషిన్",
+    "connected": "కనెక్ట్ అయింది",
+    "disconnected": "డిస్కనెక్ట్ అయింది",
+    
+    // Live Produce Sorting Page
+    "selectProduce": "ఉత్పత్తి రకం ఎంచుకోండి",
+    "selectVariety": "రకం ఎంచుకోండి",
+    "produceQualityCounts": "ఉత్పత్తి నాణ్యత గణనలు",
+    "producerUserName": "రాహుల్ పాటిల్",
+    "storage": "నిల్వ",
+    "processing": "ప్రాసెసింగ్"
   },
   
   mr: {
@@ -1702,7 +1754,35 @@ export const translations = {
     "Distant (₹150/kg)": "दूर (₹150/किलो)",
     "Processing (₹120/kg)": "प्रक्रिया (₹120/किलो)",
     "Local (₹100/kg)": "स्थानिक (₹100/किलो)",
-    "Processing (₹90/kg)": "प्रक्रिया (₹90/किलो)"
+    "Processing (₹90/kg)": "प्रक्रिया (₹90/किलो)",
+    
+    // Live Waste Sorting Page
+    "startStream": "स्ट्रीम सुरू करा",
+    "stopStream": "स्ट्रीम थांबवा",
+    "resetCounts": "मोजणी रीसेट करा",
+    "connectVinyasaSorter": "विन्यास सॉर्टर कनेक्ट करा",
+    "disconnectVinyasaSorter": "विन्यास सॉर्टर डिस्कनेक्ट करा",
+    "loadingAiModel": "AI मॉडेल लोड होत आहे...",
+    "cameraStreamInactive": "कॅमेरा स्ट्रीम निष्क्रिय",
+    "initializingVinyasaAi": "विन्यास AI मॉडेल सुरू होत आहे...",
+    "clickStartStream": "कचरा डिटेक्शन सुरू करण्यासाठी \"स्ट्रीम सुरू करा\" क्लिक करा",
+    "detected": "शोधले",
+    "confidence": "विश्वास",
+    "liveAiDetectionActive": "लाइव्ह AI डिटेक्शन सक्रिय",
+    "detectionStopped": "डिटेक्शन थांबले",
+    "vinyasaAiLoaded": "विन्यास AI लोड झाले",
+    "loading": "लोड होत आहे...",
+    "vinyasaSorterMachine": "विन्यास सॉर्टर मशीन",
+    "connected": "कनेक्ट केले",
+    "disconnected": "डिस्कनेक्ट केले",
+    
+    // Live Produce Sorting Page
+    "selectProduce": "उत्पादन प्रकार निवडा",
+    "selectVariety": "जात निवडा",
+    "produceQualityCounts": "उत्पादन गुणवत्ता मोजणी",
+    "producerUserName": "राहुल पाटील",
+    "storage": "साठवण",
+    "processing": "प्रक्रिया"
   }
 };
 

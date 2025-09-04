@@ -8,6 +8,11 @@ import Dashboard from "@/pages/producer_dashboard";
 import CustomerCentralDashboard from "@/pages/customer_central_dashboard";
 import LiveWasteSorting from "@/pages/live_waste_sorting";
 import LiveProduceSorting from "@/pages/live-produce-sorting";
+import HarvestMarketplace from "@/pages/harvest-marketplace";
+import HarvestOptimizations from "@/pages/harvest-optimizations";
+import RecyclersMarketplace from "@/pages/recyclers-marketplace";
+import WasteReduction from "@/pages/waste-reduction";
+import ProductDemos from "@/pages/product-demos";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import Privacy from "@/pages/privacy";
@@ -24,6 +29,11 @@ function Router() {
       <Route path="/customer-central-dashboard" component={CustomerCentralDashboard} />
       <Route path="/live-waste-sorting" component={LiveWasteSorting} />
       <Route path="/live-produce-sorting" component={LiveProduceSorting} />
+      <Route path="/harvest-marketplace" component={HarvestMarketplace} />
+      <Route path="/harvest-optimizations" component={HarvestOptimizations} />
+      <Route path="/recyclers-marketplace" component={RecyclersMarketplace} />
+      <Route path="/waste-reduction" component={WasteReduction} />
+      <Route path="/product-demos" component={ProductDemos} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route path="/privacy" component={Privacy} />

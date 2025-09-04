@@ -1,62 +1,38 @@
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Leaf, Users, Target, Award, ArrowRight } from "lucide-react";
+import { Leaf, Users, Target, Award, ArrowRight, UserCircle } from "lucide-react";
 import { useLanguage } from "@/hooks/use-language";
-import { translations } from "@/lib/translations";
-import ChatInterface from "@/components/consumer/chat-interface";
+import { useTranslation } from "@/lib/translations";
+import ExpandableMenu from "@/components/ui/expandable-menu";
+import logoUrl from "@assets/logo_1756410067559.png";
 
 export default function About() {
-  const { language, setLanguage } = useLanguage();
-  const t = (key: keyof typeof translations.en) => {
-    return translations[language as keyof typeof translations]?.[key] || translations.en[key] || key;
-  };
+  const { currentLanguage } = useLanguage();
+  const { t, formatNumber } = useTranslation(currentLanguage);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
-      {/* Navigation Header */}
-      <nav className="bg-white shadow-lg sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/">
-              <div className="flex items-center cursor-pointer">
-                <Leaf className="h-8 w-8 text-forest mr-2" />
-                <span className="text-2xl font-bold text-forest">Vinyasa-AI</span>
-              </div>
-            </Link>
-            
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-forest transition-colors">
-                {t('home')}
-              </Link>
-              <Link href="/producer" className="text-gray-700 hover:text-forest transition-colors">
-                {t('producerDashboard')}
-              </Link>
-              <Link href="/customer-central" className="text-gray-700 hover:text-forest transition-colors">
-                {t('consumerDashboard')}
-              </Link>
-              <Link href="/contact" className="text-gray-700 hover:text-forest transition-colors">
-                {t('contactUs')}
-              </Link>
-              <Link href="/products" className="text-gray-700 hover:text-forest transition-colors">
-                {t('buyProducts')}
-              </Link>
+      {/* Header */}
+      <header className="bg-forest text-white py-0 px-2 shadow-lg">
+        <div className="container mx-auto">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center space-x-2">
+              <img src={logoUrl} alt="Vinyasa-AI Logo" className="h-16 w-16" />
+              <h1 className="text-xl font-bold" data-testid="header-title">
+                Vinyasa-AI - {t('aboutUs')}
+              </h1>
             </div>
-
             <div className="flex items-center space-x-4">
-              <select
-                value={language}
-                onChange={(e) => setLanguage(e.target.value)}
-                className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-forest"
-              >
-                <option value="en">English</option>
-                <option value="hi">हिंदी</option>
-                <option value="bn">বাংলা</option>
-              </select>
+              <span className="text-sage text-sm" data-testid="user-info">
+                {t('aboutPage') || 'About Page'}
+              </span>
+              <UserCircle className="text-xl" />
+              <ExpandableMenu />
             </div>
           </div>
         </div>
-      </nav>
+      </header>
 
       {/* Hero Section */}
       <section className="relative py-20">

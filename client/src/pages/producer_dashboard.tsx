@@ -5,17 +5,11 @@ import OptimalRevenueTable from "@/components/dashboard/optimal-revenue-table";
 import MarketCards from "@/components/dashboard/market-cards";
 import RevenueCharts from "@/components/dashboard/revenue-charts";
 import ChatInterface from "@/components/dashboard/chat-interface";
-import { UserCircle, Globe } from "lucide-react";
+import { UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Link } from "wouter";
+import ExpandableMenu from "@/components/ui/expandable-menu";
 import logoUrl from "@assets/logo_1756410067559.png";
 import { useLanguage, type Language } from "@/hooks/use-language";
 import { useTranslation } from "@/lib/translations";
@@ -59,98 +53,21 @@ export default function Dashboard() {
       {/* Header */}
       <header className="bg-forest text-white py-0 px-2 shadow-lg">
         <div className="container mx-auto">
-          {/* Top row with logo, title, and user info */}
-          <div className="flex justify-between items-center -mb-2">
+          <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-2">
-              <img src={logoUrl} alt="Sorted Logo" className="h-28 w-28" />
-              <h1 className="text-base font-bold" data-testid="header-title">
-                {t('title')}
+              <img src={logoUrl} alt="Vinyasa-AI Logo" className="h-16 w-16" />
+              <h1 className="text-xl font-bold" data-testid="header-title">
+                Vinyasa-AI - {t('title')}
               </h1>
             </div>
-            <div className="flex items-center space-x-2">
-              <div className="flex items-center space-x-1">
-                <Globe className="h-3 w-3 text-sage" />
-                <Select value={currentLanguage} onValueChange={(value) => changeLanguage(value as Language)}>
-                  <SelectTrigger className="bg-transparent border-sage text-white w-24 h-7 text-xs">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {Object.entries(languages).map(([code, name]) => (
-                      <SelectItem key={code} value={code}>
-                        {name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <span className="text-sage text-xs" data-testid="farm-name">
+            <div className="flex items-center space-x-4">
+              <span className="text-sage text-sm" data-testid="farm-name">
                 {t('farmName')}
               </span>
-              <UserCircle className="text-lg" />
+              <UserCircle className="text-xl" />
+              <ExpandableMenu />
             </div>
           </div>
-          
-          {/* Bottom row with navigation menu spread across full width */}
-          <nav className="w-full -mt-1 pb-0">
-            <div className="flex flex-wrap justify-center gap-x-8 gap-y-1">
-              <Link href="/customer-central">
-                <Button 
-                  variant="ghost" 
-                  className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                  data-testid="nav-consumer-dashboard"
-                >
-                  <div className="flex flex-col">
-                    <span className="block text-sm leading-tight">Consumer</span>
-                    <span className="block text-sm leading-tight">Dashboard</span>
-                  </div>
-                </Button>
-              </Link>
-              <Button 
-                variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                data-testid="nav-live-sorting"
-              >
-                <div className="flex flex-col">
-                  {t('liveSorting').split(' ').map((word, index) => (
-                    <span key={index} className="block text-sm leading-tight">{word}</span>
-                  ))}
-                </div>
-              </Button>
-              <Button 
-                variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                data-testid="nav-harvest-insights"
-              >
-                <div className="flex flex-col">
-                  {t('harvestInsights').split(' ').map((word, index) => (
-                    <span key={index} className="block text-sm leading-tight">{word}</span>
-                  ))}
-                </div>
-              </Button>
-              <Button 
-                variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                data-testid="nav-crop-recommendations"
-              >
-                <div className="flex flex-col">
-                  {t('cropRecommendations').split(' ').map((word, index) => (
-                    <span key={index} className="block text-sm leading-tight">{word}</span>
-                  ))}
-                </div>
-              </Button>
-              <Button 
-                variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                data-testid="nav-yield-optimization"
-              >
-                <div className="flex flex-col">
-                  {t('yieldOptimization').split(' ').map((word, index) => (
-                    <span key={index} className="block text-sm leading-tight">{word}</span>
-                  ))}
-                </div>
-              </Button>
-            </div>
-          </nav>
         </div>
       </header>
 

@@ -8,7 +8,7 @@ export const translations = {
     farmName: "Svavlamban Farms",
     consumerUserName: "BKC-1 EcoCycler",
     
-    // Menu Items
+    // Menu Items (legacy - keeping for backward compatibility)
     liveSorting: "Live Produce Sorting",
     liveWasteSorting: "Live Waste Sorting",
     harvestInsights: "Harvest Insights",
@@ -250,6 +250,57 @@ export const translations = {
 
     // Additional terms
     "priceRange": "Price Range",
+    
+    // New Menu Items
+    "producers": "Producers",
+    "consumers": "Consumers", 
+    "producersSortedDashboard": "Producers Sorted Dashboard",
+    "liveProduceSorting": "Live Produce Sorting",
+    "harvestMarketplace": "Harvest Marketplace",
+    "harvestOptimizations": "Harvest Optimizations",
+    "consumersCentralOpsDashboard": "Consumers Central Ops Dashboard",
+    "recyclersMarketplace": "Recyclers Marketplace",
+    "wasteReduction": "Waste Reduction",
+    "productDemos": "Product Demos",
+    "language": "Language",
+    
+    // Marketplace Terms
+    "suppliers": "Suppliers",
+    "buyers": "Buyers",
+    "searchPlaceholder": "Search by category, name, distance or price...",
+    "category": "Category",
+    "name": "Name",
+    "price": "Price",
+    "connect": "Connect",
+    "viewDetails": "View Details",
+    
+    // Optimization Terms
+    "personalizedRecommendations": "Personalized Recommendations",
+    "genericRecommendations": "Generic Recommendations",
+    "yieldImprovement": "Yield Improvement",
+    "revenueOptimization": "Revenue Optimization",
+    
+    // Product Demo Terms
+    "demoVideo": "Demo Video",
+    "tryDemo": "Try Demo",
+    "features": "Features",
+    
+    // Contact Terms
+    "getInTouch": "Get in Touch",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "sendMessage": "Send Message",
+    "yourName": "Your Name",
+    "yourEmail": "Your Email",
+    "subject": "Subject",
+    "message": "Message",
+    
+    // About Terms  
+    "ourStory": "Our Story",
+    "ourTeam": "Our Team",
+    "ourMission": "Our Mission",
+    "ourVision": "Our Vision",
 
     // Home Page
     "heroTitle": "Increase Value, Reduce Waste",
@@ -762,6 +813,57 @@ export const translations = {
 
     // Additional terms  
     "priceRange": "मूल्य सीमा",
+    
+    // New Menu Items
+    "producers": "प्रोड्यूसर",
+    "consumers": "कंज्यूमर", 
+    "producersSortedDashboard": "प्रोड्यूसर सॉर्टेड डैशबोर्ड",
+    "liveProduceSorting": "लाइव प्रोड्यूस सॉर्टिंग",
+    "harvestMarketplace": "हार्वेस्ट मार्केटप्लेस",
+    "harvestOptimizations": "हार्वेस्ट ऑप्टिमाइजेशन",
+    "consumersCentralOpsDashboard": "कंज्यूमर सेंट्रल ऑप्स डैशबोर्ड",
+    "recyclersMarketplace": "रीसाइक्लर मार्केटप्लेस",
+    "wasteReduction": "कचरा कमी",
+    "productDemos": "प्रोडक्ट डेमो",
+    "language": "भाषा",
+    
+    // Marketplace Terms
+    "suppliers": "सप्लायर",
+    "buyers": "खरीदार",
+    "searchPlaceholder": "कैटेगरी, नाम, दूरी या कीमत के अनुसार खोजें...",
+    "category": "कैटेगरी",
+    "name": "नाम",
+    "price": "कीमत",
+    "connect": "कनेक्ट करें",
+    "viewDetails": "विवरण देखें",
+    
+    // Optimization Terms
+    "personalizedRecommendations": "व्यक्तिगत सिफारिशें",
+    "genericRecommendations": "सामान्य सिफारिशें",
+    "yieldImprovement": "उपज सुधार",
+    "revenueOptimization": "आय अनुकूलन",
+    
+    // Product Demo Terms
+    "demoVideo": "डेमो वीडियो",
+    "tryDemo": "डेमो आज़माएं",
+    "features": "सुविधाएं",
+    
+    // Contact Terms
+    "getInTouch": "संपर्क में रहें",
+    "email": "ईमेल",
+    "phone": "फोन",
+    "address": "पता",
+    "sendMessage": "संदेश भेजें",
+    "yourName": "आपका नाम",
+    "yourEmail": "आपका ईमेल",
+    "subject": "विषय",
+    "message": "संदेश",
+    
+    // About Terms  
+    "ourStory": "हमारी कहानी",
+    "ourTeam": "हमारी टीम",
+    "ourMission": "हमारा मिशन",
+    "ourVision": "हमारी दृष्टि",
 
     // Home Page
     "heroTitle": "मूल्य बढ़ाएं, कचरा कम करें",

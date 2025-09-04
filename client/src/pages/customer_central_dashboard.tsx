@@ -5,18 +5,25 @@ import OptimalRevenueTable from "@/components/consumer/optimal-revenue-table";
 import MarketCards from "@/components/consumer/market-cards";
 import RevenueCharts from "@/components/consumer/revenue-charts";
 import ChatInterface from "@/components/consumer/chat-interface";
-import { UserCircle } from "lucide-react";
+import { UserCircle, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import logoUrl from "@assets/logo_1756410067559.png";
-import { useLanguage } from "@/hooks/use-language";
+import { useLanguage, type Language } from "@/hooks/use-language";
 import { useTranslation } from "@/lib/translations";
 import { Link } from "wouter";
 import ExpandableMenu from "@/components/ui/expandable-menu";
 import type { Summary, OverallSummary } from "@shared/schema";
 
 export default function CustomerCentralDashboard() {
-  const { currentLanguage } = useLanguage();
+  const { currentLanguage, changeLanguage, languages } = useLanguage();
   const { t, formatNumber } = useTranslation(currentLanguage);
   
   const { data: summary } = useQuery<Summary>({
@@ -52,6 +59,21 @@ export default function CustomerCentralDashboard() {
               </h1>
             </div>
             <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <Globe className="h-4 w-4 text-sage" />
+                <Select value={currentLanguage} onValueChange={(value) => changeLanguage(value as Language)}>
+                  <SelectTrigger className="bg-transparent border-sage text-white w-28 h-8 text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.entries(languages).map(([code, name]) => (
+                      <SelectItem key={code} value={code}>
+                        {name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               <span className="text-sage text-sm" data-testid="user-name">
                 {t('consumerUserName')}
               </span>

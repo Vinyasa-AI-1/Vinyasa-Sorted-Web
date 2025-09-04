@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Leaf, Recycle, TrendingUp, Coins, UserCircle, Globe, ShoppingCart, Building } from "lucide-react";
 import { useLanguage, type Language } from "@/hooks/use-language";
-// import { translations } from "@/lib/translations";
 import ChatInterface from "@/components/consumer/chat-interface";
 import {
   Select,
@@ -13,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import ExpandableMenu from "@/components/ui/expandable-menu";
 import logoUrl from "@assets/logo_1756410067559.png";
 import produceImage from "@assets/generated_images/AI_camera_produce_sorting_system_dd81726e.png";
 import wasteImage from "@assets/generated_images/AI_camera_waste_sorting_system_79af4a88.png";
@@ -20,7 +20,7 @@ import producerVideoThumb from "@assets/generated_images/Producer_complete_video
 import consumerVideoThumb from "@assets/generated_images/Consumer_complete_video_thumbnail_e10b1b3e.png";
 
 export default function Home() {
-  const { currentLanguage, changeLanguage } = useLanguage();
+  const { currentLanguage, changeLanguage, languages } = useLanguage();
   const t = (key: string) => {
     // Comprehensive hardcoded English text for immediate loading
     const hardcodedText: Record<string, string> = {
@@ -118,30 +118,24 @@ export default function Home() {
     return new Intl.NumberFormat(currentLanguage === 'hi' ? 'hi-IN' : currentLanguage === 'bn' ? 'bn-BD' : 'en-IN').format(num);
   };
 
-  const languages = {
-    en: 'English',
-    hi: 'हिंदी', 
-    bn: 'বাংলা'
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
       {/* Header */}
       <header className="bg-forest text-white py-0 px-2 shadow-lg">
         <div className="container mx-auto">
-          {/* Top row with logo, title, and user info */}
-          <div className="flex justify-between items-center -mb-2">
+          <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-2">
-              <img src={logoUrl} alt="Vinyasa-AI Logo" className="h-28 w-28" />
-              <h1 className="text-base font-bold" data-testid="header-title">
+              <img src={logoUrl} alt="Vinyasa-AI Logo" className="h-16 w-16" />
+              <h1 className="text-xl font-bold" data-testid="header-title">
                 Vinyasa-AI - {t('heroTitle')}
               </h1>
             </div>
-            <div className="flex items-center space-x-2">
-              <div className="flex items-center space-x-1">
-                <Globe className="h-3 w-3 text-sage" />
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <Globe className="h-4 w-4 text-sage" />
                 <Select value={currentLanguage} onValueChange={(value) => changeLanguage(value as Language)}>
-                  <SelectTrigger className="bg-transparent border-sage text-white w-24 h-7 text-xs">
+                  <SelectTrigger className="bg-transparent border-sage text-white w-28 h-8 text-xs">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -153,90 +147,13 @@ export default function Home() {
                   </SelectContent>
                 </Select>
               </div>
-              <span className="text-sage text-xs" data-testid="company-tagline">
+              <span className="text-sage text-sm" data-testid="company-tagline">
                 Increase Value, Reduce Waste
               </span>
-              <UserCircle className="text-lg" />
+              <UserCircle className="text-xl" />
+              <ExpandableMenu />
             </div>
           </div>
-          
-          {/* Bottom row with navigation menu spread across full width */}
-          <nav className="w-full -mt-1 pb-0">
-            <div className="flex flex-wrap justify-center gap-x-8 gap-y-1">
-              <Link href="/producer">
-                <Button 
-                  variant="ghost" 
-                  className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                  data-testid="nav-producer-dashboard"
-                >
-                  <div className="flex flex-col">
-                    <span className="block text-sm leading-tight">Producer</span>
-                    <span className="block text-sm leading-tight">Dashboard</span>
-                  </div>
-                </Button>
-              </Link>
-              <Link href="/customer-central">
-                <Button 
-                  variant="ghost" 
-                  className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                  data-testid="nav-consumer-dashboard"
-                >
-                  <div className="flex flex-col">
-                    <span className="block text-sm leading-tight">Consumer</span>
-                    <span className="block text-sm leading-tight">Dashboard</span>
-                  </div>
-                </Button>
-              </Link>
-              <Link href="/live-produce-sorting">
-                <Button 
-                  variant="ghost" 
-                  className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                  data-testid="nav-live-produce"
-                >
-                  <div className="flex flex-col">
-                    <span className="block text-sm leading-tight">Live</span>
-                    <span className="block text-sm leading-tight">Sorting</span>
-                  </div>
-                </Button>
-              </Link>
-              <Link href="/live-waste-sorting">
-                <Button 
-                  variant="ghost" 
-                  className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                  data-testid="nav-live-waste"
-                >
-                  <div className="flex flex-col">
-                    <span className="block text-sm leading-tight">Waste</span>
-                    <span className="block text-sm leading-tight">Sorting</span>
-                  </div>
-                </Button>
-              </Link>
-              <Link href="/about">
-                <Button 
-                  variant="ghost" 
-                  className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                  data-testid="nav-about"
-                >
-                  <div className="flex flex-col">
-                    <span className="block text-sm leading-tight">About</span>
-                    <span className="block text-sm leading-tight">Us</span>
-                  </div>
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button 
-                  variant="ghost" 
-                  className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                  data-testid="nav-contact"
-                >
-                  <div className="flex flex-col">
-                    <span className="block text-sm leading-tight">Contact</span>
-                    <span className="block text-sm leading-tight">Us</span>
-                  </div>
-                </Button>
-              </Link>
-            </div>
-          </nav>
         </div>
       </header>
 

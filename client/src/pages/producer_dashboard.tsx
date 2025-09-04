@@ -5,9 +5,16 @@ import OptimalRevenueTable from "@/components/dashboard/optimal-revenue-table";
 import MarketCards from "@/components/dashboard/market-cards";
 import RevenueCharts from "@/components/dashboard/revenue-charts";
 import ChatInterface from "@/components/dashboard/chat-interface";
-import { UserCircle } from "lucide-react";
+import { UserCircle, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Link } from "wouter";
 import ExpandableMenu from "@/components/ui/expandable-menu";
 import logoUrl from "@assets/logo_1756410067559.png";
@@ -61,6 +68,21 @@ export default function Dashboard() {
               </h1>
             </div>
             <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <Globe className="h-4 w-4 text-sage" />
+                <Select value={currentLanguage} onValueChange={(value) => changeLanguage(value as Language)}>
+                  <SelectTrigger className="bg-transparent border-sage text-white w-28 h-8 text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.entries(languages).map(([code, name]) => (
+                      <SelectItem key={code} value={code}>
+                        {name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               <span className="text-sage text-sm" data-testid="farm-name">
                 {t('farmName')}
               </span>

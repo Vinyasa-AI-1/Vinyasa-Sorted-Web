@@ -13,6 +13,7 @@ import logoUrl from "@assets/logo_1756410067559.png";
 import { useLanguage, type Language } from "@/hooks/use-language";
 import { useTranslation } from "@/lib/translations";
 import { Link } from "wouter";
+import ExpandableMenu from "@/components/ui/expandable-menu";
 
 interface WasteCounts {
   dry: number;
@@ -222,19 +223,18 @@ export default function LiveWasteSorting() {
       {/* Header */}
       <header className="bg-forest text-white py-0 px-2 shadow-lg">
         <div className="container mx-auto">
-          {/* Top row with logo, title, and user info */}
-          <div className="flex justify-between items-center -mb-2">
+          <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-2">
-              <img src={logoUrl} alt="Sorted Logo" className="h-28 w-28" />
-              <h1 className="text-base font-bold" data-testid="header-title">
-                {t('liveWasteSorting')}
+              <img src={logoUrl} alt="Vinyasa-AI Logo" className="h-16 w-16" />
+              <h1 className="text-xl font-bold" data-testid="header-title">
+                Vinyasa-AI - {t('liveWasteSorting')}
               </h1>
             </div>
-            <div className="flex items-center space-x-2">
-              <div className="flex items-center space-x-1">
-                <Globe className="h-3 w-3 text-sage" />
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <Globe className="h-4 w-4 text-sage" />
                 <Select value={currentLanguage} onValueChange={(value) => changeLanguage(value as Language)}>
-                  <SelectTrigger className="bg-transparent border-sage text-white w-24 h-7 text-xs">
+                  <SelectTrigger className="bg-transparent border-sage text-white w-28 h-8 text-xs">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -246,62 +246,13 @@ export default function LiveWasteSorting() {
                   </SelectContent>
                 </Select>
               </div>
-              <span className="text-sage text-xs" data-testid="user-name">
+              <span className="text-sage text-sm" data-testid="user-name">
                 {t('consumerUserName')}
               </span>
-              <UserCircle className="text-lg" />
+              <UserCircle className="text-xl" />
+              <ExpandableMenu />
             </div>
           </div>
-          
-          {/* Bottom row with navigation menu spread across full width */}
-          <nav className="w-full -mt-1 pb-0">
-            <div className="flex flex-wrap justify-center gap-x-8 gap-y-1">
-              <Link href="/customer-central">
-                <Button 
-                  variant="ghost" 
-                  className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                  data-testid="nav-dashboard"
-                >
-                  <div className="flex flex-col">
-                    <span className="block text-sm leading-tight">Dashboard</span>
-                  </div>
-                </Button>
-              </Link>
-              <Button 
-                variant="ghost" 
-                className="text-white bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                data-testid="nav-live-waste-sorting-active"
-              >
-                <div className="flex flex-col">
-                  {t('liveWasteSorting').split(' ').map((word, index) => (
-                    <span key={index} className="block text-sm leading-tight">{word}</span>
-                  ))}
-                </div>
-              </Button>
-              <Button 
-                variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                data-testid="nav-bin-insights"
-              >
-                <div className="flex flex-col">
-                  {t('binInsights').split(' ').map((word, index) => (
-                    <span key={index} className="block text-sm leading-tight">{word}</span>
-                  ))}
-                </div>
-              </Button>
-              <Button 
-                variant="ghost" 
-                className="text-sage hover:text-white hover:bg-sage/20 px-3 py-0 text-sm font-medium text-center leading-tight min-w-0 w-20"
-                data-testid="nav-recycling-tips"
-              >
-                <div className="flex flex-col">
-                  {t('recyclingTips').split(' ').map((word, index) => (
-                    <span key={index} className="block text-sm leading-tight">{word}</span>
-                  ))}
-                </div>
-              </Button>
-            </div>
-          </nav>
         </div>
       </header>
 

@@ -82,6 +82,11 @@ export default function ExpandableMenu() {
   const closeMenu = () => setIsOpen(false);
   
   const menuItems: MenuItemProps[] = [
+    { 
+      label: "Vinyasa Home", 
+      href: "/",
+      onClick: closeMenu 
+    },
     {
       label: t('producers'),
       children: [
@@ -175,25 +180,6 @@ export default function ExpandableMenu() {
       {isOpen && (
         <Card className="absolute top-full right-0 w-80 mt-2 z-50 shadow-xl border-sage/20">
           <CardContent className="p-0">
-            {/* Language selector at top */}
-            <div className="border-b border-sage/20 p-4">
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-forest font-medium">{t('language')}:</span>
-                <Select value={currentLanguage} onValueChange={(value) => changeLanguage(value as Language)}>
-                  <SelectTrigger className="w-32 h-8 text-xs">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {Object.entries(languages).map(([code, name]) => (
-                      <SelectItem key={code} value={code}>
-                        {name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            
             {/* Menu items */}
             <div className="max-h-96 overflow-y-auto">
               {menuItems.map((item, index) => (

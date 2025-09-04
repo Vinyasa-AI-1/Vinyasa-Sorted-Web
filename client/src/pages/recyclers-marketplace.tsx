@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, MapPin, Star, Recycle, Truck, Filter } from "lucide-react";
+import { Search, MapPin, Star, Recycle, Truck, Filter, Globe } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,7 +14,7 @@ import {
 import ExpandableMenu from "@/components/ui/expandable-menu";
 import { UserCircle } from "lucide-react";
 import logoUrl from "@assets/logo_1756410067559.png";
-import { useLanguage } from "@/hooks/use-language";
+import { useLanguage, type Language } from "@/hooks/use-language";
 import { useTranslation } from "@/lib/translations";
 
 interface Recycler {
@@ -32,7 +32,7 @@ interface Recycler {
 }
 
 export default function RecyclersMarketplace() {
-  const { currentLanguage } = useLanguage();
+  const { currentLanguage, changeLanguage, languages } = useLanguage();
   const { t, formatNumber } = useTranslation(currentLanguage);
   
   const [searchTerm, setSearchTerm] = useState("");
@@ -147,6 +147,21 @@ export default function RecyclersMarketplace() {
               </h1>
             </div>
             <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <Globe className="h-4 w-4 text-sage" />
+                <Select value={currentLanguage} onValueChange={(value) => changeLanguage(value as Language)}>
+                  <SelectTrigger className="bg-transparent border-sage text-white w-28 h-8 text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.entries(languages).map(([code, name]) => (
+                      <SelectItem key={code} value={code}>
+                        {name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               <span className="text-sage text-sm" data-testid="user-info">
                 {t('consumerUserName')}
               </span>

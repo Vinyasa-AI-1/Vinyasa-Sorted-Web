@@ -1,14 +1,21 @@
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Leaf, Users, Target, Award, ArrowRight, UserCircle } from "lucide-react";
-import { useLanguage } from "@/hooks/use-language";
+import { Leaf, Users, Target, Award, ArrowRight, UserCircle, Globe } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useLanguage, type Language } from "@/hooks/use-language";
 import { useTranslation } from "@/lib/translations";
 import ExpandableMenu from "@/components/ui/expandable-menu";
 import logoUrl from "@assets/logo_1756410067559.png";
 
 export default function About() {
-  const { currentLanguage } = useLanguage();
+  const { currentLanguage, changeLanguage, languages } = useLanguage();
   const { t, formatNumber } = useTranslation(currentLanguage);
 
   return (
@@ -24,6 +31,21 @@ export default function About() {
               </h1>
             </div>
             <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <Globe className="h-4 w-4 text-sage" />
+                <Select value={currentLanguage} onValueChange={(value) => changeLanguage(value as Language)}>
+                  <SelectTrigger className="bg-transparent border-sage text-white w-28 h-8 text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.entries(languages).map(([code, name]) => (
+                      <SelectItem key={code} value={code}>
+                        {name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               <span className="text-sage text-sm" data-testid="user-info">
                 {t('aboutPage') || 'About Page'}
               </span>

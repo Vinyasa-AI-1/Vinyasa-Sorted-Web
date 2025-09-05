@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Leaf, Recycle, TrendingUp, Coins, UserCircle, Globe, ShoppingCart, Building } from "lucide-react";
 import { useLanguage, type Language } from "@/hooks/use-language";
+import { useTranslation } from "@/lib/translations";
 import ChatInterface from "@/components/consumer/chat-interface";
 import {
   Select,
@@ -21,103 +22,7 @@ import consumerVideoThumb from "@assets/generated_images/Consumer_complete_video
 
 export default function Home() {
   const { currentLanguage, changeLanguage, languages } = useLanguage();
-  const t = (key: string) => {
-    // Comprehensive hardcoded English text for immediate loading
-    const hardcodedText: Record<string, string> = {
-      // Header & Navigation
-      'title': 'Sorted! Waste Management',
-      'home': 'Home',
-      'about': 'About Us', 
-      'contact': 'Contact Us',
-      'privacy': 'Privacy',
-      'buyProducts': 'Buy Products',
-      
-      // Hero Section
-      'heroTitle': 'Increase Value, Reduce Waste',
-      'heroSubtitle': 'Sorting Harvests and Habits for a greener future',
-      'tagline': 'Increase Value, Reduce Waste - Sorting Harvests and Habits for a greener future',
-      'learnMore': 'Learn More',
-      'watchVideo': 'Watch Video',
-      'getStarted': 'Get Started',
-      
-      // Features Section
-      'featuresTitle': 'Comprehensive Waste Management Solutions',
-      'producerFeatures': 'For Farmers & Producers',
-      'producerFeaturesDesc': 'Smart AI-powered produce sorting and quality analysis',
-      'consumerFeatures': 'For Smart Cities & Consumers', 
-      'consumerFeaturesDesc': 'Intelligent waste bins with automated sorting and rewards',
-      
-      // Dashboards
-      'producerDashboard': 'Producer Dashboard',
-      'consumerDashboard': 'Consumer Dashboard',
-      'harvestMarketplace': 'Harvest Marketplace',
-      'harvestMarketplaceDesc': 'Connect with buyers for your sorted produce',
-      'recyclersMarketplace': 'Recyclers Marketplace', 
-      'recyclersMarketplaceDesc': 'Find certified recyclers for your waste',
-      
-      // Video Section
-      'videoSectionTitle': 'See Our Technology in Action',
-      'producerVideoTitle': 'AI Produce Sorting System',
-      'producerVideoDesc': 'Watch how our AI technology sorts agricultural produce by quality, maximizing farmer revenue and reducing waste.',
-      'consumerVideoTitle': 'Smart Waste Management',
-      'consumerVideoDesc': 'Discover how our intelligent bins automatically sort waste and reward users with Vinyasa Coins.',
-      
-      // Statistics
-      'wasteReduced': 'Waste Reduced',
-      'farmersHelped': 'Farmers Helped', 
-      'citiesConnected': 'Cities Connected',
-      'coinsEarned': 'Vinyasa Coins Earned',
-      
-      // Footer
-      'newsletter': 'Newsletter',
-      'newsletterDescription': 'Subscribe to get updates on our latest features and sustainability tips.',
-      'emailPlaceholder': 'Enter your email',
-      'subscribe': 'Subscribe',
-      'allRightsReserved': 'All rights reserved.',
-      
-      // Language
-      'language': 'Language',
-      'english': 'English',
-      'hindi': 'Hindi', 
-      'bengali': 'Bengali',
-      
-      // Additional Features
-      'featuresSubtitle': 'Complete ecosystem for sustainable waste management and agricultural optimization',
-      'smartSorting': 'Smart AI Sorting',
-      'smartSortingDesc': 'Advanced AI technology automatically sorts produce and waste by quality and type',
-      'wasteOptimization': 'Waste Optimization',
-      'wasteOptimizationDesc': 'Reduce waste through intelligent sorting and optimal recycling strategies',
-      'valueMaximization': 'Value Maximization', 
-      'valueMaximizationDesc': 'Maximize revenue from your produce and earn rewards from your waste',
-      'vinyasaRewards': 'Vinyasa Coin Rewards',
-      'vinyasaRewardsDesc': 'Earn digital coins for sustainable practices and redeem for eco-friendly products',
-      
-      // How It Works
-      'howItWorks': 'How Our Technology Works',
-      'howItWorksDesc': 'See our AI-powered sorting systems in action',
-      
-      // Call to Action
-      'ctaTitle': 'Ready to Transform Your Waste Management?',
-      'ctaDescription': 'Join thousands of farmers and cities already using our smart sorting technology',
-      'startSortingProduce': 'Start Sorting Produce',
-      'startSortingWaste': 'Start Sorting Waste',
-      
-      // Footer Content
-      'footerDescription': 'Leading the future of sustainable waste management through AI-powered sorting technology.',
-      'products': 'Products',
-      'company': 'Company',
-      'aboutUs': 'About Us',
-      'contactUs': 'Contact Us',
-      'liveWasteSorting': 'Live Waste Sorting',
-      'liveProduceSorting': 'Live Produce Sorting'
-    };
-    return hardcodedText[key] || key;
-  };
-
-  const formatNumber = (num: number) => {
-    return new Intl.NumberFormat(currentLanguage === 'hi' ? 'hi-IN' : currentLanguage === 'bn' ? 'bn-BD' : 'en-IN').format(num);
-  };
-
+  const { t, formatNumber } = useTranslation(currentLanguage);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
@@ -186,11 +91,15 @@ export default function Home() {
                   alt="AI Produce Sorting"
                   className="w-full h-64 object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end">
-                  <div className="p-6 text-white">
-                    <h3 className="text-2xl font-bold mb-2">{t('producerFeatures')}</h3>
-                    <p>{t('producerFeaturesDesc')}</p>
-                  </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-4 left-4 text-white">
+                  <h3 className="text-2xl font-bold mb-2">{t('producerFeatures')}</h3>
+                  <p className="text-sm opacity-90">{t('producerFeaturesDesc')}</p>
+                  <Link href="/live-produce-sorting">
+                    <Button className="bg-forest hover:bg-green-800 text-white mt-4">
+                      Try Live Demo <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </Card>
@@ -199,14 +108,18 @@ export default function Home() {
               <div className="relative">
                 <img 
                   src={wasteImage} 
-                  alt="AI Waste Sorting"
+                  alt="AI Waste Sorting" 
                   className="w-full h-64 object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end">
-                  <div className="p-6 text-white">
-                    <h3 className="text-2xl font-bold mb-2">{t('consumerFeatures')}</h3>
-                    <p>{t('consumerFeaturesDesc')}</p>
-                  </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-4 left-4 text-white">
+                  <h3 className="text-2xl font-bold mb-2">{t('consumerFeatures')}</h3>
+                  <p className="text-sm opacity-90">{t('consumerFeaturesDesc')}</p>
+                  <Link href="/live-waste-sorting">
+                    <Button className="bg-sage hover:bg-green-700 text-white mt-4">
+                      Try Live Demo <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </Card>
@@ -214,15 +127,47 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Statistics Section */}
       <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-4xl font-bold text-forest mb-2">
+                {formatNumber(250000)}
+              </div>
+              <div className="text-gray-600">{t('wasteReduced')} (kg)</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold text-sage mb-2">
+                {formatNumber(15000)}
+              </div>
+              <div className="text-gray-600">{t('farmersHelped')}</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold text-fresh mb-2">
+                {formatNumber(50)}
+              </div>
+              <div className="text-gray-600">{t('citiesConnected')}</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold text-harvest mb-2">
+                {formatNumber(1000000)}
+              </div>
+              <div className="text-gray-600">{t('coinsEarned')}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-forest mb-4">{t('featuresTitle')}</h2>
-            <p className="text-xl text-gray-600">{t('featuresSubtitle')}</p>
+            <p className="text-xl text-gray-600">Advanced AI technology for sustainable waste management</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             <Card className="text-center p-6 hover:shadow-lg transition-shadow">
               <CardContent className="space-y-4">
                 <Leaf className="h-12 w-12 text-forest mx-auto" />
@@ -233,90 +178,18 @@ export default function Home() {
 
             <Card className="text-center p-6 hover:shadow-lg transition-shadow">
               <CardContent className="space-y-4">
-                <Recycle className="h-12 w-12 text-sage mx-auto" />
-                <h3 className="text-xl font-semibold">{t('wasteOptimization')}</h3>
-                <p className="text-gray-600">{t('wasteOptimizationDesc')}</p>
+                <TrendingUp className="h-12 w-12 text-sage mx-auto" />
+                <h3 className="text-xl font-semibold">{t('realTimeAnalytics')}</h3>
+                <p className="text-gray-600">{t('realTimeAnalyticsDesc')}</p>
               </CardContent>
             </Card>
 
             <Card className="text-center p-6 hover:shadow-lg transition-shadow">
               <CardContent className="space-y-4">
-                <TrendingUp className="h-12 w-12 text-fresh mx-auto" />
-                <h3 className="text-xl font-semibold">{t('valueMaximization')}</h3>
-                <p className="text-gray-600">{t('valueMaximizationDesc')}</p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <CardContent className="space-y-4">
-                <Coins className="h-12 w-12 text-harvest mx-auto" />
+                <Coins className="h-12 w-12 text-fresh mx-auto" />
                 <h3 className="text-xl font-semibold">{t('vinyasaRewards')}</h3>
                 <p className="text-gray-600">{t('vinyasaRewardsDesc')}</p>
               </CardContent>
-            </Card>
-
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <CardContent className="space-y-4">
-                <ShoppingCart className="h-12 w-12 text-forest mx-auto" />
-                <h3 className="text-xl font-semibold">{t('harvestMarketplace')}</h3>
-                <p className="text-gray-600">{t('harvestMarketplaceDesc')}</p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <CardContent className="space-y-4">
-                <Building className="h-12 w-12 text-sage mx-auto" />
-                <h3 className="text-xl font-semibold">{t('recyclersMarketplace')}</h3>
-                <p className="text-gray-600">{t('recyclersMarketplaceDesc')}</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Explainer Videos Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-forest mb-4">{t('howItWorks')}</h2>
-            <p className="text-xl text-gray-600">{t('howItWorksDesc')}</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Producer Video */}
-            <Card className="overflow-hidden shadow-xl">
-              <div className="relative group cursor-pointer">
-                <img 
-                  src={producerVideoThumb} 
-                  alt="Producer Explainer Video"
-                  className="w-full h-64 object-cover"
-                />
-                <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors">
-                  <div className="text-center text-white">
-                    <Play className="h-16 w-16 mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold mb-2">{t('producerVideoTitle')}</h3>
-                    <p>{t('producerVideoDesc')}</p>
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            {/* Consumer Video */}
-            <Card className="overflow-hidden shadow-xl">
-              <div className="relative group cursor-pointer">
-                <img 
-                  src={consumerVideoThumb} 
-                  alt="Consumer Explainer Video"
-                  className="w-full h-64 object-cover"
-                />
-                <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors">
-                  <div className="text-center text-white">
-                    <Play className="h-16 w-16 mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold mb-2">{t('consumerVideoTitle')}</h3>
-                    <p>{t('consumerVideoDesc')}</p>
-                  </div>
-                </div>
-              </div>
             </Card>
           </div>
         </div>
@@ -330,12 +203,12 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/producer">
               <Button className="bg-white text-forest hover:bg-gray-100 px-8 py-3 text-lg">
-                {t('startSortingProduce')}
+                {t('producerDashboard')} <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <Link href="/customer-central">
               <Button variant="outline" className="border-white text-white hover:bg-white hover:text-forest px-8 py-3 text-lg">
-                {t('startSortingWaste')}
+                {t('consumerDashboard')}
               </Button>
             </Link>
           </div>
@@ -349,64 +222,40 @@ export default function Home() {
             <div>
               <div className="flex items-center mb-4">
                 <Leaf className="h-8 w-8 text-sage mr-2" />
-                <span className="text-2xl font-bold">Vinyasa-AI</span>
+                <span className="text-xl font-bold">Vinyasa-AI</span>
               </div>
-              <p className="text-gray-400 mb-4">{t('footerDescription')}</p>
+              <p className="text-gray-300 mb-4">{t('footerDescription')}</p>
             </div>
-
+            
             <div>
               <h4 className="text-lg font-semibold mb-4">{t('products')}</h4>
-              <div className="space-y-2">
-                <Link href="/producer" className="block text-gray-400 hover:text-white transition-colors">
-                  {t('producerDashboard')}
-                </Link>
-                <Link href="/customer-central" className="block text-gray-400 hover:text-white transition-colors">
-                  {t('consumerDashboard')}
-                </Link>
-                <Link href="/live-waste-sorting" className="block text-gray-400 hover:text-white transition-colors">
-                  {t('liveWasteSorting')}
-                </Link>
-                <Link href="/live-produce-sorting" className="block text-gray-400 hover:text-white transition-colors">
-                  {t('liveProduceSorting')}
-                </Link>
-              </div>
+              <ul className="space-y-2 text-gray-300">
+                <li><Link href="/live-produce-sorting" className="hover:text-white">{t('liveProduceSorting')}</Link></li>
+                <li><Link href="/live-waste-sorting" className="hover:text-white">{t('liveWasteSorting')}</Link></li>
+                <li><Link href="/products" className="hover:text-white">{t('buyProducts')}</Link></li>
+              </ul>
             </div>
-
+            
             <div>
               <h4 className="text-lg font-semibold mb-4">{t('company')}</h4>
-              <div className="space-y-2">
-                <Link href="/about" className="block text-gray-400 hover:text-white transition-colors">
-                  {t('aboutUs')}
-                </Link>
-                <Link href="/contact" className="block text-gray-400 hover:text-white transition-colors">
-                  {t('contactUs')}
-                </Link>
-                <Link href="/privacy" className="block text-gray-400 hover:text-white transition-colors">
-                  {t('privacy')}
-                </Link>
-                <Link href="/products" className="block text-gray-400 hover:text-white transition-colors">
-                  {t('buyProducts')}
-                </Link>
-              </div>
+              <ul className="space-y-2 text-gray-300">
+                <li><Link href="/about" className="hover:text-white">{t('aboutUs')}</Link></li>
+                <li><Link href="/contact" className="hover:text-white">{t('contactUs')}</Link></li>
+                <li><Link href="/privacy" className="hover:text-white">{t('privacy')}</Link></li>
+              </ul>
             </div>
-
+            
             <div>
-              <h4 className="text-lg font-semibold mb-4">{t('newsletter')}</h4>
-              <p className="text-gray-400 mb-4">{t('newsletterDescription')}</p>
-              <div className="flex">
-                <input
-                  type="email"
-                  placeholder={t('emailPlaceholder')}
-                  className="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-l-md focus:outline-none focus:ring-2 focus:ring-sage"
-                />
-                <Button className="bg-sage hover:bg-green-600 px-4 py-2 rounded-l-none">
-                  {t('subscribe')}
-                </Button>
-              </div>
+              <h4 className="text-lg font-semibold mb-4">Dashboards</h4>
+              <ul className="space-y-2 text-gray-300">
+                <li><Link href="/producer" className="hover:text-white">{t('producerDashboard')}</Link></li>
+                <li><Link href="/customer-central" className="hover:text-white">{t('consumerDashboard')}</Link></li>
+                <li><Link href="/harvest-marketplace" className="hover:text-white">{t('harvestMarketplace')}</Link></li>
+              </ul>
             </div>
           </div>
-
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          
+          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-300">
             <p>&copy; 2024 Vinyasa-AI. {t('allRightsReserved')}</p>
           </div>
         </div>

@@ -2,20 +2,21 @@ import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Leaf, ShoppingCart, Star, Check, Zap, Shield } from "lucide-react";
-import { useLanguage } from "@/hooks/use-language";
-import { translations } from "@/lib/translations";
+import { useLanguage, type Language } from "@/hooks/use-language";
+import { useTranslation } from "@/lib/translations";
 import ChatInterface from "@/components/consumer/chat-interface";
 
 export default function Products() {
-  const { language, setLanguage } = useLanguage();
-  const t = (key: keyof typeof translations.en) => {
-    return translations[language as keyof typeof translations]?.[key] || translations.en[key] || key;
-  };
-
-  const formatNumber = (num: number) => {
-    return new Intl.NumberFormat(language === 'hi' ? 'hi-IN' : language === 'bn' ? 'bn-BD' : 'en-IN').format(num);
-  };
+  const { currentLanguage, changeLanguage, languages } = useLanguage();
+  const { t, formatNumber } = useTranslation(currentLanguage);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
@@ -49,15 +50,18 @@ export default function Products() {
             </div>
 
             <div className="flex items-center space-x-4">
-              <select
-                value={language}
-                onChange={(e) => setLanguage(e.target.value)}
-                className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-forest"
-              >
-                <option value="en">English</option>
-                <option value="hi">हिंदी</option>
-                <option value="bn">বাংলা</option>
-              </select>
+              <Select value={currentLanguage} onValueChange={(value) => changeLanguage(value as Language)}>
+                <SelectTrigger className="w-28">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {Object.entries(languages).map(([code, name]) => (
+                    <SelectItem key={code} value={code}>
+                      {name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>
@@ -118,10 +122,17 @@ export default function Products() {
                   </div>
                 </div>
                 
-                <Button className="w-full bg-forest hover:bg-green-800 text-white">
-                  <ShoppingCart className="h-4 w-4 mr-2" />
-                  {t('addToCart')}
-                </Button>
+                <div className="space-y-3">
+                  <Link href="/live-produce-sorting">
+                    <Button className="w-full bg-forest hover:bg-green-800 text-white">
+                      Try Live Demo
+                    </Button>
+                  </Link>
+                  <Button className="w-full bg-sage hover:bg-green-700 text-white">
+                    <ShoppingCart className="h-4 w-4 mr-2" />
+                    {t('addToCart')}
+                  </Button>
+                </div>
               </CardContent>
             </Card>
 
@@ -161,10 +172,17 @@ export default function Products() {
                   </div>
                 </div>
                 
-                <Button className="w-full bg-sage hover:bg-green-700 text-white">
-                  <ShoppingCart className="h-4 w-4 mr-2" />
-                  {t('addToCart')}
-                </Button>
+                <div className="space-y-3">
+                  <Link href="/live-waste-sorting">
+                    <Button className="w-full bg-sage hover:bg-green-700 text-white">
+                      Try Live Demo
+                    </Button>
+                  </Link>
+                  <Button className="w-full bg-fresh hover:bg-green-600 text-white">
+                    <ShoppingCart className="h-4 w-4 mr-2" />
+                    {t('addToCart')}
+                  </Button>
+                </div>
               </CardContent>
             </Card>
 
@@ -270,7 +288,7 @@ export default function Products() {
       </section>
 
       {/* Global AI Assistant */}
-      <ChatInterface t={t} currentLanguage={language} />
+      <ChatInterface t={t} currentLanguage={currentLanguage} />
     </div>
   );
 }

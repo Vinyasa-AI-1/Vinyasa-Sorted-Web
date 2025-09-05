@@ -12,6 +12,7 @@ import {
 import { useLanguage, type Language } from "@/hooks/use-language";
 import { useTranslation } from "@/lib/translations";
 import ExpandableMenu from "@/components/ui/expandable-menu";
+import ChatInterface from "@/components/consumer/chat-interface";
 import logoUrl from "@assets/logo_1756410067559.png";
 
 export default function About() {
@@ -201,7 +202,7 @@ export default function About() {
       </section>
 
       {/* Global AI Assistant */}
-      <ChatInterface t={t} currentLanguage={language} />
+      <ChatInterface t={t} currentLanguage={currentLanguage} />
     </div>
   );
 }

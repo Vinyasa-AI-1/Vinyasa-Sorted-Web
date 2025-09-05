@@ -75,7 +75,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/producer">
                 <Button className="bg-forest hover:bg-green-800 text-white px-8 py-3 text-lg">
-                  {t('learnMore')} <ArrowRight className="ml-2 h-5 w-5" />
+                  Learn More <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Button 
@@ -83,7 +83,7 @@ export default function Home() {
                 className="border-forest text-forest hover:bg-forest hover:text-white px-8 py-3 text-lg"
                 onClick={() => document.getElementById('video-section')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                {t('watchVideo')} <Play className="ml-2 h-5 w-5" />
+                Watch Video <Play className="ml-2 h-5 w-5" />
               </Button>
             </div>
           </div>
@@ -163,30 +163,30 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="p-6">
               <div className="text-4xl font-bold text-forest mb-2">
-                {formatNumber(250000)}+
+                {formatNumber(2500)}+
               </div>
-              <div className="text-gray-600 font-medium">{t('wasteReduced')} (kg)</div>
+              <div className="text-gray-600 font-medium">Waste Reduced (kg)</div>
               <div className="text-sm text-gray-500 mt-1">Monthly reduction</div>
             </div>
             <div className="p-6">
               <div className="text-4xl font-bold text-sage mb-2">
-                {formatNumber(15000)}+
+                {formatNumber(150)}+
               </div>
-              <div className="text-gray-600 font-medium">{t('farmersHelped')}</div>
+              <div className="text-gray-600 font-medium">Farmers Helped</div>
               <div className="text-sm text-gray-500 mt-1">Revenue increased by 40%</div>
             </div>
             <div className="p-6">
               <div className="text-4xl font-bold text-fresh mb-2">
-                {formatNumber(50)}+
+                {formatNumber(5)}+
               </div>
-              <div className="text-gray-600 font-medium">{t('citiesConnected')}</div>
+              <div className="text-gray-600 font-medium">Cities Connected</div>
               <div className="text-sm text-gray-500 mt-1">Smart waste management</div>
             </div>
             <div className="p-6">
               <div className="text-4xl font-bold text-harvest mb-2">
-                {formatNumber(1000000)}+
+                {formatNumber(10000)}+
               </div>
-              <div className="text-gray-600 font-medium">{t('coinsEarned')}</div>
+              <div className="text-gray-600 font-medium">Coins Earned</div>
               <div className="text-sm text-gray-500 mt-1">Environmental rewards</div>
             </div>
           </div>
@@ -203,7 +203,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Card className="text-center p-8 hover:shadow-xl transition-shadow border-l-4 border-forest">
               <CardContent className="space-y-4">
                 <Camera className="h-16 w-16 text-forest mx-auto" />
@@ -275,6 +275,21 @@ export default function Home() {
                 </div>
               </CardContent>
             </Card>
+
+            <Card className="text-center p-8 hover:shadow-xl transition-shadow border-l-4 border-harvest">
+              <CardContent className="space-y-4">
+                <Database className="h-16 w-16 text-harvest mx-auto" />
+                <div className="flex items-center justify-center space-x-2 mb-2">
+                  <h3 className="text-xl font-semibold">Blockchain Traceability</h3>
+                  <Badge className="bg-harvest/20 text-harvest px-2 py-1 text-xs font-medium">Coming Soon</Badge>
+                </div>
+                <p className="text-gray-600">Complete supply chain transparency from farm to consumer with immutable blockchain records</p>
+                <div className="flex items-center justify-center space-x-2 mt-4">
+                  <Shield className="h-4 w-4 text-harvest" />
+                  <span className="text-sm font-medium">Full Transparency</span>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -324,6 +339,7 @@ export default function Home() {
                       <li className="flex items-center"><Check className="h-4 w-4 text-forest mr-2" />Market price optimization</li>
                       <li className="flex items-center"><Check className="h-4 w-4 text-forest mr-2" />Revenue comparison charts</li>
                       <li className="flex items-center"><Check className="h-4 w-4 text-forest mr-2" />Harvest planning tools</li>
+                      <li className="flex items-center"><Badge className="bg-harvest/20 text-harvest mr-2 px-2 py-1 text-xs">Coming Soon</Badge>Blockchain tracking from farm to consumer</li>
                     </ul>
                   </div>
                 </div>
@@ -372,6 +388,7 @@ export default function Home() {
                       <li className="flex items-center"><Check className="h-4 w-4 text-sage mr-2" />Recycler marketplace</li>
                       <li className="flex items-center"><Check className="h-4 w-4 text-sage mr-2" />Environmental impact tracking</li>
                       <li className="flex items-center"><Check className="h-4 w-4 text-sage mr-2" />Reward redemption system</li>
+                      <li className="flex items-center"><Badge className="bg-harvest/20 text-harvest mr-2 px-2 py-1 text-xs">Coming Soon</Badge>Blockchain tracking from farm to consumer</li>
                     </ul>
                   </div>
                 </div>
@@ -404,7 +421,7 @@ export default function Home() {
                   controls
                   preload="metadata"
                 >
-                  <source src="@assets/Producer - video_1757096397296.mp4" type="video/mp4" />
+                  <source src="@assets/Producer - video_1757097200426.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
@@ -437,7 +454,7 @@ export default function Home() {
                   controls
                   preload="metadata"
                 >
-                  <source src="@assets/consumer - video_1757096429019.mp4" type="video/mp4" />
+                  <source src="@assets/consumer - video_1757097200425.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
